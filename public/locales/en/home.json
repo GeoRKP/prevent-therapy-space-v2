@@ -1,0 +1,80 @@
+{
+  "meta": {
+    "title": "PREVENT Therapy Space | Physiotherapy & Osteopathy in Athens",
+    "description": "Modern physiotherapy clinic in Patisia, Athens. Expert physiotherapy, osteopathy & therapeutic exercise."
+  },
+  "hero": {
+    "label": "PREVENT Therapy Space",
+    "title": "Physiotherapy & Osteopathy",
+    "subtitle": "Live pain-free. Move with confidence.",
+    "ctaPrimary": "Book Appointment",
+    "ctaSecondary": "Our Services",
+    "badgeLicensed": "Specialized Movement Care",
+    "badgeExperience": "Evidence-Based Methods",
+    "badgePatients": "Holistic Recovery & Prevention"
+  },
+  "services": {
+    "label": "Services",
+    "title": "Our Services",
+    "subtitle": "Modern therapeutic services designed around your specific needs"
+  },
+  "team": {
+    "label": "The Team",
+    "title": "Our Team",
+    "subtitle": "Meet the experts behind every treatment"
+  },
+  "howItWorks": {
+    "label": "Your Journey",
+    "title": "How It Works",
+    "subtitle": "Four simple steps to your recovery",
+    "step1Title": "Book Online",
+    "step1Desc": "Choose your service and pick a time that works for you, in just a few clicks",
+    "step2Title": "Get Assessed",
+    "step2Desc": "Thorough examination to fully understand your condition",
+    "step3Title": "Receive Treatment",
+    "step3Desc": "Personalized therapy plan designed exclusively for you",
+    "step4Title": "Recover Stronger",
+    "step4Desc": "Gradual progress with lasting results and relapse prevention"
+  },
+  "whyChooseUs": {
+    "label": "Our Approach",
+    "title": "Why Choose Us",
+    "subtitle": "Expertise, collaboration, and personalized care",
+    "feature1Title": "Specialized Treatment",
+    "feature1Desc": "Chiropractic, osteopathy, and therapeutic exercise techniques tailored to your needs.",
+    "feature2Title": "Medical Collaboration",
+    "feature2Desc": "Physiotherapist and orthopedic surgeon working together for comprehensive care.",
+    "feature3Title": "Personal Approach",
+    "feature3Desc": "Every treatment plan is designed exclusively around you and your goals."
+  },
+  "testimonials": {
+    "label": "Reviews",
+    "title": "Recovery Stories",
+    "subtitle": "See how we helped patients overcome pain and get back to the life they love"
+  },
+  "conditions": {
+    "label": "Conditions",
+    "title": "Conditions We Treat",
+    "subtitle": "Evidence-based treatment for a wide range of musculoskeletal and neurological conditions",
+    "items": {
+      "backPain": { "title": "Back Pain", "desc": "Targeted treatment for lower back pain and disc-related issues" },
+      "sportsInjuries": { "title": "Sports Injuries", "desc": "Quick return to your sport with specialized rehabilitation" },
+      "neckPain": { "title": "Neck Pain", "desc": "Relief from cervical pain, stiffness, and headaches" },
+      "postSurgery": { "title": "Post-Surgery Recovery", "desc": "Guided recovery to restore strength and mobility" },
+      "jointPain": { "title": "Joint Pain", "desc": "Treatment for knee, shoulder, hip, and other joint problems" },
+      "chronicPain": { "title": "Chronic Pain", "desc": "Long-term management strategies for persistent pain" },
+      "posture": { "title": "Posture Correction", "desc": "Corrective exercises for improved alignment and balance" },
+      "sciatica": { "title": "Sciatica", "desc": "Effective treatment for sciatic nerve pain and numbness" }
+    }
+  },
+  "cta": {
+    "title": "Start Your Recovery Today",
+    "subtitle": "Book your appointment online in seconds",
+    "primary": "Book Appointment",
+    "secondary": "Call for Consultation"
+  },
+  "gallery": {
+    "label": "PREVENT Therapy Space",
+    "title": "Our Space"
+  }
+}

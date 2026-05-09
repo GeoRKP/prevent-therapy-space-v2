@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "title": "FAQ | PREVENT Therapy Space",
+    "description": "Answers to frequently asked questions about our services, appointments, and treatment approach."
+  },
+  "title": "Frequently Asked Questions",
+  "subtitle": "Answering the most common questions from our patients",
+  "search": "Search…",
+  "items": [
+    {
+      "q": "How long does a session last?",
+      "a": "Each session lasts about 45 minutes, depending on the service."
+    },
+    {
+      "q": "Do I need a doctor's referral?",
+      "a": "No, you can book directly. In some cases, medical history may be requested."
+    },
+    {
+      "q": "How quickly will I see results?",
+      "a": "Many patients feel improvement after the first session. Full recovery depends on your condition."
+    },
+    {
+      "q": "How do I cancel or reschedule an appointment?",
+      "a": "You can contact us by phone or email at least 24 hours in advance."
+    }
+  ],
+  "noAnswer": "Didn't find what you were looking for?",
+  "contact": "Contact Us"
+}

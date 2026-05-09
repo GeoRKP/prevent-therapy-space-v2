@@ -1,0 +1,30 @@
+{
+  "title": "Get in Touch",
+  "subtitle": "We're here for any question you have",
+  "form": {
+    "name": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "send": "Send",
+    "success": "Your message has been sent successfully!",
+    "error": "Something went wrong. Please try again."
+  },
+  "info": {
+    "address": {
+      "title": "Address",
+      "value": "Theotokopoulou 55, Patisia, Athens"
+    },
+    "phone": {
+      "title": "Phone",
+      "value": "210 123 4567"
+    },
+    "email": {
+      "title": "Email",
+      "value": "info@preventtherapy.gr"
+    }
+  },
+  "location": {
+    "googleMapsUrl": "https://maps.google.com/?q=Theotokopoulou+55+Patisia+Athens"
+  }
+}

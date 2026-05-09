@@ -1,0 +1,11 @@
+{
+  "logo": { "alt": "PREVENT Therapy Space" },
+  "contact": {
+    "phone": "210 123 4567",
+    "email": "info@preventtherapy.gr"
+  },
+  "aria": {
+    "openMenu": "Άνοιγμα μενού",
+    "closeMenu": "Κλείσιμο μενού"
+  }
+}

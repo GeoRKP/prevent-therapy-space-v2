@@ -1,0 +1,29 @@
+{
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "team": "Our Team",
+    "testimonials": "Reviews",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "booking": "Book Appointment"
+  },
+  "actions": {
+    "learnMore": "Learn More",
+    "bookAppointment": "Book Appointment",
+    "viewAll": "View All",
+    "viewDetails": "View Details",
+    "contactUs": "Contact Us",
+    "send": "Send",
+    "loading": "Loading…",
+    "next": "Next",
+    "back": "Back",
+    "submit": "Submit"
+  },
+  "validation": {
+    "required": "Required field",
+    "invalidEmail": "Invalid email",
+    "invalidPhone": "Invalid phone"
+  }
+}

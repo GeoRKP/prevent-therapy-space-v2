@@ -1,0 +1,20 @@
+# robots.txt for PREVENT Therapy Space
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://preventtherapy.gr/sitemap.xml
+
+# Disallow admin or private areas
+Disallow: /api/
+Disallow: /admin/
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /

@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Service {
+  id           String        @id @default(cuid())
+  nameEl       String
+  nameEn       String
+  descEl       String        @db.Text
+  descEn       String        @db.Text
+  active       Boolean       @default(true)
+  sortOrder    Int           @default(0)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  appointments Appointment[]
+
+  @@map("services")
+}
+
+model Appointment {
+  id           String            @id @default(cuid())
+  serviceId    String
+  service      Service           @relation(fields: [serviceId], references: [id])
+  patientName  String
+  patientEmail String
+  patientPhone String
+  date         DateTime          @db.Date
+  startTime    String
+  endTime      String
+  status       AppointmentStatus @default(PENDING)
+  notes        String?           @db.Text
+  locale       String            @default("el")
+  reminderSent Boolean           @default(false)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@index([date, status])
+  @@index([patientEmail])
+  @@map("appointments")
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+model WorkingHours {
+  id         String   @id @default(cuid())
+  dayOfWeek  Int
+  isWorkDay  Boolean  @default(true)
+  startTime  String
+  endTime    String
+  breakStart String?
+  breakEnd   String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([dayOfWeek])
+  @@map("working_hours")
+}
+
+model BlockedDate {
+  id        String   @id @default(cuid())
+  date      DateTime @db.Date
+  reason    String?
+  createdAt DateTime @default(now())
+
+  @@unique([date])
+  @@map("blocked_dates")
+}
+
+model BookingSettings {
+  id                         String   @id @default(cuid())
+  bufferMinutes              Int      @default(15)
+  maxAdvanceDays             Int      @default(30)
+  minAdvanceHours            Int      @default(2)
+  slotIntervalMinutes        Int      @default(30)
+  defaultAppointmentDuration Int      @default(45)
+  autoConfirm                Boolean  @default(true)
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+
+  @@map("booking_settings")
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  message   String   @db.Text
+  locale    String   @default("el")
+  createdAt DateTime @default(now())
+
+  @@map("contact_messages")
+}

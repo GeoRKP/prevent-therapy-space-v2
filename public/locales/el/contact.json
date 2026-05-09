@@ -1,0 +1,30 @@
+{
+  "title": "Επικοινωνήστε μαζί μας",
+  "subtitle": "Είμαστε εδώ για κάθε σας ερώτηση",
+  "form": {
+    "name": "Ονοματεπώνυμο",
+    "email": "Email",
+    "phone": "Τηλέφωνο",
+    "message": "Μήνυμα",
+    "send": "Αποστολή",
+    "success": "Το μήνυμά σας στάλθηκε επιτυχώς!",
+    "error": "Κάτι πήγε στραβά. Δοκιμάστε ξανά."
+  },
+  "info": {
+    "address": {
+      "title": "Διεύθυνση",
+      "value": "Θεοτοκοπούλου 55, Πατήσια, Αθήνα"
+    },
+    "phone": {
+      "title": "Τηλέφωνο",
+      "value": "210 123 4567"
+    },
+    "email": {
+      "title": "Email",
+      "value": "info@preventtherapy.gr"
+    }
+  },
+  "location": {
+    "googleMapsUrl": "https://maps.google.com/?q=Theotokopoulou+55+Patisia+Athens"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "title": "Book an Appointment | PREVENT Therapy Space",
+    "description": "Book your appointment at PREVENT Therapy Space online in seconds."
+  },
+  "title": "Book an Appointment",
+  "subtitle": "Pick a service, date, and time — we'll handle the rest.",
+  "steps": {
+    "service": "Service",
+    "datetime": "Date & Time",
+    "details": "Details",
+    "confirm": "Confirm"
+  },
+  "form": {
+    "name": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "notes": "Notes (optional)",
+    "submit": "Confirm Appointment"
+  },
+  "summary": {
+    "title": "Appointment Summary",
+    "service": "Service",
+    "date": "Date",
+    "time": "Time"
+  },
+  "success": {
+    "title": "Your appointment is confirmed!",
+    "message": "You will receive a confirmation email shortly.",
+    "back": "Back to Home"
+  },
+  "errors": {
+    "slotTaken": "This time slot was just booked. Please select another time.",
+    "invalid": "Please check your details.",
+    "generic": "Something went wrong. Please try again."
+  },
+  "morning": "Morning",
+  "afternoon": "Afternoon",
+  "noSlots": "No available appointments for this day"
+}

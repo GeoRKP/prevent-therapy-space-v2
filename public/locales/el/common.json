@@ -1,0 +1,29 @@
+{
+  "navigation": {
+    "home": "Αρχική",
+    "services": "Υπηρεσίες",
+    "about": "Σχετικά",
+    "team": "Η Ομάδα μας",
+    "testimonials": "Κριτικές",
+    "contact": "Επικοινωνία",
+    "faq": "Συχνές Ερωτήσεις",
+    "booking": "Κλείστε Ραντεβού"
+  },
+  "actions": {
+    "learnMore": "Μάθετε Περισσότερα",
+    "bookAppointment": "Κλείστε Ραντεβού",
+    "viewAll": "Δείτε Όλες",
+    "viewDetails": "Δείτε Λεπτομέρειες",
+    "contactUs": "Επικοινωνήστε μαζί μας",
+    "send": "Αποστολή",
+    "loading": "Φόρτωση…",
+    "next": "Επόμενο",
+    "back": "Πίσω",
+    "submit": "Υποβολή"
+  },
+  "validation": {
+    "required": "Υποχρεωτικό πεδίο",
+    "invalidEmail": "Μη έγκυρο email",
+    "invalidPhone": "Μη έγκυρο τηλέφωνο"
+  }
+}

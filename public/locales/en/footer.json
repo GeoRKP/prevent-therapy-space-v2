@@ -1,0 +1,37 @@
+{
+  "brand": {
+    "logoAlt": "PREVENT Therapy Space",
+    "description": "Modern physiotherapy clinic in Patisia, Athens — specialized movement care and holistic recovery."
+  },
+  "navigation": {
+    "title": "Navigation"
+  },
+  "services": {
+    "title": "Services",
+    "items": [
+      "Physiotherapy",
+      "Osteopathy",
+      "Therapeutic Exercise",
+      "Neurological Rehab",
+      "Senior Exercise"
+    ]
+  },
+  "location": {
+    "title": "Location",
+    "address": "Theotokopoulou 55, Patisia, Athens"
+  },
+  "hours": {
+    "title": "Working Hours",
+    "mondayFriday": "Mon — Fri",
+    "mondayFridayTime": "09:00 — 21:00",
+    "saturday": "Saturday",
+    "saturdayTime": "09:00 — 14:00",
+    "sunday": "Sunday",
+    "closed": "Closed"
+  },
+  "legal": {
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "copyright": "© {{year}} PREVENT Therapy Space. All rights reserved."
+}

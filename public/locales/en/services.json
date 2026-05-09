@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "title": "Services | PREVENT Therapy Space",
+    "description": "Specialized physiotherapy, osteopathy, and therapeutic exercise services."
+  },
+  "hero": {
+    "label": "Our Services",
+    "title": "Modern therapeutic services",
+    "subtitle": "Personalized care for every patient"
+  },
+  "items": {
+    "physiotherapy": {
+      "name": "Physiotherapy",
+      "description": "Comprehensive physiotherapy techniques for pain relief and restoration of mobility."
+    },
+    "osteopathy": {
+      "name": "Osteopathy",
+      "description": "Holistic approach targeting the underlying causes of pain, not just the symptoms."
+    },
+    "exercise": {
+      "name": "Therapeutic Exercise",
+      "description": "Personalized exercise programs for strength, flexibility, and prevention."
+    },
+    "neurological": {
+      "name": "Neurological Rehabilitation",
+      "description": "Specialized rehabilitation after stroke, Parkinson's disease, and other neurological conditions."
+    },
+    "senior": {
+      "name": "Senior Exercise",
+      "description": "Safe, adapted movement programs for older adults."
+    }
+  }
+}
