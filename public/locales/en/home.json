@@ -105,9 +105,14 @@
     "subtitle": "Book your appointment online in seconds. Instant confirmation, no waiting.",
     "button": "Book Appointment",
     "callNow": "Call Now",
-    "years": "Years",
-    "clients": "Patients",
-    "support": "Care"
+    "info": {
+      "hoursTitle": "Monday — Friday",
+      "hoursValue": "09:00 — 21:00 · Saturday 09:00 — 14:00",
+      "locationTitle": "Patisia, Athens",
+      "locationValue": "Theotokopoulou 55",
+      "bookingTitle": "Online booking",
+      "bookingValue": "Instant confirmation"
+    }
   },
   "testimonials": {
     "label": "Reviews",

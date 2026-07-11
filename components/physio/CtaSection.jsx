@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Phone, ArrowRight } from "lucide-react";
+import { Phone, ArrowRight, Clock, MapPin, CalendarCheck } from "lucide-react";
 import { contactInfo } from "@/data/conditions";
 import { RevealText } from "@/components/effects/kinetic-text";
 
@@ -69,26 +69,43 @@ export function CtaSection() {
             </div>
 
             <div className="lg:col-span-5">
-              <div className="grid grid-cols-3 gap-3">
+              <div className="flex flex-col gap-3">
                 {[
-                  { value: "8+", label: t("ctaSection.years") },
-                  { value: "1500+", label: t("ctaSection.clients") },
-                  { value: "98%", label: t("ctaSection.support") },
-                ].map((stat, i) => (
+                  {
+                    icon: Clock,
+                    title: t("ctaSection.info.hoursTitle"),
+                    value: t("ctaSection.info.hoursValue"),
+                  },
+                  {
+                    icon: MapPin,
+                    title: t("ctaSection.info.locationTitle"),
+                    value: t("ctaSection.info.locationValue"),
+                  },
+                  {
+                    icon: CalendarCheck,
+                    title: t("ctaSection.info.bookingTitle"),
+                    value: t("ctaSection.info.bookingValue"),
+                  },
+                ].map((item, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.4 + i * 0.1 }}
-                    className="rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 p-5 text-center"
+                    className="flex items-center gap-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 p-4"
                   >
-                    <span className="text-2xl lg:text-3xl font-bold text-white block">
-                      {stat.value}
-                    </span>
-                    <span className="block text-[10px] text-white/70 uppercase tracking-wider mt-1.5 font-semibold">
-                      {stat.label}
-                    </span>
+                    <div className="w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <span className="block text-sm font-bold text-white">
+                        {item.title}
+                      </span>
+                      <span className="block text-xs text-white/70 mt-0.5">
+                        {item.value}
+                      </span>
+                    </div>
                   </motion.div>
                 ))}
               </div>
