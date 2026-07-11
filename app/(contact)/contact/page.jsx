@@ -171,7 +171,7 @@ function ContactCard({ icon: Icon, title, value, href }) {
         <Icon className="w-5 h-5 text-primary" />
       </div>
       <div>
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-white/45 mb-0.5">
+        <h4 className="text-xs font-semibold uppercase tracking-wider text-white/55 mb-0.5">
           {title}
         </h4>
         <p className="text-white font-medium group-hover:text-primary transition-colors">
@@ -192,7 +192,7 @@ function ContactCard({ icon: Icon, title, value, href }) {
 function FormField({ label, multiline, ...props }) {
   return (
     <div>
-      <label className="block text-xs font-semibold uppercase tracking-wider text-white/45 mb-2">
+      <label className="block text-xs font-semibold uppercase tracking-wider text-white/55 mb-2">
         {label}
       </label>
       {multiline ? (

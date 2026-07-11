@@ -39,7 +39,7 @@ export function PhysioFooter() {
               </span>
             </Link>
 
-            <p className="text-white/45 text-sm leading-relaxed mb-7 max-w-xs">
+            <p className="text-white/55 text-sm leading-relaxed mb-7 max-w-xs">
               {t("footer:brand.description")}
             </p>
 
@@ -66,7 +66,7 @@ export function PhysioFooter() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-white/40 mb-6">
+            <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-white/55 mb-6">
               {t("footer:navigation.title")}
             </h4>
             <ul className="space-y-2.5">
@@ -85,7 +85,7 @@ export function PhysioFooter() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-white/40 mb-6">
+            <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-white/55 mb-6">
               {t("footer:services.title")}
             </h4>
             <ul className="space-y-2.5">
@@ -103,7 +103,7 @@ export function PhysioFooter() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-white/40 mb-6">
+            <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-white/55 mb-6">
               {t("footer:location.title")}
             </h4>
 
@@ -127,7 +127,7 @@ export function PhysioFooter() {
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-white/45">
+                <span className="text-white/55">
                   {t("footer:hours.mondayFriday")}
                 </span>
                 <span className="text-white/85 font-medium">
@@ -135,7 +135,7 @@ export function PhysioFooter() {
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-white/45">
+                <span className="text-white/55">
                   {t("footer:hours.saturday")}
                 </span>
                 <span className="text-white/85 font-medium">
@@ -143,7 +143,7 @@ export function PhysioFooter() {
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-white/45">
+                <span className="text-white/55">
                   {t("footer:hours.sunday")}
                 </span>
                 <span className="text-white/30">

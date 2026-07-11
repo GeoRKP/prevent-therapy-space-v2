@@ -15,7 +15,7 @@ export function SectionHeading({ label, title, subtitle, centered = true }) {
             )}
           >
             <div className="w-8 h-px bg-primary" />
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/55">
               {label}
             </span>
             {centered && <div className="w-8 h-px bg-primary" />}

@@ -25,12 +25,4 @@ export {
     NumberedCard,
     StackedCard
 } from "./brutal-card";
-export {
-    SplitText,
-    RevealText,
-    GlitchText,
-    MarqueeText,
-    CountUpNumber,
-    ParallaxText,
-    StaggerWords
-} from "./kinetic-text";
+export { RevealText, MarqueeText } from "./kinetic-text";

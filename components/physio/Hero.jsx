@@ -72,7 +72,7 @@ export function Hero() {
 
   if (!ready) {
     return (
-      <section className="relative min-h-screen bg-[#050810] flex items-center">
+      <section className="relative min-h-[92svh] bg-[#050810] flex items-center">
         <div className="container">
           <div className="max-w-4xl">
             <div className="w-32 h-6 bg-white/5 rounded mb-8" />
@@ -88,7 +88,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative min-h-screen bg-[#050810] overflow-hidden"
+      className="relative min-h-[92svh] bg-[#050810] overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -121,7 +121,7 @@ export function Hero() {
 
       <DiagonalLines className="opacity-[0.012]" spacing={100} />
 
-      <div className="container relative z-20 min-h-screen flex items-center py-32">
+      <div className="container relative z-20 min-h-[92svh] flex items-center pt-24 pb-32">
         <div className="grid lg:grid-cols-12 gap-12 items-center w-full">
           <div className="lg:col-span-7">
             <AnimatePresence mode="wait">
@@ -188,7 +188,7 @@ export function Hero() {
           </div>
 
           <div className="lg:col-span-5 hidden lg:block">
-            <div className="relative w-full max-w-[400px] xl:max-w-[440px] ml-auto">
+            <div className="relative w-full max-w-[360px] xl:max-w-[400px] ml-auto">
               {/* Διακοσμητικές γωνίες */}
               <div className="absolute -top-4 -left-4 w-20 h-20 border-t-2 border-l-2 border-primary/30 rounded-tl-3xl" />
               <div className="absolute -bottom-4 -right-4 w-20 h-20 border-b-2 border-r-2 border-primary/30 rounded-br-3xl" />
@@ -262,7 +262,7 @@ export function Hero() {
       <div className="absolute bottom-0 left-0 right-0 z-20">
         <div className="border-t border-white/[0.06] py-3 bg-[#050810]/85 backdrop-blur-sm overflow-hidden">
           <MarqueeText
-            text="• PREVENT THERAPY SPACE • PHYSIOTHERAPY • OSTEOPATHY • THERAPEUTIC EXERCISE • SINCE 2017 •"
+            text={t("home:hero.marquee")}
             className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/25"
             speed={35}
           />
@@ -284,7 +284,7 @@ export function Hero() {
                 />
               ))}
             </div>
-            <span className="text-xs font-mono text-white/40">
+            <span className="text-xs font-mono text-white/55">
               {String(currentSlide + 1).padStart(2, "0")} /{" "}
               {String(heroSlides.length).padStart(2, "0")}
             </span>

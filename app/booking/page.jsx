@@ -97,7 +97,7 @@ export default function BookingPage() {
               <h2 className="text-2xl lg:text-3xl font-bold text-white mb-3 tracking-tight">
                 {ready ? t("booking:steps.service") : ""}
               </h2>
-              <p className="text-white/45 mb-8 text-sm">01 / 03</p>
+              <p className="text-white/55 mb-8 text-sm">01 / 03</p>
 
               <div className="grid gap-3">
                 {services.map((s, i) => {
@@ -115,7 +115,7 @@ export default function BookingPage() {
                         <h3 className="font-bold text-white mb-0.5 group-hover:text-primary transition-colors">
                           {ready ? t(`services:items.${s.id}.name`) : ""}
                         </h3>
-                        <p className="text-sm text-white/45 line-clamp-1">
+                        <p className="text-sm text-white/55 line-clamp-1">
                           {ready ? t(`services:items.${s.id}.description`) : ""}
                         </p>
                       </div>
@@ -136,7 +136,7 @@ export default function BookingPage() {
               <h2 className="text-2xl lg:text-3xl font-bold text-white mb-3 tracking-tight">
                 {ready ? t("booking:steps.datetime") : ""}
               </h2>
-              <p className="text-white/45 mb-8 text-sm">02 / 03</p>
+              <p className="text-white/55 mb-8 text-sm">02 / 03</p>
 
               <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-7 space-y-5">
                 <FormField
@@ -185,7 +185,7 @@ export default function BookingPage() {
               <h2 className="text-2xl lg:text-3xl font-bold text-white mb-3 tracking-tight">
                 {ready ? t("booking:steps.details") : ""}
               </h2>
-              <p className="text-white/45 mb-8 text-sm">03 / 03</p>
+              <p className="text-white/55 mb-8 text-sm">03 / 03</p>
 
               <form
                 onSubmit={handleSubmit}
@@ -287,7 +287,7 @@ export default function BookingPage() {
 function FormField({ label, multiline, ...props }) {
   return (
     <div>
-      <label className="block text-xs font-semibold uppercase tracking-wider text-white/45 mb-2">
+      <label className="block text-xs font-semibold uppercase tracking-wider text-white/55 mb-2">
         {label}
       </label>
       {multiline ? (

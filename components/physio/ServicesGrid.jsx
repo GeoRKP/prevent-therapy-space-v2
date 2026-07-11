@@ -101,7 +101,7 @@ export function ServicesGrid() {
                       {service.features.slice(0, 3).map((feature, idx) => (
                         <li
                           key={idx}
-                          className="flex items-start gap-2.5 text-sm text-white/45 group-hover:text-white/65 transition-colors"
+                          className="flex items-start gap-2.5 text-sm text-white/55 group-hover:text-white/65 transition-colors"
                         >
                           <CheckCircle2 className="w-4 h-4 text-primary/80 mt-0.5 flex-shrink-0" />
                           <span>{feature}</span>
@@ -113,7 +113,7 @@ export function ServicesGrid() {
                   <div className="pt-4 border-t border-white/[0.06]">
                     <Link
                       href="/services"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-white/40 hover:text-primary transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-white/55 hover:text-primary transition-colors"
                     >
                       <span>{t("contact:learnMore")}</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />

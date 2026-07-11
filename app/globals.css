@@ -163,6 +163,12 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-NotoSerif), Georgia, serif;
   }
+  /* Ορατή εστίαση για πλοήγηση με πληκτρολόγιο — ουδέτερο λευκό πάνω στο σκούρο UI */
+  :focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.75);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 }
 
 ::selection {
