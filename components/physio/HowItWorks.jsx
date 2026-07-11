@@ -17,7 +17,7 @@ export function HowItWorks() {
   if (!ready) return null;
 
   return (
-    <section className="relative py-28 lg:py-36 overflow-hidden bg-[#070b14]">
+    <section className="relative py-28 lg:py-36 overflow-hidden bg-surface-1">
       <div className="container relative z-10">
         <div className="text-center mb-16">
           <RevealText>
@@ -53,7 +53,7 @@ export function HowItWorks() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="group relative bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 rounded-2xl p-7 lg:p-8 transition-all"
+                className="group relative bg-surface-0 hover:bg-surface-2 border border-white/[0.06] hover:border-primary/30 rounded-2xl p-7 lg:p-8 transition-all"
               >
                 <div className="flex items-start justify-between mb-6">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 group-hover:bg-primary/15 flex items-center justify-center transition-colors">

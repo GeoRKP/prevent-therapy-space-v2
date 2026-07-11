@@ -47,7 +47,7 @@ export function AnimatedBorder({ children, className }) {
       <div className="absolute -inset-px bg-gradient-to-r from-primary via-primary/50 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
       {/* Content container */}
-      <div className="relative bg-[#050810] border border-white/10 group-hover:border-transparent transition-colors">
+      <div className="relative bg-surface-0 border border-white/10 group-hover:border-transparent transition-colors">
         {children}
       </div>
     </div>

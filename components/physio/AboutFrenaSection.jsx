@@ -18,7 +18,7 @@ export function AboutFrenaSection() {
   const points = t("aboutSection.points", { returnObjects: true }) || [];
 
   return (
-    <section className="relative py-28 lg:py-36 overflow-hidden bg-[#050810]">
+    <section className="relative py-28 lg:py-36 overflow-hidden bg-surface-0">
       <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[200px] translate-y-1/2 pointer-events-none" />
 
       <div className="container relative z-10">
@@ -69,11 +69,11 @@ export function AboutFrenaSection() {
                   style={{ objectPosition: "center 25%" }}
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050810] via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-surface-0 via-transparent to-transparent" />
               </div>
 
               <div className="absolute bottom-5 left-5 right-5">
-                <div className="bg-[#050810]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-5">
+                <div className="bg-surface-0/90 backdrop-blur-xl border border-white/10 rounded-2xl p-5">
                   <span className="text-3xl font-bold text-primary">
                     {stats[0]?.value}
                   </span>
@@ -99,7 +99,7 @@ export function AboutFrenaSection() {
                   className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 20vw"
                 />
-                <div className="absolute inset-0 bg-[#050810]/30" />
+                <div className="absolute inset-0 bg-surface-0/30" />
               </motion.div>
 
               <motion.div
@@ -116,7 +116,7 @@ export function AboutFrenaSection() {
                   className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 20vw"
                 />
-                <div className="absolute inset-0 bg-[#050810]/30" />
+                <div className="absolute inset-0 bg-surface-0/30" />
               </motion.div>
             </div>
           </div>
@@ -130,7 +130,7 @@ export function AboutFrenaSection() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
               >
-                <div className="group relative bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 rounded-2xl p-6 lg:p-8 transition-all">
+                <div className="group relative bg-surface-1 hover:bg-surface-2 border border-white/[0.06] hover:border-primary/30 rounded-2xl p-6 lg:p-8 transition-all">
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 text-sm font-bold text-primary">
                       {String(index + 1).padStart(2, "0")}
@@ -165,7 +165,7 @@ export function AboutFrenaSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="group bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 rounded-2xl p-7 lg:p-8 text-center transition-all"
+              className="group bg-surface-1 hover:bg-surface-2 border border-white/[0.06] hover:border-primary/30 rounded-2xl p-7 lg:p-8 text-center transition-all"
             >
               <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-primary/10 group-hover:bg-primary/15 flex items-center justify-center transition-colors">
                 <stat.icon className="w-5 h-5 text-primary" />

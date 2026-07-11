@@ -4,14 +4,14 @@ import { RevealText } from "@/components/effects/kinetic-text";
 
 export function PageHero({ label, title, subtitle, backgroundImage }) {
   return (
-    <section className="relative overflow-hidden bg-[#050810] pt-32 pb-16 lg:pt-40 lg:pb-24">
+    <section className="relative overflow-hidden bg-surface-0 pt-32 pb-16 lg:pt-40 lg:pb-24">
       {backgroundImage && (
         <div
           className="absolute inset-0 bg-cover bg-center opacity-25"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#050810]/70 via-[#050810]/85 to-[#050810]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-surface-0/70 via-surface-0/85 to-surface-0" />
 
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[200px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
 

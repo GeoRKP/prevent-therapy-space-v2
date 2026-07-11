@@ -119,7 +119,7 @@ export function NumberedCard({ number, children, className }) {
             {/* Card content */}
             <div className="relative bg-white/[0.02] border border-white/10 backdrop-blur-sm">
                 {/* Number indicator */}
-                <div className="absolute -top-3 left-6 px-3 py-1 bg-primary text-white text-xs font-bold">
+                <div className="absolute -top-3 left-6 px-3 py-1 bg-primary text-primary-foreground text-xs font-bold">
                     {String(number).padStart(2, '0')}
                 </div>
                 {children}

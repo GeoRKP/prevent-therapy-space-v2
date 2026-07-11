@@ -15,7 +15,7 @@ export function WhyChooseUs() {
   const features = t("whyChooseUs.features", { returnObjects: true }) || [];
 
   return (
-    <section className="relative py-28 lg:py-36 overflow-hidden bg-[#070b14]">
+    <section className="relative py-28 lg:py-36 overflow-hidden bg-surface-1">
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/[0.04] rounded-full blur-[200px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
 
       <div className="container relative z-10">
@@ -55,7 +55,7 @@ export function WhyChooseUs() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
-                    className="group bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 rounded-2xl p-5 transition-all"
+                    className="group bg-surface-0 hover:bg-surface-2 border border-white/[0.06] hover:border-primary/30 rounded-2xl p-5 transition-all"
                   >
                     <div className="flex items-start gap-3.5">
                       <div className="w-11 h-11 rounded-xl bg-primary/10 group-hover:bg-primary/15 flex items-center justify-center flex-shrink-0 transition-colors">
@@ -93,7 +93,7 @@ export function WhyChooseUs() {
                   style={{ objectPosition: "center 30%" }}
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#070b14]/90 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-surface-1/90 via-transparent to-transparent" />
               </div>
 
               <motion.div
@@ -103,10 +103,10 @@ export function WhyChooseUs() {
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="absolute -bottom-6 -left-6 lg:-left-10"
               >
-                <div className="bg-[#050810]/95 backdrop-blur-xl border border-primary/30 rounded-2xl p-5">
+                <div className="bg-surface-0/95 backdrop-blur-xl border border-primary/30 rounded-2xl p-5">
                   <div className="flex items-center gap-3.5">
                     <div className="w-11 h-11 rounded-xl bg-primary flex items-center justify-center">
-                      <Award className="w-5 h-5 text-white" />
+                      <Award className="w-5 h-5 text-primary-foreground" />
                     </div>
                     <div>
                       <span className="text-2xl font-bold text-white">8+</span>

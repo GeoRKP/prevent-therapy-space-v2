@@ -22,7 +22,7 @@ export function GallerySection() {
   if (!ready) return null;
 
   return (
-    <section className="relative py-28 lg:py-36 overflow-hidden bg-[#050810]">
+    <section className="relative py-28 lg:py-36 overflow-hidden bg-surface-0">
       <div className="container relative z-10">
         <div className="text-center mb-16">
           <RevealText>
@@ -66,7 +66,7 @@ export function GallerySection() {
                 className="w-full h-auto transition-transform duration-700 group-hover:scale-[1.04]"
                 sizes="(max-width: 1024px) 50vw, 33vw"
               />
-              <div className="absolute inset-0 bg-[#050810]/25 group-hover:bg-transparent transition-colors duration-500" />
+              <div className="absolute inset-0 bg-surface-0/25 group-hover:bg-transparent transition-colors duration-500" />
             </motion.div>
           ))}
         </div>

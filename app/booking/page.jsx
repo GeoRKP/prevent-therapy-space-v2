@@ -63,7 +63,7 @@ export default function BookingPage() {
         backgroundImage="/images/clinic/beautiful-chropractor-bed-photo.jpg"
       />
 
-      <section className="relative py-20 lg:py-28 overflow-hidden bg-[#050810]">
+      <section className="relative py-20 lg:py-28 overflow-hidden bg-surface-0">
         <div className="container relative z-10 max-w-3xl">
           {step < 4 && (
             <div className="flex items-center justify-center gap-3 mb-12">
@@ -97,7 +97,7 @@ export default function BookingPage() {
               <h2 className="text-2xl lg:text-3xl font-bold text-white mb-3 tracking-tight">
                 {ready ? t("booking:steps.service") : ""}
               </h2>
-              <p className="text-white/45 mb-8 text-sm">01 / 03</p>
+              <p className="text-white/55 mb-8 text-sm">01 / 03</p>
 
               <div className="grid gap-3">
                 {services.map((s, i) => {
@@ -106,7 +106,7 @@ export default function BookingPage() {
                     <button
                       key={s.id}
                       onClick={() => handleServiceSelect(s.id)}
-                      className="group flex items-center gap-4 p-5 rounded-2xl bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 text-left transition-all"
+                      className="group flex items-center gap-4 p-5 rounded-2xl bg-surface-1 hover:bg-surface-2 border border-white/[0.06] hover:border-primary/30 text-left transition-all"
                     >
                       <div className="w-12 h-12 rounded-xl bg-primary/10 group-hover:bg-primary/15 flex items-center justify-center flex-shrink-0 transition-colors">
                         <Icon className="w-5 h-5 text-primary" />
@@ -115,7 +115,7 @@ export default function BookingPage() {
                         <h3 className="font-bold text-white mb-0.5 group-hover:text-primary transition-colors">
                           {ready ? t(`services:items.${s.id}.name`) : ""}
                         </h3>
-                        <p className="text-sm text-white/45 line-clamp-1">
+                        <p className="text-sm text-white/55 line-clamp-1">
                           {ready ? t(`services:items.${s.id}.description`) : ""}
                         </p>
                       </div>
@@ -136,9 +136,9 @@ export default function BookingPage() {
               <h2 className="text-2xl lg:text-3xl font-bold text-white mb-3 tracking-tight">
                 {ready ? t("booking:steps.datetime") : ""}
               </h2>
-              <p className="text-white/45 mb-8 text-sm">02 / 03</p>
+              <p className="text-white/55 mb-8 text-sm">02 / 03</p>
 
-              <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-7 space-y-5">
+              <div className="bg-surface-1 border border-white/[0.06] rounded-3xl p-7 space-y-5">
                 <FormField
                   label={ready ? t("booking:summary.date") : "Date"}
                   type="date"
@@ -166,7 +166,7 @@ export default function BookingPage() {
                   <button
                     onClick={() => setStep(3)}
                     disabled={!selection.date || !selection.time}
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors disabled:opacity-50"
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors disabled:opacity-50"
                   >
                     {ready ? t("common:actions.next") : "Next"}
                     <ArrowRight className="w-4 h-4" />
@@ -185,11 +185,11 @@ export default function BookingPage() {
               <h2 className="text-2xl lg:text-3xl font-bold text-white mb-3 tracking-tight">
                 {ready ? t("booking:steps.details") : ""}
               </h2>
-              <p className="text-white/45 mb-8 text-sm">03 / 03</p>
+              <p className="text-white/55 mb-8 text-sm">03 / 03</p>
 
               <form
                 onSubmit={handleSubmit}
-                className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-7 space-y-5"
+                className="bg-surface-1 border border-white/[0.06] rounded-3xl p-7 space-y-5"
               >
                 <FormField
                   label={ready ? t("booking:form.name") : ""}
@@ -237,7 +237,7 @@ export default function BookingPage() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors disabled:opacity-50"
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors disabled:opacity-50"
                   >
                     <CalendarCheck className="w-4 h-4" />
                     {submitting
@@ -271,7 +271,7 @@ export default function BookingPage() {
               </p>
               <a
                 href="/"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors"
               >
                 {ready ? t("booking:success.back") : "Home"}
                 <ArrowRight className="w-4 h-4" />
@@ -287,19 +287,19 @@ export default function BookingPage() {
 function FormField({ label, multiline, ...props }) {
   return (
     <div>
-      <label className="block text-xs font-semibold uppercase tracking-wider text-white/45 mb-2">
+      <label className="block text-xs font-semibold uppercase tracking-wider text-white/55 mb-2">
         {label}
       </label>
       {multiline ? (
         <textarea
           rows={3}
           {...props}
-          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 resize-none"
+          className="w-full px-4 py-3 rounded-xl bg-surface-0 border border-white/[0.08] focus:border-primary/50 focus:bg-surface-2 outline-none transition-all text-sm text-white placeholder:text-white/30 resize-none"
         />
       ) : (
         <input
           {...props}
-          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 [color-scheme:dark]"
+          className="w-full px-4 py-3 rounded-xl bg-surface-0 border border-white/[0.08] focus:border-primary/50 focus:bg-surface-2 outline-none transition-all text-sm text-white placeholder:text-white/30 [color-scheme:dark]"
         />
       )}
     </div>

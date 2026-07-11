@@ -29,7 +29,7 @@ export default function FaqPage() {
         subtitle={ready ? t("faq:subtitle") : ""}
       />
 
-      <section className="relative py-24 lg:py-32 overflow-hidden bg-[#050810]">
+      <section className="relative py-24 lg:py-32 overflow-hidden bg-surface-0">
         <div className="container relative z-10 max-w-3xl">
           {/* Search */}
           <motion.div
@@ -44,7 +44,7 @@ export default function FaqPage() {
               placeholder={ready ? t("faq:search") : ""}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full pl-14 pr-5 py-4 rounded-2xl bg-[#070b14] border border-white/[0.06] focus:border-primary/50 outline-none text-base text-white placeholder:text-white/30 transition-all"
+              className="w-full pl-14 pr-5 py-4 rounded-2xl bg-surface-1 border border-white/[0.06] focus:border-primary/50 outline-none text-base text-white placeholder:text-white/30 transition-all"
             />
           </motion.div>
 
@@ -59,7 +59,7 @@ export default function FaqPage() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="group w-full text-left bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 rounded-2xl transition-all overflow-hidden"
+                  className="group w-full text-left bg-surface-1 hover:bg-surface-2 border border-white/[0.06] hover:border-primary/30 rounded-2xl transition-all overflow-hidden"
                 >
                   <div className="flex items-start justify-between gap-4 p-5 lg:p-7">
                     <div className="flex items-start gap-4 flex-1">
@@ -99,14 +99,14 @@ export default function FaqPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-12 p-8 rounded-3xl bg-[#070b14] border border-white/[0.06] text-center"
+            className="mt-12 p-8 rounded-3xl bg-surface-1 border border-white/[0.06] text-center"
           >
             <h3 className="text-xl font-bold text-white mb-3">
               {ready ? t("faq:noAnswer") : ""}
             </h3>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 mt-2 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors"
+              className="inline-flex items-center gap-2 px-7 py-3.5 mt-2 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors"
             >
               {ready ? t("faq:contact") : "Contact"}
               <ArrowUpRight className="w-4 h-4" />

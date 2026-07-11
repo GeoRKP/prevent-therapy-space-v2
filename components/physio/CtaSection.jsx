@@ -12,14 +12,14 @@ export function CtaSection() {
   if (!ready) return null;
 
   return (
-    <section className="relative py-20 lg:py-28 overflow-hidden bg-[#050810]">
+    <section className="relative py-20 lg:py-28 overflow-hidden bg-surface-0">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary to-secondary p-10 lg:p-16 max-w-6xl mx-auto"
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-forest-800 via-forest-700 to-forest-600 p-10 lg:p-16 max-w-6xl mx-auto"
         >
           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/[0.06] rounded-full blur-[150px] -translate-y-1/3 translate-x-1/3 pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-white/[0.04] rounded-full blur-[120px] translate-y-1/3 -translate-x-1/3 pointer-events-none" />
@@ -51,7 +51,7 @@ export function CtaSection() {
                 <div className="flex flex-col sm:flex-row gap-3">
                   <Link
                     href="/booking"
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white text-primary font-semibold text-sm hover:bg-white/95 transition-colors"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-white text-forest-800 font-semibold text-sm hover:bg-white/95 transition-colors"
                   >
                     {t("ctaSection.button")}
                     <ArrowRight className="w-4 h-4" />

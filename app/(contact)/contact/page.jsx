@@ -52,11 +52,11 @@ export default function ContactPage() {
         backgroundImage="/images/clinic/office-photo.jpg"
       />
 
-      <section className="relative py-24 lg:py-32 overflow-hidden bg-[#050810]">
+      <section className="relative py-24 lg:py-32 overflow-hidden bg-surface-0">
         <div className="container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-6xl mx-auto">
             {/* Left — info */}
-            <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-7 lg:p-10">
+            <div className="bg-surface-1 border border-white/[0.06] rounded-3xl p-7 lg:p-10">
               <RevealText>
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-10 h-px bg-primary/70" />
@@ -94,7 +94,7 @@ export default function ContactPage() {
             </div>
 
             {/* Right — form */}
-            <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-7 lg:p-10">
+            <div className="bg-surface-1 border border-white/[0.06] rounded-3xl p-7 lg:p-10">
               <RevealText>
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-10 h-px bg-primary/70" />
@@ -140,7 +140,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center justify-center gap-2 w-full px-7 py-3.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors disabled:opacity-50"
+                  className="inline-flex items-center justify-center gap-2 w-full px-7 py-3.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors disabled:opacity-50"
                 >
                   <Send className="w-4 h-4" />
                   {submitting
@@ -165,13 +165,13 @@ function ContactCard({ icon: Icon, title, value, href }) {
   const Content = (
     <motion.div
       whileHover={{ x: 3 }}
-      className="group flex items-center gap-4 p-5 rounded-2xl bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 transition-all"
+      className="group flex items-center gap-4 p-5 rounded-2xl bg-surface-0 hover:bg-surface-2 border border-white/[0.06] hover:border-primary/30 transition-all"
     >
       <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/15 transition-colors">
         <Icon className="w-5 h-5 text-primary" />
       </div>
       <div>
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-white/45 mb-0.5">
+        <h4 className="text-xs font-semibold uppercase tracking-wider text-white/55 mb-0.5">
           {title}
         </h4>
         <p className="text-white font-medium group-hover:text-primary transition-colors">
@@ -192,19 +192,19 @@ function ContactCard({ icon: Icon, title, value, href }) {
 function FormField({ label, multiline, ...props }) {
   return (
     <div>
-      <label className="block text-xs font-semibold uppercase tracking-wider text-white/45 mb-2">
+      <label className="block text-xs font-semibold uppercase tracking-wider text-white/55 mb-2">
         {label}
       </label>
       {multiline ? (
         <textarea
           rows={4}
           {...props}
-          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 resize-none"
+          className="w-full px-4 py-3 rounded-xl bg-surface-0 border border-white/[0.08] focus:border-primary/50 focus:bg-surface-2 outline-none transition-all text-sm text-white placeholder:text-white/30 resize-none"
         />
       ) : (
         <input
           {...props}
-          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 [color-scheme:dark]"
+          className="w-full px-4 py-3 rounded-xl bg-surface-0 border border-white/[0.08] focus:border-primary/50 focus:bg-surface-2 outline-none transition-all text-sm text-white placeholder:text-white/30 [color-scheme:dark]"
         />
       )}
     </div>

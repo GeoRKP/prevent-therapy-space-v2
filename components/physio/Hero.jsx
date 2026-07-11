@@ -72,7 +72,7 @@ export function Hero() {
 
   if (!ready) {
     return (
-      <section className="relative min-h-screen bg-[#050810] flex items-center">
+      <section className="relative min-h-screen bg-surface-0 flex items-center">
         <div className="container">
           <div className="max-w-4xl">
             <div className="w-32 h-6 bg-white/5 rounded mb-8" />
@@ -88,7 +88,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative min-h-screen bg-[#050810] overflow-hidden"
+      className="relative min-h-screen bg-surface-0 overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -116,8 +116,8 @@ export function Hero() {
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-[#050810] via-[#050810]/70 to-[#050810]/30" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#050810] via-transparent to-[#050810]/40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-surface-0 via-surface-0/70 to-surface-0/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-surface-0 via-transparent to-surface-0/40" />
 
       <DiagonalLines className="opacity-[0.012]" spacing={100} />
 
@@ -168,7 +168,7 @@ export function Hero() {
                   <div className="flex flex-wrap gap-3">
                     <Link
                       href={heroSlides[currentSlide].link}
-                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-primary text-white font-semibold text-sm rounded-full hover:bg-primary/90 transition-all hover:gap-3"
+                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-primary text-primary-foreground font-semibold text-sm rounded-full hover:bg-primary/90 transition-all hover:gap-3"
                     >
                       {t("home:hero.ctaPrimary")}
                       <ArrowRight className="w-4 h-4 transition-transform" />
@@ -214,7 +214,7 @@ export function Hero() {
                       sizes="(min-width: 1280px) 440px, (min-width: 1024px) 400px, 0px"
                       quality={90}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050810]/35 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-surface-0/35 via-transparent to-transparent" />
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -260,15 +260,15 @@ export function Hero() {
 
       {/* Bottom marquee — softer */}
       <div className="absolute bottom-0 left-0 right-0 z-20">
-        <div className="border-t border-white/[0.06] py-3 bg-[#050810]/85 backdrop-blur-sm overflow-hidden">
+        <div className="border-t border-white/[0.06] py-3 bg-surface-0/85 backdrop-blur-sm overflow-hidden">
           <MarqueeText
-            text="• PREVENT THERAPY SPACE • PHYSIOTHERAPY • OSTEOPATHY • THERAPEUTIC EXERCISE • SINCE 2017 •"
+            text={t("home:hero.marquee")}
             className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/25"
             speed={35}
           />
         </div>
 
-        <div className="lg:hidden border-t border-white/[0.06] py-4 bg-[#050810]/90 backdrop-blur-sm">
+        <div className="lg:hidden border-t border-white/[0.06] py-4 bg-surface-0/90 backdrop-blur-sm">
           <div className="container flex items-center justify-between">
             <div className="flex gap-2">
               {heroSlides.map((_, index) => (
@@ -284,7 +284,7 @@ export function Hero() {
                 />
               ))}
             </div>
-            <span className="text-xs font-mono text-white/40">
+            <span className="text-xs font-mono text-white/55">
               {String(currentSlide + 1).padStart(2, "0")} /{" "}
               {String(heroSlides.length).padStart(2, "0")}
             </span>

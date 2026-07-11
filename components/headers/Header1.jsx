@@ -53,8 +53,8 @@ export default function Header1() {
           className={cn(
             "absolute inset-0 transition-all duration-500",
             isScrolled
-              ? "bg-[#050810]/95 backdrop-blur-xl border-b border-white/[0.06]"
-              : "bg-gradient-to-b from-[#050810]/85 to-transparent"
+              ? "bg-surface-0/95 backdrop-blur-xl border-b border-white/[0.06]"
+              : "bg-gradient-to-b from-surface-0/85 to-transparent"
           )}
         />
 
@@ -105,7 +105,7 @@ export default function Header1() {
                 <LanguageSwitcher />
                 <Link
                   href="/booking"
-                  className="ml-1 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-primary text-white hover:bg-primary/90 transition-colors"
+                  className="ml-1 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
                 >
                   {ready ? t("common:navigation.booking") : "Book"}
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -154,7 +154,7 @@ export default function Header1() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[1001] bg-[#050810]"
+            className="fixed inset-0 z-[1001] bg-surface-0"
           >
             <button
               onClick={() => setIsMobileMenuOpen(false)}
@@ -213,7 +213,7 @@ export default function Header1() {
                 <Link
                   href="/booking"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full font-semibold bg-primary text-white hover:bg-primary/90 transition-colors"
+                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
                 >
                   {t("common:navigation.booking")}
                   <ArrowUpRight className="w-4 h-4" />

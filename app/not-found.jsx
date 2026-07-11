@@ -10,7 +10,7 @@ export default function NotFound() {
   const { t, ready } = useTranslation("notfound");
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050810] py-32">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-surface-0 py-32">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
         <span className="text-[28vw] lg:text-[18vw] font-bold text-white/[0.025] leading-none">
           404
@@ -70,7 +70,7 @@ function NotFoundLink({ href, icon: Icon, label }) {
   return (
     <Link
       href={href}
-      className="group flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 transition-all flex-1"
+      className="group flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-surface-1 hover:bg-surface-2 border border-white/[0.06] hover:border-primary/30 transition-all flex-1"
     >
       <Icon className="w-5 h-5 text-primary" />
       <span className="font-semibold text-sm text-white/80 group-hover:text-white transition-colors">

@@ -57,7 +57,7 @@ export function BrutalButton({
   ...props
 }) {
   const variants = {
-    primary: "bg-primary text-white hover:bg-primary/90",
+    primary: "bg-primary text-primary-foreground hover:bg-primary/90",
     outline: "bg-transparent border border-white/15 text-white hover:border-primary hover:text-primary",
     ghost: "bg-transparent text-white/60 hover:text-white hover:bg-white/5",
   };

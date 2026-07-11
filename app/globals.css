@@ -7,13 +7,23 @@
 
 @theme {
   --font-Manrope: "Manrope", "sans-serif";
-  --font-NotoSerif: "Noto Serif", "serif";
   --font-SansSerif: "sans-serif";
 
   /* Color System */
   --color-*: initial;
   --color-white: #ffffff;
   --color-black: #000000;
+
+  /* Dark surfaces — green-tinted, aligned with the mint brand */
+  --color-surface-0: #06100c; /* page background */
+  --color-surface-1: #0a1712; /* cards */
+  --color-surface-2: #0e1e17; /* card hover */
+  --color-surface-deep: #040b08; /* footer */
+
+  /* Brand greens for solid panels (CTA) */
+  --color-forest-600: #177258;
+  --color-forest-700: #0d5240;
+  --color-forest-800: #0b4636;
 
   /* Responsive Breakpoints */
   --breakpoint-*: initial;
@@ -118,23 +128,23 @@
    DARK THEME — Forest Night
    ═══════════════════════════════════════════════════════════════════════════ */
 .dark {
-  --background: 160 24% 8%;
-  --foreground: 40 4% 88%;
+  --background: 156 45% 4%;
+  --foreground: 40 4% 90%;
 
-  --card: 165 28% 12%;
-  --card-foreground: 40 4% 88%;
+  --card: 158 30% 7%;
+  --card-foreground: 40 4% 90%;
 
-  --popover: 165 28% 12%;
-  --popover-foreground: 40 4% 88%;
+  --popover: 158 30% 7%;
+  --popover-foreground: 40 4% 90%;
 
   --primary: 154 47% 69%;
   --primary-foreground: 165 100% 11%;
 
-  --secondary: 154 47% 69%;
-  --secondary-foreground: 165 100% 7%;
+  --secondary: 160 45% 40%;
+  --secondary-foreground: 0 0% 100%;
 
-  --muted: 162 18% 14%;
-  --muted-foreground: 155 7% 64%;
+  --muted: 158 22% 11%;
+  --muted-foreground: 155 8% 66%;
 
   --accent: 263 64% 85%;
   --accent-foreground: 257 51% 16%;
@@ -147,8 +157,8 @@
   --destructive: 7 100% 74%;
   --destructive-foreground: 0 0% 100%;
 
-  --border: 155 7% 27%;
-  --input: 165 16% 19%;
+  --border: 155 15% 20%;
+  --input: 158 20% 12%;
   --ring: 154 47% 69%;
 }
 
@@ -161,7 +171,13 @@
   }
   html { scroll-behavior: smooth; }
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-NotoSerif), Georgia, serif;
+    font-family: var(--font-Manrope), system-ui, sans-serif;
+    font-weight: 800;
+  }
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 }
 
