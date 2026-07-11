@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Phone, ArrowUpRight, X } from "lucide-react";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { cn } from "@/lib/utils";
 
@@ -25,7 +25,7 @@ export default function Header1() {
   ];
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 30);
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -45,27 +45,32 @@ export default function Header1() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          isScrolled
-            ? "h-16 bg-background/80 backdrop-blur-2xl border-b border-border/40 shadow-sm"
-            : "h-20 bg-background/40 backdrop-blur-md border-b border-transparent"
+          "fixed top-0 left-0 right-0 z-[999] transition-all duration-500",
+          isScrolled ? "h-16" : "h-20"
         )}
       >
-        <div className="container h-full">
+        <div
+          className={cn(
+            "absolute inset-0 transition-all duration-500",
+            isScrolled
+              ? "bg-[#050810]/95 backdrop-blur-xl border-b border-white/[0.06]"
+              : "bg-gradient-to-b from-[#050810]/85 to-transparent"
+          )}
+        />
+
+        <div className="container relative h-full">
           <nav className="flex items-center justify-between h-full">
-            {/* Logo */}
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="relative z-[1002] flex items-center gap-3">
               <Image
                 src="/images/logo.webp"
                 alt={ready ? t("header:logo.alt") : "PREVENT Therapy Space"}
                 width={48}
                 height={48}
-                className="h-12 w-12"
+                className="h-10 w-10"
                 priority
               />
             </Link>
 
-            {/* Desktop nav */}
             <div className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
@@ -74,10 +79,10 @@ export default function Header1() {
                     key={link.href}
                     href={link.href}
                     className={cn(
-                      "px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+                      "relative px-4 py-2 rounded-full text-sm font-medium transition-colors duration-300",
                       isActive
-                        ? "text-primary bg-primary/5"
-                        : "text-on-surface-variant hover:text-foreground hover:bg-muted"
+                        ? "text-primary bg-primary/10"
+                        : "text-white/70 hover:text-white hover:bg-white/[0.04]"
                     )}
                   >
                     {ready ? t(`common:navigation.${link.key}`) : link.key}
@@ -86,106 +91,148 @@ export default function Header1() {
               })}
             </div>
 
-            {/* Right section */}
             <div className="flex items-center gap-3">
-              <div className="hidden lg:block">
+              <div className="hidden lg:flex items-center gap-3">
+                <a
+                  href="tel:+302101234567"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/[0.04] transition-colors"
+                >
+                  <Phone className="w-4 h-4 text-primary" />
+                  <span className="hidden xl:inline">
+                    {ready ? t("header:contact.phone") : "210 123 4567"}
+                  </span>
+                </a>
                 <LanguageSwitcher />
+                <Link
+                  href="/booking"
+                  className="ml-1 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-primary text-white hover:bg-primary/90 transition-colors"
+                >
+                  {ready ? t("common:navigation.booking") : "Book"}
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
-              <Link
-                href="/booking"
-                className="hidden md:inline-flex items-center px-5 py-2 bg-primary text-primary-foreground rounded-full text-sm font-semibold hover:bg-secondary transition-colors"
-              >
-                {ready ? t("common:navigation.booking") : "Book"}
-              </Link>
 
-              {/* Mobile toggle */}
               <button
-                onClick={() => setIsMobileMenuOpen(true)}
-                className="lg:hidden p-2 text-on-surface-variant hover:text-primary transition-colors"
-                aria-label={ready ? t("header:aria.openMenu") : "Open menu"}
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="lg:hidden relative z-[1002] w-10 h-10 flex items-center justify-center text-white/80"
+                aria-label={
+                  isMobileMenuOpen
+                    ? t("header:aria.closeMenu")
+                    : t("header:aria.openMenu")
+                }
               >
-                <Menu className="h-6 w-6" />
+                <div className="relative w-5 h-3.5 flex flex-col justify-between">
+                  <motion.span
+                    className="w-full h-0.5 bg-white origin-left rounded-full"
+                    animate={{ rotate: isMobileMenuOpen ? 45 : 0 }}
+                  />
+                  <motion.span
+                    className="w-full h-0.5 bg-white rounded-full"
+                    animate={{
+                      opacity: isMobileMenuOpen ? 0 : 1,
+                      scaleX: isMobileMenuOpen ? 0 : 1,
+                    }}
+                  />
+                  <motion.span
+                    className="w-full h-0.5 bg-white origin-left rounded-full"
+                    animate={{
+                      rotate: isMobileMenuOpen ? -45 : 0,
+                      y: isMobileMenuOpen ? -2 : 0,
+                    }}
+                  />
+                </div>
               </button>
             </div>
           </nav>
         </div>
       </header>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <div className="fixed inset-0 z-[100] lg:hidden">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="absolute inset-0 bg-black/40"
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[1001] bg-[#050810]"
+          >
+            <button
               onClick={() => setIsMobileMenuOpen(false)}
-            />
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="absolute inset-y-0 right-0 w-full max-w-[340px] bg-background flex flex-col shadow-2xl"
+              className="absolute top-5 right-5 z-[1002] w-12 h-12 flex items-center justify-center text-white/80 hover:text-primary transition-colors bg-white/5 hover:bg-white/10 rounded-full"
+              aria-label={t("header:aria.closeMenu")}
             >
-              <div className="flex items-center justify-between px-6 py-5 border-b border-border/40">
-                <Image
-                  src="/images/logo.webp"
-                  alt="PREVENT"
-                  width={40}
-                  height={40}
-                  className="h-10 w-10"
-                />
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 rounded-xl bg-muted text-on-surface-variant hover:bg-muted/70 transition-colors"
-                  aria-label={t("header:aria.closeMenu")}
-                >
-                  <X className="h-5 w-5" />
-                </button>
-              </div>
+              <X className="w-5 h-5" />
+            </button>
 
-              <nav className="flex-1 py-4 px-4 overflow-y-auto">
-                {navLinks.map((link, i) => {
-                  const isActive = pathname === link.href;
-                  return (
-                    <motion.div
-                      key={link.href}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.05 + i * 0.04 }}
-                    >
-                      <Link
-                        href={link.href}
-                        className={cn(
-                          "flex items-center py-3.5 px-4 rounded-xl text-base font-medium transition-all",
-                          isActive
-                            ? "bg-primary/5 text-primary"
-                            : "text-on-surface-variant hover:bg-muted"
-                        )}
+            <div className="container relative z-10 h-full flex flex-col pt-24 pb-8 overflow-y-auto">
+              <nav className="flex-1">
+                <div className="space-y-2">
+                  {navLinks.map((link, index) => {
+                    const isActive = pathname === link.href;
+                    return (
+                      <motion.div
+                        key={link.href}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.05 + index * 0.04, duration: 0.4 }}
                       >
-                        {t(`common:navigation.${link.key}`)}
-                      </Link>
-                    </motion.div>
-                  );
-                })}
+                        <Link
+                          href={link.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className={cn(
+                            "group flex items-center justify-between py-4 px-5 rounded-2xl transition-colors",
+                            isActive
+                              ? "bg-primary/10 text-primary"
+                              : "text-white/85 hover:bg-white/[0.04]"
+                          )}
+                        >
+                          <span className="text-xl font-semibold tracking-tight">
+                            {t(`common:navigation.${link.key}`)}
+                          </span>
+                          <ArrowUpRight
+                            className={cn(
+                              "w-5 h-5 transition-all",
+                              isActive
+                                ? "text-primary"
+                                : "text-white/30 group-hover:text-white/60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                            )}
+                          />
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </div>
               </nav>
 
-              <div className="px-4 pb-6 pt-4 space-y-3 border-t border-border/40">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
+                className="pt-8 border-t border-white/10 space-y-3"
+              >
                 <Link
                   href="/booking"
-                  className="flex items-center justify-center gap-2 w-full py-3.5 bg-primary text-primary-foreground rounded-xl font-semibold text-sm"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full font-semibold bg-primary text-white hover:bg-primary/90 transition-colors"
                 >
                   {t("common:navigation.booking")}
+                  <ArrowUpRight className="w-4 h-4" />
                 </Link>
-                <div className="flex justify-center pt-1">
+                <a
+                  href="tel:+302101234567"
+                  className="flex items-center justify-center gap-3 w-full py-3.5 rounded-full text-white/70 border border-white/10 hover:border-primary/30 hover:text-white transition-colors"
+                >
+                  <Phone className="w-4 h-4 text-primary" />
+                  <span className="text-sm font-medium">
+                    {t("header:contact.phone")}
+                  </span>
+                </a>
+                <div className="flex justify-center pt-2">
                   <LanguageSwitcher />
                 </div>
-              </div>
-            </motion.div>
-          </div>
+              </motion.div>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>

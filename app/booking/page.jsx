@@ -1,15 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { CalendarCheck, ArrowRight } from "lucide-react";
+import {
+  CalendarCheck,
+  ArrowRight,
+  ArrowLeft,
+  CheckCircle2,
+} from "lucide-react";
 import { toast } from "sonner";
 import HeadManager from "@/components/common/HeadManager";
-import { MotionWrapper } from "@/components/physio/MotionWrapper";
+import { PageHero } from "@/components/physio/PageHero";
 import { services } from "@/data/services";
+import { cn } from "@/lib/utils";
 
 export default function BookingPage() {
-  const { t, i18n } = useTranslation(["booking", "services", "common"]);
+  const { t, ready, i18n } = useTranslation(["booking", "services", "common"]);
   const [step, setStep] = useState(1);
   const [selection, setSelection] = useState({
     service: null,
@@ -49,188 +56,227 @@ export default function BookingPage() {
     <>
       <HeadManager namespace="booking" pageKey="meta" />
 
-      <section className="pt-32 pb-12 md:pt-40 md:pb-16 bg-muted">
-        <div className="container max-w-3xl text-center">
-          <MotionWrapper>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight mb-4">
-              {t("booking:title")}
-            </h1>
-            <p className="text-lg text-on-surface-variant">{t("booking:subtitle")}</p>
-          </MotionWrapper>
-        </div>
-      </section>
+      <PageHero
+        label={ready ? "Booking" : ""}
+        title={ready ? t("booking:title") : ""}
+        subtitle={ready ? t("booking:subtitle") : ""}
+        backgroundImage="/images/clinic/beautiful-chropractor-bed-photo.jpg"
+      />
 
-      <section className="py-12 md:py-16 bg-background">
-        <div className="container max-w-3xl">
-          {/* Steps indicator */}
+      <section className="relative py-20 lg:py-28 overflow-hidden bg-[#050810]">
+        <div className="container relative z-10 max-w-3xl">
           {step < 4 && (
-            <div className="flex items-center justify-center gap-2 mb-10">
+            <div className="flex items-center justify-center gap-3 mb-12">
               {[1, 2, 3].map((n) => (
-                <div
-                  key={n}
-                  className={`h-1.5 rounded-full transition-all ${
-                    n <= step ? "bg-primary w-12" : "bg-border w-6"
-                  }`}
-                />
+                <div key={n} className="flex items-center gap-2">
+                  <span
+                    className={cn(
+                      "text-xs font-mono",
+                      n <= step ? "text-primary" : "text-white/20"
+                    )}
+                  >
+                    {String(n).padStart(2, "0")}
+                  </span>
+                  <div
+                    className={cn(
+                      "h-0.5 rounded-full transition-all",
+                      n <= step ? "bg-primary w-12" : "bg-white/10 w-6"
+                    )}
+                  />
+                </div>
               ))}
             </div>
           )}
 
-          {/* Step 1: Service */}
           {step === 1 && (
-            <MotionWrapper>
-              <h2 className="text-2xl font-bold text-foreground mb-6">
-                {t("booking:steps.service")}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="text-2xl lg:text-3xl font-bold text-white mb-3 tracking-tight">
+                {ready ? t("booking:steps.service") : ""}
               </h2>
+              <p className="text-white/45 mb-8 text-sm">01 / 03</p>
+
               <div className="grid gap-3">
-                {services.map((s) => {
+                {services.map((s, i) => {
                   const Icon = s.icon;
                   return (
                     <button
                       key={s.id}
                       onClick={() => handleServiceSelect(s.id)}
-                      className="group flex items-center gap-4 p-5 rounded-xl bg-card border border-border hover:border-primary/40 hover:bg-primary/5 text-left transition-all"
+                      className="group flex items-center gap-4 p-5 rounded-2xl bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 text-left transition-all"
                     >
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                        <Icon className="h-5 w-5 text-primary" />
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 group-hover:bg-primary/15 flex items-center justify-center flex-shrink-0 transition-colors">
+                        <Icon className="w-5 h-5 text-primary" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-foreground">
-                          {t(`services:items.${s.id}.name`)}
+                        <h3 className="font-bold text-white mb-0.5 group-hover:text-primary transition-colors">
+                          {ready ? t(`services:items.${s.id}.name`) : ""}
                         </h3>
-                        <p className="text-sm text-on-surface-variant line-clamp-1">
-                          {t(`services:items.${s.id}.description`)}
+                        <p className="text-sm text-white/45 line-clamp-1">
+                          {ready ? t(`services:items.${s.id}.description`) : ""}
                         </p>
                       </div>
-                      <ArrowRight className="h-5 w-5 text-primary group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                      <ArrowRight className="w-5 h-5 text-white/30 group-hover:text-primary group-hover:translate-x-1 transition-all flex-shrink-0" />
                     </button>
                   );
                 })}
               </div>
-            </MotionWrapper>
+            </motion.div>
           )}
 
-          {/* Step 2: Date & Time */}
           {step === 2 && (
-            <MotionWrapper>
-              <h2 className="text-2xl font-bold text-foreground mb-6">
-                {t("booking:steps.datetime")}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="text-2xl lg:text-3xl font-bold text-white mb-3 tracking-tight">
+                {ready ? t("booking:steps.datetime") : ""}
               </h2>
-              <div className="bg-card border border-border rounded-xl p-6 space-y-4">
-                <FormInput
-                  label={t("booking:summary.date")}
+              <p className="text-white/45 mb-8 text-sm">02 / 03</p>
+
+              <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-7 space-y-5">
+                <FormField
+                  label={ready ? t("booking:summary.date") : "Date"}
                   type="date"
                   value={selection.date}
-                  onChange={(e) => setSelection((p) => ({ ...p, date: e.target.value }))}
+                  onChange={(e) =>
+                    setSelection((p) => ({ ...p, date: e.target.value }))
+                  }
                 />
-                <FormInput
-                  label={t("booking:summary.time")}
+                <FormField
+                  label={ready ? t("booking:summary.time") : "Time"}
                   type="time"
                   value={selection.time}
-                  onChange={(e) => setSelection((p) => ({ ...p, time: e.target.value }))}
+                  onChange={(e) =>
+                    setSelection((p) => ({ ...p, time: e.target.value }))
+                  }
                 />
-                <div className="flex gap-2 pt-2">
+                <div className="flex gap-3 pt-2">
                   <button
                     onClick={() => setStep(1)}
-                    className="px-5 py-2.5 rounded-xl border border-border text-foreground hover:bg-muted transition-colors text-sm font-medium"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/15 text-white/70 hover:text-white hover:border-white/30 font-semibold text-sm transition-colors"
                   >
-                    {t("common:actions.back")}
+                    <ArrowLeft className="w-4 h-4" />
+                    {ready ? t("common:actions.back") : "Back"}
                   </button>
                   <button
                     onClick={() => setStep(3)}
                     disabled={!selection.date || !selection.time}
-                    className="flex-1 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground hover:bg-secondary transition-colors text-sm font-semibold disabled:opacity-50"
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors disabled:opacity-50"
                   >
-                    {t("common:actions.next")}
+                    {ready ? t("common:actions.next") : "Next"}
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
-            </MotionWrapper>
+            </motion.div>
           )}
 
-          {/* Step 3: Details */}
           {step === 3 && (
-            <MotionWrapper>
-              <h2 className="text-2xl font-bold text-foreground mb-6">
-                {t("booking:steps.details")}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="text-2xl lg:text-3xl font-bold text-white mb-3 tracking-tight">
+                {ready ? t("booking:steps.details") : ""}
               </h2>
+              <p className="text-white/45 mb-8 text-sm">03 / 03</p>
+
               <form
                 onSubmit={handleSubmit}
-                className="bg-card border border-border rounded-xl p-6 space-y-4"
+                className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-7 space-y-5"
               >
-                <FormInput
-                  label={t("booking:form.name")}
+                <FormField
+                  label={ready ? t("booking:form.name") : ""}
                   required
                   value={selection.name}
-                  onChange={(e) => setSelection((p) => ({ ...p, name: e.target.value }))}
+                  onChange={(e) =>
+                    setSelection((p) => ({ ...p, name: e.target.value }))
+                  }
                 />
-                <FormInput
-                  label={t("booking:form.email")}
+                <FormField
+                  label={ready ? t("booking:form.email") : ""}
                   type="email"
                   required
                   value={selection.email}
-                  onChange={(e) => setSelection((p) => ({ ...p, email: e.target.value }))}
+                  onChange={(e) =>
+                    setSelection((p) => ({ ...p, email: e.target.value }))
+                  }
                 />
-                <FormInput
-                  label={t("booking:form.phone")}
+                <FormField
+                  label={ready ? t("booking:form.phone") : ""}
                   type="tel"
                   required
                   value={selection.phone}
-                  onChange={(e) => setSelection((p) => ({ ...p, phone: e.target.value }))}
+                  onChange={(e) =>
+                    setSelection((p) => ({ ...p, phone: e.target.value }))
+                  }
                 />
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {t("booking:form.notes")}
-                  </label>
-                  <textarea
-                    rows={3}
-                    value={selection.notes}
-                    onChange={(e) => setSelection((p) => ({ ...p, notes: e.target.value }))}
-                    className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-sm resize-none"
-                  />
-                </div>
-                <div className="flex gap-2 pt-2">
+                <FormField
+                  label={ready ? t("booking:form.notes") : ""}
+                  multiline
+                  value={selection.notes}
+                  onChange={(e) =>
+                    setSelection((p) => ({ ...p, notes: e.target.value }))
+                  }
+                />
+                <div className="flex gap-3 pt-2">
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="px-5 py-2.5 rounded-xl border border-border text-foreground hover:bg-muted transition-colors text-sm font-medium"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/15 text-white/70 hover:text-white hover:border-white/30 font-semibold text-sm transition-colors"
                   >
-                    {t("common:actions.back")}
+                    <ArrowLeft className="w-4 h-4" />
+                    {ready ? t("common:actions.back") : "Back"}
                   </button>
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground hover:bg-secondary transition-colors text-sm font-semibold disabled:opacity-50"
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors disabled:opacity-50"
                   >
-                    <CalendarCheck className="h-4 w-4" />
-                    {submitting ? t("common:actions.loading") : t("booking:form.submit")}
+                    <CalendarCheck className="w-4 h-4" />
+                    {submitting
+                      ? ready
+                        ? t("common:actions.loading")
+                        : "..."
+                      : ready
+                        ? t("booking:form.submit")
+                        : "Submit"}
                   </button>
                 </div>
               </form>
-            </MotionWrapper>
+            </motion.div>
           )}
 
-          {/* Step 4: Success */}
           {step === 4 && (
-            <MotionWrapper>
-              <div className="text-center py-12">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
-                  <CalendarCheck className="h-10 w-10 text-primary" />
-                </div>
-                <h2 className="text-3xl font-bold text-foreground mb-4">
-                  {t("booking:success.title")}
-                </h2>
-                <p className="text-on-surface-variant mb-8">
-                  {t("booking:success.message")}
-                </p>
-                <a
-                  href="/"
-                  className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:bg-secondary transition-colors"
-                >
-                  {t("booking:success.back")}
-                </a>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="text-center py-12"
+            >
+              <div className="w-20 h-20 mx-auto mb-7 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center">
+                <CheckCircle2 className="w-10 h-10 text-primary" />
               </div>
-            </MotionWrapper>
+              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-3 tracking-tight">
+                {ready ? t("booking:success.title") : ""}
+              </h2>
+              <p className="text-white/55 mb-8 text-lg">
+                {ready ? t("booking:success.message") : ""}
+              </p>
+              <a
+                href="/"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors"
+              >
+                {ready ? t("booking:success.back") : "Home"}
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </motion.div>
           )}
         </div>
       </section>
@@ -238,14 +284,24 @@ export default function BookingPage() {
   );
 }
 
-function FormInput({ label, ...props }) {
+function FormField({ label, multiline, ...props }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-foreground mb-2">{label}</label>
-      <input
-        {...props}
-        className="w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-sm"
-      />
+      <label className="block text-xs font-semibold uppercase tracking-wider text-white/45 mb-2">
+        {label}
+      </label>
+      {multiline ? (
+        <textarea
+          rows={3}
+          {...props}
+          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 resize-none"
+        />
+      ) : (
+        <input
+          {...props}
+          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 [color-scheme:dark]"
+        />
+      )}
     </div>
   );
 }

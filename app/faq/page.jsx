@@ -1,17 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { ChevronDown, Search, ArrowRight } from "lucide-react";
+import { ChevronDown, Search, ArrowUpRight } from "lucide-react";
 import HeadManager from "@/components/common/HeadManager";
-import { MotionWrapper } from "@/components/physio/MotionWrapper";
+import { PageHero } from "@/components/physio/PageHero";
 
 export default function FaqPage() {
-  const { t } = useTranslation(["faq", "common"]);
+  const { t, ready } = useTranslation(["faq", "common"]);
   const [query, setQuery] = useState("");
   const [openIndex, setOpenIndex] = useState(null);
 
-  const items = t("faq:items", { returnObjects: true }) || [];
+  const items = ready ? t("faq:items", { returnObjects: true }) || [] : [];
   const filtered = items.filter(
     (it) =>
       it.q.toLowerCase().includes(query.toLowerCase()) ||
@@ -22,71 +23,95 @@ export default function FaqPage() {
     <>
       <HeadManager namespace="faq" pageKey="meta" />
 
-      <section className="pt-32 pb-12 md:pt-40 md:pb-16 bg-muted">
-        <div className="container max-w-3xl text-center">
-          <MotionWrapper>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight mb-4">
-              {t("faq:title")}
-            </h1>
-            <p className="text-lg text-on-surface-variant">{t("faq:subtitle")}</p>
-          </MotionWrapper>
-        </div>
-      </section>
+      <PageHero
+        label={ready ? "FAQ" : ""}
+        title={ready ? t("faq:title") : ""}
+        subtitle={ready ? t("faq:subtitle") : ""}
+      />
 
-      <section className="py-16 md:py-20 bg-background">
-        <div className="container max-w-3xl">
+      <section className="relative py-24 lg:py-32 overflow-hidden bg-[#050810]">
+        <div className="container relative z-10 max-w-3xl">
           {/* Search */}
-          <div className="relative mb-8">
-            <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-on-surface-variant" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="relative mb-8"
+          >
+            <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-white/30" />
             <input
               type="text"
-              placeholder={t("faq:search")}
+              placeholder={ready ? t("faq:search") : ""}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full pl-14 pr-5 py-4 rounded-xl bg-card border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-base"
+              className="w-full pl-14 pr-5 py-4 rounded-2xl bg-[#070b14] border border-white/[0.06] focus:border-primary/50 outline-none text-base text-white placeholder:text-white/30 transition-all"
             />
-          </div>
+          </motion.div>
 
-          {/* FAQ items */}
           <div className="space-y-3">
             {filtered.map((item, i) => {
               const isOpen = openIndex === i;
               return (
-                <MotionWrapper key={i} delay={i * 0.05}>
-                  <button
-                    onClick={() => setOpenIndex(isOpen ? null : i)}
-                    className="w-full text-left bg-card rounded-xl border border-border overflow-hidden hover:border-primary/40 transition-colors"
-                  >
-                    <div className="flex items-center justify-between gap-4 p-5">
-                      <h3 className="font-semibold text-foreground">{item.q}</h3>
-                      <ChevronDown
-                        className={`h-5 w-5 text-primary flex-shrink-0 transition-transform ${
-                          isOpen ? "rotate-180" : ""
-                        }`}
-                      />
+                <motion.button
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  className="group w-full text-left bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 rounded-2xl transition-all overflow-hidden"
+                >
+                  <div className="flex items-start justify-between gap-4 p-5 lg:p-7">
+                    <div className="flex items-start gap-4 flex-1">
+                      <span className="text-xs font-mono text-white/30 group-hover:text-primary transition-colors mt-1">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <h3 className="font-bold text-white group-hover:text-primary transition-colors">
+                        {item.q}
+                      </h3>
                     </div>
-                    {isOpen && (
-                      <div className="px-5 pb-5 -mt-1">
-                        <p className="text-on-surface-variant leading-relaxed">{item.a}</p>
+                    <ChevronDown
+                      className={`h-5 w-5 text-primary flex-shrink-0 mt-0.5 transition-transform ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 pb-5 lg:px-7 lg:pb-7 pl-14 lg:pl-16">
+                        <p className="text-white/55 leading-relaxed">
+                          {item.a}
+                        </p>
                       </div>
-                    )}
-                  </button>
-                </MotionWrapper>
+                    </motion.div>
+                  )}
+                </motion.button>
               );
             })}
           </div>
 
-          {/* No answer */}
-          <div className="mt-12 p-8 rounded-2xl bg-muted text-center">
-            <h3 className="text-lg font-bold text-foreground mb-3">{t("faq:noAnswer")}</h3>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-12 p-8 rounded-3xl bg-[#070b14] border border-white/[0.06] text-center"
+          >
+            <h3 className="text-xl font-bold text-white mb-3">
+              {ready ? t("faq:noAnswer") : ""}
+            </h3>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:bg-secondary transition-colors"
+              className="inline-flex items-center gap-2 px-7 py-3.5 mt-2 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors"
             >
-              {t("faq:contact")}
-              <ArrowRight className="h-4 w-4" />
+              {ready ? t("faq:contact") : "Contact"}
+              <ArrowUpRight className="w-4 h-4" />
             </a>
-          </div>
+          </motion.div>
         </div>
       </section>
     </>

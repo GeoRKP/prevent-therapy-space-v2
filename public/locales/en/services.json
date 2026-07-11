@@ -8,26 +8,96 @@
     "title": "Modern therapeutic services",
     "subtitle": "Personalized care for every patient"
   },
-  "items": {
-    "physiotherapy": {
-      "name": "Physiotherapy",
-      "description": "Comprehensive physiotherapy techniques for pain relief and restoration of mobility."
+  "servicesBadge": "Services",
+  "title": "Our Services",
+  "subtitle": "Five specialized treatment categories — one comprehensive approach",
+  "services": [
+    {
+      "title": "Physiotherapy",
+      "description": "Comprehensive techniques for pain relief and restoration of mobility.",
+      "icon": "uil-wrench",
+      "link": "/services",
+      "features": [
+        "Manual therapy and chiropractic techniques",
+        "Electrotherapy and ultrasound",
+        "Soft-tissue mobilization"
+      ]
     },
-    "osteopathy": {
-      "name": "Osteopathy",
-      "description": "Holistic approach targeting the underlying causes of pain, not just the symptoms."
+    {
+      "title": "Osteopathy",
+      "description": "Holistic approach targeting the underlying causes of pain, not just the symptoms.",
+      "icon": "uil-constructor",
+      "link": "/services",
+      "features": [
+        "Spinal and joint techniques",
+        "Visceral interventions",
+        "Cranio-sacral therapy"
+      ]
     },
-    "exercise": {
-      "name": "Therapeutic Exercise",
-      "description": "Personalized exercise programs for strength, flexibility, and prevention."
+    {
+      "title": "Therapeutic Exercise",
+      "description": "Personalized exercise programs for strength, flexibility, and prevention.",
+      "icon": "uil-bolt",
+      "link": "/services",
+      "features": [
+        "Strength program",
+        "Balance and stability exercises",
+        "Postural correction"
+      ]
     },
-    "neurological": {
-      "name": "Neurological Rehabilitation",
-      "description": "Specialized rehabilitation after stroke, Parkinson's disease, and other neurological conditions."
+    {
+      "title": "Neurological Rehabilitation",
+      "description": "Specialized rehabilitation after stroke, Parkinson's disease, and other neurological conditions.",
+      "icon": "scan",
+      "link": "/services",
+      "features": [
+        "Gait re-education",
+        "Functional limb recovery",
+        "Balance and movement training"
+      ]
     },
-    "senior": {
-      "name": "Senior Exercise",
-      "description": "Safe, adapted movement programs for older adults."
+    {
+      "title": "Senior Exercise",
+      "description": "Safe, adapted movement programs for older adults.",
+      "icon": "uil-shield-check",
+      "link": "/services",
+      "features": [
+        "Fall prevention",
+        "Mobility maintenance",
+        "Low-intensity exercise"
+      ]
+    },
+    {
+      "title": "Prevention & Consulting",
+      "description": "Education and preventive interventions to help you avoid future problems.",
+      "icon": "uil-box",
+      "link": "/services",
+      "features": [
+        "Posture assessment",
+        "Ergonomic advice",
+        "Home exercise program"
+      ]
     }
+  ],
+  "items": {
+    "physiotherapy": { "name": "Physiotherapy", "description": "Comprehensive physiotherapy techniques for pain relief and restoration of mobility." },
+    "osteopathy": { "name": "Osteopathy", "description": "Holistic approach targeting the underlying causes of pain, not just the symptoms." },
+    "exercise": { "name": "Therapeutic Exercise", "description": "Personalized exercise programs for strength, flexibility, and prevention." },
+    "neurological": { "name": "Neurological Rehabilitation", "description": "Specialized rehabilitation after stroke, Parkinson's disease, and other neurological conditions." },
+    "senior": { "name": "Senior Exercise", "description": "Safe, adapted movement programs for older adults." }
+  },
+  "whyChooseUs": {
+    "badge": "Why us",
+    "title": "Our difference",
+    "titleHighlight": "is expertise",
+    "description": "We combine scientific knowledge with a human touch — every treatment plan is designed exclusively for you.",
+    "yearsExperience": "Years Experience",
+    "imageAlt": "PREVENT Therapy Space",
+    "features": [
+      { "title": "Personalized Care", "description": "A plan just for you, based on your assessment." },
+      { "title": "Certified Professionals", "description": "Licensed practice and continuous training." },
+      { "title": "Quick Results", "description": "Many patients feel improvement after the first session." },
+      { "title": "Holistic Approach", "description": "We work on the causes, not just the symptoms." }
+    ]
   }
 }

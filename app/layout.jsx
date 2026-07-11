@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
         />
       </head>
 
-      <body className="min-h-screen flex flex-col bg-background text-foreground antialiased">
+      <body className="min-h-screen flex flex-col bg-[#050810] text-white antialiased">
         <LanguageDetector />
         <StructuredData />
         <Header1 />

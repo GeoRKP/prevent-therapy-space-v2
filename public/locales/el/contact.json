@@ -1,6 +1,12 @@
 {
+  "meta": {
+    "title": "Επικοινωνία | PREVENT Therapy Space",
+    "description": "Επικοινωνήστε με το PREVENT Therapy Space στα Πατήσια — ραντεβού, ερωτήσεις, οδηγίες πρόσβασης."
+  },
   "title": "Επικοινωνήστε μαζί μας",
   "subtitle": "Είμαστε εδώ για κάθε σας ερώτηση",
+  "learnMore": "Μάθετε περισσότερα",
+  "requestQuote": "Κλείστε Ραντεβού",
   "form": {
     "name": "Ονοματεπώνυμο",
     "email": "Email",
@@ -11,18 +17,9 @@
     "error": "Κάτι πήγε στραβά. Δοκιμάστε ξανά."
   },
   "info": {
-    "address": {
-      "title": "Διεύθυνση",
-      "value": "Θεοτοκοπούλου 55, Πατήσια, Αθήνα"
-    },
-    "phone": {
-      "title": "Τηλέφωνο",
-      "value": "210 123 4567"
-    },
-    "email": {
-      "title": "Email",
-      "value": "info@preventtherapy.gr"
-    }
+    "address": { "title": "Διεύθυνση", "value": "Θεοτοκοπούλου 55, Πατήσια, Αθήνα" },
+    "phone": { "title": "Τηλέφωνο", "value": "210 123 4567" },
+    "email": { "title": "Email", "value": "info@preventtherapy.gr" }
   },
   "location": {
     "googleMapsUrl": "https://maps.google.com/?q=Theotokopoulou+55+Patisia+Athens"

@@ -1,40 +1,67 @@
 "use client";
 
 import Link from "next/link";
-import { Home, Stethoscope, Mail } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+import { Home, Stethoscope, Mail, ArrowUpRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { RevealText } from "@/components/effects/kinetic-text";
 
 export default function NotFound() {
-  const { t } = useTranslation("notfound");
+  const { t, ready } = useTranslation("notfound");
 
   return (
-    <section className="min-h-[80vh] flex items-center justify-center px-4 py-20 bg-background">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/3 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/3 w-56 h-56 bg-accent/10 rounded-full blur-3xl" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050810] py-32">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+        <span className="text-[28vw] lg:text-[18vw] font-bold text-white/[0.025] leading-none">
+          404
+        </span>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="relative text-center max-w-2xl"
-      >
-        <h1 className="text-[8rem] md:text-[12rem] font-black text-primary/10 leading-none select-none">
-          404
-        </h1>
-        <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 tracking-tight">
-          {t("title")}
-        </h2>
-        <p className="text-on-surface-variant mb-8 text-lg">{t("description")}</p>
+      <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-primary/[0.05] rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-primary/[0.03] rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <NotFoundLink href="/" icon={Home} label={t("goHome")} />
-          <NotFoundLink href="/services" icon={Stethoscope} label={t("services")} />
-          <NotFoundLink href="/contact" icon={Mail} label={t("contact")} />
-        </div>
-      </motion.div>
+      <div className="container relative z-10 text-center">
+        <RevealText>
+          <div className="inline-flex items-center gap-3 mb-7">
+            <div className="w-10 h-px bg-primary/70" />
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+              Error 404
+            </span>
+          </div>
+        </RevealText>
+
+        <RevealText delay={0.1}>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-4">
+            {ready ? t("title") : "Page not found"}
+          </h1>
+        </RevealText>
+
+        <RevealText delay={0.2}>
+          <p className="text-white/55 mb-10 text-base lg:text-lg max-w-xl mx-auto">
+            {ready ? t("description") : ""}
+          </p>
+        </RevealText>
+
+        <RevealText delay={0.3}>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-2xl mx-auto">
+            <NotFoundLink
+              href="/"
+              icon={Home}
+              label={ready ? t("goHome") : "Home"}
+            />
+            <NotFoundLink
+              href="/services"
+              icon={Stethoscope}
+              label={ready ? t("services") : "Services"}
+            />
+            <NotFoundLink
+              href="/contact"
+              icon={Mail}
+              label={ready ? t("contact") : "Contact"}
+            />
+          </div>
+        </RevealText>
+      </div>
     </section>
   );
 }
@@ -43,10 +70,13 @@ function NotFoundLink({ href, icon: Icon, label }) {
   return (
     <Link
       href={href}
-      className="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-card border border-border hover:border-primary/40 hover:bg-primary/5 transition-all"
+      className="group flex items-center gap-3 px-5 py-3.5 rounded-2xl bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 transition-all flex-1"
     >
-      <Icon className="h-5 w-5 text-primary" />
-      <span className="font-medium text-foreground">{label}</span>
+      <Icon className="w-5 h-5 text-primary" />
+      <span className="font-semibold text-sm text-white/80 group-hover:text-white transition-colors">
+        {label}
+      </span>
+      <ArrowUpRight className="w-4 h-4 ml-auto text-white/20 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
     </Link>
   );
 }

@@ -7,8 +7,26 @@
     "label": "PREVENT Therapy Space",
     "title": "Physiotherapy & Osteopathy",
     "subtitle": "Live pain-free. Move with confidence.",
+    "slides": [
+      {
+        "title": "Physiotherapy & Osteopathy",
+        "highlight": "PREVENT",
+        "subtitle": "Live pain-free. Move with confidence — in Patisia, Athens, since 2017."
+      },
+      {
+        "title": "Personalized",
+        "highlight": "THERAPY",
+        "subtitle": "A physiotherapist and an orthopedic surgeon working together on a treatment plan built exclusively for you."
+      },
+      {
+        "title": "Your path to",
+        "highlight": "RECOVERY",
+        "subtitle": "From your first assessment to full recovery — step by step, with clear progress at every session."
+      }
+    ],
     "ctaPrimary": "Book Appointment",
     "ctaSecondary": "Our Services",
+    "experience": "SINCE 2017",
     "badgeLicensed": "Specialized Movement Care",
     "badgeExperience": "Evidence-Based Methods",
     "badgePatients": "Holistic Recovery & Prevention"
@@ -38,14 +56,57 @@
   },
   "whyChooseUs": {
     "label": "Our Approach",
-    "title": "Why Choose Us",
+    "title": "Why Choose",
+    "titleHighlight": "Us",
     "subtitle": "Expertise, collaboration, and personalized care",
-    "feature1Title": "Specialized Treatment",
-    "feature1Desc": "Chiropractic, osteopathy, and therapeutic exercise techniques tailored to your needs.",
-    "feature2Title": "Medical Collaboration",
-    "feature2Desc": "Physiotherapist and orthopedic surgeon working together for comprehensive care.",
-    "feature3Title": "Personal Approach",
-    "feature3Desc": "Every treatment plan is designed exclusively around you and your goals."
+    "description": "We combine evidence-based methods with a holistic approach. Every patient gets a personalized plan tailored to their unique needs and goals.",
+    "yearsExperience": "Years Experience",
+    "features": [
+      {
+        "title": "Specialized Treatment",
+        "description": "Chiropractic, osteopathy, and therapeutic exercise techniques tailored to your needs."
+      },
+      {
+        "title": "Medical Collaboration",
+        "description": "Physiotherapist and orthopedic surgeon working together for comprehensive care."
+      },
+      {
+        "title": "Personal Approach",
+        "description": "Every treatment plan is designed exclusively around you and your goals."
+      },
+      {
+        "title": "Ongoing Support",
+        "description": "From the first session to full recovery, we're with you every step of the way."
+      }
+    ]
+  },
+  "aboutSection": {
+    "badge": "About Us",
+    "title": "Movement care",
+    "subtitle": "you can trust",
+    "description": "Since 2017, we've been helping patients in Patisia overcome pain and get back to the life they love — with expertise, medical collaboration, and a human approach.",
+    "stats": [
+      { "value": "8+", "label": "Years Experience" },
+      { "value": "1500+", "label": "Patients" },
+      { "value": "98%", "label": "Satisfaction" },
+      { "value": "5+", "label": "Services" }
+    ],
+    "points": [
+      { "title": "Evidence-Based Therapy", "text": "All our methods are grounded in current research and clinical guidelines." },
+      { "title": "Modern Equipment", "text": "Fully equipped recovery space with modern physiotherapy and exercise gear." },
+      { "title": "Medical Collaboration", "text": "Close cooperation with an orthopedic surgeon for comprehensive care." },
+      { "title": "Personal Care", "text": "You're not a number. Every patient gets a personalized plan and treatment flow." }
+    ]
+  },
+  "ctaSection": {
+    "getStarted": "Get Started Today",
+    "title": "Ready to live pain-free?",
+    "subtitle": "Book your appointment online in seconds. Instant confirmation, no waiting.",
+    "button": "Book Appointment",
+    "callNow": "Call Now",
+    "years": "Years",
+    "clients": "Patients",
+    "support": "Care"
   },
   "testimonials": {
     "label": "Reviews",
@@ -67,14 +128,19 @@
       "sciatica": { "title": "Sciatica", "desc": "Effective treatment for sciatic nerve pain and numbness" }
     }
   },
-  "cta": {
-    "title": "Start Your Recovery Today",
-    "subtitle": "Book your appointment online in seconds",
-    "primary": "Book Appointment",
-    "secondary": "Call for Consultation"
-  },
   "gallery": {
-    "label": "PREVENT Therapy Space",
-    "title": "Our Space"
+    "label": "Gallery",
+    "title": "Moments from our space",
+    "subtitle": "The space, the work, and the care you'll find at PREVENT",
+    "alts": {
+      "treatment1": "Spinal mobilization by the physiotherapist",
+      "treatment2": "Seated neck and shoulder treatment",
+      "treatment3": "Lumbar therapeutic massage",
+      "treatment4": "Limb mobilization technique",
+      "waitingArea": "The PREVENT Therapy Space waiting area",
+      "clinicInterior": "The therapeutic exercise space",
+      "equipment": "Therapeutic exercise equipment",
+      "office": "The consultation office"
+    }
   }
 }

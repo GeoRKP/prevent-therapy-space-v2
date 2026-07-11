@@ -1,52 +1,46 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { RevealText } from "@/components/effects/kinetic-text";
 import { cn } from "@/lib/utils";
 
-export function SectionHeading({ label, title, subtitle, centered = true, light = false }) {
+export function SectionHeading({ label, title, subtitle, centered = true }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6 }}
-      className={cn("mb-14", centered && "text-center")}
-    >
+    <div className={cn("mb-20", centered ? "text-center" : "")}>
       {label && (
-        <span
-          className={cn(
-            "block text-xs font-bold tracking-[0.2em] uppercase mb-4",
-            light ? "text-white/70" : "text-primary"
-          )}
-        >
-          {label}
-        </span>
+        <RevealText>
+          <div
+            className={cn(
+              "inline-flex items-center gap-4 mb-6",
+              centered ? "" : ""
+            )}
+          >
+            <div className="w-8 h-px bg-primary" />
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">
+              {label}
+            </span>
+            {centered && <div className="w-8 h-px bg-primary" />}
+          </div>
+        </RevealText>
       )}
-      <h2
-        className={cn(
-          "text-3xl md:text-4xl font-bold mb-3 tracking-tight",
-          light ? "text-white" : "text-foreground"
-        )}
-      >
-        {title}
-      </h2>
+
+      <RevealText delay={0.1}>
+        <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-[0.95] tracking-tight text-white mb-6">
+          {title}
+        </h2>
+      </RevealText>
+
       {subtitle && (
-        <p
-          className={cn(
-            "text-lg max-w-2xl font-light leading-relaxed",
-            centered && "mx-auto",
-            light ? "text-white/70" : "text-on-surface-variant"
-          )}
-        >
-          {subtitle}
-        </p>
+        <RevealText delay={0.2}>
+          <p
+            className={cn(
+              "text-lg text-white/50 max-w-2xl leading-relaxed",
+              centered ? "mx-auto" : ""
+            )}
+          >
+            {subtitle}
+          </p>
+        </RevealText>
       )}
-      <div
-        className={cn(
-          "mt-4 h-1 w-16 rounded-full bg-primary",
-          centered && "mx-auto"
-        )}
-      />
-    </motion.div>
+    </div>
   );
 }
