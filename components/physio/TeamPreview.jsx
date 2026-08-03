@@ -34,7 +34,7 @@ export function TeamPreview() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.6 }}
-              className="group relative bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 rounded-3xl p-6 lg:p-8 transition-all"
+              className="group relative bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-3xl p-6 lg:p-8 transition-all"
             >
               <div className="relative aspect-[4/5] overflow-hidden rounded-2xl mb-5">
                 <Image
@@ -48,10 +48,10 @@ export function TeamPreview() {
               </div>
 
               <div className="flex items-start justify-between mb-2.5 gap-3">
-                <h3 className="text-xl font-bold text-white group-hover:text-primary transition-colors">
+                <h3 className="text-xl font-bold text-white group-hover:text-primary-soft transition-colors">
                   {t(`about:team.members.${member.id}.name`)}
                 </h3>
-                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary uppercase tracking-wider">
+                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-primary-soft/10 text-primary-soft uppercase tracking-wider">
                   {t(`about:team.members.${member.id}.credentials`)}
                 </span>
               </div>

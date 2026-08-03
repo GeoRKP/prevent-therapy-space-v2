@@ -13,13 +13,11 @@ export function PageHero({ label, title, subtitle, backgroundImage }) {
       )}
       <div className="absolute inset-0 bg-gradient-to-b from-[#050810]/70 via-[#050810]/85 to-[#050810]" />
 
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[200px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-
       <div className="container relative z-10">
         <div className="max-w-4xl">
           <RevealText>
             <div className="inline-flex items-center gap-3 mb-7">
-              <div className="w-10 h-px bg-primary/70" />
+              <div className="w-10 h-px bg-primary-soft/70" />
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
                 {label}
               </span>

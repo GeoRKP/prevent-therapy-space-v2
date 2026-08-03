@@ -16,14 +16,12 @@ export function WhyChooseUs() {
 
   return (
     <section className="relative py-28 lg:py-36 overflow-hidden bg-[#070b14]">
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/[0.04] rounded-full blur-[200px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-
       <div className="container relative z-10">
         <div className="grid lg:grid-cols-12 gap-14 lg:gap-20 items-center">
           <div className="lg:col-span-6">
             <RevealText>
               <div className="flex items-center gap-3 mb-5">
-                <div className="w-10 h-px bg-primary/70" />
+                <div className="w-10 h-px bg-primary-soft/70" />
                 <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
                   {t("whyChooseUs.label")}
                 </span>
@@ -33,7 +31,7 @@ export function WhyChooseUs() {
             <RevealText delay={0.1}>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight mb-5">
                 <span className="text-white">{t("whyChooseUs.title")}</span>{" "}
-                <span className="text-primary">
+                <span className="text-primary-soft">
                   {t("whyChooseUs.titleHighlight")}
                 </span>
               </h2>
@@ -55,14 +53,14 @@ export function WhyChooseUs() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
-                    className="group bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 rounded-2xl p-5 transition-all"
+                    className="group bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-5 transition-all"
                   >
                     <div className="flex items-start gap-3.5">
-                      <div className="w-11 h-11 rounded-xl bg-primary/10 group-hover:bg-primary/15 flex items-center justify-center flex-shrink-0 transition-colors">
-                        <Icon className="w-5 h-5 text-primary" />
+                      <div className="w-11 h-11 rounded-xl bg-primary-soft/10 group-hover:bg-primary-soft/15 flex items-center justify-center flex-shrink-0 transition-colors">
+                        <Icon className="w-5 h-5 text-primary-soft" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-white mb-1 group-hover:text-primary transition-colors">
+                        <h4 className="font-bold text-white mb-1 group-hover:text-primary-soft transition-colors">
                           {feature.title}
                         </h4>
                         <p className="text-sm text-white/50 leading-relaxed">
@@ -103,10 +101,10 @@ export function WhyChooseUs() {
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="absolute -bottom-6 -left-6 lg:-left-10"
               >
-                <div className="bg-[#050810]/95 backdrop-blur-xl border border-primary/30 rounded-2xl p-5">
+                <div className="bg-[#050810]/95 backdrop-blur-xl border border-primary-soft/30 rounded-2xl p-5">
                   <div className="flex items-center gap-3.5">
-                    <div className="w-11 h-11 rounded-xl bg-primary flex items-center justify-center">
-                      <Award className="w-5 h-5 text-white" />
+                    <div className="w-11 h-11 rounded-xl bg-primary-soft flex items-center justify-center">
+                      <Award className="w-5 h-5 text-primary-soft-foreground" />
                     </div>
                     <div>
                       <span className="text-2xl font-bold text-white">8+</span>

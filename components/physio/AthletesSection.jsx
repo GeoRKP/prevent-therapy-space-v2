@@ -47,13 +47,13 @@ export function AthletesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="group flex items-center gap-4 bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 rounded-2xl p-6 transition-all"
+              className="group flex items-center gap-4 bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 transition-all"
             >
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 group-hover:bg-primary/15 flex items-center justify-center flex-shrink-0 transition-colors">
-                <Medal className="w-6 h-6 text-primary" />
+              <div className="w-14 h-14 rounded-2xl bg-primary-soft/10 group-hover:bg-primary-soft/15 flex items-center justify-center flex-shrink-0 transition-colors">
+                <Medal className="w-6 h-6 text-primary-soft" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white group-hover:text-primary transition-colors">
+                <h3 className="text-base font-bold text-white group-hover:text-primary-soft transition-colors">
                   {athlete.name}
                 </h3>
                 <p className="text-sm text-white/55 mt-0.5">{athlete.sport}</p>
@@ -69,10 +69,10 @@ export function AthletesSection() {
           >
             <Link
               href="/contact"
-              className="group flex items-center gap-4 h-full bg-primary/[0.06] hover:bg-primary/10 border border-primary/20 hover:border-primary/40 rounded-2xl p-6 transition-all"
+              className="group flex items-center gap-4 h-full bg-primary-soft/[0.06] hover:bg-primary-soft/10 border border-primary-soft/20 hover:border-primary-soft/40 rounded-2xl p-6 transition-all"
             >
-              <div className="w-14 h-14 rounded-2xl bg-primary/15 flex items-center justify-center flex-shrink-0">
-                <HeartHandshake className="w-6 h-6 text-primary" />
+              <div className="w-14 h-14 rounded-2xl bg-primary-soft/15 flex items-center justify-center flex-shrink-0">
+                <HeartHandshake className="w-6 h-6 text-primary-soft" />
               </div>
               <div className="flex-1">
                 <h3 className="text-base font-bold text-white">
@@ -81,7 +81,7 @@ export function AthletesSection() {
                 <p className="text-sm text-white/55 mt-0.5">
                   {t("athletes.openText")}
                 </p>
-                <span className="inline-flex items-center gap-1.5 mt-2 text-xs font-semibold uppercase tracking-wider text-primary">
+                <span className="inline-flex items-center gap-1.5 mt-2 text-xs font-semibold uppercase tracking-wider text-primary-soft">
                   {t("athletes.openCta")}
                   <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </span>

@@ -48,8 +48,8 @@ export function PhysioFooter() {
                 href={`mailto:${contactInfo.email}`}
                 className="group flex items-center gap-3 text-white/55 hover:text-white text-sm transition-colors"
               >
-                <div className="w-9 h-9 rounded-xl border border-white/[0.08] bg-white/[0.02] flex items-center justify-center group-hover:border-primary/40 group-hover:bg-primary/10 transition-all">
-                  <Mail className="w-3.5 h-3.5 text-primary" />
+                <div className="w-9 h-9 rounded-xl border border-white/[0.08] bg-white/[0.02] flex items-center justify-center group-hover:border-primary-soft/40 group-hover:bg-primary-soft/10 transition-all">
+                  <Mail className="w-3.5 h-3.5 text-primary-soft" />
                 </div>
                 <span>{contactInfo.email}</span>
               </a>
@@ -57,8 +57,8 @@ export function PhysioFooter() {
                 href={`tel:+30${contactInfo.phone.replace(/\s/g, "")}`}
                 className="group flex items-center gap-3 text-white/55 hover:text-white text-sm transition-colors"
               >
-                <div className="w-9 h-9 rounded-xl border border-white/[0.08] bg-white/[0.02] flex items-center justify-center group-hover:border-primary/40 group-hover:bg-primary/10 transition-all">
-                  <Phone className="w-3.5 h-3.5 text-primary" />
+                <div className="w-9 h-9 rounded-xl border border-white/[0.08] bg-white/[0.02] flex items-center justify-center group-hover:border-primary-soft/40 group-hover:bg-primary-soft/10 transition-all">
+                  <Phone className="w-3.5 h-3.5 text-primary-soft" />
                 </div>
                 <span>{contactInfo.phone}</span>
               </a>
@@ -66,8 +66,8 @@ export function PhysioFooter() {
                 href={contactInfo.viberHref}
                 className="group flex items-center gap-3 text-white/55 hover:text-white text-sm transition-colors"
               >
-                <div className="w-9 h-9 rounded-xl border border-white/[0.08] bg-white/[0.02] flex items-center justify-center group-hover:border-primary/40 group-hover:bg-primary/10 transition-all">
-                  <MessageCircle className="w-3.5 h-3.5 text-primary" />
+                <div className="w-9 h-9 rounded-xl border border-white/[0.08] bg-white/[0.02] flex items-center justify-center group-hover:border-primary-soft/40 group-hover:bg-primary-soft/10 transition-all">
+                  <MessageCircle className="w-3.5 h-3.5 text-primary-soft" />
                 </div>
                 <span>Viber</span>
               </a>
@@ -83,7 +83,7 @@ export function PhysioFooter() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="group inline-flex items-center gap-2 text-white/60 hover:text-primary text-sm transition-colors"
+                    className="group inline-flex items-center gap-2 text-white/60 hover:text-primary-soft text-sm transition-colors"
                   >
                     <span>{t(`common:navigation.${link.key}`)}</span>
                     <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
@@ -102,7 +102,7 @@ export function PhysioFooter() {
                 <li key={index}>
                   <Link
                     href="/services"
-                    className="text-white/60 hover:text-primary text-sm transition-colors"
+                    className="text-white/60 hover:text-primary-soft text-sm transition-colors"
                   >
                     {service}
                   </Link>
@@ -122,7 +122,7 @@ export function PhysioFooter() {
               rel="noopener noreferrer"
               className="group flex items-start gap-3 text-white/55 hover:text-white text-sm transition-colors mb-6"
             >
-              <MapPin className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+              <MapPin className="w-4 h-4 text-primary-soft flex-shrink-0 mt-0.5" />
               <span className="leading-relaxed">
                 {t("footer:location.address")}
               </span>
@@ -130,7 +130,7 @@ export function PhysioFooter() {
 
             <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 text-sm space-y-2">
               <div className="flex items-center gap-2 text-white/85 font-medium mb-1">
-                <Clock className="w-3.5 h-3.5 text-primary" />
+                <Clock className="w-3.5 h-3.5 text-primary-soft" />
                 <span className="text-xs uppercase tracking-wider font-semibold">
                   {t("footer:hours.title")}
                 </span>

@@ -134,7 +134,7 @@ export function Hero() {
               >
                 <RevealText delay={0.1}>
                   <div className="inline-flex items-center gap-3 mb-7">
-                    <div className="w-10 h-px bg-primary" />
+                    <div className="w-10 h-px bg-primary-soft" />
                     <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">
                       {t("home:hero.label")}
                     </span>
@@ -150,7 +150,7 @@ export function Hero() {
                     </RevealText>
                     <RevealText delay={0.3}>
                       <span className="block mt-2">
-                        <span className="relative inline-block text-primary">
+                        <span className="relative inline-block text-primary-soft">
                           {heroSlides[currentSlide].highlight}
                         </span>
                       </span>
@@ -168,7 +168,7 @@ export function Hero() {
                   <div className="flex flex-wrap gap-3">
                     <Link
                       href={heroSlides[currentSlide].link}
-                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-primary text-white font-semibold text-sm rounded-full hover:bg-primary/90 transition-all hover:gap-3"
+                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-primary-soft text-primary-soft-foreground font-semibold text-sm rounded-full hover:bg-primary-soft/90 transition-all hover:gap-3"
                     >
                       {t("home:hero.ctaPrimary")}
                       <ArrowRight className="w-4 h-4 transition-transform" />
@@ -176,7 +176,7 @@ export function Hero() {
 
                     <Link
                       href="/contact"
-                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 border border-white/20 text-white/90 font-semibold text-sm rounded-full hover:border-primary/60 hover:text-primary hover:bg-white/[0.02] transition-all"
+                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 border border-white/20 text-white/90 font-semibold text-sm rounded-full hover:border-primary-soft/60 hover:text-primary-soft hover:bg-white/[0.02] transition-all"
                     >
                       <Phone className="w-4 h-4" />
                       {t("common:actions.contactUs")}
@@ -190,8 +190,8 @@ export function Hero() {
           <div className="lg:col-span-5 hidden lg:block">
             <div className="relative w-full max-w-[360px] xl:max-w-[400px] ml-auto">
               {/* Διακοσμητικές γωνίες */}
-              <div className="absolute -top-4 -left-4 w-20 h-20 border-t-2 border-l-2 border-primary/30 rounded-tl-3xl" />
-              <div className="absolute -bottom-4 -right-4 w-20 h-20 border-b-2 border-r-2 border-primary/30 rounded-br-3xl" />
+              <div className="absolute -top-4 -left-4 w-20 h-20 border-t-2 border-l-2 border-primary-soft/30 rounded-tl-3xl" />
+              <div className="absolute -bottom-4 -right-4 w-20 h-20 border-b-2 border-r-2 border-primary-soft/30 rounded-br-3xl" />
 
               {/* Κάρτα 2:3 — ίδιο aspect με τις φωτογραφίες, εμφανίζονται ολόκληρες */}
               <div className="relative aspect-[2/3]">
@@ -235,7 +235,7 @@ export function Hero() {
                     <span
                       className={cn(
                         "text-xs font-mono transition-colors",
-                        index === currentSlide ? "text-primary" : "text-white/50"
+                        index === currentSlide ? "text-primary-soft" : "text-white/50"
                       )}
                     >
                       {String(index + 1).padStart(2, "0")}
@@ -243,7 +243,7 @@ export function Hero() {
                     <div className="relative w-12 h-0.5 bg-white/15 overflow-hidden rounded-full">
                       {index === currentSlide && (
                         <motion.div
-                          className="absolute inset-y-0 left-0 bg-primary rounded-full"
+                          className="absolute inset-y-0 left-0 bg-primary-soft rounded-full"
                           initial={{ width: "0%" }}
                           animate={{ width: "100%" }}
                           transition={{ duration: 7, ease: "linear" }}
@@ -278,7 +278,7 @@ export function Hero() {
                   className={cn(
                     "h-1 transition-all duration-300 rounded-full",
                     index === currentSlide
-                      ? "w-8 bg-primary"
+                      ? "w-8 bg-primary-soft"
                       : "w-4 bg-white/15"
                   )}
                 />

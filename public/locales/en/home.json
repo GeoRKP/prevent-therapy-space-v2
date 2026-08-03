@@ -104,26 +104,34 @@
       "tsitouridis": {
         "name": "Dr. Alexandros Tsitouridis",
         "role": "Orthopedic Surgeon — Sports Medicine",
-        "note": "Supervising doctor of our space"
+        "note": "Supervising physician"
       },
       "trainer": {
-        "name": "Partner Name",
-        "role": "Fitness Trainer"
+        "role": "Fitness Trainer",
+        "roleDesc": "Guided exercise as a continuation of rehabilitation, in collaboration with the physiotherapist."
       },
       "doctor": {
-        "name": "Partner Name",
-        "role": "General / Family Doctor"
+        "role": "General / Family Doctor",
+        "roleDesc": "Medical oversight and care coordination, whenever needed."
       },
       "nutritionist": {
-        "name": "Partner Name",
-        "role": "Sports Nutritionist",
+        "name": "Eleni Kallianioti",
+        "role": "Dietitian – Nutritionist",
+        "note": "MSc Sports Nutrition",
+        "credentials": [
+          "BSc Dietetics — Harokopio University of Athens",
+          "MSc Sports Nutrition — Liverpool John Moores University"
+        ],
         "bio": [
           "I believe that nutrition and proper nourishment are not just a temporary diet someone can follow, and success in nutrition is certainly not measured solely by the number on a scale. Real change lies in improving body composition, maintaining a strong and functional body, and gaining the knowledge that allows each person to make sound dietary choices in everyday life. Through education and ongoing support, my goal is to build habits that can be sustained long-term, with respect for each person's needs and daily routine, and to develop a healthy relationship with food — without unnecessary restrictions and deprivation.",
           "When it comes to sports, nutrition is a powerful \"weapon\" for the athlete. The nutrition plan, the supplement plan, the various strategies applied and the counseling are all tailored to the demands of the sport, the training program and each athlete's goals. I focus on optimizing performance, accelerating recovery and body recomposition — always in line with the latest scientific guidelines and the real demands of daily training."
         ]
       }
     },
-    "readMore": "Philosophy & approach"
+    "readMore": "Philosophy & approach",
+    "comingSoon": "Joining us soon",
+    "dialogCta": "Book an appointment",
+    "close": "Close"
   },
   "athletes": {
     "label": "Sponsorships",

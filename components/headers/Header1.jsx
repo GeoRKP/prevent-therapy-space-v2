@@ -81,7 +81,7 @@ export default function Header1() {
                     className={cn(
                       "relative px-4 py-2 rounded-full text-sm font-medium transition-colors duration-300",
                       isActive
-                        ? "text-primary bg-primary/10"
+                        ? "text-primary-soft bg-primary-soft/10"
                         : "text-white/70 hover:text-white hover:bg-white/[0.04]"
                     )}
                   >
@@ -97,7 +97,7 @@ export default function Header1() {
                   href="tel:+302101234567"
                   className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/[0.04] transition-colors"
                 >
-                  <Phone className="w-4 h-4 text-primary" />
+                  <Phone className="w-4 h-4 text-primary-soft" />
                   <span className="hidden xl:inline">
                     {ready ? t("header:contact.phone") : "210 123 4567"}
                   </span>
@@ -106,13 +106,13 @@ export default function Header1() {
                   href="viber://chat?number=%2B302101234567"
                   className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/[0.04] transition-colors"
                 >
-                  <MessageCircle className="w-4 h-4 text-primary" />
+                  <MessageCircle className="w-4 h-4 text-primary-soft" />
                   <span className="hidden xl:inline">Viber</span>
                 </a>
                 <LanguageSwitcher />
                 <Link
                   href="/booking"
-                  className="ml-1 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-primary text-white hover:bg-primary/90 transition-colors"
+                  className="ml-1 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-primary-soft text-primary-soft-foreground hover:bg-primary-soft/90 transition-colors"
                 >
                   {ready ? t("common:navigation.booking") : "Book"}
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -165,7 +165,7 @@ export default function Header1() {
           >
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className="absolute top-5 right-5 z-[1002] w-12 h-12 flex items-center justify-center text-white/80 hover:text-primary transition-colors bg-white/5 hover:bg-white/10 rounded-full"
+              className="absolute top-5 right-5 z-[1002] w-12 h-12 flex items-center justify-center text-white/80 hover:text-primary-soft transition-colors bg-white/5 hover:bg-white/10 rounded-full"
               aria-label={t("header:aria.closeMenu")}
             >
               <X className="w-5 h-5" />
@@ -189,7 +189,7 @@ export default function Header1() {
                           className={cn(
                             "group flex items-center justify-between py-4 px-5 rounded-2xl transition-colors",
                             isActive
-                              ? "bg-primary/10 text-primary"
+                              ? "bg-primary-soft/10 text-primary-soft"
                               : "text-white/85 hover:bg-white/[0.04]"
                           )}
                         >
@@ -200,7 +200,7 @@ export default function Header1() {
                             className={cn(
                               "w-5 h-5 transition-all",
                               isActive
-                                ? "text-primary"
+                                ? "text-primary-soft"
                                 : "text-white/30 group-hover:text-white/60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                             )}
                           />
@@ -220,7 +220,7 @@ export default function Header1() {
                 <Link
                   href="/booking"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full font-semibold bg-primary text-white hover:bg-primary/90 transition-colors"
+                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full font-semibold bg-primary-soft text-primary-soft-foreground hover:bg-primary-soft/90 transition-colors"
                 >
                   {t("common:navigation.booking")}
                   <ArrowUpRight className="w-4 h-4" />
@@ -230,7 +230,7 @@ export default function Header1() {
                     href="tel:+302101234567"
                     className="flex items-center justify-center gap-3 flex-1 py-3.5 rounded-full text-white/70 border border-white/10 hover:border-primary/30 hover:text-white transition-colors"
                   >
-                    <Phone className="w-4 h-4 text-primary" />
+                    <Phone className="w-4 h-4 text-primary-soft" />
                     <span className="text-sm font-medium">
                       {t("header:contact.phone")}
                     </span>
@@ -239,7 +239,7 @@ export default function Header1() {
                     href="viber://chat?number=%2B302101234567"
                     className="flex items-center justify-center gap-3 flex-1 py-3.5 rounded-full text-white/70 border border-white/10 hover:border-primary/30 hover:text-white transition-colors"
                   >
-                    <MessageCircle className="w-4 h-4 text-primary" />
+                    <MessageCircle className="w-4 h-4 text-primary-soft" />
                     <span className="text-sm font-medium">Viber</span>
                   </a>
                 </div>

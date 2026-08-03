@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { RevealText } from "@/components/effects/kinetic-text";
+import { SectionHeading } from "./SectionHeading";
 
 // Masonry με φυσικά aspect ratios — οι φωτογραφίες εμφανίζονται ολόκληρες, χωρίς κόψιμο.
 const galleryItems = [
@@ -24,29 +24,11 @@ export function GallerySection() {
   return (
     <section className="relative py-28 lg:py-36 overflow-hidden bg-[#050810]">
       <div className="container relative z-10">
-        <div className="text-center mb-16">
-          <RevealText>
-            <div className="inline-flex items-center gap-3 mb-5">
-              <div className="w-8 h-px bg-primary/70" />
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-                {t("gallery.label")}
-              </span>
-              <div className="w-8 h-px bg-primary/70" />
-            </div>
-          </RevealText>
-
-          <RevealText delay={0.1}>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-white mb-5">
-              {t("gallery.title")}
-            </h2>
-          </RevealText>
-
-          <RevealText delay={0.2}>
-            <p className="text-base lg:text-lg text-white/55 max-w-2xl mx-auto leading-relaxed">
-              {t("gallery.subtitle")}
-            </p>
-          </RevealText>
-        </div>
+        <SectionHeading
+          label={t("gallery.label")}
+          title={t("gallery.title")}
+          subtitle={t("gallery.subtitle")}
+        />
 
         <div className="columns-2 lg:columns-3 gap-4 max-w-6xl mx-auto [column-fill:balance]">
           {galleryItems.map((item, i) => (

@@ -1,12 +1,18 @@
 import { Stethoscope, Dumbbell, Apple } from "lucide-react";
 
-// Οι συνεργάτες χωρίς image εμφανίζονται με placeholder μέχρι να δοθούν
-// ονόματα και φωτογραφίες από τον ιδιοκτήτη (τα ονόματα ζουν στα locale αρχεία).
+// Πρώτα οι συνεργάτες με πραγματικό πρόσωπο/όνομα, μετά οι role-first θέσεις.
+// Όσοι δεν έχουν image εμφανίζονται ως κάρτες ρόλου (χωρίς ψεύτικο όνομα) —
+// μόλις δοθούν όνομα + φωτογραφία, συμπληρώνεται το image και το όνομα στα locales.
 export const partners = [
   {
     id: "tsitouridis",
     image: "/images/team/alexandros-tsitouridis.jpg",
     icon: Stethoscope,
+  },
+  {
+    id: "nutritionist",
+    image: "/images/team/eleni-kallianioti.jpg",
+    icon: Apple,
   },
   {
     id: "trainer",
@@ -17,10 +23,5 @@ export const partners = [
     id: "doctor",
     image: null,
     icon: Stethoscope,
-  },
-  {
-    id: "nutritionist",
-    image: "/images/team/nutritionist.jpg",
-    icon: Apple,
   },
 ];

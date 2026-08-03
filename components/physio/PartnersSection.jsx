@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { Plus, ArrowRight, GraduationCap } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { RevealText } from "@/components/effects/kinetic-text";
+import { SectionHeading } from "./SectionHeading";
 import {
   Dialog,
   DialogContent,
@@ -15,49 +16,142 @@ import {
 } from "@/components/ui/dialog";
 import { partners } from "@/data/partners";
 
+const cardBase =
+  "h-full bg-[#050810] border border-white/[0.06] rounded-2xl p-5";
+
+function PartnerCardContent({ partner, name, role, note, t, interactive }) {
+  return (
+    <>
+      <div className="relative aspect-[4/5] overflow-hidden rounded-xl mb-5">
+        <Image
+          src={partner.image}
+          alt={name}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className={
+            interactive
+              ? "object-cover object-top group-hover:scale-[1.03] transition-transform duration-700"
+              : "object-cover object-top"
+          }
+        />
+      </div>
+
+      <h3 className="text-lg font-bold text-white mb-1">{name}</h3>
+      <p className="text-sm text-white/55">{role}</p>
+
+      {note && (
+        <span className="inline-block mt-3 text-xs font-semibold px-2.5 py-1 rounded-full bg-primary-soft/10 text-primary-soft whitespace-nowrap">
+          {note}
+        </span>
+      )}
+
+      {interactive && (
+        <span className="mt-4 inline-flex min-h-11 w-full items-center justify-between gap-2 rounded-xl border border-white/10 group-hover:border-primary-soft/40 px-4 py-2.5 text-sm font-semibold text-primary-soft transition-colors">
+          {t("partners.readMore")}
+          <Plus className="w-4 h-4" aria-hidden="true" />
+        </span>
+      )}
+    </>
+  );
+}
+
 export function PartnersSection() {
   const { t, ready } = useTranslation("home");
   if (!ready) return null;
 
   return (
-    <section className="relative py-28 lg:py-36 overflow-hidden bg-[#070b14]">
-      <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[200px] -translate-y-1/2 pointer-events-none" />
-
+    <section
+      aria-labelledby="partners-heading"
+      className="relative py-28 lg:py-36 overflow-hidden bg-[#070b14]"
+    >
       <div className="container relative z-10">
-        <div className="text-center mb-16">
-          <RevealText>
-            <div className="inline-flex items-center gap-3 mb-5">
-              <div className="w-8 h-px bg-primary/70" />
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-                {t("partners.label")}
-              </span>
-              <div className="w-8 h-px bg-primary/70" />
-            </div>
-          </RevealText>
+        <SectionHeading
+          id="partners-heading"
+          centered={false}
+          label={t("partners.label")}
+          title={t("partners.title")}
+          subtitle={t("partners.subtitle")}
+        />
 
-          <RevealText delay={0.1}>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-white mb-5">
-              {t("partners.title")}
-            </h2>
-          </RevealText>
-
-          <RevealText delay={0.2}>
-            <p className="text-base lg:text-lg text-white/55 max-w-2xl mx-auto leading-relaxed">
-              {t("partners.subtitle")}
-            </p>
-          </RevealText>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl">
           {partners.map((partner, i) => {
             const Icon = partner.icon;
+            const name = t(`partners.members.${partner.id}.name`, {
+              defaultValue: "",
+            });
+            const role = t(`partners.members.${partner.id}.role`);
             const note = t(`partners.members.${partner.id}.note`, {
               defaultValue: "",
             });
+            const roleDesc = t(`partners.members.${partner.id}.roleDesc`, {
+              defaultValue: "",
+            });
+            const credentials = t(
+              `partners.members.${partner.id}.credentials`,
+              { returnObjects: true, defaultValue: null }
+            );
             const bio = t(`partners.members.${partner.id}.bio`, {
               returnObjects: true,
               defaultValue: null,
             });
+            const hasBio = Array.isArray(bio) && bio.length > 0;
+
+            // Χωρίς όνομα δεν renderάρεται ποτέ «κάρτα προσώπου» — μόνο κάρτα ρόλου.
+            if (!name || !partner.image) {
+              return (
+                <motion.div
+                  key={partner.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.6 }}
+                >
+                  <div
+                    className={`${cardBase} flex flex-col items-start justify-center gap-3.5`}
+                  >
+                    <div className="w-11 h-11 rounded-xl bg-primary-soft/10 flex items-center justify-center">
+                      <Icon
+                        className="w-5 h-5 text-primary-soft"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <h3 className="text-lg font-bold text-white">{role}</h3>
+                    {roleDesc && (
+                      <p className="text-sm text-white/55 leading-relaxed">
+                        {roleDesc}
+                      </p>
+                    )}
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full border border-dashed border-white/20 text-white/60">
+                      {t("partners.comingSoon")}
+                    </span>
+                  </div>
+                </motion.div>
+              );
+            }
+
+            if (!hasBio) {
+              return (
+                <motion.div
+                  key={partner.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.6 }}
+                >
+                  <div className={cardBase}>
+                    <PartnerCardContent
+                      partner={partner}
+                      name={name}
+                      role={role}
+                      note={note}
+                      t={t}
+                      interactive={false}
+                    />
+                  </div>
+                </motion.div>
+              );
+            }
+
             return (
               <motion.div
                 key={partner.id}
@@ -65,81 +159,85 @@ export function PartnersSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="group relative bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 rounded-2xl p-5 transition-all"
               >
-                <div className="relative aspect-[4/5] overflow-hidden rounded-xl mb-5">
-                  {partner.image ? (
-                    <>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button
+                      type="button"
+                      className={`${cardBase} group block w-full text-left cursor-pointer transition-colors hover:bg-[#0a0f1a] hover:border-primary-soft/30`}
+                    >
+                      <PartnerCardContent
+                        partner={partner}
+                        name={name}
+                        role={role}
+                        note={note}
+                        t={t}
+                        interactive
+                      />
+                    </button>
+                  </DialogTrigger>
+
+                  <DialogContent
+                    closeLabel={t("partners.close")}
+                    className="w-[calc(100%-2rem)] max-w-xl max-h-[85vh] p-0 gap-0 flex flex-col bg-[#0a0f1a] border-white/10 rounded-2xl overflow-hidden"
+                  >
+                    <DialogHeader className="flex-row items-center gap-4 space-y-0 p-6 pb-4 text-left">
                       <Image
                         src={partner.image}
-                        alt={t(`partners.members.${partner.id}.name`)}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                        alt=""
+                        width={64}
+                        height={64}
+                        className="w-16 h-16 rounded-xl object-cover object-top shrink-0"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#050810]/70 via-transparent to-transparent" />
-                    </>
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-primary/[0.04] border border-dashed border-white/10 rounded-xl">
-                      <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
-                        <Icon className="w-6 h-6 text-primary" />
+                      <div>
+                        <DialogTitle className="text-white leading-snug">
+                          {name}
+                        </DialogTitle>
+                        <DialogDescription className="text-white/55 mt-1">
+                          {role}
+                        </DialogDescription>
                       </div>
+                    </DialogHeader>
+
+                    <div className="overflow-y-auto px-6 pb-6 space-y-4">
+                      {Array.isArray(credentials) && credentials.length > 0 && (
+                        <ul className="flex flex-wrap gap-2">
+                          {credentials.map((credential) => (
+                            <li
+                              key={credential}
+                              className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-full bg-white/[0.06] border border-white/10 text-white/75"
+                            >
+                              <GraduationCap
+                                className="w-3.5 h-3.5 text-primary-soft shrink-0"
+                                aria-hidden="true"
+                              />
+                              {credential}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+
+                      {bio.map((paragraph, j) => (
+                        <p
+                          key={j}
+                          className="text-sm text-white/70 leading-relaxed"
+                        >
+                          {paragraph}
+                        </p>
+                      ))}
                     </div>
-                  )}
-                </div>
 
-                <h3 className="text-base font-bold text-white mb-1 group-hover:text-primary transition-colors">
-                  {t(`partners.members.${partner.id}.name`)}
-                </h3>
-                <p className="text-sm text-white/55">
-                  {t(`partners.members.${partner.id}.role`)}
-                </p>
-
-                {note && (
-                  <span className="inline-block mt-3 text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary">
-                    {note}
-                  </span>
-                )}
-
-                {Array.isArray(bio) && bio.length > 0 && (
-                  <Dialog>
-                    <DialogTrigger className="inline-flex items-center gap-1 mt-3 text-xs font-semibold text-primary hover:underline underline-offset-4">
-                      {t("partners.readMore")}
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </DialogTrigger>
-                    <DialogContent className="max-w-xl max-h-[85vh] overflow-y-auto bg-[#0a0f1a] border-white/10 rounded-2xl">
-                      <DialogHeader className="flex-row items-center gap-4 space-y-0">
-                        {partner.image && (
-                          <Image
-                            src={partner.image}
-                            alt={t(`partners.members.${partner.id}.name`)}
-                            width={64}
-                            height={64}
-                            className="w-16 h-16 rounded-xl object-cover object-top shrink-0"
-                          />
-                        )}
-                        <div>
-                          <DialogTitle className="text-white leading-snug">
-                            {t(`partners.members.${partner.id}.name`)}
-                          </DialogTitle>
-                          <DialogDescription className="text-white/55 mt-1">
-                            {t(`partners.members.${partner.id}.role`)}
-                          </DialogDescription>
-                        </div>
-                      </DialogHeader>
-                      <div className="space-y-4">
-                        {bio.map((paragraph, j) => (
-                          <p
-                            key={j}
-                            className="text-sm text-white/70 leading-relaxed"
-                          >
-                            {paragraph}
-                          </p>
-                        ))}
-                      </div>
-                    </DialogContent>
-                  </Dialog>
-                )}
+                    <div className="p-6 pt-4 border-t border-white/[0.06]">
+                      <Link
+                        href="/booking"
+                        className="inline-flex min-h-11 items-center gap-2 px-5 py-2.5 rounded-full bg-primary-soft text-primary-soft-foreground font-semibold text-sm hover:bg-primary-soft/90 transition-colors"
+                      >
+                        {t("partners.dialogCta")}
+                        <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                      </Link>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </motion.div>
             );
           })}

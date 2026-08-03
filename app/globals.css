@@ -46,6 +46,8 @@
   --color-tertiary: hsl(var(--tertiary));
   --color-tertiary-foreground: hsl(var(--tertiary-foreground));
   --color-on-surface-variant: hsl(var(--on-surface-variant));
+  --color-primary-soft: hsl(var(--primary-soft));
+  --color-primary-soft-foreground: hsl(var(--primary-soft-foreground));
 
   /* Premium Animations */
   --animate-accordion-down: accordion-down 0.2s ease-out;
@@ -82,6 +84,11 @@
   /* Primary: Deep Forest Green */
   --primary: 165 100% 16%;
   --primary-foreground: 0 0% 100%;
+
+  /* Primary Soft: ανοιχτό mint για κείμενο/εικονίδια πάνω στα σκούρα navy sections —
+     το deep forest primary πέφτει στο 2,1:1 εκεί (WCAG fail) */
+  --primary-soft: 154 47% 69%;
+  --primary-soft-foreground: 165 100% 11%;
 
   /* Secondary: Mid green */
   --secondary: 162 58% 26%;
