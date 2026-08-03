@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Mail, Phone, MapPin, Send, ArrowRight } from "lucide-react";
+import { Mail, Phone, MessageCircle, MapPin, Send, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
+import { contactInfo } from "@/data/conditions";
 import HeadManager from "@/components/common/HeadManager";
 import { PageHero } from "@/components/physio/PageHero";
 import { RevealText } from "@/components/effects/kinetic-text";
@@ -83,6 +84,12 @@ export default function ContactPage() {
                   title={ready ? t("contact:info.phone.title") : ""}
                   value={ready ? t("contact:info.phone.value") : ""}
                   href={`tel:+30${(ready ? t("contact:info.phone.value") : "").replace(/\s/g, "")}`}
+                />
+                <ContactCard
+                  icon={MessageCircle}
+                  title={ready ? t("contact:info.viber.title") : ""}
+                  value={ready ? t("contact:info.viber.value") : ""}
+                  href={contactInfo.viberHref}
                 />
                 <ContactCard
                   icon={Mail}

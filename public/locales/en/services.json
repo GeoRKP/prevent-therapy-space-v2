@@ -1,16 +1,16 @@
 {
   "meta": {
-    "title": "Services | PREVENT Therapy Space",
-    "description": "Specialized physiotherapy, osteopathy, and therapeutic exercise services."
+    "title": "Our Service | PREVENT Therapy Space",
+    "description": "Physiotherapy, osteopathy, and therapeutic exercise — one comprehensive service, personalized in every session."
   },
   "hero": {
-    "label": "Our Services",
-    "title": "Modern therapeutic services",
-    "subtitle": "Personalized care for every patient"
+    "label": "Service",
+    "title": "Our Service",
+    "subtitle": "One comprehensive approach, personalized for every patient"
   },
-  "servicesBadge": "Services",
-  "title": "Our Services",
-  "subtitle": "Five specialized treatment categories — one comprehensive approach",
+  "servicesBadge": "Service",
+  "title": "Our Service",
+  "subtitle": "Every session combines physiotherapy — with therapeutic exercise at its core — and the hands-on approach of osteopathy",
   "services": [
     {
       "title": "Physiotherapy",
@@ -18,25 +18,26 @@
       "icon": "uil-wrench",
       "link": "/services",
       "features": [
-        "Manual therapy and chiropractic techniques",
-        "Electrotherapy and ultrasound",
-        "Soft-tissue mobilization"
+        "Musculoskeletal physiotherapy: manual therapy & therapeutic exercise",
+        "Neurological physiotherapy: management of acute and chronic neurological conditions",
+        "Seniors: fall prevention and maintaining functionality",
+        "Injury prevention"
       ]
     },
     {
       "title": "Osteopathy",
-      "description": "Holistic approach targeting the underlying causes of pain, not just the symptoms.",
+      "description": "A hands-on approach aiming at the balanced function of all the body's systems.",
       "icon": "uil-constructor",
       "link": "/services",
       "features": [
-        "Spinal and joint techniques",
-        "Visceral interventions",
-        "Cranio-sacral therapy"
+        "Promoting the body's own self-healing mechanism",
+        "Particularly effective in chronic cases",
+        "A core tool of ours in prevention"
       ]
     },
     {
       "title": "Therapeutic Exercise",
-      "description": "Personalized exercise programs for strength, flexibility, and prevention.",
+      "description": "An essential, integral tool in rehabilitation and prevention.",
       "icon": "uil-bolt",
       "link": "/services",
       "features": [
@@ -46,36 +47,15 @@
       ]
     },
     {
-      "title": "Neurological Rehabilitation",
-      "description": "Specialized rehabilitation after stroke, Parkinson's disease, and other neurological conditions.",
-      "icon": "scan",
-      "link": "/services",
-      "features": [
-        "Gait re-education",
-        "Functional limb recovery",
-        "Balance and movement training"
-      ]
-    },
-    {
-      "title": "Senior Exercise",
-      "description": "Safe, adapted movement programs for older adults.",
+      "title": "Prevention & Consulting",
+      "description": "Education and preventive interventions to help you avoid future problems.",
       "icon": "uil-shield-check",
       "link": "/services",
       "features": [
-        "Fall prevention",
-        "Mobility maintenance",
-        "Low-intensity exercise"
-      ]
-    },
-    {
-      "title": "Prevention & Consulting",
-      "description": "Education and preventive interventions to help you avoid future problems.",
-      "icon": "uil-box",
-      "link": "/services",
-      "features": [
-        "Posture assessment",
-        "Ergonomic advice",
-        "Home exercise program"
+        "Self-management guidance for painful conditions and maintaining quality of life",
+        "Injury prevention for exercisers and athletes",
+        "Therapeutic exercise programs for seniors",
+        "Consulting and collaboration with our team's external scientific partners"
       ]
     }
   ],

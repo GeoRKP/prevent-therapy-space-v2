@@ -19,6 +19,7 @@
   "info": {
     "address": { "title": "Διεύθυνση", "value": "Θεοτοκοπούλου 55, Πατήσια, Αθήνα" },
     "phone": { "title": "Τηλέφωνο", "value": "210 123 4567" },
+    "viber": { "title": "Viber", "value": "Στείλτε μας μήνυμα" },
     "email": { "title": "Email", "value": "info@preventtherapy.gr" }
   },
   "location": {

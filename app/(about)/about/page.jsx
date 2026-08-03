@@ -6,6 +6,7 @@ import { PageHero } from "@/components/physio/PageHero";
 import { TeamPreview } from "@/components/physio/TeamPreview";
 import { WhyChooseUs } from "@/components/physio/WhyChooseUs";
 import { AboutFrenaSection } from "@/components/physio/AboutFrenaSection";
+import { PartnersSection } from "@/components/physio/PartnersSection";
 import { CtaSection } from "@/components/physio/CtaSection";
 
 export default function AboutPage() {
@@ -24,6 +25,7 @@ export default function AboutPage() {
 
       <AboutFrenaSection />
       <TeamPreview />
+      <PartnersSection />
       <WhyChooseUs />
       <CtaSection />
     </>

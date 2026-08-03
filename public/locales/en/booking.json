@@ -4,13 +4,18 @@
     "description": "Book your appointment at PREVENT Therapy Space online in seconds."
   },
   "title": "Book an Appointment",
-  "subtitle": "Pick a service, date, and time — we'll handle the rest.",
+  "subtitle": "Pick a date and time from real-time availability — we'll handle the rest.",
+  "duration": "{{minutes}} minutes",
   "steps": {
-    "service": "Service",
     "datetime": "Date & Time",
-    "details": "Details",
-    "confirm": "Confirm"
+    "details": "Details"
   },
+  "selectDay": "Select a day",
+  "morning": "Morning",
+  "afternoon": "Afternoon",
+  "noSlots": "No available appointments for this day",
+  "noSlotsWindow": "No available appointments in this period. Please contact us by phone.",
+  "retry": "Try again",
   "form": {
     "name": "Full Name",
     "email": "Email",
@@ -18,23 +23,15 @@
     "notes": "Notes (optional)",
     "submit": "Confirm Appointment"
   },
-  "summary": {
-    "title": "Appointment Summary",
-    "service": "Service",
-    "date": "Date",
-    "time": "Time"
-  },
   "success": {
     "title": "Your appointment is confirmed!",
-    "message": "You will receive a confirmation email shortly.",
+    "message": "You will receive a calendar invitation by email with all the details.",
     "back": "Back to Home"
   },
   "errors": {
     "slotTaken": "This time slot was just booked. Please select another time.",
     "invalid": "Please check your details.",
+    "loadFailed": "Availability could not be loaded.",
     "generic": "Something went wrong. Please try again."
-  },
-  "morning": "Morning",
-  "afternoon": "Afternoon",
-  "noSlots": "No available appointments for this day"
+  }
 }

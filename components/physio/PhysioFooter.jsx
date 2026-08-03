@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
-import { Mail, Phone, MapPin, ArrowUpRight, Clock } from "lucide-react";
+import { Mail, Phone, MessageCircle, MapPin, ArrowUpRight, Clock } from "lucide-react";
 import { contactInfo } from "@/data/conditions";
 
 export function PhysioFooter() {
@@ -61,6 +61,15 @@ export function PhysioFooter() {
                   <Phone className="w-3.5 h-3.5 text-primary" />
                 </div>
                 <span>{contactInfo.phone}</span>
+              </a>
+              <a
+                href={contactInfo.viberHref}
+                className="group flex items-center gap-3 text-white/55 hover:text-white text-sm transition-colors"
+              >
+                <div className="w-9 h-9 rounded-xl border border-white/[0.08] bg-white/[0.02] flex items-center justify-center group-hover:border-primary/40 group-hover:bg-primary/10 transition-all">
+                  <MessageCircle className="w-3.5 h-3.5 text-primary" />
+                </div>
+                <span>Viber</span>
               </a>
             </div>
           </div>

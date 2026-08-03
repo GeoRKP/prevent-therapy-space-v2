@@ -19,6 +19,7 @@
   "info": {
     "address": { "title": "Address", "value": "Theotokopoulou 55, Patisia, Athens" },
     "phone": { "title": "Phone", "value": "210 123 4567" },
+    "viber": { "title": "Viber", "value": "Send us a message" },
     "email": { "title": "Email", "value": "info@preventtherapy.gr" }
   },
   "location": {

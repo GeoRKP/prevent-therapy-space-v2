@@ -1,11 +1,11 @@
 import { z } from "zod";
-import { prisma } from "@/lib/prisma";
+import { Resend } from "resend";
 
 const schema = z.object({
-  name: z.string().min(2),
+  name: z.string().min(2).max(120),
   email: z.string().email(),
-  phone: z.string().min(5),
-  message: z.string().min(5),
+  phone: z.string().min(5).max(30),
+  message: z.string().min(5).max(3000),
   locale: z.enum(["el", "en"]).default("el"),
 });
 
@@ -14,11 +14,22 @@ export async function POST(request) {
     const body = await request.json();
     const data = schema.parse(body);
 
-    await prisma.contactMessage.create({ data });
-
-    // TODO: send email via Resend / Nodemailer
-    // const resend = new Resend(process.env.RESEND_API_KEY);
-    // await resend.emails.send({...});
+    // Χωρίς βάση: το μήνυμα προωθείται με email στο ιατρείο μέσω Resend.
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const { error } = await resend.emails.send({
+      from: process.env.RESEND_FROM_EMAIL,
+      to: process.env.CONTACT_EMAIL,
+      replyTo: data.email,
+      subject: `Νέο μήνυμα επικοινωνίας — ${data.name}`,
+      text: [
+        `Όνομα: ${data.name}`,
+        `Email: ${data.email}`,
+        `Τηλέφωνο: ${data.phone}`,
+        "",
+        data.message,
+      ].join("\n"),
+    });
+    if (error) throw new Error(error.message);
 
     return Response.json({ success: true });
   } catch (err) {

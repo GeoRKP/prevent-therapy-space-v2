@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
-import { Phone, ArrowUpRight, X } from "lucide-react";
+import { Phone, MessageCircle, ArrowUpRight, X } from "lucide-react";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { cn } from "@/lib/utils";
 
@@ -101,6 +101,13 @@ export default function Header1() {
                   <span className="hidden xl:inline">
                     {ready ? t("header:contact.phone") : "210 123 4567"}
                   </span>
+                </a>
+                <a
+                  href="viber://chat?number=%2B302101234567"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/[0.04] transition-colors"
+                >
+                  <MessageCircle className="w-4 h-4 text-primary" />
+                  <span className="hidden xl:inline">Viber</span>
                 </a>
                 <LanguageSwitcher />
                 <Link
@@ -218,15 +225,24 @@ export default function Header1() {
                   {t("common:navigation.booking")}
                   <ArrowUpRight className="w-4 h-4" />
                 </Link>
-                <a
-                  href="tel:+302101234567"
-                  className="flex items-center justify-center gap-3 w-full py-3.5 rounded-full text-white/70 border border-white/10 hover:border-primary/30 hover:text-white transition-colors"
-                >
-                  <Phone className="w-4 h-4 text-primary" />
-                  <span className="text-sm font-medium">
-                    {t("header:contact.phone")}
-                  </span>
-                </a>
+                <div className="flex gap-3">
+                  <a
+                    href="tel:+302101234567"
+                    className="flex items-center justify-center gap-3 flex-1 py-3.5 rounded-full text-white/70 border border-white/10 hover:border-primary/30 hover:text-white transition-colors"
+                  >
+                    <Phone className="w-4 h-4 text-primary" />
+                    <span className="text-sm font-medium">
+                      {t("header:contact.phone")}
+                    </span>
+                  </a>
+                  <a
+                    href="viber://chat?number=%2B302101234567"
+                    className="flex items-center justify-center gap-3 flex-1 py-3.5 rounded-full text-white/70 border border-white/10 hover:border-primary/30 hover:text-white transition-colors"
+                  >
+                    <MessageCircle className="w-4 h-4 text-primary" />
+                    <span className="text-sm font-medium">Viber</span>
+                  </a>
+                </div>
                 <div className="flex justify-center pt-2">
                   <LanguageSwitcher />
                 </div>

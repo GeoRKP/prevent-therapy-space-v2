@@ -3,18 +3,19 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Award, Users, Shield, Clock, ArrowUpRight } from "lucide-react";
+import { Star, ArrowUpRight } from "lucide-react";
 import { RevealText } from "@/components/effects/kinetic-text";
-
-const statIcons = [Award, Users, Shield, Clock];
+import { reviews, googleReviews } from "@/data/reviews";
 
 export function AboutFrenaSection() {
-  const { t, ready } = useTranslation("home");
+  const { t, ready, i18n } = useTranslation("home");
   if (!ready) return null;
 
-  const stats = (t("aboutSection.stats", { returnObjects: true }) || []).map(
-    (stat, i) => ({ ...stat, icon: statIcons[i] || Award })
-  );
+  const lang = i18n.language === "en" ? "en" : "el";
+  const rating =
+    lang === "el"
+      ? googleReviews.ratingValue.replace(".", ",")
+      : googleReviews.ratingValue;
   const points = t("aboutSection.points", { returnObjects: true }) || [];
 
   return (
@@ -75,10 +76,10 @@ export function AboutFrenaSection() {
               <div className="absolute bottom-5 left-5 right-5">
                 <div className="bg-[#050810]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-5">
                   <span className="text-3xl font-bold text-primary">
-                    {stats[0]?.value}
+                    {t("aboutSection.experience.value")}
                   </span>
                   <span className="block text-sm text-white/65 mt-1">
-                    {stats[0]?.label}
+                    {t("aboutSection.experience.label")}
                   </span>
                 </div>
               </div>
@@ -156,28 +157,72 @@ export function AboutFrenaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mt-20 lg:mt-28 grid grid-cols-2 lg:grid-cols-4 gap-4"
+          className="mt-20 lg:mt-28"
         >
-          {stats.map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="group bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 rounded-2xl p-7 lg:p-8 text-center transition-all"
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-8 h-px bg-primary/70" />
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
+                  Google
+                </span>
+              </div>
+              <h3 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
+                {t("aboutSection.reviews.title")}
+              </h3>
+            </div>
+
+            <a
+              href={googleReviews.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-3 px-5 py-3 rounded-full border border-white/10 bg-white/[0.02] hover:border-primary/40 transition-colors"
             >
-              <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-primary/10 group-hover:bg-primary/15 flex items-center justify-center transition-colors">
-                <stat.icon className="w-5 h-5 text-primary" />
-              </div>
-              <div className="text-3xl font-bold text-white mb-1.5">
-                {stat.value}
-              </div>
-              <div className="text-xs text-white/50 uppercase tracking-wider font-semibold">
-                {stat.label}
-              </div>
-            </motion.div>
-          ))}
+              <span className="flex items-center gap-0.5" aria-hidden="true">
+                {[1, 2, 3, 4, 5].map((j) => (
+                  <Star key={j} className="w-3.5 h-3.5 fill-primary text-primary" />
+                ))}
+              </span>
+              <span className="text-sm text-white/70 group-hover:text-white transition-colors">
+                <span className="font-bold text-white">{rating}</span> ·{" "}
+                {googleReviews.reviewCount} {t("aboutSection.reviews.googleLabel")}
+              </span>
+              <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-primary transition-colors" />
+            </a>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4">
+            {reviews.slice(0, 3).map((review, index) => (
+              <motion.div
+                key={review.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                className="flex flex-col bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 rounded-2xl p-6 lg:p-7 transition-all"
+              >
+                <div
+                  className="flex items-center gap-0.5 mb-4"
+                  aria-label={`${review.rating} / 5`}
+                >
+                  {Array.from({ length: review.rating }).map((_, j) => (
+                    <Star key={j} className="w-3.5 h-3.5 fill-primary text-primary" />
+                  ))}
+                </div>
+                <blockquote className="flex-1 text-sm text-white/65 leading-relaxed mb-5">
+                  “{review.quote[lang]}”
+                </blockquote>
+                <figcaption className="pt-4 border-t border-white/[0.06]">
+                  <span className="block text-sm font-bold text-white">
+                    {review.name}
+                  </span>
+                  <span className="block text-xs text-white/40 mt-0.5">
+                    {t("aboutSection.reviews.reviewSource")}
+                  </span>
+                </figcaption>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

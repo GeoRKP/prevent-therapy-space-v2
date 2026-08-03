@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Lightbulb, Award, Zap, Shield } from "lucide-react";
+import { Hand, Stethoscope, HeartHandshake, Award } from "lucide-react";
 import { RevealText } from "@/components/effects/kinetic-text";
 
-const featureIcons = [Lightbulb, Award, Zap, Shield];
+const featureIcons = [Hand, Stethoscope, HeartHandshake];
 
 export function WhyChooseUs() {
   const { t, ready } = useTranslation("home");
@@ -45,9 +45,9 @@ export function WhyChooseUs() {
               </p>
             </RevealText>
 
-            <div className="grid sm:grid-cols-2 gap-3.5">
+            <div className="grid gap-3.5">
               {features.map((feature, index) => {
-                const Icon = featureIcons[index] || Lightbulb;
+                const Icon = featureIcons[index] || Hand;
                 return (
                   <motion.div
                     key={feature.title}

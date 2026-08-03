@@ -13,15 +13,23 @@
     },
     {
       "q": "Do I need a doctor's referral?",
-      "a": "No, you can book directly. In some cases, medical history may be requested."
+      "a": "No, it isn't required — you can book directly. If you do have one, it can be put to use, as we are contracted with EOPYY (the Greek national health fund)."
     },
     {
       "q": "How quickly will I see results?",
-      "a": "Many patients feel improvement after the first session. Full recovery depends on your condition."
+      "a": "We can give you an approximate answer after the assessment and history-taking — it varies from case to case."
+    },
+    {
+      "q": "How often will I need sessions?",
+      "a": "For chronic symptoms, once a week is usually enough. For rehabilitation after surgery, 2–3 visits per week are typically needed — always depending on each individual case."
     },
     {
       "q": "How do I cancel or reschedule an appointment?",
-      "a": "You can contact us by phone or email at least 24 hours in advance."
+      "a": "You can contact us by phone at least 24 hours in advance."
+    },
+    {
+      "q": "Is your space easy to reach?",
+      "a": "Yes — we are located near Patision and Acharnon streets, just 400 meters from the Agios Eleftherios station of the metro green line (Line 1)."
     }
   ],
   "noAnswer": "Didn't find what you were looking for?",

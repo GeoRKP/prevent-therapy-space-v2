@@ -5,8 +5,8 @@
   },
   "hero": {
     "label": "About Us",
-    "title": "Movement care you can trust",
-    "subtitle": "Since 2017, helping patients overcome pain and get back to the life they love"
+    "title": "Our goal: to trust your body again",
+    "subtitle": "Since 2018, helping patients overcome pain and get back to the life they love"
   },
   "mission": {
     "title": "Our Mission",
@@ -19,11 +19,6 @@
         "name": "Konstantinos Patsakis",
         "role": "Physiotherapist & Osteopath",
         "credentials": "BSc"
-      },
-      "alexandros": {
-        "name": "Dr. Alexandros Tsitouridis",
-        "role": "Orthopedic Surgeon — Sports Medicine",
-        "credentials": "MD"
       }
     }
   }

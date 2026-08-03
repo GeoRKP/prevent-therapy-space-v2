@@ -20,7 +20,13 @@ export function TeamPreview() {
           subtitle={t("home:team.subtitle")}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto">
+        <div
+          className={
+            team.length === 1
+              ? "max-w-md mx-auto"
+              : "grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto"
+          }
+        >
           {team.map((member, i) => (
             <motion.div
               key={member.id}

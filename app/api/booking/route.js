@@ -1,15 +1,17 @@
 import { z } from "zod";
-import { prisma } from "@/lib/prisma";
+import { bookingConfig } from "@/data/booking";
+import { assertSlotAvailable } from "@/lib/booking";
+import { createBookingEvent } from "@/lib/google-calendar";
+
+export const dynamic = "force-dynamic";
 
 const schema = z.object({
-  service: z.string(),
-  date: z.string(),
-  time: z.string(),
-  name: z.string().min(2),
+  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  time: z.string().regex(/^\d{2}:\d{2}$/),
+  name: z.string().min(2).max(120),
   email: z.string().email(),
-  phone: z.string().min(5),
-  notes: z.string().optional().default(""),
-  locale: z.enum(["el", "en"]).default("el"),
+  phone: z.string().min(5).max(30),
+  notes: z.string().max(1000).optional().default(""),
 });
 
 export async function POST(request) {
@@ -17,46 +19,29 @@ export async function POST(request) {
     const body = await request.json();
     const data = schema.parse(body);
 
-    // Find or create the service stub for now
-    let service = await prisma.service.findFirst({ where: { id: data.service } });
-    if (!service) {
-      service = await prisma.service.create({
-        data: {
-          id: data.service,
-          nameEl: data.service,
-          nameEn: data.service,
-          descEl: "",
-          descEn: "",
-        },
-      });
-    }
+    // Επαλήθευση ότι το slot είναι έγκυρο και ακόμα ελεύθερο στο Google Calendar
+    const { start, end } = await assertSlotAvailable(data.date, data.time);
 
-    const date = new Date(data.date);
-    const [h, m] = data.time.split(":").map(Number);
-    const startTime = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
-    const endHour = h + 1;
-    const endTime = `${String(endHour).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
-
-    const appointment = await prisma.appointment.create({
-      data: {
-        serviceId: service.id,
-        patientName: data.name,
-        patientEmail: data.email,
-        patientPhone: data.phone,
-        date,
-        startTime,
-        endTime,
-        notes: data.notes,
-        locale: data.locale,
-      },
+    const event = await createBookingEvent({
+      start,
+      end,
+      timeZone: bookingConfig.timeZone,
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      notes: data.notes,
     });
 
-    // TODO: send confirmation email via Resend / Nodemailer
-
-    return Response.json({ success: true, id: appointment.id });
+    return Response.json({ success: true, id: event.id });
   } catch (err) {
-    if (err.issues) {
+    if (err?.issues) {
       return Response.json({ error: "validation", issues: err.issues }, { status: 400 });
+    }
+    if (err?.code === "invalid_slot") {
+      return Response.json({ error: "invalid_slot" }, { status: 400 });
+    }
+    if (err?.code === "slot_taken") {
+      return Response.json({ error: "slot_taken" }, { status: 409 });
     }
     console.error("[booking]", err);
     return Response.json({ error: "server" }, { status: 500 });

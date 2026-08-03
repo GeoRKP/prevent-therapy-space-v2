@@ -9,7 +9,7 @@ import {
   Hand,
   Dumbbell,
   BrainCircuit,
-  Activity,
+  ShieldCheck,
   ScanLine,
   CheckCircle2,
   ArrowUpRight,
@@ -21,7 +21,7 @@ const iconMap = {
   "uil-constructor": Hand,
   "uil-bolt": Dumbbell,
   "scan": BrainCircuit,
-  "uil-shield-check": Activity,
+  "uil-shield-check": ShieldCheck,
   "uil-box": ScanLine,
 };
 
@@ -98,7 +98,7 @@ export function ServicesGrid() {
 
                   {service.features && (
                     <ul className="space-y-2 mb-5">
-                      {service.features.slice(0, 3).map((feature, idx) => (
+                      {service.features.map((feature, idx) => (
                         <li
                           key={idx}
                           className="flex items-start gap-2.5 text-sm text-white/55 group-hover:text-white/65 transition-colors"

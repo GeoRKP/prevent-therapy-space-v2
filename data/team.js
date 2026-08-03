@@ -7,12 +7,4 @@ export const team = [
       en: ["Physiotherapy", "Osteopathy", "Therapeutic Exercise"],
     },
   },
-  {
-    id: "alexandros",
-    image: "/images/team/alexandros-tsitouridis.jpg",
-    specialties: {
-      el: ["Ορθοπαιδική", "Αθλητιατρική", "Αθλητικές Κακώσεις"],
-      en: ["Orthopedics", "Sports Medicine", "Athletic Injuries"],
-    },
-  },
 ];

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Phone, ArrowRight, Clock, MapPin, CalendarCheck } from "lucide-react";
+import { Phone, MessageCircle, ArrowRight, Clock, MapPin, CalendarCheck } from "lucide-react";
 import { contactInfo } from "@/data/conditions";
 import { RevealText } from "@/components/effects/kinetic-text";
 
@@ -63,6 +63,14 @@ export function CtaSection() {
                   >
                     <Phone className="w-4 h-4" />
                     <span>{t("ctaSection.callNow")}</span>
+                  </a>
+
+                  <a
+                    href={contactInfo.viberHref}
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full border border-white/30 text-white font-semibold text-sm hover:bg-white/10 transition-colors"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>{t("ctaSection.viber")}</span>
                   </a>
                 </div>
               </RevealText>
