@@ -32,6 +32,29 @@
     "message": "You will receive a calendar invitation by email with all the details.",
     "back": "Back to Home"
   },
+  "cancel": {
+    "meta": {
+      "title": "Cancel Appointment | PREVENT Therapy Space",
+      "description": "Cancel your appointment at PREVENT Therapy Space.",
+      "robots": "noindex, nofollow"
+    },
+    "title": "Cancel Appointment",
+    "confirmTitle": "Do you want to cancel this appointment?",
+    "confirmText": "The slot will immediately become available to another patient. This cannot be undone.",
+    "confirmButton": "Yes, cancel it",
+    "keep": "No, keep it",
+    "doneTitle": "Appointment cancelled",
+    "doneText": "You will receive a confirmation email. We would be happy to see you again any time.",
+    "rebook": "Book a new appointment",
+    "tooLateTitle": "The appointment is coming up",
+    "tooLateText": "Online cancellation is no longer possible. Please contact us by phone.",
+    "goneTitle": "Appointment not found",
+    "goneText": "It may have already been cancelled, or its date has passed.",
+    "invalidTitle": "Invalid link",
+    "invalidText": "This cancellation link is not valid. Please use the link from your confirmation email.",
+    "errorTitle": "Something went wrong",
+    "errorText": "Please try again in a moment, or contact us by phone."
+  },
   "errors": {
     "slotTaken": "This time slot was just booked. Please select another time.",
     "invalid": "Please check your details.",

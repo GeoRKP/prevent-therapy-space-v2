@@ -117,7 +117,10 @@ export default function BookingPage() {
       const res = await fetch("/api/booking", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(selection),
+        body: JSON.stringify({
+          ...selection,
+          locale: i18n.language === "en" ? "en" : "el",
+        }),
       });
       if (res.ok) {
         setStep(3);

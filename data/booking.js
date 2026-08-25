@@ -11,6 +11,9 @@ export const bookingConfig = {
   // Ελάχιστη προειδοποίηση: πόσες ώρες πριν δεν επιτρέπεται νέα κράτηση
   minNoticeHours: Number(process.env.BOOKING_MIN_NOTICE_HOURS) || 2,
 
+  // Έως πόσες ώρες πριν το ραντεβού επιτρέπεται online ακύρωση
+  cancelNoticeHours: Number(process.env.BOOKING_CANCEL_NOTICE_HOURS) || 2,
+
   // Πόσες μέρες μπροστά μπορεί να κλείσει κανείς ραντεβού
   maxAdvanceDays: Number(process.env.BOOKING_MAX_ADVANCE_DAYS) || 30,
 
