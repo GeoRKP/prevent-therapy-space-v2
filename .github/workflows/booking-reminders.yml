@@ -1,0 +1,26 @@
+# Χρονοδιακόπτης υπενθυμίσεων ραντεβού: χτυπά το endpoint κάθε ~30 λεπτά.
+# Το Vercel Hobby επιτρέπει cron μόνο 1 φορά/μέρα, οπότε ο ρυθμός δίνεται από εδώ.
+# Χρειάζεται το repo secret CRON_SECRET (ίδια τιμή με το Vercel env CRON_SECRET).
+
+name: booking-reminders
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Trigger reminder run
+        run: |
+          status=$(curl -s -o response.json -w "%{http_code}" --max-time 60 \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://www.preventtherapy.gr/api/booking/reminders")
+          cat response.json
+          if [ "$status" != "200" ]; then
+            echo "Reminder endpoint returned $status"
+            exit 1
+          fi
