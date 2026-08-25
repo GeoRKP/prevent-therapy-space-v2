@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { bookingConfig } from "@/data/booking";
 import { assertSlotAvailable } from "@/lib/booking";
-import { createBookingEvent } from "@/lib/google-calendar";
+import { createBookingEvent, patchBookingEventProps } from "@/lib/google-calendar";
 import { cancelUrl } from "@/lib/booking-token";
-import { sendBookingEmails } from "@/lib/email";
+import { sendBookingEmails, scheduleReminderEmails } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -37,14 +37,23 @@ export async function POST(request) {
     });
 
     // Emails best-effort: μια αποτυχία τους δεν ακυρώνει την κράτηση.
-    sendBookingEmails({
+    const emailInfo = {
       startISO: start.toISOString(),
       name: data.name,
       email: data.email,
-      phone: data.phone,
       locale: data.locale,
       cancelLink: cancelUrl(event.id),
-    }).catch((err) => console.error("[booking emails]", err));
+    };
+    sendBookingEmails({ ...emailInfo, phone: data.phone }).catch((err) =>
+      console.error("[booking emails]", err)
+    );
+    // Υπενθυμίσεις T-24h/T-2h ως προγραμματισμένα Resend emails — τα ids
+    // αποθηκεύονται στο event ώστε να ακυρωθούν μαζί με το ραντεβού.
+    scheduleReminderEmails(emailInfo)
+      .then((ids) =>
+        Object.keys(ids).length ? patchBookingEventProps(event.id, ids) : null
+      )
+      .catch((err) => console.error("[booking reminders]", err));
 
     return Response.json({ success: true, id: event.id });
   } catch (err) {

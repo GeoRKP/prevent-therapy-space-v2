@@ -4,7 +4,7 @@
 import { bookingConfig } from "@/data/booking";
 import { verifyEventSignature } from "@/lib/booking-token";
 import { getBookingEvent, deleteBookingEvent } from "@/lib/google-calendar";
-import { sendCancellationEmails } from "@/lib/email";
+import { sendCancellationEmails, cancelScheduledEmails } from "@/lib/email";
 
 export const dynamic = "force-dynamic";
 
@@ -90,6 +90,11 @@ export async function POST(request) {
       phone: props.patientPhone || "",
       locale: props.patientLocale || "el",
     }).catch((err) => console.error("[cancel emails]", err));
+
+    // Οι προγραμματισμένες υπενθυμίσεις του ραντεβού δεν έχουν πια λόγο ύπαρξης.
+    cancelScheduledEmails([props.reminder24EmailId, props.reminder2EmailId]).catch(
+      (err) => console.error("[cancel scheduled]", err)
+    );
 
     return Response.json({ success: true, ...eventDetails(event, start) });
   } catch (err) {
