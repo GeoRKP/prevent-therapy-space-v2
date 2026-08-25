@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { bookingConfig } from "@/data/booking";
 import { assertSlotAvailable } from "@/lib/booking";
 import { createBookingEvent, patchBookingEventProps } from "@/lib/google-calendar";
 import { cancelUrl } from "@/lib/booking-token";
@@ -23,12 +22,12 @@ export async function POST(request) {
     const data = schema.parse(body);
 
     // Επαλήθευση ότι το slot είναι έγκυρο και ακόμα ελεύθερο στο Google Calendar
-    const { start, end } = await assertSlotAvailable(data.date, data.time);
+    const { start, end, config } = await assertSlotAvailable(data.date, data.time);
 
     const event = await createBookingEvent({
       start,
       end,
-      timeZone: bookingConfig.timeZone,
+      timeZone: config.timeZone,
       name: data.name,
       email: data.email,
       phone: data.phone,

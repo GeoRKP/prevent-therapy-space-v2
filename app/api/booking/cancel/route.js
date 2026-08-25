@@ -1,7 +1,7 @@
 // Ακύρωση ραντεβού με υπογεγραμμένο link (χωρίς βάση): GET επιστρέφει τα
 // στοιχεία για τη σελίδα επιβεβαίωσης, POST εκτελεί την ακύρωση.
 
-import { bookingConfig } from "@/data/booking";
+import { getBookingConfig } from "@/lib/settings";
 import { verifyEventSignature } from "@/lib/booking-token";
 import { getBookingEvent, deleteBookingEvent } from "@/lib/google-calendar";
 import { sendCancellationEmails, cancelScheduledEmails } from "@/lib/email";
@@ -32,23 +32,24 @@ async function loadCancellableEvent(id, sig) {
     return { error: "gone", status: 410 };
   }
 
-  const deadline = start.getTime() - bookingConfig.cancelNoticeHours * 3_600_000;
+  const config = await getBookingConfig();
+  const deadline = start.getTime() - config.cancelNoticeHours * 3_600_000;
   if (Date.now() > deadline) return { error: "too_late", status: 409 };
 
-  return { event, start };
+  return { event, start, config };
 }
 
-function eventDetails(event, start) {
+function eventDetails(event, start, timeZone) {
   const props = event.extendedProperties?.private || {};
   return {
     date: new Intl.DateTimeFormat("en-CA", {
-      timeZone: bookingConfig.timeZone,
+      timeZone,
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
     }).format(start),
     time: new Intl.DateTimeFormat("en-GB", {
-      timeZone: bookingConfig.timeZone,
+      timeZone,
       hour: "2-digit",
       minute: "2-digit",
       hour12: false,
@@ -64,7 +65,7 @@ export async function GET(request) {
     if (result.error) {
       return Response.json({ error: result.error }, { status: result.status });
     }
-    return Response.json(eventDetails(result.event, result.start));
+    return Response.json(eventDetails(result.event, result.start, result.config.timeZone));
   } catch (err) {
     console.error("[booking/cancel GET]", err);
     return Response.json({ error: "server" }, { status: 500 });
@@ -79,7 +80,7 @@ export async function POST(request) {
       return Response.json({ error: result.error }, { status: result.status });
     }
 
-    const { event, start } = result;
+    const { event, start, config } = result;
     await deleteBookingEvent(event.id);
 
     const props = event.extendedProperties?.private || {};
@@ -96,7 +97,7 @@ export async function POST(request) {
       (err) => console.error("[cancel scheduled]", err)
     );
 
-    return Response.json({ success: true, ...eventDetails(event, start) });
+    return Response.json({ success: true, ...eventDetails(event, start, config.timeZone) });
   } catch (err) {
     console.error("[booking/cancel POST]", err);
     return Response.json({ error: "server" }, { status: 500 });
