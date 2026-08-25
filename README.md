@@ -66,3 +66,4 @@ No database: Google Calendar is the single source of truth. The physiotherapist 
 ## Origin
 
 Forked structurally from the `frena` (Frena Rigas) project. Bootstrap and many decorative animation libraries (rellax, isotope-layout, plyr, photoswipe, glightbox, swiper) are kept in dependencies but **not used** by the physio components — safe to prune later with `npm uninstall`.
+
