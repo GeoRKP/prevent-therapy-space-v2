@@ -17,7 +17,7 @@ export async function POST(request) {
     // Χωρίς βάση: το μήνυμα προωθείται με email στο ιατρείο μέσω Resend.
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { error } = await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL,
+      from: process.env.EMAIL_FROM,
       to: process.env.CONTACT_EMAIL,
       replyTo: data.email,
       subject: `Νέο μήνυμα επικοινωνίας — ${data.name}`,
