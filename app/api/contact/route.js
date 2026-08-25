@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { Resend } from "resend";
+import { CONTACT_EMAIL } from "@/lib/email";
 
 const schema = z.object({
   name: z.string().min(2).max(120),
@@ -18,7 +19,7 @@ export async function POST(request) {
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { error } = await resend.emails.send({
       from: process.env.EMAIL_FROM,
-      to: process.env.CONTACT_EMAIL,
+      to: CONTACT_EMAIL,
       replyTo: data.email,
       subject: `Νέο μήνυμα επικοινωνίας — ${data.name}`,
       text: [
