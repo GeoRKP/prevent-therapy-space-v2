@@ -1,8 +1,8 @@
-import { Stethoscope, Dumbbell, Apple } from "lucide-react";
+import { Stethoscope, Apple } from "lucide-react";
 
-// Πρώτα οι συνεργάτες με πραγματικό πρόσωπο/όνομα, μετά οι role-first θέσεις.
-// Όσοι δεν έχουν image εμφανίζονται ως κάρτες ρόλου (χωρίς ψεύτικο όνομα) —
-// μόλις δοθούν όνομα + φωτογραφία, συμπληρώνεται το image και το όνομα στα locales.
+// Μόνο συνεργάτες με πραγματικό όνομα + φωτογραφία εμφανίζονται στο site.
+// Οι θέσεις που εκκρεμούν (γυμνάστρια, οικογενειακή ιατρός) είναι
+// καταγεγραμμένες στο ΕΚΚΡΕΜΟΤΗΤΕΣ.md — προστίθενται εδώ μόλις έρθουν στοιχεία.
 export const partners = [
   {
     id: "tsitouridis",
@@ -13,15 +13,5 @@ export const partners = [
     id: "nutritionist",
     image: "/images/team/eleni-kallianioti.jpg",
     icon: Apple,
-  },
-  {
-    id: "trainer",
-    image: null,
-    icon: Dumbbell,
-  },
-  {
-    id: "doctor",
-    image: null,
-    icon: Stethoscope,
   },
 ];

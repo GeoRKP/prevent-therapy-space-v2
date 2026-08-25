@@ -73,7 +73,7 @@ export function PartnersSection() {
           subtitle={t("partners.subtitle")}
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl">
           {partners.map((partner, i) => {
             const Icon = partner.icon;
             const name = t(`partners.members.${partner.id}.name`, {
