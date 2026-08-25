@@ -1,13 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import {
   CalendarCheck,
+  CalendarDays,
   ArrowRight,
   ArrowLeft,
   CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
   Clock,
   RefreshCw,
 } from "lucide-react";
@@ -19,11 +22,18 @@ import { cn } from "@/lib/utils";
 // Ώρες πριν τις 14:00 εμφανίζονται ως «Πρωί», οι υπόλοιπες ως «Απόγευμα»
 const AFTERNOON_FROM = 14 * 60;
 
+const pad2 = (n) => String(n).padStart(2, "0");
+const toMinutes = (s) => {
+  const [h, m] = s.split(":").map(Number);
+  return h * 60 + m;
+};
+
 export default function BookingPage() {
   const { t, ready, i18n } = useTranslation(["booking", "common"]);
   const [step, setStep] = useState(1);
   const [availability, setAvailability] = useState(null); // { durationMinutes, days: [...] }
   const [loadError, setLoadError] = useState(false);
+  const [monthIdx, setMonthIdx] = useState(0);
   const [selection, setSelection] = useState({
     date: "",
     time: "",
@@ -39,6 +49,7 @@ export default function BookingPage() {
   const loadAvailability = async () => {
     setAvailability(null);
     setLoadError(false);
+    setMonthIdx(0);
     try {
       const res = await fetch("/api/booking/availability", { cache: "no-store" });
       if (!res.ok) throw new Error("Failed");
@@ -52,6 +63,31 @@ export default function BookingPage() {
     loadAvailability();
   }, []);
 
+  // date -> slots της ημέρας, για γρήγορο lookup από το ημερολόγιο
+  const slotsByDate = useMemo(() => {
+    const map = new Map();
+    for (const d of availability?.days || []) map.set(d.date, d.slots);
+    return map;
+  }, [availability]);
+
+  // Οι μήνες που καλύπτει το παράθυρο κρατήσεων (από την πρώτη ως την τελευταία διαθέσιμη μέρα)
+  const months = useMemo(() => {
+    const days = availability?.days;
+    if (!days?.length) return [];
+    let [y, m] = days[0].date.split("-").map(Number);
+    const [ly, lm] = days[days.length - 1].date.split("-").map(Number);
+    const list = [];
+    while (y < ly || (y === ly && m <= lm)) {
+      list.push({ year: y, month: m });
+      m += 1;
+      if (m > 12) {
+        m = 1;
+        y += 1;
+      }
+    }
+    return list;
+  }, [availability]);
+
   const selectedDay = useMemo(
     () => availability?.days.find((d) => d.date === selection.date),
     [availability, selection.date]
@@ -59,24 +95,11 @@ export default function BookingPage() {
 
   const { morning, afternoon } = useMemo(() => {
     const slots = selectedDay?.slots || [];
-    const toMinutes = (s) => {
-      const [h, m] = s.split(":").map(Number);
-      return h * 60 + m;
-    };
     return {
       morning: slots.filter((s) => toMinutes(s) < AFTERNOON_FROM),
       afternoon: slots.filter((s) => toMinutes(s) >= AFTERNOON_FROM),
     };
   }, [selectedDay]);
-
-  const formatDay = (dateStr) => {
-    const date = new Date(`${dateStr}T12:00:00`);
-    return {
-      weekday: date.toLocaleDateString(locale, { weekday: "short" }),
-      day: date.toLocaleDateString(locale, { day: "numeric" }),
-      month: date.toLocaleDateString(locale, { month: "short" }),
-    };
-  };
 
   const formatFullDate = (dateStr) =>
     dateStr
@@ -130,43 +153,20 @@ export default function BookingPage() {
       />
 
       <section className="relative py-20 lg:py-28 overflow-hidden bg-[#050810]">
-        <div className="container relative z-10 max-w-3xl">
-          {step < 3 && (
-            <div className="flex items-center justify-center gap-3 mb-12">
-              {[1, 2].map((n) => (
-                <div key={n} className="flex items-center gap-2">
-                  <span
-                    className={cn(
-                      "text-xs font-mono",
-                      n <= step ? "text-primary" : "text-white/20"
-                    )}
-                  >
-                    {String(n).padStart(2, "0")}
-                  </span>
-                  <div
-                    className={cn(
-                      "h-0.5 rounded-full transition-all",
-                      n <= step ? "bg-primary w-12" : "bg-white/10 w-6"
-                    )}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-
+        <div className="container relative z-10 max-w-4xl">
           {step === 1 && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="flex items-end justify-between gap-4 mb-3">
+              <div className="flex items-end justify-between gap-4 mb-8">
                 <h2 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
                   {ready ? t("booking:steps.datetime") : ""}
                 </h2>
                 {availability && (
                   <span className="inline-flex items-center gap-1.5 text-xs text-white/55 flex-shrink-0 pb-1">
-                    <Clock className="w-3.5 h-3.5 text-primary" />
+                    <Clock className="w-3.5 h-3.5 text-primary-soft" />
                     {ready
                       ? t("booking:duration", {
                           minutes: availability.durationMinutes,
@@ -175,26 +175,31 @@ export default function BookingPage() {
                   </span>
                 )}
               </div>
-              <p className="text-white/55 mb-8 text-sm">01 / 02</p>
 
               {/* Φόρτωση διαθεσιμότητας */}
               {!availability && !loadError && (
-                <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-7">
-                  <div className="flex gap-2 mb-6">
-                    {Array.from({ length: 6 }).map((_, i) => (
-                      <div
-                        key={i}
-                        className="w-16 h-20 rounded-2xl bg-white/[0.04] animate-pulse"
-                      />
-                    ))}
+                <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl overflow-hidden grid md:grid-cols-2">
+                  <div className="p-6 lg:p-7 space-y-4">
+                    <div className="h-6 w-40 rounded-lg bg-white/[0.04] animate-pulse" />
+                    <div className="grid grid-cols-7 gap-1.5">
+                      {Array.from({ length: 35 }).map((_, i) => (
+                        <div
+                          key={i}
+                          className="aspect-square rounded-xl bg-white/[0.04] animate-pulse"
+                        />
+                      ))}
+                    </div>
                   </div>
-                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-                    {Array.from({ length: 8 }).map((_, i) => (
-                      <div
-                        key={i}
-                        className="h-11 rounded-xl bg-white/[0.04] animate-pulse"
-                      />
-                    ))}
+                  <div className="hidden md:block p-6 lg:p-7 border-l border-white/[0.06]">
+                    <div className="h-6 w-48 rounded-lg bg-white/[0.04] animate-pulse mb-5" />
+                    <div className="grid grid-cols-3 gap-2">
+                      {Array.from({ length: 9 }).map((_, i) => (
+                        <div
+                          key={i}
+                          className="h-11 rounded-xl bg-white/[0.04] animate-pulse"
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
@@ -223,97 +228,99 @@ export default function BookingPage() {
               )}
 
               {availability && availability.days.length > 0 && (
-                <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-7 space-y-7">
-                  {/* Επιλογή ημέρας */}
-                  <div>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-white/55 mb-3">
-                      {ready ? t("booking:selectDay") : ""}
-                    </p>
-                    <div className="flex gap-2 overflow-x-auto pb-2 -mb-2 [scrollbar-width:thin]">
-                      {availability.days.map((d) => {
-                        const f = formatDay(d.date);
-                        const active = selection.date === d.date;
-                        return (
-                          <button
-                            key={d.date}
-                            onClick={() =>
-                              setSelection((p) => ({
-                                ...p,
-                                date: d.date,
-                                time: "",
-                              }))
-                            }
-                            className={cn(
-                              "flex flex-col items-center justify-center w-16 h-20 rounded-2xl border flex-shrink-0 transition-all",
-                              active
-                                ? "bg-primary/15 border-primary/50 text-white"
-                                : "bg-[#050810] border-white/[0.08] text-white/55 hover:border-white/25 hover:text-white"
-                            )}
+                <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl overflow-hidden">
+                  <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/[0.06]">
+                    <CalendarPane
+                      months={months}
+                      monthIdx={monthIdx}
+                      setMonthIdx={setMonthIdx}
+                      slotsByDate={slotsByDate}
+                      locale={locale}
+                      ready={ready}
+                      t={t}
+                      selectedDate={selection.date}
+                      onSelect={(date) =>
+                        setSelection((p) => ({ ...p, date, time: "" }))
+                      }
+                    />
+
+                    {/* Ώρες επιλεγμένης ημέρας */}
+                    <div className="p-6 lg:p-7 flex flex-col min-h-[280px]">
+                      <AnimatePresence mode="wait">
+                        {selectedDay ? (
+                          <motion.div
+                            key={selection.date}
+                            initial={{ opacity: 0, y: 6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -6 }}
+                            transition={{ duration: 0.2 }}
+                            className="space-y-5"
                           >
-                            <span className="text-[10px] uppercase tracking-wider">
-                              {f.weekday}
-                            </span>
-                            <span
-                              className={cn(
-                                "text-lg font-bold",
-                                active ? "text-primary" : "text-white"
-                              )}
-                            >
-                              {f.day}
-                            </span>
-                            <span className="text-[10px] uppercase tracking-wider">
-                              {f.month}
-                            </span>
-                          </button>
-                        );
-                      })}
+                            <p className="text-sm font-semibold text-white capitalize">
+                              {formatFullDate(selection.date)}
+                            </p>
+                            {[
+                              { label: t("booking:morning"), slots: morning },
+                              { label: t("booking:afternoon"), slots: afternoon },
+                            ]
+                              .filter((g) => g.slots.length > 0)
+                              .map((group) => (
+                                <div key={group.label}>
+                                  <p className="text-xs font-semibold uppercase tracking-wider text-white/55 mb-3">
+                                    {group.label}
+                                  </p>
+                                  <div className="grid grid-cols-3 gap-2">
+                                    {group.slots.map((time) => (
+                                      <button
+                                        key={time}
+                                        onClick={() =>
+                                          setSelection((p) => ({ ...p, time }))
+                                        }
+                                        className={cn(
+                                          "h-11 rounded-xl border text-sm font-semibold font-mono transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-soft/60",
+                                          selection.time === time
+                                            ? "bg-primary-soft text-primary-soft-foreground border-primary-soft"
+                                            : "bg-[#050810] border-white/[0.08] text-white/70 hover:border-primary-soft/40 hover:text-white"
+                                        )}
+                                      >
+                                        {time}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
+                              ))}
+                          </motion.div>
+                        ) : (
+                          <motion.div
+                            key="empty"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="flex-1 flex flex-col items-center justify-center text-center gap-3 py-8"
+                          >
+                            <div className="w-12 h-12 rounded-2xl bg-primary-soft/10 flex items-center justify-center">
+                              <CalendarDays className="w-6 h-6 text-primary-soft" />
+                            </div>
+                            <p className="text-sm text-white/55 max-w-[220px]">
+                              {ready ? t("booking:pickDayHint") : ""}
+                            </p>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
                   </div>
 
-                  {/* Επιλογή ώρας */}
-                  {selectedDay && (
-                    <div className="space-y-5">
-                      {[
-                        { label: t("booking:morning"), slots: morning },
-                        { label: t("booking:afternoon"), slots: afternoon },
-                      ]
-                        .filter((g) => g.slots.length > 0)
-                        .map((group) => (
-                          <div key={group.label}>
-                            <p className="text-xs font-semibold uppercase tracking-wider text-white/55 mb-3">
-                              {group.label}
-                            </p>
-                            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-                              {group.slots.map((time) => (
-                                <button
-                                  key={time}
-                                  onClick={() =>
-                                    setSelection((p) => ({ ...p, time }))
-                                  }
-                                  className={cn(
-                                    "h-11 rounded-xl border text-sm font-semibold font-mono transition-all",
-                                    selection.time === time
-                                      ? "bg-primary text-white border-primary"
-                                      : "bg-[#050810] border-white/[0.08] text-white/70 hover:border-primary/40 hover:text-white"
-                                  )}
-                                >
-                                  {time}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
-                        ))}
-                    </div>
-                  )}
-
-                  <button
-                    onClick={() => setStep(2)}
-                    disabled={!selection.date || !selection.time}
-                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors disabled:opacity-50"
-                  >
-                    {ready ? t("common:actions.next") : "Next"}
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                  <div className="p-5 border-t border-white/[0.06]">
+                    <button
+                      onClick={() => setStep(2)}
+                      disabled={!selection.date || !selection.time}
+                      className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary-soft text-primary-soft-foreground font-semibold text-sm hover:bg-primary-soft/90 transition-colors disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-soft/60"
+                    >
+                      {ready ? t("common:actions.next") : "Next"}
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
                 </div>
               )}
             </motion.div>
@@ -324,16 +331,16 @@ export default function BookingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
+              className="max-w-3xl mx-auto"
             >
-              <h2 className="text-2xl lg:text-3xl font-bold text-white mb-3 tracking-tight">
+              <h2 className="text-2xl lg:text-3xl font-bold text-white mb-8 tracking-tight">
                 {ready ? t("booking:steps.details") : ""}
               </h2>
-              <p className="text-white/55 mb-8 text-sm">02 / 02</p>
 
               {/* Σύνοψη επιλογής */}
-              <div className="flex items-center gap-3 p-4 mb-5 rounded-2xl bg-primary/[0.07] border border-primary/20">
-                <div className="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center flex-shrink-0">
-                  <CalendarCheck className="w-5 h-5 text-primary" />
+              <div className="flex items-center gap-3 p-4 mb-5 rounded-2xl bg-primary-soft/[0.07] border border-primary-soft/20">
+                <div className="w-10 h-10 rounded-xl bg-primary-soft/15 flex items-center justify-center flex-shrink-0">
+                  <CalendarCheck className="w-5 h-5 text-primary-soft" />
                 </div>
                 <p className="text-sm text-white">
                   <span className="capitalize">{formatFullDate(selection.date)}</span>
@@ -403,7 +410,7 @@ export default function BookingPage() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors disabled:opacity-50"
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary-soft text-primary-soft-foreground font-semibold text-sm hover:bg-primary-soft/90 transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-soft/60"
                   >
                     <CalendarCheck className="w-4 h-4" />
                     {submitting
@@ -426,8 +433,8 @@ export default function BookingPage() {
               transition={{ duration: 0.5 }}
               className="text-center py-12"
             >
-              <div className="w-20 h-20 mx-auto mb-7 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center">
-                <CheckCircle2 className="w-10 h-10 text-primary" />
+              <div className="w-20 h-20 mx-auto mb-7 rounded-2xl bg-primary-soft/10 border border-primary-soft/30 flex items-center justify-center">
+                <CheckCircle2 className="w-10 h-10 text-primary-soft" />
               </div>
               <h2 className="text-3xl lg:text-4xl font-bold text-white mb-3 tracking-tight">
                 {ready ? t("booking:success.title") : ""}
@@ -444,7 +451,7 @@ export default function BookingPage() {
               </p>
               <a
                 href="/"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary-soft text-primary-soft-foreground font-semibold text-sm hover:bg-primary-soft/90 transition-colors"
               >
                 {ready ? t("booking:success.back") : "Home"}
                 <ArrowRight className="w-4 h-4" />
@@ -454,6 +461,146 @@ export default function BookingPage() {
         </div>
       </section>
     </>
+  );
+}
+
+/**
+ * Μηνιαίο ημερολόγιο (Δευτέρα πρώτη). Διαθέσιμες ημέρες: λευκές, με 1–3 mint
+ * τελείες ανάλογα με το πλήθος ελεύθερων ωρών. Ανενεργές: αχνές.
+ */
+function CalendarPane({
+  months,
+  monthIdx,
+  setMonthIdx,
+  slotsByDate,
+  locale,
+  ready,
+  t,
+  selectedDate,
+  onSelect,
+}) {
+  const current = months[Math.min(monthIdx, months.length - 1)];
+
+  // Ετικέτες ημερών εβδομάδας, Δευτέρα πρώτη (η 1/1/2024 ήταν Δευτέρα)
+  const weekDays = useMemo(
+    () =>
+      Array.from({ length: 7 }, (_, i) =>
+        new Date(Date.UTC(2024, 0, 1 + i)).toLocaleDateString(locale, {
+          weekday: "short",
+          timeZone: "UTC",
+        })
+      ),
+    [locale]
+  );
+
+  const monthLabel = new Date(current.year, current.month - 1, 1).toLocaleDateString(
+    locale,
+    { month: "long", year: "numeric" }
+  );
+
+  const daysInMonth = new Date(current.year, current.month, 0).getDate();
+  const leadingBlanks = (new Date(current.year, current.month - 1, 1).getDay() + 6) % 7;
+
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${pad2(today.getMonth() + 1)}-${pad2(today.getDate())}`;
+
+  return (
+    <div className="p-6 lg:p-7">
+      <div className="flex items-center justify-between mb-5">
+        <p className="text-sm font-semibold text-white capitalize">{monthLabel}</p>
+        <div className="flex gap-1.5">
+          <button
+            onClick={() => setMonthIdx(monthIdx - 1)}
+            disabled={monthIdx === 0}
+            aria-label={ready ? t("booking:prevMonth") : "Previous month"}
+            className="w-8 h-8 rounded-lg border border-white/[0.08] flex items-center justify-center text-white/55 hover:text-white hover:border-white/25 transition-colors disabled:opacity-30 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-soft/60"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => setMonthIdx(monthIdx + 1)}
+            disabled={monthIdx >= months.length - 1}
+            aria-label={ready ? t("booking:nextMonth") : "Next month"}
+            className="w-8 h-8 rounded-lg border border-white/[0.08] flex items-center justify-center text-white/55 hover:text-white hover:border-white/25 transition-colors disabled:opacity-30 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-soft/60"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-7 gap-1.5 mb-2">
+        {weekDays.map((d) => (
+          <span
+            key={d}
+            className="text-center text-[10px] font-semibold uppercase tracking-wider text-white/40 py-1"
+          >
+            {d}
+          </span>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-7 gap-1.5">
+        {Array.from({ length: leadingBlanks }).map((_, i) => (
+          <span key={`blank-${i}`} />
+        ))}
+        {Array.from({ length: daysInMonth }, (_, i) => {
+          const day = i + 1;
+          const dateStr = `${current.year}-${pad2(current.month)}-${pad2(day)}`;
+          const slots = slotsByDate.get(dateStr);
+          const isToday = dateStr === todayStr;
+
+          if (!slots) {
+            return (
+              <span
+                key={dateStr}
+                className={cn(
+                  "aspect-square flex items-center justify-center rounded-xl text-sm text-white/20",
+                  isToday && "ring-1 ring-inset ring-white/15"
+                )}
+              >
+                {day}
+              </span>
+            );
+          }
+
+          const active = selectedDate === dateStr;
+          const dots = slots.length >= 10 ? 3 : slots.length >= 5 ? 2 : 1;
+
+          return (
+            <button
+              key={dateStr}
+              onClick={() => onSelect(dateStr)}
+              aria-label={
+                ready
+                  ? `${new Date(`${dateStr}T12:00:00`).toLocaleDateString(locale, { weekday: "long", day: "numeric", month: "long" })} — ${t("booking:slotsCount", { count: slots.length })}`
+                  : dateStr
+              }
+              aria-pressed={active}
+              className={cn(
+                "aspect-square flex flex-col items-center justify-center gap-1 rounded-xl border text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-soft/60",
+                active
+                  ? "bg-primary-soft text-primary-soft-foreground border-primary-soft"
+                  : "bg-[#050810] border-white/[0.08] text-white hover:border-primary-soft/40",
+                isToday && !active && "ring-1 ring-inset ring-white/20"
+              )}
+            >
+              {day}
+              <span className="flex gap-0.5" aria-hidden="true">
+                {Array.from({ length: dots }).map((_, j) => (
+                  <span
+                    key={j}
+                    className={cn(
+                      "w-1 h-1 rounded-full",
+                      active ? "bg-primary-soft-foreground/70" : "bg-primary-soft/80"
+                    )}
+                  />
+                ))}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
@@ -467,12 +614,12 @@ function FormField({ label, multiline, ...props }) {
         <textarea
           rows={3}
           {...props}
-          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 resize-none"
+          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary-soft/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 resize-none"
         />
       ) : (
         <input
           {...props}
-          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 [color-scheme:dark]"
+          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary-soft/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 [color-scheme:dark]"
         />
       )}
     </div>

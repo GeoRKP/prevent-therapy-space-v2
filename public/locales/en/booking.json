@@ -11,6 +11,10 @@
     "details": "Details"
   },
   "selectDay": "Select a day",
+  "pickDayHint": "Pick a day on the calendar to see the available times.",
+  "slotsCount": "{{count}} available times",
+  "prevMonth": "Previous month",
+  "nextMonth": "Next month",
   "morning": "Morning",
   "afternoon": "Afternoon",
   "noSlots": "No available appointments for this day",
