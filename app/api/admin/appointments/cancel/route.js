@@ -43,9 +43,11 @@ export async function POST(request) {
         locale: props.patientLocale || "el",
       }).catch((err) => console.error("[admin cancel emails]", err));
     }
-    cancelScheduledEmails([props.reminder24EmailId, props.reminder2EmailId]).catch(
-      (err) => console.error("[admin cancel scheduled]", err)
-    );
+    cancelScheduledEmails([
+      props.reminder24EmailId,
+      props.reminder2EmailId,
+      props.reviewEmailId,
+    ]).catch((err) => console.error("[admin cancel scheduled]", err));
 
     return Response.json({ success: true });
   } catch (err) {

@@ -65,12 +65,17 @@ export async function POST(request) {
       cancelLink: cancelUrl(event.id),
     };
 
-    // Παλιές υπενθυμίσεις εκτός — νέες για τη νέα ώρα.
-    await cancelScheduledEmails([props.reminder24EmailId, props.reminder2EmailId]);
+    // Παλιές υπενθυμίσεις/review εκτός — νέες για τη νέα ώρα.
+    await cancelScheduledEmails([
+      props.reminder24EmailId,
+      props.reminder2EmailId,
+      props.reviewEmailId,
+    ]);
     const ids = await scheduleReminderEmails(patient);
     await patchBookingEventProps(event.id, {
       reminder24EmailId: ids.reminder24EmailId || "",
       reminder2EmailId: ids.reminder2EmailId || "",
+      reviewEmailId: ids.reviewEmailId || "",
     });
 
     if (patient.email) {

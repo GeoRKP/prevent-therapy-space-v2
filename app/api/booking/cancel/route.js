@@ -92,10 +92,12 @@ export async function POST(request) {
       locale: props.patientLocale || "el",
     }).catch((err) => console.error("[cancel emails]", err));
 
-    // Οι προγραμματισμένες υπενθυμίσεις του ραντεβού δεν έχουν πια λόγο ύπαρξης.
-    cancelScheduledEmails([props.reminder24EmailId, props.reminder2EmailId]).catch(
-      (err) => console.error("[cancel scheduled]", err)
-    );
+    // Υπενθυμίσεις και review email του ραντεβού δεν έχουν πια λόγο ύπαρξης.
+    cancelScheduledEmails([
+      props.reminder24EmailId,
+      props.reminder2EmailId,
+      props.reviewEmailId,
+    ]).catch((err) => console.error("[cancel scheduled]", err));
 
     return Response.json({ success: true, ...eventDetails(event, start, config.timeZone) });
   } catch (err) {
