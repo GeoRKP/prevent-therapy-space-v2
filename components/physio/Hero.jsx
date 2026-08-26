@@ -187,14 +187,15 @@ export function Hero() {
             </AnimatePresence>
           </div>
 
-          <div className="lg:col-span-5 hidden lg:block">
-            <div className="relative w-full max-w-[360px] xl:max-w-[400px] ml-auto">
+          <div className="lg:col-span-5">
+            <div className="relative w-full max-w-sm mx-auto lg:max-w-[360px] xl:max-w-[400px] lg:ml-auto lg:mr-0">
               {/* Διακοσμητικές γωνίες */}
               <div className="absolute -top-4 -left-4 w-20 h-20 border-t-2 border-l-2 border-primary-soft/30 rounded-tl-3xl" />
               <div className="absolute -bottom-4 -right-4 w-20 h-20 border-b-2 border-r-2 border-primary-soft/30 rounded-br-3xl" />
 
-              {/* Κάρτα 2:3 — ίδιο aspect με τις φωτογραφίες, εμφανίζονται ολόκληρες */}
-              <div className="relative aspect-[2/3]">
+              {/* Κάρτα: 3:2 στο κινητό (χαμηλή, δεν μακραίνει τη σελίδα),
+                  2:3 σε desktop — ίδιο aspect με τις portrait φωτογραφίες */}
+              <div className="relative aspect-[3/2] lg:aspect-[2/3]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -211,7 +212,7 @@ export function Hero() {
                       priority
                       className="object-cover"
                       style={{ objectPosition: heroSlides[currentSlide].position }}
-                      sizes="(min-width: 1280px) 440px, (min-width: 1024px) 400px, 0px"
+                      sizes="(min-width: 1280px) 400px, (min-width: 1024px) 360px, 100vw"
                       quality={90}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#050810]/35 via-transparent to-transparent" />
@@ -219,8 +220,8 @@ export function Hero() {
                 </AnimatePresence>
               </div>
 
-              {/* Progress indicators */}
-              <div className="mt-7 flex items-center justify-end gap-5">
+              {/* Progress indicators — μόνο desktop· στο κινητό υπάρχουν ήδη στη μπάρα κάτω */}
+              <div className="mt-7 hidden lg:flex items-center justify-end gap-5">
                 {heroSlides.map((_, index) => (
                   <button
                     key={index}
