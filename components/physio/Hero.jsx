@@ -25,7 +25,6 @@ export function Hero() {
       title: t("home:hero.slides.0.title"),
       highlight: t("home:hero.slides.0.highlight"),
       subtitle: t("home:hero.slides.0.subtitle"),
-      link: "/booking",
     },
     {
       image: "/images/treatments/physio-19-side-lying-shoulder.jpg",
@@ -33,7 +32,6 @@ export function Hero() {
       title: t("home:hero.slides.1.title"),
       highlight: t("home:hero.slides.1.highlight"),
       subtitle: t("home:hero.slides.1.subtitle"),
-      link: "/services",
     },
     {
       image: "/images/treatments/physio-10-leg-raise-ankle.jpg",
@@ -41,7 +39,6 @@ export function Hero() {
       title: t("home:hero.slides.2.title"),
       highlight: t("home:hero.slides.2.highlight"),
       subtitle: t("home:hero.slides.2.subtitle"),
-      link: "/services",
     },
   ];
 
@@ -171,7 +168,7 @@ export function Hero() {
                 <RevealText delay={0.5}>
                   <div className="flex flex-wrap gap-3">
                     <Link
-                      href={heroSlides[currentSlide].link}
+                      href="/booking"
                       className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-primary-soft text-primary-soft-foreground font-semibold text-sm rounded-full hover:bg-primary-soft/90 transition-all hover:gap-3"
                     >
                       {t("home:hero.ctaPrimary")}
