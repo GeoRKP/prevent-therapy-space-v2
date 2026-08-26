@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { Plus, ArrowRight, GraduationCap } from "lucide-react";
+import { Plus, GraduationCap } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { SectionHeading } from "./SectionHeading";
 import {
@@ -227,15 +226,6 @@ export function PartnersSection() {
                       ))}
                     </div>
 
-                    <div className="p-6 pt-4 border-t border-white/[0.06]">
-                      <Link
-                        href="/booking"
-                        className="inline-flex min-h-11 items-center gap-2 px-5 py-2.5 rounded-full bg-primary-soft text-primary-soft-foreground font-semibold text-sm hover:bg-primary-soft/90 transition-colors"
-                      >
-                        {t("partners.dialogCta")}
-                        <ArrowRight className="w-4 h-4" aria-hidden="true" />
-                      </Link>
-                    </div>
                   </DialogContent>
                 </Dialog>
               </motion.div>

@@ -76,7 +76,7 @@ export function ServicesGrid() {
                   </p>
 
                   {service.features && (
-                    <ul className="space-y-2 mb-5">
+                    <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
                         <li
                           key={idx}
@@ -88,16 +88,6 @@ export function ServicesGrid() {
                       ))}
                     </ul>
                   )}
-
-                  <div className="pt-4 border-t border-white/[0.06]">
-                    <Link
-                      href="/services"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-white/55 hover:text-primary-soft transition-colors"
-                    >
-                      <span>{t("contact:learnMore")}</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </Link>
-                  </div>
                 </div>
               </motion.div>
             );
