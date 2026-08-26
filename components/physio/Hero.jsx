@@ -92,8 +92,9 @@ export function Hero() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Ambient background — έντονα blurred εκδοχή της φωτογραφίας του slide,
-          δίνει ατμόσφαιρα χωρίς να φαίνεται κομμένη ή θολή η ίδια η φωτογραφία */}
+      {/* Background — στο κινητό η φωτογραφία του slide γεμίζει την οθόνη
+          καθαρή (portrait σε portrait κάδρο)· σε desktop γίνεται έντονα
+          blurred ambient πίσω από την κάρτα, ώστε να μη φαίνεται διπλή */}
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
@@ -109,15 +110,18 @@ export function Hero() {
             alt=""
             fill
             priority
-            className="object-cover scale-110 blur-2xl opacity-35"
+            className="object-cover lg:scale-110 lg:blur-2xl opacity-100 lg:opacity-35"
+            style={{ objectPosition: heroSlides[currentSlide].position }}
             sizes="100vw"
             quality={40}
           />
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 bg-gradient-to-r from-[#050810] via-[#050810]/70 to-[#050810]/30" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#050810] via-transparent to-[#050810]/40" />
+      {/* Scrim μόνο στο κινητό — κρατά το κείμενο αναγνώσιμο πάνω στη φωτογραφία */}
+      <div className="absolute inset-0 bg-[#050810]/45 lg:hidden" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#050810]/90 via-[#050810]/50 to-transparent lg:from-[#050810] lg:via-[#050810]/70 lg:to-[#050810]/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050810] via-transparent to-[#050810]/60 lg:to-[#050810]/40" />
 
       <DiagonalLines className="opacity-[0.012]" spacing={100} />
 
@@ -187,15 +191,14 @@ export function Hero() {
             </AnimatePresence>
           </div>
 
-          <div className="lg:col-span-5">
-            <div className="relative w-full max-w-sm mx-auto lg:max-w-[360px] xl:max-w-[400px] lg:ml-auto lg:mr-0">
+          <div className="lg:col-span-5 hidden lg:block">
+            <div className="relative w-full max-w-[360px] xl:max-w-[400px] ml-auto">
               {/* Διακοσμητικές γωνίες */}
               <div className="absolute -top-4 -left-4 w-20 h-20 border-t-2 border-l-2 border-primary-soft/30 rounded-tl-3xl" />
               <div className="absolute -bottom-4 -right-4 w-20 h-20 border-b-2 border-r-2 border-primary-soft/30 rounded-br-3xl" />
 
-              {/* Κάρτα: 3:2 στο κινητό (χαμηλή, δεν μακραίνει τη σελίδα),
-                  2:3 σε desktop — ίδιο aspect με τις portrait φωτογραφίες */}
-              <div className="relative aspect-[3/2] lg:aspect-[2/3]">
+              {/* Κάρτα 2:3 — ίδιο aspect με τις portrait φωτογραφίες */}
+              <div className="relative aspect-[2/3]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -212,7 +215,7 @@ export function Hero() {
                       priority
                       className="object-cover"
                       style={{ objectPosition: heroSlides[currentSlide].position }}
-                      sizes="(min-width: 1280px) 400px, (min-width: 1024px) 360px, 100vw"
+                      sizes="(min-width: 1280px) 440px, (min-width: 1024px) 400px, 0px"
                       quality={90}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#050810]/35 via-transparent to-transparent" />
@@ -220,8 +223,8 @@ export function Hero() {
                 </AnimatePresence>
               </div>
 
-              {/* Progress indicators — μόνο desktop· στο κινητό υπάρχουν ήδη στη μπάρα κάτω */}
-              <div className="mt-7 hidden lg:flex items-center justify-end gap-5">
+              {/* Progress indicators */}
+              <div className="mt-7 flex items-center justify-end gap-5">
                 {heroSlides.map((_, index) => (
                   <button
                     key={index}
