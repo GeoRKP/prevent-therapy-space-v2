@@ -82,7 +82,7 @@
         "h": "Appointments",
         "p": [
           "A booking is completed upon the confirmation you receive by email and calendar invitation. You must provide accurate and up-to-date contact details.",
-          "You may cancel your appointment online, through the cancellation link in your email, up to 2 hours before the scheduled time. After that limit, cancellation is possible only by phone.",
+          "You may cancel your appointment online, through the cancellation link in your email, up to 24 hours before the scheduled time. After that limit, cancellation is possible only by phone.",
           "The practice reserves the right to reschedule or cancel appointments for reasons of force majeure, notifying you promptly at the contact details you have provided."
         ]
       },
