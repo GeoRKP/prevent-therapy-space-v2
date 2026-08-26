@@ -13,6 +13,7 @@ import { RevealText } from "@/components/effects/kinetic-text";
 export default function ContactPage() {
   const { t, ready, i18n } = useTranslation(["contact", "common"]);
   const [submitting, setSubmitting] = useState(false);
+  const [consent, setConsent] = useState(false);
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -27,11 +28,12 @@ export default function ContactPage() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, locale: i18n.language || "el" }),
+        body: JSON.stringify({ ...form, consent, locale: i18n.language || "el" }),
       });
       if (!res.ok) throw new Error("Failed");
       toast.success(t("contact:form.success"));
       setForm({ name: "", email: "", phone: "", message: "" });
+      setConsent(false);
     } catch (err) {
       toast.error(t("contact:form.error"));
     } finally {
@@ -144,9 +146,30 @@ export default function ContactPage() {
                   onChange={handleChange("message")}
                   required
                 />
+                <label className="flex items-start gap-3 cursor-pointer pt-1">
+                  <input
+                    type="checkbox"
+                    required
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 accent-[#82d9b9] flex-shrink-0"
+                  />
+                  <span className="text-xs text-white/55 leading-relaxed">
+                    {ready ? t("contact:form.consentPrefix") : ""}{" "}
+                    <a
+                      href="/privacy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary-soft underline underline-offset-2 hover:text-primary-soft/80"
+                    >
+                      {ready ? t("contact:form.consentLink") : ""}
+                    </a>
+                    .
+                  </span>
+                </label>
                 <button
                   type="submit"
-                  disabled={submitting}
+                  disabled={submitting || !consent}
                   className="inline-flex items-center justify-center gap-2 w-full px-7 py-3.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors disabled:opacity-50"
                 >
                   <Send className="w-4 h-4" />

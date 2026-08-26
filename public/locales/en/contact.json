@@ -12,7 +12,7 @@
     "email": "Email",
     "phone": "Phone",
     "message": "Message",
-    "send": "Send",
+    "consentPrefix": "I consent to the processing of my details in order to respond to my message, in accordance with the",
     "success": "Your message has been sent successfully!",
     "error": "Something went wrong. Please try again."
   },

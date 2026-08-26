@@ -8,6 +8,8 @@ export async function GET() {
     { url: "/contact", priority: "0.8", changefreq: "monthly" },
     { url: "/faq", priority: "0.7", changefreq: "monthly" },
     { url: "/booking", priority: "0.9", changefreq: "weekly" },
+    { url: "/privacy", priority: "0.3", changefreq: "yearly" },
+    { url: "/terms", priority: "0.3", changefreq: "yearly" },
   ];
 
   const today = new Date().toISOString().split("T")[0];

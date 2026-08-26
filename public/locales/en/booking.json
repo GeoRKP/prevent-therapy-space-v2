@@ -25,6 +25,8 @@
     "email": "Email",
     "phone": "Phone",
     "notes": "Notes (optional)",
+    "consentPrefix": "I consent to the processing of my details for the purpose of this appointment, in accordance with the",
+    "consentLink": "Privacy Policy",
     "submit": "Confirm Appointment"
   },
   "success": {

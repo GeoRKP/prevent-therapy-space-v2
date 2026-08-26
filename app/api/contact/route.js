@@ -8,6 +8,8 @@ const schema = z.object({
   phone: z.string().min(5).max(30),
   message: z.string().min(5).max(3000),
   locale: z.enum(["el", "en"]).default("el"),
+  // Ρητή συναίνεση (GDPR) — υποχρεωτική για την αποστολή
+  consent: z.literal(true),
 });
 
 export async function POST(request) {

@@ -43,6 +43,7 @@ export default function BookingPage() {
     notes: "",
   });
   const [submitting, setSubmitting] = useState(false);
+  const [consent, setConsent] = useState(false);
 
   const locale = i18n.language === "en" ? "en-GB" : "el-GR";
 
@@ -119,6 +120,7 @@ export default function BookingPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...selection,
+          consent,
           locale: i18n.language === "en" ? "en" : "el",
         }),
       });
@@ -401,6 +403,28 @@ export default function BookingPage() {
                     setSelection((p) => ({ ...p, notes: e.target.value }))
                   }
                 />
+                <label className="flex items-start gap-3 cursor-pointer pt-1">
+                  <input
+                    type="checkbox"
+                    required
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 accent-[#82d9b9] flex-shrink-0"
+                  />
+                  <span className="text-xs text-white/55 leading-relaxed">
+                    {ready ? t("booking:form.consentPrefix") : ""}{" "}
+                    <a
+                      href="/privacy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary-soft underline underline-offset-2 hover:text-primary-soft/80"
+                    >
+                      {ready ? t("booking:form.consentLink") : ""}
+                    </a>
+                    .
+                  </span>
+                </label>
+
                 <div className="flex gap-3 pt-2">
                   <button
                     type="button"
@@ -412,7 +436,7 @@ export default function BookingPage() {
                   </button>
                   <button
                     type="submit"
-                    disabled={submitting}
+                    disabled={submitting || !consent}
                     className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary-soft text-primary-soft-foreground font-semibold text-sm hover:bg-primary-soft/90 transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-soft/60"
                   >
                     <CalendarCheck className="w-4 h-4" />

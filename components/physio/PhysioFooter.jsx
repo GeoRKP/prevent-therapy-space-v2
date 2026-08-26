@@ -167,7 +167,14 @@ export function PhysioFooter() {
           <p className="text-white/35 text-xs">
             {t("footer:copyright", { year: new Date().getFullYear() })}
           </p>
-          {/* Privacy/Terms: εκτός μέχρι να γραφτούν οι σελίδες — βλ. ΕΚΚΡΕΜΟΤΗΤΕΣ.md */}
+          <div className="flex gap-5 text-white/35 text-xs">
+            <Link href="/privacy" className="hover:text-white transition-colors">
+              {t("footer:legal.privacy")}
+            </Link>
+            <Link href="/terms" className="hover:text-white transition-colors">
+              {t("footer:legal.terms")}
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

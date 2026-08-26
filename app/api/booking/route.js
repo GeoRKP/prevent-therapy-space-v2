@@ -14,6 +14,8 @@ const schema = z.object({
   phone: z.string().min(5).max(30),
   notes: z.string().max(1000).optional().default(""),
   locale: z.enum(["el", "en"]).optional().default("el"),
+  // Ρητή συναίνεση (GDPR) — υποχρεωτική για την καταχώρηση
+  consent: z.literal(true),
 });
 
 export async function POST(request) {
