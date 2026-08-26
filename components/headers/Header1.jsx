@@ -94,16 +94,16 @@ export default function Header1() {
             <div className="flex items-center gap-3">
               <div className="hidden lg:flex items-center gap-3">
                 <a
-                  href="tel:+302101234567"
+                  href="tel:+306972952263"
                   className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/[0.04] transition-colors"
                 >
                   <Phone className="w-4 h-4 text-primary-soft" />
                   <span className="hidden xl:inline">
-                    {ready ? t("header:contact.phone") : "210 123 4567"}
+                    {ready ? t("header:contact.phone") : "697 295 2263"}
                   </span>
                 </a>
                 <a
-                  href="viber://chat?number=%2B302101234567"
+                  href="viber://chat?number=%2B306972952263"
                   className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/[0.04] transition-colors"
                 >
                   <MessageCircle className="w-4 h-4 text-primary-soft" />
@@ -227,7 +227,7 @@ export default function Header1() {
                 </Link>
                 <div className="flex gap-3">
                   <a
-                    href="tel:+302101234567"
+                    href="tel:+306972952263"
                     className="flex items-center justify-center gap-3 flex-1 py-3.5 rounded-full text-white/70 border border-white/10 hover:border-primary/30 hover:text-white transition-colors"
                   >
                     <Phone className="w-4 h-4 text-primary-soft" />
@@ -236,7 +236,7 @@ export default function Header1() {
                     </span>
                   </a>
                   <a
-                    href="viber://chat?number=%2B302101234567"
+                    href="viber://chat?number=%2B306972952263"
                     className="flex items-center justify-center gap-3 flex-1 py-3.5 rounded-full text-white/70 border border-white/10 hover:border-primary/30 hover:text-white transition-colors"
                   >
                     <MessageCircle className="w-4 h-4 text-primary-soft" />

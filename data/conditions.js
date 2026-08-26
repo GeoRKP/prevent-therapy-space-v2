@@ -21,9 +21,9 @@ export const conditions = [
 ];
 
 export const contactInfo = {
-  phone: "210 123 4567",
+  phone: "697 295 2263",
   // Το Viber χρησιμοποιεί τον ίδιο αριθμό με το τηλέφωνο μέχρι να δοθεί ξεχωριστός.
-  viberHref: "viber://chat?number=%2B302101234567",
+  viberHref: "viber://chat?number=%2B306972952263",
   email: "info@preventtherapy.gr",
   address: {
     el: "Θεοτοκοπούλου 55, Πατήσια, Αθήνα",

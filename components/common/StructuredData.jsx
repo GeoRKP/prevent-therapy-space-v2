@@ -29,7 +29,7 @@ export default function StructuredData() {
         addressRegion: "Attica",
         addressCountry: "GR",
       },
-      telephone: "+302101234567",
+      telephone: "+306972952263",
       email: "info@preventtherapy.gr",
       openingHoursSpecification: [
         {
