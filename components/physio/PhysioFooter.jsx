@@ -24,7 +24,7 @@ export function PhysioFooter() {
   return (
     <footer className="relative bg-[#040609] text-white overflow-hidden border-t border-white/[0.06]">
       <div className="relative z-10 container">
-        <div className="py-16 lg:py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
+        <div className="py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           <div className="lg:col-span-1">
             <Link href="/" className="inline-flex items-center gap-3 mb-6">
               <Image

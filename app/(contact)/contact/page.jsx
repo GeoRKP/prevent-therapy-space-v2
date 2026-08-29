@@ -55,7 +55,7 @@ export default function ContactPage() {
         backgroundImage="/images/clinic/office-photo.jpg"
       />
 
-      <section className="relative py-24 lg:py-32 overflow-hidden bg-[#050810]">
+      <section className="relative section-pad overflow-hidden bg-[#050810]">
         <div className="container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-6xl mx-auto">
             {/* Left — info */}

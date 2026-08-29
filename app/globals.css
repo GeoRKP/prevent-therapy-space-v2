@@ -178,6 +178,19 @@
   }
 }
 
+/* Κάθετος ρυθμός sections — ΕΝΙΑΙΑ κλίμακα για όλο το site.
+   Κάθε section χρησιμοποιεί .section-pad (όχι δικά του py-*), ώστε το κενό
+   μεταξύ δύο διαδοχικών sections να είναι παντού σταθερό:
+   128px σε κινητό (2×64) και 192px σε desktop (2×96). */
+.section-pad {
+  padding-block: 4rem;
+}
+@media (min-width: 1024px) {
+  .section-pad {
+    padding-block: 6rem;
+  }
+}
+
 ::selection {
   background-color: hsl(var(--primary) / 0.25);
   color: hsl(var(--foreground));

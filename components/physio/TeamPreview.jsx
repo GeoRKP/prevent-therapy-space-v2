@@ -12,7 +12,7 @@ export function TeamPreview() {
   const lang = i18n.language === "en" ? "en" : "el";
 
   return (
-    <section className="relative py-28 lg:py-36 overflow-hidden bg-[#050810]">
+    <section className="relative section-pad overflow-hidden bg-[#050810]">
       <div className="container relative z-10">
         <SectionHeading
           label={t("home:team.label")}

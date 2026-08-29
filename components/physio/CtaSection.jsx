@@ -12,7 +12,7 @@ export function CtaSection() {
   if (!ready) return null;
 
   return (
-    <section className="relative py-20 lg:py-28 overflow-hidden bg-[#050810]">
+    <section className="relative section-pad overflow-hidden bg-[#050810]">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

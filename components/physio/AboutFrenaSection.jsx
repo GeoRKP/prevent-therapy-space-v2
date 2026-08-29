@@ -19,7 +19,7 @@ export function AboutFrenaSection() {
   const points = t("aboutSection.points", { returnObjects: true }) || [];
 
   return (
-    <section className="relative py-28 lg:py-36 overflow-hidden bg-[#050810]">
+    <section className="relative section-pad overflow-hidden bg-[#050810]">
       <div className="container relative z-10">
         <div className="mb-16 lg:mb-20">
           <RevealText>

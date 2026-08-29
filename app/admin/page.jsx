@@ -55,7 +55,7 @@ export default function AdminPage() {
   }, []);
 
   return (
-    <section className="relative min-h-screen py-28 lg:py-32 bg-[#050810]">
+    <section className="relative min-h-screen pt-28 lg:pt-32 pb-16 lg:pb-24 bg-[#050810]">
       <div className="container relative z-10 max-w-4xl">
         {authed === null && (
           <div className="flex justify-center py-20">

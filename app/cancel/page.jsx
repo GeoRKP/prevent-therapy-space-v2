@@ -105,7 +105,7 @@ function CancelContent() {
         backgroundImage="/images/clinic/beautiful-chropractor-bed-photo.jpg"
       />
 
-      <section className="relative py-20 lg:py-28 overflow-hidden bg-[#050810]">
+      <section className="relative section-pad overflow-hidden bg-[#050810]">
         <div className="container relative z-10 max-w-xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

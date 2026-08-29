@@ -13,7 +13,7 @@ export function AthletesSection() {
   const athletes = t("athletes.items", { returnObjects: true }) || [];
 
   return (
-    <section className="relative py-20 lg:py-28 overflow-hidden bg-[#070b14]">
+    <section className="relative section-pad overflow-hidden bg-[#070b14]">
       <div className="container relative z-10">
         <div className="mb-12">
           <RevealText>

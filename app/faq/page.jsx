@@ -29,7 +29,7 @@ export default function FaqPage() {
         subtitle={ready ? t("faq:subtitle") : ""}
       />
 
-      <section className="relative py-24 lg:py-32 overflow-hidden bg-[#050810]">
+      <section className="relative section-pad overflow-hidden bg-[#050810]">
         <div className="container relative z-10 max-w-3xl">
           {/* Search */}
           <motion.div
