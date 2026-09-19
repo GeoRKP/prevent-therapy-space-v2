@@ -43,3 +43,6 @@ dev.log
 
 vercel-env-paste.txt
 email-previews/
+
+# Το .env.example ΠΡΕΠΕΙ να μπαίνει στο repo (οδηγός setup για τον πελάτη)
+!.env.example

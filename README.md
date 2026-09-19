@@ -16,14 +16,14 @@ npm run google:setup   # one-time: sign in with the clinic's Google account
 npm run dev
 ```
 
-There is **no database** — bookings live entirely in the physiotherapist's Google Calendar, and the contact form forwards messages by email (Resend).
+Bookings live entirely in the physiotherapist's Google Calendar; a tiny Neon Postgres table only stores the admin booking settings. The contact form and all booking emails go through Resend. Handover / pending items: see the Greek pending-items file in the repo root.
 
 ## Structure
 
 - `app/` — Next.js App Router (JSX). Route groups: `(about)`, `(contact)`, `(services)`. Top-level: `booking/`, `faq/`, `api/`, `not-found.jsx`, `sitemap.xml/`.
 - `components/headers/Header1.jsx` — main navigation.
 - `components/physio/*` — page sections (Hero, ServicesGrid, HowItWorks, WhyChooseUs, TeamPreview, ConditionsSection, CtaSection, PhysioFooter, MotionWrapper, SectionHeading).
-- `components/common/*` — HeadManager (per-page meta), LanguageDetector, StructuredData.
+- `components/common/*` — AppShell (client shell: i18n, header/footer, toasts), HeadManager (client-side meta refresh on language change), LanguageDetector, StructuredData.
 - `components/ui/*` — Radix-based primitives (button, input, etc.) + LanguageSwitcher.
 - `data/services.js`, `data/team.js`, `data/conditions.js` — static service/team/condition definitions.
 - `lib/i18n.js` — i18next setup (el + en).
@@ -57,11 +57,13 @@ There is **no database** — bookings live entirely in the physiotherapist's Goo
 
 No database: Google Calendar is the single source of truth. The physiotherapist registers **once** with `npm run google:setup` (OAuth consent → refresh token in `.env.local` / production env vars). Configuration lives in `data/booking.js` (45-minute appointments by default, working hours per weekday, 2h min notice, 30-day window). Double-booking is prevented by re-checking freeBusy at booking time and returning `409 slot_taken`.
 
+## SEO / metadata
+
+`app/layout.jsx` is a **server component** (default metadata, JSON-LD) and every route folder has a `layout.jsx` exporting its own metadata via `lib/seo.js` — pages themselves stay client components. `lib/site.js` is the single source for the public URL (`NEXT_PUBLIC_SITE_URL`, production `https://www.preventtherapy.gr`). `components/common/HeadManager.jsx` only re-writes the same tags on the client when the visitor switches language.
+
 ## What's NOT implemented yet
 
 - Theme toggle (dark mode is reachable only by manually adding `.dark` to `<html>`).
-- Privacy/Terms static pages.
-- Sitemap and Open Graph image fine-tuning.
 
 ## Origin
 

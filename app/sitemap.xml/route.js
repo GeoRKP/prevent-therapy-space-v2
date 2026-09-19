@@ -1,5 +1,7 @@
+import { SITE_URL } from "@/lib/site";
+
 export async function GET() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://preventtherapy.gr";
+  const baseUrl = SITE_URL;
 
   const pages = [
     { url: "", priority: "1.0", changefreq: "weekly" },

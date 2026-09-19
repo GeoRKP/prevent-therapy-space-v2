@@ -4,7 +4,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://preventtherapy.gr/sitemap.xml
+Sitemap: https://www.preventtherapy.gr/sitemap.xml
 
 # Disallow admin or private areas
 Disallow: /api/
