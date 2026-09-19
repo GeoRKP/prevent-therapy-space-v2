@@ -7,7 +7,9 @@ import { Star, ArrowUpRight } from "lucide-react";
 import { RevealText } from "@/components/effects/kinetic-text";
 import { reviews, googleReviews } from "@/data/reviews";
 
-export function AboutFrenaSection() {
+// asPageIntro: στη σελίδα «Σχετικά» ο PageHero λέει ήδη «Στόχος μας…» —
+// η ενότητα ξεκινά κατευθείαν από το περιεχόμενο, χωρίς δικό της heading.
+export function AboutFrenaSection({ asPageIntro = false }) {
   const { t, ready, i18n } = useTranslation("home");
   if (!ready) return null;
 
@@ -21,6 +23,7 @@ export function AboutFrenaSection() {
   return (
     <section className="relative section-pad overflow-hidden bg-[#050810]">
       <div className="container relative z-10">
+        {!asPageIntro && (
         <div className="mb-16 lg:mb-20">
           <RevealText>
             <div className="flex items-center gap-3 mb-5">
@@ -49,6 +52,7 @@ export function AboutFrenaSection() {
             </RevealText>
           </div>
         </div>
+        )}
 
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-10">
           <div className="lg:col-span-5 space-y-4">

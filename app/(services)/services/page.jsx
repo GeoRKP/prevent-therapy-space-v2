@@ -21,7 +21,7 @@ export default function ServicesPage() {
         backgroundImage="/images/clinic/inner-space-and-equipment.jpg"
       />
 
-      <ServicesGrid />
+      <ServicesGrid asPageIntro />
       <ConditionsSection />
       <CtaSection />
     </>

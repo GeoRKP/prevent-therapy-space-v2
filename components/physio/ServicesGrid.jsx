@@ -25,7 +25,9 @@ const iconMap = {
   "uil-box": ScanLine,
 };
 
-export function ServicesGrid() {
+// asPageIntro: όταν η ενότητα μπαίνει αμέσως κάτω από PageHero, ο τίτλος της
+// σελίδας είναι ήδη ο τίτλος της ενότητας — δεν επαναλαμβάνεται.
+export function ServicesGrid({ asPageIntro = false }) {
   const { t, ready } = useTranslation(["services", "contact"]);
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
@@ -36,11 +38,13 @@ export function ServicesGrid() {
   return (
     <section className="relative section-pad overflow-hidden bg-[#050810]">
       <div className="container relative z-10">
-        <SectionHeading
-          label={t("services:servicesBadge")}
-          title={t("services:title")}
-          subtitle={t("services:subtitle")}
-        />
+        {!asPageIntro && (
+          <SectionHeading
+            label={t("services:servicesBadge")}
+            title={t("services:title")}
+            subtitle={t("services:subtitle")}
+          />
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {services.map((service, index) => {

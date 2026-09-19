@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Hand, Stethoscope, HeartHandshake, Award } from "lucide-react";
+import { Hand, Target, HeartHandshake, Award } from "lucide-react";
 import { RevealText } from "@/components/effects/kinetic-text";
 
-const featureIcons = [Hand, Stethoscope, HeartHandshake];
+const featureIcons = [Hand, Target, HeartHandshake];
 
 export function WhyChooseUs() {
   const { t, ready } = useTranslation("home");
