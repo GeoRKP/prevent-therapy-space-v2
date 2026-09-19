@@ -1,13 +1,16 @@
 "use client";
 
 // Πίνακας διαχείρισης θεραπευτή: ραντεβού (ακύρωση/μετάθεση), ωράριο &
-// ρυθμίσεις κρατήσεων, κλειστές ημέρες. Ελληνικά μόνο — εσωτερικό εργαλείο.
+// ρυθμίσεις κρατήσεων, κλειστές ημέρες, σύνδεση Google Calendar. Ελληνικά μόνο —
+// εσωτερικό εργαλείο.
 
 import { useEffect, useMemo, useState } from "react";
 import {
   CalendarDays,
   CalendarX,
+  CalendarCheck,
   Clock,
+  Link2,
   Lock,
   LogOut,
   Phone,
@@ -16,6 +19,7 @@ import {
   RefreshCw,
   Settings,
   Trash2,
+  Unplug,
   X,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -117,7 +121,10 @@ function Login({ onSuccess }) {
 }
 
 function Dashboard({ onLogout }) {
-  const [tab, setTab] = useState("appointments");
+  // Μετά την επιστροφή από τη Google (?google=…) ανοίγει απευθείας η καρτέλα της
+  const [tab, setTab] = useState(() =>
+    new URLSearchParams(window.location.search).has("google") ? "google" : "appointments"
+  );
 
   const logout = async () => {
     await fetch("/api/admin/login", { method: "DELETE" }).catch(() => {});
@@ -128,6 +135,7 @@ function Dashboard({ onLogout }) {
     { key: "appointments", label: "Ραντεβού", icon: CalendarDays },
     { key: "settings", label: "Ωράριο & Ρυθμίσεις", icon: Settings },
     { key: "closures", label: "Κλειστές ημέρες", icon: CalendarX },
+    { key: "google", label: "Google Calendar", icon: CalendarCheck },
   ];
 
   return (
@@ -163,6 +171,7 @@ function Dashboard({ onLogout }) {
       {tab === "appointments" && <AppointmentsTab />}
       {tab === "settings" && <SettingsTab />}
       {tab === "closures" && <ClosuresTab />}
+      {tab === "google" && <GoogleTab />}
     </div>
   );
 }
@@ -706,6 +715,156 @@ function ClosuresTab() {
 }
 
 /* ------------------------------- Κοινά UI ------------------------------- */
+
+/* --------------------------- Google Calendar --------------------------- */
+
+function GoogleTab() {
+  const [status, setStatus] = useState(null);
+  const [error, setError] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [confirming, setConfirming] = useState(false);
+
+  const load = async () => {
+    setStatus(null);
+    setError(false);
+    try {
+      const res = await fetch("/api/admin/google/status", { cache: "no-store" });
+      if (!res.ok) throw new Error();
+      setStatus(await res.json());
+    } catch {
+      setError(true);
+    }
+  };
+
+  useEffect(() => {
+    // Επιστροφή από τη Google: /admin?google=connected|denied|error&reason=…
+    const params = new URLSearchParams(window.location.search);
+    const result = params.get("google");
+    if (result) {
+      if (result === "connected") toast.success("Το Google Calendar συνδέθηκε.");
+      else if (result === "denied") toast.error("Η σύνδεση ακυρώθηκε στη σελίδα της Google.");
+      else toast.error(`Η σύνδεση απέτυχε (${params.get("reason") || "άγνωστο σφάλμα"}).`);
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+    load();
+  }, []);
+
+  const disconnect = async () => {
+    setBusy(true);
+    try {
+      const res = await fetch("/api/admin/google/disconnect", { method: "POST" });
+      if (res.ok) {
+        toast.success("Η σύνδεση αφαιρέθηκε.");
+        load();
+      } else toast.error("Η αποσύνδεση απέτυχε.");
+    } catch {
+      toast.error("Η αποσύνδεση απέτυχε.");
+    } finally {
+      setBusy(false);
+      setConfirming(false);
+    }
+  };
+
+  if (error) return <LoadError onRetry={load} />;
+  if (!status) return <Spinner />;
+
+  const healthy = status.connected && status.probe?.ok;
+  const connectedAt = status.connectedAt
+    ? new Date(status.connectedAt).toLocaleDateString("el-GR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    : null;
+
+  return (
+    <div className="space-y-6">
+      <Card>
+        <h2 className="text-sm font-bold text-white mb-1">Σύνδεση Google Calendar</h2>
+        <p className="text-xs text-white/40 mb-5">
+          Τα ραντεβού γράφονται στο κύριο ημερολόγιο του συνδεδεμένου λογαριασμού και οι
+          προσκλήσεις προς τους ασθενείς στέλνονται από αυτόν. Συνδέστε τον λογαριασμό Google
+          του ιατρείου.
+        </p>
+
+        <div className="flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-[#050810] p-4 mb-5">
+          <span
+            className={cn(
+              "mt-1.5 w-2.5 h-2.5 rounded-full flex-shrink-0",
+              !status.connected ? "bg-red-400" : healthy ? "bg-primary-soft" : "bg-amber-400"
+            )}
+          />
+          <div className="text-sm">
+            {!status.connected && (
+              <p className="text-white font-semibold">
+                Δεν υπάρχει σύνδεση — οι online κρατήσεις δεν λειτουργούν.
+              </p>
+            )}
+            {status.connected && status.source === "db" && (
+              <>
+                <p className="text-white font-semibold">
+                  Συνδεδεμένο: {status.email || "λογαριασμός Google"}
+                </p>
+                {connectedAt && (
+                  <p className="text-white/45 text-xs mt-0.5">Από {connectedAt}</p>
+                )}
+              </>
+            )}
+            {status.connected && status.source === "env" && (
+              <>
+                <p className="text-white font-semibold">Συνδεδεμένο μέσω ρύθμισης του server</p>
+                <p className="text-white/45 text-xs mt-0.5">
+                  Προσωρινή σύνδεση από την κατασκευή του site. Συνδέστε τον λογαριασμό του
+                  ιατρείου για να την αντικαταστήσετε.
+                </p>
+              </>
+            )}
+            {status.connected && status.probe && !status.probe.ok && (
+              <p className="text-amber-300/90 text-xs mt-2">
+                Η Google δεν δέχεται πλέον αυτή τη σύνδεση — συνδεθείτε ξανά.
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-3">
+          <a href="/api/admin/google/connect" className={btnPrimary}>
+            <Link2 className="w-4 h-4" />
+            {status.connected ? "Σύνδεση άλλου λογαριασμού" : "Σύνδεση λογαριασμού Google"}
+          </a>
+
+          {status.source === "db" && !confirming && (
+            <button onClick={() => setConfirming(true)} disabled={busy} className={btnGhost}>
+              <Unplug className="w-3.5 h-3.5" />
+              Αποσύνδεση
+            </button>
+          )}
+          {status.source === "db" && confirming && (
+            <>
+              <button
+                onClick={disconnect}
+                disabled={busy}
+                className={cn(btnGhost, "border-red-400/40 text-red-300 hover:border-red-400")}
+              >
+                Επιβεβαίωση αποσύνδεσης
+              </button>
+              <button onClick={() => setConfirming(false)} disabled={busy} className={btnGhost}>
+                Άκυρο
+              </button>
+            </>
+          )}
+        </div>
+
+        <p className="text-[11px] text-white/35 mt-5 leading-relaxed">
+          Η Google ζητά άδεια μόνο για τα ραντεβού (events) και τη διαθεσιμότητα (free/busy) του
+          ημερολογίου. Αν εμφανιστεί η οθόνη «Google hasn&apos;t verified this app», επιλέξτε
+          Advanced → Go to PREVENT Therapy Space.
+        </p>
+      </Card>
+    </div>
+  );
+}
+
 
 function Card({ children }) {
   return (
