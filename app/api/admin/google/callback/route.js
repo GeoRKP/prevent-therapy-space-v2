@@ -7,6 +7,7 @@ import {
   verifyState,
   exchangeCode,
   clearStateCookieHeader,
+  missingScopes,
 } from "@/lib/google-oauth";
 import { saveGoogleConnection } from "@/lib/google-auth";
 
@@ -36,8 +37,11 @@ export async function GET(request) {
   }
 
   try {
-    const { refreshToken, email } = await exchangeCode(code);
+    const { refreshToken, email, scope } = await exchangeCode(code);
     if (!refreshToken) return backToAdmin("error", "no_refresh_token");
+    // Η Google επιτρέπει στον χρήστη να αφήσει ατσέκαριστα τα δικαιώματα ημερολογίου —
+    // τότε το token είναι άχρηστο και ΔΕΝ αποθηκεύεται (θα «έκρυβε» το fallback που δουλεύει).
+    if (missingScopes(scope).length) return backToAdmin("error", "scopes");
     await saveGoogleConnection({ refreshToken, email });
     return backToAdmin("connected");
   } catch (err) {

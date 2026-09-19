@@ -743,6 +743,11 @@ function GoogleTab() {
     if (result) {
       if (result === "connected") toast.success("Το Google Calendar συνδέθηκε.");
       else if (result === "denied") toast.error("Η σύνδεση ακυρώθηκε στη σελίδα της Google.");
+      else if (params.get("reason") === "scopes")
+        toast.error(
+          "Η σύνδεση δεν πήρε δικαιώματα ημερολογίου. Συνδεθείτε ξανά και στην οθόνη της Google επιλέξτε όλα τα πλαίσια.",
+          { duration: 12000 }
+        );
       else toast.error(`Η σύνδεση απέτυχε (${params.get("reason") || "άγνωστο σφάλμα"}).`);
       window.history.replaceState(null, "", window.location.pathname);
     }
@@ -821,12 +826,19 @@ function GoogleTab() {
             )}
             {status.connected && status.probe && !status.probe.ok && (
               <p className="text-amber-300/90 text-xs mt-2">
-                Η Google δεν δέχεται πλέον αυτή τη σύνδεση — συνδεθείτε ξανά.
+                {status.probe.missingScopes?.length
+                  ? "Λείπουν τα δικαιώματα ημερολογίου (ραντεβού / διαθεσιμότητα). Συνδεθείτε ξανά και στην οθόνη της Google επιλέξτε όλα τα πλαίσια."
+                  : "Η Google δεν δέχεται πλέον αυτή τη σύνδεση — συνδεθείτε ξανά."}
               </p>
             )}
           </div>
         </div>
 
+        <p className="text-xs text-amber-200/80 mb-4 leading-relaxed">
+          Στην οθόνη αδειών της Google επιλέξτε <strong>όλα τα πλαίσια</strong> («Select all» /
+          «Επιλογή όλων»). Αν μείνει κάποιο ατσέκαριστο, η σύνδεση δεν μπορεί να διαβάσει ούτε να
+          γράψει ραντεβού και απορρίπτεται.
+        </p>
         <div className="flex flex-wrap gap-3">
           <a href="/api/admin/google/connect" className={btnPrimary}>
             <Link2 className="w-4 h-4" />
