@@ -36,7 +36,7 @@ export function ServicesGrid({ asPageIntro = false }) {
   const services = t("services:services", { returnObjects: true }) || [];
 
   return (
-    <section className="relative section-pad overflow-hidden bg-surface">
+    <section className="relative section-pad overflow-hidden bg-[#050810]">
       <div className="container relative z-10">
         {!asPageIntro && (
           <SectionHeading
@@ -62,20 +62,20 @@ export function ServicesGrid({ asPageIntro = false }) {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="group relative h-full bg-surface-1 hover:bg-surface-2 border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-7 lg:p-8 transition-all duration-500">
+                <div className="group relative h-full bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-7 lg:p-8 transition-all duration-500">
                   <div className="flex items-start justify-between mb-5">
                     <div className="w-12 h-12 rounded-xl bg-primary-soft/10 group-hover:bg-primary-soft/15 flex items-center justify-center transition-colors">
                       <Icon className="w-5 h-5 text-primary-soft" />
                     </div>
-                    <span className="text-3xl font-bold text-paper/[0.04] group-hover:text-primary-soft/15 transition-colors">
+                    <span className="text-3xl font-bold text-white/[0.04] group-hover:text-primary-soft/15 transition-colors">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
 
-                  <h3 className="text-lg lg:text-xl font-bold text-paper mb-2.5 group-hover:text-primary-soft transition-colors">
+                  <h3 className="text-lg lg:text-xl font-bold text-white mb-2.5 group-hover:text-primary-soft transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-paper/70 mb-5 leading-relaxed text-sm">
+                  <p className="text-white/55 mb-5 leading-relaxed text-sm">
                     {service.description}
                   </p>
 
@@ -84,7 +84,7 @@ export function ServicesGrid({ asPageIntro = false }) {
                       {service.features.map((feature, idx) => (
                         <li
                           key={idx}
-                          className="flex items-start gap-2.5 text-sm text-paper/70 group-hover:text-paper/75 transition-colors"
+                          className="flex items-start gap-2.5 text-sm text-white/55 group-hover:text-white/65 transition-colors"
                         >
                           <CheckCircle2 className="w-4 h-4 text-primary-soft/80 mt-0.5 flex-shrink-0" />
                           <span>{feature}</span>

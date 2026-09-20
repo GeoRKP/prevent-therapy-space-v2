@@ -29,7 +29,7 @@ export default function FaqPage() {
         subtitle={ready ? t("faq:subtitle") : ""}
       />
 
-      <section className="relative section-pad overflow-hidden bg-surface">
+      <section className="relative section-pad overflow-hidden bg-[#050810]">
         <div className="container relative z-10 max-w-3xl">
           {/* Search */}
           <motion.div
@@ -38,13 +38,13 @@ export default function FaqPage() {
             viewport={{ once: true }}
             className="relative mb-8"
           >
-            <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-paper/44" />
+            <Search className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-white/30" />
             <input
               type="text"
               placeholder={ready ? t("faq:search") : ""}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="w-full pl-14 pr-5 py-4 rounded-2xl bg-surface-1 border border-white/[0.06] focus:border-primary/50 outline-none text-base text-paper placeholder:text-paper/44 transition-all"
+              className="w-full pl-14 pr-5 py-4 rounded-2xl bg-[#070b14] border border-white/[0.06] focus:border-primary/50 outline-none text-base text-white placeholder:text-white/30 transition-all"
             />
           </motion.div>
 
@@ -59,14 +59,14 @@ export default function FaqPage() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.05 }}
                   onClick={() => setOpenIndex(isOpen ? null : i)}
-                  className="group w-full text-left bg-surface-1 hover:bg-surface-2 border border-white/[0.06] hover:border-primary/30 rounded-2xl transition-all overflow-hidden"
+                  className="group w-full text-left bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 rounded-2xl transition-all overflow-hidden"
                 >
                   <div className="flex items-start justify-between gap-4 p-5 lg:p-7">
                     <div className="flex items-start gap-4 flex-1">
-                      <span className="text-xs font-mono text-paper/44 group-hover:text-primary transition-colors mt-1">
+                      <span className="text-xs font-mono text-white/30 group-hover:text-primary transition-colors mt-1">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <h3 className="font-bold text-paper group-hover:text-primary transition-colors">
+                      <h3 className="font-bold text-white group-hover:text-primary transition-colors">
                         {item.q}
                       </h3>
                     </div>
@@ -84,7 +84,7 @@ export default function FaqPage() {
                       className="overflow-hidden"
                     >
                       <div className="px-5 pb-5 lg:px-7 lg:pb-7 pl-14 lg:pl-16">
-                        <p className="text-paper/70 leading-relaxed">
+                        <p className="text-white/55 leading-relaxed">
                           {item.a}
                         </p>
                       </div>
@@ -99,14 +99,14 @@ export default function FaqPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-12 p-8 rounded-3xl bg-surface-1 border border-white/[0.06] text-center"
+            className="mt-12 p-8 rounded-3xl bg-[#070b14] border border-white/[0.06] text-center"
           >
-            <h3 className="text-xl font-bold text-paper mb-3">
+            <h3 className="text-xl font-bold text-white mb-3">
               {ready ? t("faq:noAnswer") : ""}
             </h3>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 mt-2 rounded-full bg-primary text-paper font-semibold text-sm hover:bg-primary/90 transition-colors"
+              className="inline-flex items-center gap-2 px-7 py-3.5 mt-2 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors"
             >
               {ready ? t("faq:contact") : "Contact"}
               <ArrowUpRight className="w-4 h-4" />

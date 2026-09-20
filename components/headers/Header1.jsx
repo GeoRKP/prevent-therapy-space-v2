@@ -53,8 +53,8 @@ export default function Header1() {
           className={cn(
             "absolute inset-0 transition-all duration-500",
             isScrolled
-              ? "bg-surface/95 backdrop-blur-xl border-b border-white/[0.06]"
-              : "bg-gradient-to-b from-surface/85 to-transparent"
+              ? "bg-[#050810]/95 backdrop-blur-xl border-b border-white/[0.06]"
+              : "bg-gradient-to-b from-[#050810]/85 to-transparent"
           )}
         />
 
@@ -82,7 +82,7 @@ export default function Header1() {
                       "relative px-4 py-2 rounded-full text-sm font-medium transition-colors duration-300",
                       isActive
                         ? "text-primary-soft bg-primary-soft/10"
-                        : "text-paper/78 hover:text-paper hover:bg-white/[0.04]"
+                        : "text-white/70 hover:text-white hover:bg-white/[0.04]"
                     )}
                   >
                     {ready ? t(`common:navigation.${link.key}`) : link.key}
@@ -95,7 +95,7 @@ export default function Header1() {
               <div className="hidden lg:flex items-center gap-3">
                 <a
                   href="tel:+306972952263"
-                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-paper/78 hover:text-paper hover:bg-white/[0.04] transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/[0.04] transition-colors"
                 >
                   <Phone className="w-4 h-4 text-primary-soft" />
                   <span className="hidden xl:inline">
@@ -104,7 +104,7 @@ export default function Header1() {
                 </a>
                 <a
                   href="viber://chat?number=%2B306972952263"
-                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-paper/78 hover:text-paper hover:bg-white/[0.04] transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/[0.04] transition-colors"
                 >
                   <MessageCircle className="w-4 h-4 text-primary-soft" />
                   <span className="hidden xl:inline">Viber</span>
@@ -121,7 +121,7 @@ export default function Header1() {
 
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden relative z-[1002] w-10 h-10 flex items-center justify-center text-paper/85"
+                className="lg:hidden relative z-[1002] w-10 h-10 flex items-center justify-center text-white/80"
                 aria-label={
                   isMobileMenuOpen
                     ? t("header:aria.closeMenu")
@@ -161,11 +161,11 @@ export default function Header1() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[1001] bg-surface"
+            className="fixed inset-0 z-[1001] bg-[#050810]"
           >
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className="absolute top-5 right-5 z-[1002] w-12 h-12 flex items-center justify-center text-paper/85 hover:text-primary-soft transition-colors bg-white/5 hover:bg-white/10 rounded-full"
+              className="absolute top-5 right-5 z-[1002] w-12 h-12 flex items-center justify-center text-white/80 hover:text-primary-soft transition-colors bg-white/5 hover:bg-white/10 rounded-full"
               aria-label={t("header:aria.closeMenu")}
             >
               <X className="w-5 h-5" />
@@ -190,7 +190,7 @@ export default function Header1() {
                             "group flex items-center justify-between py-4 px-5 rounded-2xl transition-colors",
                             isActive
                               ? "bg-primary-soft/10 text-primary-soft"
-                              : "text-paper/88 hover:bg-white/[0.04]"
+                              : "text-white/85 hover:bg-white/[0.04]"
                           )}
                         >
                           <span className="text-xl font-semibold tracking-tight">
@@ -201,7 +201,7 @@ export default function Header1() {
                               "w-5 h-5 transition-all",
                               isActive
                                 ? "text-primary-soft"
-                                : "text-paper/44 group-hover:text-paper/72 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                                : "text-white/30 group-hover:text-white/60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                             )}
                           />
                         </Link>
@@ -228,7 +228,7 @@ export default function Header1() {
                 <div className="flex gap-3">
                   <a
                     href="tel:+306972952263"
-                    className="flex items-center justify-center gap-3 flex-1 py-3.5 rounded-full text-paper/78 border border-white/10 hover:border-primary/30 hover:text-paper transition-colors"
+                    className="flex items-center justify-center gap-3 flex-1 py-3.5 rounded-full text-white/70 border border-white/10 hover:border-primary/30 hover:text-white transition-colors"
                   >
                     <Phone className="w-4 h-4 text-primary-soft" />
                     <span className="text-sm font-medium">
@@ -237,7 +237,7 @@ export default function Header1() {
                   </a>
                   <a
                     href="viber://chat?number=%2B306972952263"
-                    className="flex items-center justify-center gap-3 flex-1 py-3.5 rounded-full text-paper/78 border border-white/10 hover:border-primary/30 hover:text-paper transition-colors"
+                    className="flex items-center justify-center gap-3 flex-1 py-3.5 rounded-full text-white/70 border border-white/10 hover:border-primary/30 hover:text-white transition-colors"
                   >
                     <MessageCircle className="w-4 h-4 text-primary-soft" />
                     <span className="text-sm font-medium">Viber</span>

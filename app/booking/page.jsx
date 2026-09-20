@@ -157,7 +157,7 @@ export default function BookingPage() {
         backgroundImage="/images/clinic/beautiful-chropractor-bed-photo.jpg"
       />
 
-      <section className="relative section-pad overflow-hidden bg-surface">
+      <section className="relative section-pad overflow-hidden bg-[#050810]">
         <div className="container relative z-10 max-w-4xl">
           {step === 1 && (
             <motion.div
@@ -166,11 +166,11 @@ export default function BookingPage() {
               transition={{ duration: 0.5 }}
             >
               <div className="flex items-end justify-between gap-4 mb-8">
-                <h2 className="text-2xl lg:text-3xl font-bold text-paper tracking-tight">
+                <h2 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
                   {ready ? t("booking:steps.datetime") : ""}
                 </h2>
                 {availability && (
-                  <span className="inline-flex items-center gap-1.5 text-xs text-paper/70 flex-shrink-0 pb-1">
+                  <span className="inline-flex items-center gap-1.5 text-xs text-white/55 flex-shrink-0 pb-1">
                     <Clock className="w-3.5 h-3.5 text-primary-soft" />
                     {ready
                       ? t("booking:duration", {
@@ -183,7 +183,7 @@ export default function BookingPage() {
 
               {/* Φόρτωση διαθεσιμότητας */}
               {!availability && !loadError && (
-                <div className="bg-surface-1 border border-white/[0.06] rounded-3xl overflow-hidden grid md:grid-cols-2">
+                <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl overflow-hidden grid md:grid-cols-2">
                   <div className="p-6 lg:p-7 space-y-4">
                     <div className="h-6 w-40 rounded-lg bg-white/[0.04] animate-pulse" />
                     <div className="grid grid-cols-7 gap-1.5">
@@ -210,13 +210,13 @@ export default function BookingPage() {
               )}
 
               {loadError && (
-                <div className="bg-surface-1 border border-white/[0.06] rounded-3xl p-10 text-center">
-                  <p className="text-paper/70 mb-6 text-sm">
+                <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-10 text-center">
+                  <p className="text-white/55 mb-6 text-sm">
                     {ready ? t("booking:errors.loadFailed") : ""}
                   </p>
                   <button
                     onClick={loadAvailability}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 text-paper/78 hover:text-paper hover:border-white/30 font-semibold text-sm transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 text-white/70 hover:text-white hover:border-white/30 font-semibold text-sm transition-colors"
                   >
                     <RefreshCw className="w-4 h-4" />
                     {ready ? t("booking:retry") : "Retry"}
@@ -225,15 +225,15 @@ export default function BookingPage() {
               )}
 
               {availability && availability.days.length === 0 && (
-                <div className="bg-surface-1 border border-white/[0.06] rounded-3xl p-10 text-center">
-                  <p className="text-paper/70 text-sm">
+                <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-10 text-center">
+                  <p className="text-white/55 text-sm">
                     {ready ? t("booking:noSlotsWindow") : ""}
                   </p>
                 </div>
               )}
 
               {availability && availability.days.length > 0 && (
-                <div className="bg-surface-1 border border-white/[0.06] rounded-3xl overflow-hidden">
+                <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl overflow-hidden">
                   <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/[0.06]">
                     <CalendarPane
                       months={months}
@@ -261,7 +261,7 @@ export default function BookingPage() {
                             transition={{ duration: 0.2 }}
                             className="space-y-5"
                           >
-                            <p className="text-sm font-semibold text-paper capitalize">
+                            <p className="text-sm font-semibold text-white capitalize">
                               {formatFullDate(selection.date)}
                             </p>
                             {[
@@ -271,7 +271,7 @@ export default function BookingPage() {
                               .filter((g) => g.slots.length > 0)
                               .map((group) => (
                                 <div key={group.label}>
-                                  <p className="text-xs font-semibold uppercase tracking-wider text-paper/70 mb-3">
+                                  <p className="text-xs font-semibold uppercase tracking-wider text-white/55 mb-3">
                                     {group.label}
                                   </p>
                                   <div className="grid grid-cols-3 gap-2">
@@ -285,7 +285,7 @@ export default function BookingPage() {
                                           "h-11 rounded-xl border text-sm font-semibold font-mono transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-soft/60",
                                           selection.time === time
                                             ? "bg-primary-soft text-primary-soft-foreground border-primary-soft"
-                                            : "bg-surface border-white/[0.08] text-paper/78 hover:border-primary-soft/40 hover:text-paper"
+                                            : "bg-[#050810] border-white/[0.08] text-white/70 hover:border-primary-soft/40 hover:text-white"
                                         )}
                                       >
                                         {time}
@@ -307,7 +307,7 @@ export default function BookingPage() {
                             <div className="w-12 h-12 rounded-2xl bg-primary-soft/10 flex items-center justify-center">
                               <CalendarDays className="w-6 h-6 text-primary-soft" />
                             </div>
-                            <p className="text-sm text-paper/70 max-w-[220px]">
+                            <p className="text-sm text-white/55 max-w-[220px]">
                               {ready ? t("booking:pickDayHint") : ""}
                             </p>
                           </motion.div>
@@ -338,7 +338,7 @@ export default function BookingPage() {
               transition={{ duration: 0.5 }}
               className="max-w-3xl mx-auto"
             >
-              <h2 className="text-2xl lg:text-3xl font-bold text-paper mb-8 tracking-tight">
+              <h2 className="text-2xl lg:text-3xl font-bold text-white mb-8 tracking-tight">
                 {ready ? t("booking:steps.details") : ""}
               </h2>
 
@@ -347,12 +347,12 @@ export default function BookingPage() {
                 <div className="w-10 h-10 rounded-xl bg-primary-soft/15 flex items-center justify-center flex-shrink-0">
                   <CalendarCheck className="w-5 h-5 text-primary-soft" />
                 </div>
-                <p className="text-sm text-paper">
+                <p className="text-sm text-white">
                   <span className="capitalize">{formatFullDate(selection.date)}</span>
-                  <span className="text-paper/70"> · </span>
+                  <span className="text-white/55"> · </span>
                   <span className="font-mono font-semibold">{selection.time}</span>
                   {availability && (
-                    <span className="text-paper/70">
+                    <span className="text-white/55">
                       {" "}
                       ·{" "}
                       {ready
@@ -367,7 +367,7 @@ export default function BookingPage() {
 
               <form
                 onSubmit={handleSubmit}
-                className="bg-surface-1 border border-white/[0.06] rounded-3xl p-7 space-y-5"
+                className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-7 space-y-5"
               >
                 <FormField
                   label={ready ? t("booking:form.name") : ""}
@@ -411,7 +411,7 @@ export default function BookingPage() {
                     onChange={(e) => setConsent(e.target.checked)}
                     className="mt-0.5 w-4 h-4 accent-[#82d9b9] flex-shrink-0"
                   />
-                  <span className="text-xs text-paper/70 leading-relaxed">
+                  <span className="text-xs text-white/55 leading-relaxed">
                     {ready ? t("booking:form.consentPrefix") : ""}{" "}
                     <a
                       href="/privacy"
@@ -429,7 +429,7 @@ export default function BookingPage() {
                   <button
                     type="button"
                     onClick={() => setStep(1)}
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/15 text-paper/78 hover:text-paper hover:border-white/30 font-semibold text-sm transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/15 text-white/70 hover:text-white hover:border-white/30 font-semibold text-sm transition-colors"
                   >
                     <ArrowLeft className="w-4 h-4" />
                     {ready ? t("common:actions.back") : "Back"}
@@ -463,17 +463,17 @@ export default function BookingPage() {
               <div className="w-20 h-20 mx-auto mb-7 rounded-2xl bg-primary-soft/10 border border-primary-soft/30 flex items-center justify-center">
                 <CheckCircle2 className="w-10 h-10 text-primary-soft" />
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-paper mb-3 tracking-tight">
+              <h2 className="text-3xl lg:text-4xl font-bold text-white mb-3 tracking-tight">
                 {ready ? t("booking:success.title") : ""}
               </h2>
-              <p className="text-paper/70 mb-2 text-lg">
+              <p className="text-white/55 mb-2 text-lg">
                 <span className="capitalize">{formatFullDate(selection.date)}</span>
                 <span> · </span>
-                <span className="font-mono font-semibold text-paper/85">
+                <span className="font-mono font-semibold text-white/80">
                   {selection.time}
                 </span>
               </p>
-              <p className="text-paper/70 mb-8">
+              <p className="text-white/55 mb-8">
                 {ready ? t("booking:success.message") : ""}
               </p>
               <a
@@ -534,13 +534,13 @@ function CalendarPane({
   return (
     <div className="p-6 lg:p-7">
       <div className="flex items-center justify-between mb-5">
-        <p className="text-sm font-semibold text-paper capitalize">{monthLabel}</p>
+        <p className="text-sm font-semibold text-white capitalize">{monthLabel}</p>
         <div className="flex gap-1.5">
           <button
             onClick={() => setMonthIdx(monthIdx - 1)}
             disabled={monthIdx === 0}
             aria-label={ready ? t("booking:prevMonth") : "Previous month"}
-            className="w-8 h-8 rounded-lg border border-white/[0.08] flex items-center justify-center text-paper/70 hover:text-paper hover:border-white/25 transition-colors disabled:opacity-30 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-soft/60"
+            className="w-8 h-8 rounded-lg border border-white/[0.08] flex items-center justify-center text-white/55 hover:text-white hover:border-white/25 transition-colors disabled:opacity-30 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-soft/60"
           >
             <ChevronLeft className="w-4 h-4" />
           </button>
@@ -548,7 +548,7 @@ function CalendarPane({
             onClick={() => setMonthIdx(monthIdx + 1)}
             disabled={monthIdx >= months.length - 1}
             aria-label={ready ? t("booking:nextMonth") : "Next month"}
-            className="w-8 h-8 rounded-lg border border-white/[0.08] flex items-center justify-center text-paper/70 hover:text-paper hover:border-white/25 transition-colors disabled:opacity-30 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-soft/60"
+            className="w-8 h-8 rounded-lg border border-white/[0.08] flex items-center justify-center text-white/55 hover:text-white hover:border-white/25 transition-colors disabled:opacity-30 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-soft/60"
           >
             <ChevronRight className="w-4 h-4" />
           </button>
@@ -559,7 +559,7 @@ function CalendarPane({
         {weekDays.map((d) => (
           <span
             key={d}
-            className="text-center text-[10px] font-semibold uppercase tracking-wider text-paper/56 py-1"
+            className="text-center text-[10px] font-semibold uppercase tracking-wider text-white/40 py-1"
           >
             {d}
           </span>
@@ -581,7 +581,7 @@ function CalendarPane({
               <span
                 key={dateStr}
                 className={cn(
-                  "aspect-square flex items-center justify-center rounded-xl text-sm text-paper/30",
+                  "aspect-square flex items-center justify-center rounded-xl text-sm text-white/20",
                   isToday && "ring-1 ring-inset ring-white/15"
                 )}
               >
@@ -607,7 +607,7 @@ function CalendarPane({
                 "aspect-square flex flex-col items-center justify-center gap-1 rounded-xl border text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-soft/60",
                 active
                   ? "bg-primary-soft text-primary-soft-foreground border-primary-soft"
-                  : "bg-surface border-white/[0.08] text-paper hover:border-primary-soft/40",
+                  : "bg-[#050810] border-white/[0.08] text-white hover:border-primary-soft/40",
                 isToday && !active && "ring-1 ring-inset ring-white/20"
               )}
             >
@@ -634,19 +634,19 @@ function CalendarPane({
 function FormField({ label, multiline, ...props }) {
   return (
     <div>
-      <label className="block text-xs font-semibold uppercase tracking-wider text-paper/70 mb-2">
+      <label className="block text-xs font-semibold uppercase tracking-wider text-white/55 mb-2">
         {label}
       </label>
       {multiline ? (
         <textarea
           rows={3}
           {...props}
-          className="w-full px-4 py-3 rounded-xl bg-surface border border-white/[0.08] focus:border-primary-soft/50 focus:bg-surface-2 outline-none transition-all text-sm text-paper placeholder:text-paper/44 resize-none"
+          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary-soft/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 resize-none"
         />
       ) : (
         <input
           {...props}
-          className="w-full px-4 py-3 rounded-xl bg-surface border border-white/[0.08] focus:border-primary-soft/50 focus:bg-surface-2 outline-none transition-all text-sm text-paper placeholder:text-paper/44 [color-scheme:dark]"
+          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary-soft/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 [color-scheme:dark]"
         />
       )}
     </div>

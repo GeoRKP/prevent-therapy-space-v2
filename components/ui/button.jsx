@@ -24,22 +24,22 @@ const buttonVariants = cva(
           "text-primary underline-offset-4 hover:underline",
         // Modern gradient variant
         gradient:
-          "bg-gradient-to-r from-primary to-[#5a8fe8] text-paper shadow-lg hover:shadow-xl hover:-translate-y-0.5 hover:from-primary/90 hover:to-[#5a8fe8]/90",
+          "bg-gradient-to-r from-primary to-[#5a8fe8] text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5 hover:from-primary/90 hover:to-[#5a8fe8]/90",
         // Glass morphism variant
         glass:
-          "bg-white/10 backdrop-blur-md border border-white/20 text-paper shadow-lg hover:bg-white/20 hover:-translate-y-0.5",
+          "bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-lg hover:bg-white/20 hover:-translate-y-0.5",
         // Soft variant with subtle background
         soft:
           "bg-primary/10 text-primary hover:bg-primary/20 hover:-translate-y-0.5",
         // Modern dark variant
         dark:
-          "bg-[#343f52] text-paper shadow-md hover:bg-[#343f52]/90 hover:shadow-lg hover:-translate-y-0.5",
+          "bg-[#343f52] text-white shadow-md hover:bg-[#343f52]/90 hover:shadow-lg hover:-translate-y-0.5",
         // White/Light variant for dark backgrounds
         white:
           "bg-white text-[#343f52] shadow-md hover:bg-white/90 hover:shadow-lg hover:-translate-y-0.5",
         // Outline white for dark backgrounds
         "outline-white":
-          "border-2 border-white bg-transparent text-paper hover:bg-white hover:text-[#343f52] hover:-translate-y-0.5",
+          "border-2 border-white bg-transparent text-white hover:bg-white hover:text-[#343f52] hover:-translate-y-0.5",
       },
       size: {
         default: "h-10 px-5 py-2",

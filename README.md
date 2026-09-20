@@ -40,8 +40,6 @@ Bookings live entirely in the physiotherapist's Google Calendar; a tiny Neon Pos
 
 `app/globals.css` defines the light/dark palettes via HSL CSS variables under `:root` and `.dark`. Tokens map to Tailwind via `@theme` (`bg-background`, `text-primary`, `bg-card`, etc.). Dark mode is class-based (`.dark` on `<html>`). A toggle is **not yet wired** — add `next-themes` and a button in the header when needed.
 
-The site as shipped is dark. Page/card backgrounds use the `surface` scale from `@theme` (`bg-surface` page, `bg-surface-1` cards, `bg-surface-2` hover/dropdowns, `bg-surface-3` elevated, `bg-surface-deep` footer) and body text uses `text-paper` (warm off-white) with opacity steps (`text-paper/70` for paragraphs, `/56` for labels, `/44` for placeholders and decorative marks). Never hardcode dark hex values in components — the surfaces were deliberately lifted off pure black (`#050810` → `#162321`) because the old near-black read as absolute black on OLED phones and tired the eyes.
-
 ## Pages
 
 - `/` — home (hero, services preview, how it works, why us, team, conditions, CTA).
