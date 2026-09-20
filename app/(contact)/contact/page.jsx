@@ -55,22 +55,22 @@ export default function ContactPage() {
         backgroundImage="/images/clinic/office-photo.jpg"
       />
 
-      <section className="relative section-pad overflow-hidden bg-[#050810]">
+      <section className="light-m relative section-pad overflow-hidden bg-canvas">
         <div className="container relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-6xl mx-auto">
             {/* Left — info */}
-            <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-7 lg:p-10">
+            <div className="bg-canvas-1 border border-ink/[0.06] rounded-3xl p-7 lg:p-10">
               <RevealText>
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-10 h-px bg-primary/70" />
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-50">
                     Info
                   </span>
                 </div>
               </RevealText>
 
               <RevealText delay={0.1}>
-                <h3 className="text-2xl lg:text-3xl font-bold text-white mb-7 tracking-tight">
+                <h3 className="text-2xl lg:text-3xl font-bold text-ink mb-7 tracking-tight">
                   Επικοινωνήστε μαζί μας
                 </h3>
               </RevealText>
@@ -103,18 +103,18 @@ export default function ContactPage() {
             </div>
 
             {/* Right — form */}
-            <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-7 lg:p-10">
+            <div className="bg-canvas-1 border border-ink/[0.06] rounded-3xl p-7 lg:p-10">
               <RevealText>
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-10 h-px bg-primary/70" />
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-50">
                     Form
                   </span>
                 </div>
               </RevealText>
 
               <RevealText delay={0.1}>
-                <h3 className="text-2xl lg:text-3xl font-bold text-white mb-7 tracking-tight">
+                <h3 className="text-2xl lg:text-3xl font-bold text-ink mb-7 tracking-tight">
                   Στείλτε μήνυμα
                 </h3>
               </RevealText>
@@ -154,13 +154,13 @@ export default function ContactPage() {
                     onChange={(e) => setConsent(e.target.checked)}
                     className="mt-0.5 w-4 h-4 accent-[#82d9b9] flex-shrink-0"
                   />
-                  <span className="text-xs text-white/55 leading-relaxed">
+                  <span className="text-xs text-ink-55 leading-relaxed">
                     {ready ? t("contact:form.consentPrefix") : ""}{" "}
                     <a
                       href="/privacy"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-primary-soft underline underline-offset-2 hover:text-primary-soft/80"
+                      className="text-brand underline underline-offset-2 hover:text-brand/80"
                     >
                       {ready ? t("contact:form.consentLink") : ""}
                     </a>
@@ -195,16 +195,16 @@ function ContactCard({ icon: Icon, title, value, href }) {
   const Content = (
     <motion.div
       whileHover={{ x: 3 }}
-      className="group flex items-center gap-4 p-5 rounded-2xl bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 transition-all"
+      className="group flex items-center gap-4 p-5 rounded-2xl bg-canvas hover:bg-canvas-2 border border-ink/[0.06] hover:border-primary/30 transition-all"
     >
       <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/15 transition-colors">
         <Icon className="w-5 h-5 text-primary" />
       </div>
       <div>
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-white/55 mb-0.5">
+        <h4 className="text-xs font-semibold uppercase tracking-wider text-ink-55 mb-0.5">
           {title}
         </h4>
-        <p className="text-white font-medium group-hover:text-primary transition-colors">
+        <p className="text-ink font-medium group-hover:text-primary transition-colors">
           {value}
         </p>
       </div>
@@ -222,19 +222,19 @@ function ContactCard({ icon: Icon, title, value, href }) {
 function FormField({ label, multiline, ...props }) {
   return (
     <div>
-      <label className="block text-xs font-semibold uppercase tracking-wider text-white/55 mb-2">
+      <label className="block text-xs font-semibold uppercase tracking-wider text-ink-55 mb-2">
         {label}
       </label>
       {multiline ? (
         <textarea
           rows={4}
           {...props}
-          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 resize-none"
+          className="w-full px-4 py-3 rounded-xl bg-canvas border border-ink/[0.08] focus:border-primary/50 focus:bg-canvas-2 outline-none transition-all text-sm text-ink placeholder:text-ink-30 resize-none"
         />
       ) : (
         <input
           {...props}
-          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 [color-scheme:dark]"
+          className="w-full px-4 py-3 rounded-xl bg-canvas border border-ink/[0.08] focus:border-primary/50 focus:bg-canvas-2 outline-none transition-all text-sm text-ink placeholder:text-ink-30 [color-scheme:var(--scheme)]"
         />
       )}
     </div>

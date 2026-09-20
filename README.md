@@ -40,6 +40,8 @@ Bookings live entirely in the physiotherapist's Google Calendar; a tiny Neon Pos
 
 `app/globals.css` defines the light/dark palettes via HSL CSS variables under `:root` and `.dark`. Tokens map to Tailwind via `@theme` (`bg-background`, `text-primary`, `bg-card`, etc.). Dark mode is class-based (`.dark` on `<html>`). A toggle is **not yet wired** — add `next-themes` and a button in the header when needed.
 
+**Light mode on mobile only.** Content sections carry the `light-m` class; below the `lg` breakpoint (992px) they switch to a cream/white palette while hero, page hero, CTA, footer and header stay dark on every device. This is pure CSS: `@theme inline` tokens in `app/globals.css` (`bg-canvas`, `bg-canvas-1`, `bg-canvas-2`, `bg-dim`, `text-ink`, `text-ink-NN`, `bg-brand`, `text-brand-fg`) whose `:root` values equal the original dark hex/white/mint values, and a `@media (width < 992px) .light-m { … }` block that overrides them. Rules: inside a `light-m` section never hardcode `#050810`-style hex, `text-white`, `border-white/…` or `primary-soft` — use the tokens; keep `text-white` only on solid-colored buttons (`bg-primary text-white`); use `bg-dim/NN` for a darkening overlay on a photo (it becomes transparent on light) and `from-canvas…` for a fade into the section background. A dialog rendered in a portal needs its own `light-m` class.
+
 ## Pages
 
 - `/` — home (hero, services preview, how it works, why us, team, conditions, CTA).
