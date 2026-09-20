@@ -24,7 +24,7 @@ export function LegalPage({ docKey }) {
         backgroundImage="/images/clinic/office-photo.jpg"
       />
 
-      <section className="light-m relative section-pad bg-canvas">
+      <section className="relative section-pad bg-canvas">
         <div className="container relative z-10 max-w-3xl">
           <p className="text-xs text-ink-40 mb-10">{t(`${docKey}.updated`)}</p>
 

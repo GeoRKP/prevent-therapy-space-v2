@@ -61,7 +61,7 @@ export function PartnersSection() {
   return (
     <section
       aria-labelledby="partners-heading"
-      className="light-m relative section-pad overflow-hidden bg-canvas-1"
+      className="relative section-pad overflow-hidden bg-canvas-1"
     >
       <div className="container relative z-10">
         <SectionHeading
@@ -178,7 +178,7 @@ export function PartnersSection() {
 
                   <DialogContent
                     closeLabel={t("partners.close")}
-                    className="light-m w-[calc(100%-2rem)] max-w-xl max-h-[85vh] p-0 gap-0 flex flex-col bg-canvas-2 border-ink/10 rounded-2xl overflow-hidden"
+                    className="w-[calc(100%-2rem)] max-w-xl max-h-[85vh] p-0 gap-0 flex flex-col bg-canvas-2 border-ink/10 rounded-2xl overflow-hidden"
                   >
                     <DialogHeader className="flex-row items-center gap-4 space-y-0 p-6 pb-4 text-left">
                       <Image

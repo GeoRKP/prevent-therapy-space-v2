@@ -157,7 +157,7 @@ export default function BookingPage() {
         backgroundImage="/images/clinic/beautiful-chropractor-bed-photo.jpg"
       />
 
-      <section className="light-m relative section-pad overflow-hidden bg-canvas">
+      <section className="relative section-pad overflow-hidden bg-canvas">
         <div className="container relative z-10 max-w-4xl">
           {step === 1 && (
             <motion.div

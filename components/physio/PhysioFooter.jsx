@@ -22,7 +22,7 @@ export function PhysioFooter() {
   const services = t("footer:services.items", { returnObjects: true }) || [];
 
   return (
-    <footer className="relative bg-[#040609] text-white overflow-hidden border-t border-white/[0.06]">
+    <footer className="relative bg-canvas-deep text-ink overflow-hidden border-t border-ink/[0.06]">
       <div className="relative z-10 container">
         <div className="py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           <div className="lg:col-span-1">
@@ -34,40 +34,40 @@ export function PhysioFooter() {
                 height={48}
                 className="h-10 w-10"
               />
-              <span className="text-base font-bold tracking-wider text-white">
+              <span className="text-base font-bold tracking-wider text-ink">
                 PREVENT
               </span>
             </Link>
 
-            <p className="text-white/55 text-sm leading-relaxed mb-7 max-w-xs">
+            <p className="text-ink-55 text-sm leading-relaxed mb-7 max-w-xs">
               {t("footer:brand.description")}
             </p>
 
             <div className="space-y-2.5">
               <a
                 href={`mailto:${contactInfo.email}`}
-                className="group flex items-center gap-3 text-white/55 hover:text-white text-sm transition-colors"
+                className="group flex items-center gap-3 text-ink-55 hover:text-ink text-sm transition-colors"
               >
-                <div className="w-9 h-9 rounded-xl border border-white/[0.08] bg-white/[0.02] flex items-center justify-center group-hover:border-primary-soft/40 group-hover:bg-primary-soft/10 transition-all">
-                  <Mail className="w-3.5 h-3.5 text-primary-soft" />
+                <div className="w-9 h-9 rounded-xl border border-ink/[0.08] bg-ink/[0.02] flex items-center justify-center group-hover:border-brand/40 group-hover:bg-brand/10 transition-all">
+                  <Mail className="w-3.5 h-3.5 text-brand" />
                 </div>
                 <span>{contactInfo.email}</span>
               </a>
               <a
                 href={`tel:+30${contactInfo.phone.replace(/\s/g, "")}`}
-                className="group flex items-center gap-3 text-white/55 hover:text-white text-sm transition-colors"
+                className="group flex items-center gap-3 text-ink-55 hover:text-ink text-sm transition-colors"
               >
-                <div className="w-9 h-9 rounded-xl border border-white/[0.08] bg-white/[0.02] flex items-center justify-center group-hover:border-primary-soft/40 group-hover:bg-primary-soft/10 transition-all">
-                  <Phone className="w-3.5 h-3.5 text-primary-soft" />
+                <div className="w-9 h-9 rounded-xl border border-ink/[0.08] bg-ink/[0.02] flex items-center justify-center group-hover:border-brand/40 group-hover:bg-brand/10 transition-all">
+                  <Phone className="w-3.5 h-3.5 text-brand" />
                 </div>
                 <span>{contactInfo.phone}</span>
               </a>
               <a
                 href={contactInfo.viberHref}
-                className="group flex items-center gap-3 text-white/55 hover:text-white text-sm transition-colors"
+                className="group flex items-center gap-3 text-ink-55 hover:text-ink text-sm transition-colors"
               >
-                <div className="w-9 h-9 rounded-xl border border-white/[0.08] bg-white/[0.02] flex items-center justify-center group-hover:border-primary-soft/40 group-hover:bg-primary-soft/10 transition-all">
-                  <MessageCircle className="w-3.5 h-3.5 text-primary-soft" />
+                <div className="w-9 h-9 rounded-xl border border-ink/[0.08] bg-ink/[0.02] flex items-center justify-center group-hover:border-brand/40 group-hover:bg-brand/10 transition-all">
+                  <MessageCircle className="w-3.5 h-3.5 text-brand" />
                 </div>
                 <span>Viber</span>
               </a>
@@ -75,7 +75,7 @@ export function PhysioFooter() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-white/55 mb-6">
+            <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-55 mb-6">
               {t("footer:navigation.title")}
             </h4>
             <ul className="space-y-2.5">
@@ -83,7 +83,7 @@ export function PhysioFooter() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="group inline-flex items-center gap-2 text-white/60 hover:text-primary-soft text-sm transition-colors"
+                    className="group inline-flex items-center gap-2 text-ink-60 hover:text-brand text-sm transition-colors"
                   >
                     <span>{t(`common:navigation.${link.key}`)}</span>
                     <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
@@ -94,7 +94,7 @@ export function PhysioFooter() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-white/55 mb-6">
+            <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-55 mb-6">
               {t("footer:services.title")}
             </h4>
             <ul className="space-y-2.5">
@@ -102,7 +102,7 @@ export function PhysioFooter() {
                 <li key={index}>
                   <Link
                     href="/services"
-                    className="text-white/60 hover:text-primary-soft text-sm transition-colors"
+                    className="text-ink-60 hover:text-brand text-sm transition-colors"
                   >
                     {service}
                   </Link>
@@ -112,7 +112,7 @@ export function PhysioFooter() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-white/55 mb-6">
+            <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-55 mb-6">
               {t("footer:location.title")}
             </h4>
 
@@ -120,42 +120,42 @@ export function PhysioFooter() {
               href={t("contact:location.googleMapsUrl")}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-start gap-3 text-white/55 hover:text-white text-sm transition-colors mb-6"
+              className="group flex items-start gap-3 text-ink-55 hover:text-ink text-sm transition-colors mb-6"
             >
-              <MapPin className="w-4 h-4 text-primary-soft flex-shrink-0 mt-0.5" />
+              <MapPin className="w-4 h-4 text-brand flex-shrink-0 mt-0.5" />
               <span className="leading-relaxed">
                 {t("footer:location.address")}
               </span>
             </a>
 
-            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 text-sm space-y-2">
-              <div className="flex items-center gap-2 text-white/85 font-medium mb-1">
-                <Clock className="w-3.5 h-3.5 text-primary-soft" />
+            <div className="rounded-2xl border border-ink/[0.06] bg-ink/[0.02] p-4 text-sm space-y-2">
+              <div className="flex items-center gap-2 text-ink-85 font-medium mb-1">
+                <Clock className="w-3.5 h-3.5 text-brand" />
                 <span className="text-xs uppercase tracking-wider font-semibold">
                   {t("footer:hours.title")}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-white/55">
+                <span className="text-ink-55">
                   {t("footer:hours.mondayFriday")}
                 </span>
-                <span className="text-white/85 font-medium">
+                <span className="text-ink-85 font-medium">
                   {t("footer:hours.mondayFridayTime")}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-white/55">
+                <span className="text-ink-55">
                   {t("footer:hours.saturday")}
                 </span>
-                <span className="text-white/85 font-medium">
+                <span className="text-ink-85 font-medium">
                   {t("footer:hours.saturdayTime")}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-white/55">
+                <span className="text-ink-55">
                   {t("footer:hours.sunday")}
                 </span>
-                <span className="text-white/30">
+                <span className="text-ink-30">
                   {t("footer:hours.closed")}
                 </span>
               </div>
@@ -163,15 +163,15 @@ export function PhysioFooter() {
           </div>
         </div>
 
-        <div className="py-6 border-t border-white/[0.06] flex flex-col md:flex-row justify-between items-center gap-3">
-          <p className="text-white/35 text-xs">
+        <div className="py-6 border-t border-ink/[0.06] flex flex-col md:flex-row justify-between items-center gap-3">
+          <p className="text-ink-35 text-xs">
             {t("footer:copyright", { year: new Date().getFullYear() })}
           </p>
-          <div className="flex gap-5 text-white/35 text-xs">
-            <Link href="/privacy" className="hover:text-white transition-colors">
+          <div className="flex gap-5 text-ink-35 text-xs">
+            <Link href="/privacy" className="hover:text-ink transition-colors">
               {t("footer:legal.privacy")}
             </Link>
-            <Link href="/terms" className="hover:text-white transition-colors">
+            <Link href="/terms" className="hover:text-ink transition-colors">
               {t("footer:legal.terms")}
             </Link>
           </div>

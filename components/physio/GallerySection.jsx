@@ -22,7 +22,7 @@ export function GallerySection() {
   if (!ready) return null;
 
   return (
-    <section className="light-m relative section-pad overflow-hidden bg-canvas">
+    <section className="relative section-pad overflow-hidden bg-canvas">
       <div className="container relative z-10">
         <SectionHeading
           label={t("gallery.label")}

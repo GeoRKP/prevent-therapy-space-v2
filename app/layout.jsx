@@ -53,7 +53,9 @@ export default function RootLayout({ children }) {
         />
       </head>
 
-      <body className="min-h-screen flex flex-col bg-[#050810] text-white antialiased">
+      {/* light-m: κάτω από 992px όλα τα surface tokens γυρίζουν σε ανοιχτό
+          (βλ. globals.css) — στο desktop το class δεν κάνει τίποτα */}
+      <body className="light-m min-h-screen flex flex-col bg-canvas text-ink antialiased">
         <AppShell>{children}</AppShell>
       </body>
     </html>

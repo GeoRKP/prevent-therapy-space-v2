@@ -72,11 +72,12 @@
    την υπολογισμένη τιμή του :root — έτσι ένα section που ορίζει τα δικά του
    --canvas/--ink τα βλέπει και στα παιδιά του. Οι default τιμές (:root) είναι
    ΑΚΡΙΒΩΣ οι παλιές hardcoded (#050810, white/NN, mint) — το desktop δεν
-   αλλάζει. Κάτω από το lg breakpoint (992px) τα .light-m sections γυρίζουν
-   σε κρεμ/λευκό με βαθύ πράσινο accent.
+   αλλάζει. Κάτω από το lg breakpoint (992px), μέσα στο .light-m (το body),
+   γυρίζουν σε κρεμ/λευκό με βαθύ πράσινο accent.
 
    canvas    φόντο section        canvas-1  κάρτες / εναλλακτικό section
-   canvas-2  hover / dropdown     dim       σκίαση πάνω σε φωτογραφίες
+   canvas-2  hover / dropdown     canvas-deep  footer
+   dim       σκίαση πάνω σε φωτογραφίες
    ink       βασικό κείμενο       ink-NN    κείμενο σε ένταση NN% (ιεραρχία)
    brand     accent πάνω στο canvas (mint σε σκούρο, forest σε ανοιχτό)
    ═══════════════════════════════════════════════════════════════════════════ */
@@ -84,6 +85,7 @@
   --color-canvas: var(--canvas);
   --color-canvas-1: var(--canvas-1);
   --color-canvas-2: var(--canvas-2);
+  --color-canvas-deep: var(--canvas-deep);
   --color-dim: var(--dim);
   --color-ink: var(--ink);
   --color-ink-90: var(--ink-90);
@@ -110,6 +112,7 @@
   --canvas: #050810;
   --canvas-1: #070b14;
   --canvas-2: #0a0f1a;
+  --canvas-deep: #040609;
   --dim: #050810;
   --ink: #ffffff;
   --ink-90: rgb(255 255 255 / 0.9);
@@ -132,16 +135,16 @@
   --scheme: dark;
 }
 
-/* Κινητό/tablet (< lg): τα sections περιεχομένου ανάβουν. Hero, CTA, footer
-   και header ΔΕΝ έχουν .light-m — μένουν σκούρα σε κάθε συσκευή, ώστε η
-   πρώτη οθόνη και το brand να είναι ίδια παντού. Στο light οι ink-NN είναι
-   συμπαγή χρώματα (όχι διαφάνειες): το 55% μαύρο πάνω σε κρεμ έπεφτε στο
-   4,2:1, ενώ το #4b5d56 δίνει 6,4:1. */
+/* Κινητό/tablet (< lg): ολόκληρο το site ανάβει — το .light-m κάθεται στο
+   <body> (app/layout.jsx) και όλα τα παιδιά (και τα portals των dialogs) το
+   κληρονομούν. Στο light οι ink-NN είναι συμπαγή χρώματα (όχι διαφάνειες):
+   το 55% μαύρο πάνω σε κρεμ έπεφτε στο 4,2:1, ενώ το #4b5d56 δίνει 6,4:1. */
 @media (width < 992px) {
   .light-m {
     --canvas: #f6f5ef;
     --canvas-1: #ffffff;
     --canvas-2: #edece5;
+    --canvas-deep: #eceae2;
     --dim: transparent;
     --ink: #101915;
     --ink-90: #1a2622;
@@ -271,9 +274,10 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-NotoSerif), Georgia, serif;
   }
-  /* Ορατή εστίαση για πλοήγηση με πληκτρολόγιο — ουδέτερο λευκό πάνω στο σκούρο UI */
+  /* Ορατή εστίαση για πλοήγηση με πληκτρολόγιο — ακολουθεί το ink (λευκό σε
+     σκούρο, σκούρο στο ανοιχτό κινητό) */
   :focus-visible {
-    outline: 2px solid rgba(255, 255, 255, 0.75);
+    outline: 2px solid color-mix(in oklab, var(--ink) 75%, transparent);
     outline-offset: 2px;
     border-radius: 2px;
   }

@@ -36,7 +36,7 @@ export function ServicesGrid({ asPageIntro = false }) {
   const services = t("services:services", { returnObjects: true }) || [];
 
   return (
-    <section className="light-m relative section-pad overflow-hidden bg-canvas">
+    <section className="relative section-pad overflow-hidden bg-canvas">
       <div className="container relative z-10">
         {!asPageIntro && (
           <SectionHeading

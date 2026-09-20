@@ -12,7 +12,7 @@ export function ConditionsSection() {
   if (!ready) return null;
 
   return (
-    <section className="light-m relative section-pad overflow-hidden bg-canvas-1">
+    <section className="relative section-pad overflow-hidden bg-canvas-1">
       <div className="container relative z-10">
         <SectionHeading
           label={t("home:conditions.label")}

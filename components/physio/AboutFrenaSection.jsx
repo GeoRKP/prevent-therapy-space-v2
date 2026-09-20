@@ -21,7 +21,7 @@ export function AboutFrenaSection({ asPageIntro = false }) {
   const points = t("aboutSection.points", { returnObjects: true }) || [];
 
   return (
-    <section className="light-m relative section-pad overflow-hidden bg-canvas">
+    <section className="relative section-pad overflow-hidden bg-canvas">
       <div className="container relative z-10">
         {!asPageIntro && (
         <div className="mb-16 lg:mb-20">
