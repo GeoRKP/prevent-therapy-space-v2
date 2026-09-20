@@ -66,14 +66,14 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   SURFACE TOKENS — σκούρο παντού, ανοιχτό μόνο στο κινητό μέσα σε .light-m
+   SURFACE TOKENS — σκούρο ή ανοιχτό θέμα, μέσω data-theme στο <html>
    ───────────────────────────────────────────────────────────────────────────
    Δηλώνονται με @theme inline ώστε το utility να γράφει var(--canvas) και όχι
    την υπολογισμένη τιμή του :root — έτσι ένα section που ορίζει τα δικά του
    --canvas/--ink τα βλέπει και στα παιδιά του. Οι default τιμές (:root) είναι
    ΑΚΡΙΒΩΣ οι παλιές hardcoded (#050810, white/NN, mint) — το desktop δεν
-   αλλάζει. Κάτω από το lg breakpoint (992px), μέσα στο .light-m (το body),
-   γυρίζουν σε κρεμ/λευκό με βαθύ πράσινο accent.
+   αλλάζει. Με data-theme="light" στο <html> γυρίζουν σε κρεμ/λευκό με
+   βαθύ πράσινο accent (βλ. το block πιο κάτω).
 
    canvas    φόντο section        canvas-1  κάρτες / εναλλακτικό section
    canvas-2  hover / dropdown     canvas-deep  footer
@@ -135,39 +135,48 @@
   --scheme: dark;
 }
 
-/* Κινητό/tablet (< lg): ολόκληρο το site ανάβει — το .light-m κάθεται στο
-   <body> (app/layout.jsx) και όλα τα παιδιά (και τα portals των dialogs) το
-   κληρονομούν. Στο light οι ink-NN είναι συμπαγή χρώματα (όχι διαφάνειες):
-   το 55% μαύρο πάνω σε κρεμ έπεφτε στο 4,2:1, ενώ το #4b5d56 δίνει 6,4:1. */
-@media (width < 992px) {
-  .light-m {
-    --canvas: #f6f5ef;
-    --canvas-1: #ffffff;
-    --canvas-2: #edece5;
-    --canvas-deep: #eceae2;
-    --dim: transparent;
-    --ink: #101915;
-    --ink-90: #1a2622;
-    --ink-85: #1f2c28;
-    --ink-80: #24322d;
-    --ink-75: #2a3934;
-    --ink-70: #33443e;
-    --ink-65: #3b4c46;
-    --ink-60: #43554e;
-    --ink-55: #4b5d56;
-    --ink-50: #56685f;
-    --ink-45: #62736b;
-    --ink-40: #74847c;
-    --ink-35: #86948d;
-    --ink-30: #98a49e;
-    --ink-25: #aab4ae;
-    --ink-20: #bbc3be;
-    --brand: hsl(165 100% 16%);
-    --brand-fg: #ffffff;
-    --scheme: light;
-    color-scheme: light;
-  }
+/* Ανοιχτό θέμα — ενεργό όταν το <html> έχει data-theme="light". Το θέμα το
+   ορίζει το inline script στο app/layout.jsx πριν το πρώτο paint: αποθηκευμένη
+   επιλογή του επισκέπτη (localStorage "theme"), αλλιώς προεπιλογή light κάτω
+   από 992px και dark από εκεί και πάνω. Το κουμπί εναλλαγής είναι το
+   components/common/ThemeToggle.jsx. Στο light οι ink-NN είναι συμπαγή χρώματα
+   (όχι διαφάνειες): το 55% μαύρο πάνω σε κρεμ έπεφτε στο 4,2:1, ενώ το
+   #4b5d56 δίνει 6,4:1. */
+:root[data-theme="light"] {
+  --canvas: #f6f5ef;
+  --canvas-1: #ffffff;
+  --canvas-2: #edece5;
+  --canvas-deep: #eceae2;
+  --dim: transparent;
+  --ink: #101915;
+  --ink-90: #1a2622;
+  --ink-85: #1f2c28;
+  --ink-80: #24322d;
+  --ink-75: #2a3934;
+  --ink-70: #33443e;
+  --ink-65: #3b4c46;
+  --ink-60: #43554e;
+  --ink-55: #4b5d56;
+  --ink-50: #56685f;
+  --ink-45: #62736b;
+  --ink-40: #74847c;
+  --ink-35: #86948d;
+  --ink-30: #98a49e;
+  --ink-25: #aab4ae;
+  --ink-20: #bbc3be;
+  --brand: hsl(165 100% 16%);
+  --brand-fg: #ffffff;
+  --scheme: light;
+  color-scheme: light;
 }
+
+/* Εικονίδιο του ThemeToggle: δείχνει το θέμα στο οποίο ΘΑ πάει ο επισκέπτης
+   (ήλιος στο σκούρο, φεγγάρι στο ανοιχτό). Οδηγείται από CSS ώστε να είναι
+   σωστό από το πρώτο paint, χωρίς JS state. */
+.theme-toggle-sun { display: block; }
+.theme-toggle-moon { display: none; }
+:root[data-theme="light"] .theme-toggle-sun { display: none; }
+:root[data-theme="light"] .theme-toggle-moon { display: block; }
 
 /* ═══════════════════════════════════════════════════════════════════════════
    LIGHT THEME — Cream + Deep Green

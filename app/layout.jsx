@@ -46,6 +46,16 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
           rel="stylesheet"
         />
+        {/* Θέμα πριν το πρώτο paint (χωρίς flash): αποθηκευμένη επιλογή του
+            επισκέπτη, αλλιώς light σε κινητό/tablet (<992px) και dark σε desktop.
+            Τα tokens ζουν στο globals.css (:root[data-theme="light"]). */}
+        <script
+          id="theme-init"
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){var d=document.documentElement,t=null;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='light'&&t!=='dark'){t=window.matchMedia('(max-width: 991.98px)').matches?'light':'dark'}d.setAttribute('data-theme',t)})();",
+          }}
+        />
         <script
           id="ld-business"
           type="application/ld+json"
@@ -53,9 +63,7 @@ export default function RootLayout({ children }) {
         />
       </head>
 
-      {/* light-m: κάτω από 992px όλα τα surface tokens γυρίζουν σε ανοιχτό
-          (βλ. globals.css) — στο desktop το class δεν κάνει τίποτα */}
-      <body className="light-m min-h-screen flex flex-col bg-canvas text-ink antialiased">
+      <body className="min-h-screen flex flex-col bg-canvas text-ink antialiased">
         <AppShell>{children}</AppShell>
       </body>
     </html>

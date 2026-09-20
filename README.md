@@ -38,9 +38,9 @@ Bookings live entirely in the physiotherapist's Google Calendar; a tiny Neon Pos
 
 ## Theming
 
-`app/globals.css` defines the light/dark palettes via HSL CSS variables under `:root` and `.dark`. Tokens map to Tailwind via `@theme` (`bg-background`, `text-primary`, `bg-card`, etc.). Dark mode is class-based (`.dark` on `<html>`). A toggle is **not yet wired** — add `next-themes` and a button in the header when needed.
+`app/globals.css` defines the legacy shadcn-style HSL palettes under `:root` and `.dark` (`bg-background`, `text-primary`, `bg-card`, …); the `.dark` class is not used by the pages. The site's real theming is the `data-theme` system described next.
 
-**Light mode on mobile only.** `<body>` carries the `light-m` class; below the `lg` breakpoint (992px) the whole site switches to a cream/white palette with a deep-green accent (hero, header, CTA and footer included), while desktop stays dark and pixel-identical. This is pure CSS: `@theme inline` tokens in `app/globals.css` (`bg-canvas`, `bg-canvas-1`, `bg-canvas-2`, `bg-canvas-deep`, `bg-dim`, `text-ink`, `text-ink-NN`, `bg-brand`, `text-brand-fg`) whose `:root` values equal the original dark hex/white/mint values, and a `@media (width < 992px) .light-m { … }` block that overrides them. Rules: never hardcode `#050810`-style hex, `text-white`, `border-white/…` or `primary-soft` in page components — use the tokens; keep `text-white`/`bg-white` only inside solid-colored blocks that must not flip (`bg-primary text-white` buttons, the green CTA card); use `bg-dim/NN` for a darkening overlay on a photo (it becomes transparent on light) and `from-canvas…` for a fade into the section background. `components/ui/*` and the `#343f52` button variants are not tokenized (unused by the pages).
+**Light / dark theme with a visitor toggle.** The theme is the `data-theme` attribute on `<html>` (`"light"` or `"dark"`), set before first paint by the inline `theme-init` script in `app/layout.jsx`: the visitor's stored choice (`localStorage["theme"]`), otherwise light below 992px (phones, tablets) and dark on desktop. `components/common/ThemeToggle.jsx` flips it and stores it; it sits in the header between Viber and the language switcher on desktop and next to the hamburger on mobile. Pure CSS otherwise: `@theme inline` tokens in `app/globals.css` (`bg-canvas`, `bg-canvas-1`, `bg-canvas-2`, `bg-canvas-deep`, `bg-dim`, `text-ink`, `text-ink-NN`, `bg-brand`, `text-brand-fg`) whose `:root` values equal the original dark hex/white/mint values, and a `:root[data-theme="light"] { … }` block that overrides them — to tune the light palette, edit only that block. Rules: never hardcode `#050810`-style hex, `text-white`, `border-white/…` or `primary-soft` in page components — use the tokens; keep `text-white`/`bg-white` only inside solid-colored blocks that must not flip (`bg-primary text-white` buttons, the green CTA card); use `bg-dim/NN` for a darkening overlay on a photo (it becomes transparent on light) and `from-canvas…` for a fade into the section background. `components/ui/*` (except the language switcher) and the `#343f52` button variants are not tokenized (unused by the pages).
 
 ## Pages
 
@@ -68,7 +68,6 @@ Google Calendar is the single source of truth for appointments. The physiotherap
 
 ## What's NOT implemented yet
 
-- Theme toggle (dark mode is reachable only by manually adding `.dark` to `<html>`).
 
 ## Origin
 

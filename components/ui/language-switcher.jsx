@@ -16,7 +16,7 @@ export function LanguageSwitcher() {
   return (
     <button
       onClick={toggleLocale}
-      className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-on-surface-variant hover:text-primary hover:bg-muted transition-colors"
+      className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-sm font-medium text-ink-70 hover:text-ink hover:bg-ink/[0.04] transition-colors"
       aria-label={`Switch to ${otherLang}`}
     >
       <Globe className="h-4 w-4" />

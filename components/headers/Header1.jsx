@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, MessageCircle, ArrowUpRight, X } from "lucide-react";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
+import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { cn } from "@/lib/utils";
 
 export default function Header1() {
@@ -109,6 +110,7 @@ export default function Header1() {
                   <MessageCircle className="w-4 h-4 text-brand" />
                   <span className="hidden xl:inline">Viber</span>
                 </a>
+                <ThemeToggle />
                 <LanguageSwitcher />
                 <Link
                   href="/booking"
@@ -119,6 +121,7 @@ export default function Header1() {
                 </Link>
               </div>
 
+              <ThemeToggle className="lg:hidden relative z-[1002]" />
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="lg:hidden relative z-[1002] w-10 h-10 flex items-center justify-center text-ink-80"
