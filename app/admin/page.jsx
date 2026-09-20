@@ -37,11 +37,11 @@ const DAY_NAMES = [
 const DAY_ORDER = [1, 2, 3, 4, 5, 6, 0];
 
 const inputCls =
-  "px-3 py-2 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary-soft/50 outline-none transition-all text-sm text-white [color-scheme:dark]";
+  "px-3 py-2 rounded-xl bg-surface border border-white/[0.08] focus:border-primary-soft/50 outline-none transition-all text-sm text-paper [color-scheme:dark]";
 const btnPrimary =
   "inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-primary-soft text-primary-soft-foreground font-semibold text-sm hover:bg-primary-soft/90 transition-colors disabled:opacity-40";
 const btnGhost =
-  "inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full border border-white/15 text-white/70 hover:text-white hover:border-white/30 font-semibold text-xs transition-colors";
+  "inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full border border-white/15 text-paper/78 hover:text-paper hover:border-white/30 font-semibold text-xs transition-colors";
 
 export default function AdminPage() {
   const [authed, setAuthed] = useState(null); // null=loading
@@ -59,7 +59,7 @@ export default function AdminPage() {
   }, []);
 
   return (
-    <section className="relative min-h-screen pt-28 lg:pt-32 pb-16 lg:pb-24 bg-[#050810]">
+    <section className="relative min-h-screen pt-28 lg:pt-32 pb-16 lg:pb-24 bg-surface">
       <div className="container relative z-10 max-w-4xl">
         {authed === null && (
           <div className="flex justify-center py-20">
@@ -98,20 +98,20 @@ function Login({ onSuccess }) {
   return (
     <form
       onSubmit={submit}
-      className="max-w-sm mx-auto bg-[#070b14] border border-white/[0.06] rounded-3xl p-8 text-center"
+      className="max-w-sm mx-auto bg-surface-1 border border-white/[0.06] rounded-3xl p-8 text-center"
     >
       <div className="w-14 h-14 mx-auto mb-5 rounded-2xl bg-primary-soft/10 flex items-center justify-center">
         <Lock className="w-7 h-7 text-primary-soft" />
       </div>
-      <h1 className="text-xl font-bold text-white mb-1 tracking-tight">Διαχείριση</h1>
-      <p className="text-white/55 text-sm mb-6">PREVENT Therapy Space</p>
+      <h1 className="text-xl font-bold text-paper mb-1 tracking-tight">Διαχείριση</h1>
+      <p className="text-paper/70 text-sm mb-6">PREVENT Therapy Space</p>
       <input
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Κωδικός πρόσβασης"
         autoFocus
-        className={cn(inputCls, "w-full mb-4 placeholder:text-white/30")}
+        className={cn(inputCls, "w-full mb-4 placeholder:text-paper/44")}
       />
       <button type="submit" disabled={busy || !password} className={cn(btnPrimary, "w-full")}>
         Είσοδος
@@ -141,7 +141,7 @@ function Dashboard({ onLogout }) {
   return (
     <div>
       <div className="flex items-center justify-between gap-4 mb-8 flex-wrap">
-        <h1 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
+        <h1 className="text-2xl lg:text-3xl font-bold text-paper tracking-tight">
           Διαχείριση
         </h1>
         <button onClick={logout} className={btnGhost}>
@@ -159,7 +159,7 @@ function Dashboard({ onLogout }) {
               "inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-semibold transition-colors",
               tab === key
                 ? "bg-primary-soft text-primary-soft-foreground"
-                : "border border-white/10 text-white/60 hover:text-white hover:border-white/25"
+                : "border border-white/10 text-paper/72 hover:text-paper hover:border-white/25"
             )}
           >
             <Icon className="w-4 h-4" />
@@ -220,7 +220,7 @@ function AppointmentsTab() {
   if (data.appointments.length === 0) {
     return (
       <Card>
-        <p className="text-white/55 text-sm text-center py-6">
+        <p className="text-paper/70 text-sm text-center py-6">
           Δεν υπάρχουν επερχόμενα ραντεβού μέσω του site.
         </p>
       </Card>
@@ -231,7 +231,7 @@ function AppointmentsTab() {
     <div className="space-y-6">
       {grouped.map(([day, list]) => (
         <div key={day}>
-          <p className="text-xs font-semibold uppercase tracking-wider text-white/40 mb-3 capitalize">
+          <p className="text-xs font-semibold uppercase tracking-wider text-paper/56 mb-3 capitalize">
             {new Date(`${day}T12:00:00`).toLocaleDateString("el-GR", {
               weekday: "long",
               day: "numeric",
@@ -286,8 +286,8 @@ function AppointmentRow({ appt, timeZone, onChanged }) {
       <div className="flex items-center gap-4 flex-wrap">
         <span className="font-mono font-bold text-primary-soft text-lg w-14">{time}</span>
         <div className="flex-1 min-w-[180px]">
-          <p className="text-white font-semibold text-sm">{appt.name}</p>
-          <p className="text-white/50 text-xs flex items-center gap-3 mt-1 flex-wrap">
+          <p className="text-paper font-semibold text-sm">{appt.name}</p>
+          <p className="text-paper/64 text-xs flex items-center gap-3 mt-1 flex-wrap">
             {appt.phone && (
               <a href={`tel:${appt.phone}`} className="inline-flex items-center gap-1 hover:text-primary-soft">
                 <Phone className="w-3 h-3" />
@@ -316,7 +316,7 @@ function AppointmentRow({ appt, timeZone, onChanged }) {
         )}
         {mode === "confirmCancel" && (
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs text-white/55">Σίγουρα; Ο ασθενής θα ενημερωθεί.</span>
+            <span className="text-xs text-paper/70">Σίγουρα; Ο ασθενής θα ενημερωθεί.</span>
             <button onClick={cancel} disabled={busy} className={cn(btnPrimary, "px-4 py-2 text-xs")}>
               Ναι, ακύρωση
             </button>
@@ -382,7 +382,7 @@ function ReschedulePicker({ apptId, onDone, onClose }) {
 
   return (
     <div className="mt-4 pt-4 border-t border-white/[0.06] flex items-end gap-3 flex-wrap">
-      <label className="text-xs text-white/55">
+      <label className="text-xs text-paper/70">
         Νέα ημέρα
         <select
           value={date}
@@ -404,7 +404,7 @@ function ReschedulePicker({ apptId, onDone, onClose }) {
           ))}
         </select>
       </label>
-      <label className="text-xs text-white/55">
+      <label className="text-xs text-paper/70">
         Νέα ώρα
         <select
           value={time}
@@ -489,10 +489,10 @@ function SettingsTab() {
   return (
     <div className="space-y-6">
       <Card>
-        <h2 className="text-sm font-bold text-white mb-4">Ρυθμίσεις</h2>
+        <h2 className="text-sm font-bold text-paper mb-4">Ρυθμίσεις</h2>
         <div className="grid sm:grid-cols-2 gap-4">
           {numbers.map(([key, label]) => (
-            <label key={key} className="text-xs text-white/55">
+            <label key={key} className="text-xs text-paper/70">
               {label}
               <input
                 type="number"
@@ -506,8 +506,8 @@ function SettingsTab() {
       </Card>
 
       <Card>
-        <h2 className="text-sm font-bold text-white mb-1">Ωράριο</h2>
-        <p className="text-xs text-white/40 mb-4">
+        <h2 className="text-sm font-bold text-paper mb-1">Ωράριο</h2>
+        <p className="text-xs text-paper/56 mb-4">
           Δύο διαστήματα ανά ημέρα υποστηρίζουν μεσημεριανό διάλειμμα.
         </p>
         <div className="space-y-3">
@@ -534,7 +534,7 @@ function DayRow({ name, ranges, onChange }) {
 
   return (
     <div className="flex items-center gap-3 flex-wrap">
-      <label className="inline-flex items-center gap-2 w-28 text-sm text-white cursor-pointer">
+      <label className="inline-flex items-center gap-2 w-28 text-sm text-paper cursor-pointer">
         <input
           type="checkbox"
           checked={open}
@@ -557,7 +557,7 @@ function DayRow({ name, ranges, onChange }) {
                 }
                 className={inputCls}
               />
-              <span className="text-white/40 text-xs">—</span>
+              <span className="text-paper/56 text-xs">—</span>
               <input
                 type="time"
                 value={r.to}
@@ -569,7 +569,7 @@ function DayRow({ name, ranges, onChange }) {
               {ranges.length > 1 && (
                 <button
                   onClick={() => onChange(ranges.filter((_, j) => j !== i))}
-                  className="text-white/40 hover:text-white p-1"
+                  className="text-paper/56 hover:text-paper p-1"
                   aria-label="Αφαίρεση διαστήματος"
                 >
                   <X className="w-3.5 h-3.5" />
@@ -590,7 +590,7 @@ function DayRow({ name, ranges, onChange }) {
           )}
         </div>
       ) : (
-        <span className="text-white/30 text-xs">Κλειστά</span>
+        <span className="text-paper/44 text-xs">Κλειστά</span>
       )}
     </div>
   );
@@ -662,8 +662,8 @@ function ClosuresTab() {
   return (
     <div className="space-y-6">
       <Card>
-        <h2 className="text-sm font-bold text-white mb-1">Κλείσιμο ημέρας</h2>
-        <p className="text-xs text-white/40 mb-4">
+        <h2 className="text-sm font-bold text-paper mb-1">Κλείσιμο ημέρας</h2>
+        <p className="text-xs text-paper/56 mb-4">
           Άδεια, αργία ή έκτακτο κλείσιμο: η ημέρα παύει να δέχεται online κρατήσεις.
           Υπάρχοντα ραντεβού της ημέρας δεν ακυρώνονται αυτόματα.
         </p>
@@ -684,11 +684,11 @@ function ClosuresTab() {
 
       {closures.length > 0 && (
         <Card>
-          <h2 className="text-sm font-bold text-white mb-4">Προγραμματισμένες κλειστές ημέρες</h2>
+          <h2 className="text-sm font-bold text-paper mb-4">Προγραμματισμένες κλειστές ημέρες</h2>
           <div className="space-y-2">
             {closures.map((c) => (
               <div key={c.id} className="flex items-center justify-between gap-3">
-                <span className="text-sm text-white capitalize">
+                <span className="text-sm text-paper capitalize">
                   {c.date
                     ? new Date(`${c.date}T12:00:00`).toLocaleDateString("el-GR", {
                         weekday: "long",
@@ -700,7 +700,7 @@ function ClosuresTab() {
                 </span>
                 <button
                   onClick={() => remove(c.id)}
-                  className="text-white/40 hover:text-white p-1.5"
+                  className="text-paper/56 hover:text-paper p-1.5"
                   aria-label="Άνοιγμα ημέρας"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -785,14 +785,14 @@ function GoogleTab() {
   return (
     <div className="space-y-6">
       <Card>
-        <h2 className="text-sm font-bold text-white mb-1">Σύνδεση Google Calendar</h2>
-        <p className="text-xs text-white/40 mb-5">
+        <h2 className="text-sm font-bold text-paper mb-1">Σύνδεση Google Calendar</h2>
+        <p className="text-xs text-paper/56 mb-5">
           Τα ραντεβού γράφονται στο κύριο ημερολόγιο του συνδεδεμένου λογαριασμού και οι
           προσκλήσεις προς τους ασθενείς στέλνονται από αυτόν. Συνδέστε τον λογαριασμό Google
           του ιατρείου.
         </p>
 
-        <div className="flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-[#050810] p-4 mb-5">
+        <div className="flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-surface p-4 mb-5">
           <span
             className={cn(
               "mt-1.5 w-2.5 h-2.5 rounded-full flex-shrink-0",
@@ -801,24 +801,24 @@ function GoogleTab() {
           />
           <div className="text-sm">
             {!status.connected && (
-              <p className="text-white font-semibold">
+              <p className="text-paper font-semibold">
                 Δεν υπάρχει σύνδεση — οι online κρατήσεις δεν λειτουργούν.
               </p>
             )}
             {status.connected && status.source === "db" && (
               <>
-                <p className="text-white font-semibold">
+                <p className="text-paper font-semibold">
                   Συνδεδεμένο: {status.email || "λογαριασμός Google"}
                 </p>
                 {connectedAt && (
-                  <p className="text-white/45 text-xs mt-0.5">Από {connectedAt}</p>
+                  <p className="text-paper/60 text-xs mt-0.5">Από {connectedAt}</p>
                 )}
               </>
             )}
             {status.connected && status.source === "env" && (
               <>
-                <p className="text-white font-semibold">Συνδεδεμένο μέσω ρύθμισης του server</p>
-                <p className="text-white/45 text-xs mt-0.5">
+                <p className="text-paper font-semibold">Συνδεδεμένο μέσω ρύθμισης του server</p>
+                <p className="text-paper/60 text-xs mt-0.5">
                   Προσωρινή σύνδεση από την κατασκευή του site. Συνδέστε τον λογαριασμό του
                   ιατρείου για να την αντικαταστήσετε.
                 </p>
@@ -867,7 +867,7 @@ function GoogleTab() {
           )}
         </div>
 
-        <p className="text-[11px] text-white/35 mt-5 leading-relaxed">
+        <p className="text-[11px] text-paper/52 mt-5 leading-relaxed">
           Η Google ζητά άδεια μόνο για τα ραντεβού (events) και τη διαθεσιμότητα (free/busy) του
           ημερολογίου. Αν εμφανιστεί η οθόνη «Google hasn&apos;t verified this app», επιλέξτε
           Advanced → Go to PREVENT Therapy Space.
@@ -880,7 +880,7 @@ function GoogleTab() {
 
 function Card({ children }) {
   return (
-    <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-6">
+    <div className="bg-surface-1 border border-white/[0.06] rounded-3xl p-6">
       {children}
     </div>
   );
@@ -898,7 +898,7 @@ function LoadError({ onRetry }) {
   return (
     <Card>
       <div className="text-center py-6">
-        <p className="text-white/55 text-sm mb-4">Αποτυχία φόρτωσης.</p>
+        <p className="text-paper/70 text-sm mb-4">Αποτυχία φόρτωσης.</p>
         <button onClick={onRetry} className={btnGhost}>
           <RefreshCw className="w-3.5 h-3.5" />
           Δοκιμή ξανά

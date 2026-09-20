@@ -69,7 +69,7 @@ export function Hero() {
 
   if (!ready) {
     return (
-      <section className="relative min-h-[92svh] bg-[#050810] flex items-center">
+      <section className="relative min-h-[80svh] lg:min-h-[92svh] bg-surface flex items-center">
         <div className="container">
           <div className="max-w-4xl">
             <div className="w-32 h-6 bg-white/5 rounded mb-8" />
@@ -85,7 +85,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative min-h-[92svh] bg-[#050810] overflow-hidden"
+      className="relative min-h-[80svh] lg:min-h-[92svh] bg-surface overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -115,14 +115,16 @@ export function Hero() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Scrim μόνο στο κινητό — κρατά το κείμενο αναγνώσιμο πάνω στη φωτογραφία */}
-      <div className="absolute inset-0 bg-[#050810]/45 lg:hidden" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#050810]/90 via-[#050810]/50 to-transparent lg:from-[#050810] lg:via-[#050810]/70 lg:to-[#050810]/30" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#050810] via-transparent to-[#050810]/60 lg:to-[#050810]/40" />
+      {/* Scrim μόνο στο κινητό — ελαφρύ (25%), η φωτογραφία είναι το «φως» της
+          οθόνης· την αναγνωσιμότητα του κειμένου τη δίνει το οριζόντιο gradient
+          από αριστερά, όχι το γενικό σκοτείνιασμα */}
+      <div className="absolute inset-0 bg-surface/25 lg:hidden" />
+      <div className="absolute inset-0 bg-gradient-to-r from-surface/90 via-surface/50 to-transparent lg:from-surface lg:via-surface/70 lg:to-surface/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-surface/35 lg:to-surface/40" />
 
       <DiagonalLines className="opacity-[0.012]" spacing={100} />
 
-      <div className="container relative z-20 min-h-[92svh] flex items-center pt-24 pb-32">
+      <div className="container relative z-20 min-h-[80svh] lg:min-h-[92svh] flex items-center pt-24 pb-24 lg:pb-32">
         <div className="grid lg:grid-cols-12 gap-12 items-center w-full">
           <div className="lg:col-span-7">
             <AnimatePresence mode="wait">
@@ -136,7 +138,7 @@ export function Hero() {
                 <RevealText delay={0.1}>
                   <div className="inline-flex items-center gap-3 mb-7">
                     <div className="w-10 h-px bg-primary-soft" />
-                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">
+                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-paper/72">
                       {t("home:hero.label")}
                     </span>
                   </div>
@@ -145,7 +147,7 @@ export function Hero() {
                 <div className="mb-6">
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1] tracking-tight">
                     <RevealText delay={0.2}>
-                      <span className="block text-white">
+                      <span className="block text-paper">
                         {heroSlides[currentSlide].title}
                       </span>
                     </RevealText>
@@ -160,7 +162,7 @@ export function Hero() {
                 </div>
 
                 <RevealText delay={0.4}>
-                  <p className="text-lg lg:text-xl text-white/60 max-w-xl mb-10 leading-relaxed font-light">
+                  <p className="text-lg lg:text-xl text-paper/72 max-w-xl mb-10 leading-relaxed">
                     {heroSlides[currentSlide].subtitle}
                   </p>
                 </RevealText>
@@ -177,7 +179,7 @@ export function Hero() {
 
                     <Link
                       href="/contact"
-                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 border border-white/20 text-white/90 font-semibold text-sm rounded-full hover:border-primary-soft/60 hover:text-primary-soft hover:bg-white/[0.02] transition-all"
+                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 border border-white/20 text-paper/90 font-semibold text-sm rounded-full hover:border-primary-soft/60 hover:text-primary-soft hover:bg-white/[0.02] transition-all"
                     >
                       <Phone className="w-4 h-4" />
                       {t("common:actions.contactUs")}
@@ -215,7 +217,7 @@ export function Hero() {
                       sizes="(min-width: 1280px) 440px, (min-width: 1024px) 400px, 0px"
                       quality={90}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050810]/35 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-surface/35 via-transparent to-transparent" />
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -236,7 +238,7 @@ export function Hero() {
                     <span
                       className={cn(
                         "text-xs font-mono transition-colors",
-                        index === currentSlide ? "text-primary-soft" : "text-white/50"
+                        index === currentSlide ? "text-primary-soft" : "text-paper/64"
                       )}
                     >
                       {String(index + 1).padStart(2, "0")}
@@ -261,15 +263,15 @@ export function Hero() {
 
       {/* Bottom marquee — softer */}
       <div className="absolute bottom-0 left-0 right-0 z-20">
-        <div className="border-t border-white/[0.06] py-3 bg-[#050810]/85 backdrop-blur-sm overflow-hidden">
+        <div className="border-t border-white/[0.06] py-3 bg-surface/85 backdrop-blur-sm overflow-hidden">
           <MarqueeText
             text={t("home:hero.marquee")}
-            className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/25"
+            className="text-[10px] font-semibold uppercase tracking-[0.25em] text-paper/36"
             speed={35}
           />
         </div>
 
-        <div className="lg:hidden border-t border-white/[0.06] py-4 bg-[#050810]/90 backdrop-blur-sm">
+        <div className="lg:hidden border-t border-white/[0.06] py-4 bg-surface/90 backdrop-blur-sm">
           <div className="container flex items-center justify-between">
             <div className="flex gap-2">
               {heroSlides.map((_, index) => (
@@ -285,7 +287,7 @@ export function Hero() {
                 />
               ))}
             </div>
-            <span className="text-xs font-mono text-white/55">
+            <span className="text-xs font-mono text-paper/70">
               {String(currentSlide + 1).padStart(2, "0")} /{" "}
               {String(heroSlides.length).padStart(2, "0")}
             </span>

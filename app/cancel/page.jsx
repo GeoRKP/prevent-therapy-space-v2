@@ -105,13 +105,13 @@ function CancelContent() {
         backgroundImage="/images/clinic/beautiful-chropractor-bed-photo.jpg"
       />
 
-      <section className="relative section-pad overflow-hidden bg-[#050810]">
+      <section className="relative section-pad overflow-hidden bg-surface">
         <div className="container relative z-10 max-w-xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-8 lg:p-10 text-center"
+            className="bg-surface-1 border border-white/[0.06] rounded-3xl p-8 lg:p-10 text-center"
           >
             {state === "idle" && (
               <div className="py-8">
@@ -124,21 +124,21 @@ function CancelContent() {
                 <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-primary-soft/10 flex items-center justify-center">
                   <CalendarX className="w-8 h-8 text-primary-soft" />
                 </div>
-                <h2 className="text-2xl font-bold text-white mb-3 tracking-tight">
+                <h2 className="text-2xl font-bold text-paper mb-3 tracking-tight">
                   {ready ? t("booking:cancel.confirmTitle") : ""}
                 </h2>
-                <p className="text-white/70 mb-1 text-lg">
+                <p className="text-paper/78 mb-1 text-lg">
                   <span className="capitalize">{formatFullDate(details.date)}</span>
-                  <span className="text-white/40"> · </span>
+                  <span className="text-paper/56"> · </span>
                   <span className="font-mono font-semibold">{details.time}</span>
                 </p>
-                <p className="text-white/55 text-sm mb-8">
+                <p className="text-paper/70 text-sm mb-8">
                   {ready ? t("booking:cancel.confirmText") : ""}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <a
                     href="/"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/15 text-white/70 hover:text-white hover:border-white/30 font-semibold text-sm transition-colors"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/15 text-paper/78 hover:text-paper hover:border-white/30 font-semibold text-sm transition-colors"
                   >
                     {ready ? t("booking:cancel.keep") : ""}
                   </a>
@@ -164,10 +164,10 @@ function CancelContent() {
                 <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-primary-soft/10 border border-primary-soft/30 flex items-center justify-center">
                   <CheckCircle2 className="w-8 h-8 text-primary-soft" />
                 </div>
-                <h2 className="text-2xl font-bold text-white mb-3 tracking-tight">
+                <h2 className="text-2xl font-bold text-paper mb-3 tracking-tight">
                   {ready ? t("booking:cancel.doneTitle") : ""}
                 </h2>
-                <p className="text-white/55 text-sm mb-8">
+                <p className="text-paper/70 text-sm mb-8">
                   {ready ? t("booking:cancel.doneText") : ""}
                 </p>
                 <a
@@ -186,10 +186,10 @@ function CancelContent() {
                 <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-white/[0.04] flex items-center justify-center">
                   <PhoneCall className="w-8 h-8 text-primary-soft" />
                 </div>
-                <h2 className="text-2xl font-bold text-white mb-3 tracking-tight">
+                <h2 className="text-2xl font-bold text-paper mb-3 tracking-tight">
                   {ready ? t("booking:cancel.tooLateTitle") : ""}
                 </h2>
-                <p className="text-white/55 text-sm">
+                <p className="text-paper/70 text-sm">
                   {ready ? t("booking:cancel.tooLateText") : ""}
                 </p>
               </>
@@ -198,17 +198,17 @@ function CancelContent() {
             {(state === "gone" || state === "invalid" || state === "error") && (
               <>
                 <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-white/[0.04] flex items-center justify-center">
-                  <CalendarX className="w-8 h-8 text-white/40" />
+                  <CalendarX className="w-8 h-8 text-paper/56" />
                 </div>
-                <h2 className="text-2xl font-bold text-white mb-3 tracking-tight">
+                <h2 className="text-2xl font-bold text-paper mb-3 tracking-tight">
                   {ready ? t(`booking:cancel.${state}Title`) : ""}
                 </h2>
-                <p className="text-white/55 text-sm mb-8">
+                <p className="text-paper/70 text-sm mb-8">
                   {ready ? t(`booking:cancel.${state}Text`) : ""}
                 </p>
                 <a
                   href="/booking"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/15 text-white/70 hover:text-white hover:border-white/30 font-semibold text-sm transition-colors"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/15 text-paper/78 hover:text-paper hover:border-white/30 font-semibold text-sm transition-colors"
                 >
                   {ready ? t("booking:cancel.rebook") : ""}
                 </a>

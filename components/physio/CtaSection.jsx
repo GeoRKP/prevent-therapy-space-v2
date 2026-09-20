@@ -12,7 +12,7 @@ export function CtaSection() {
   if (!ready) return null;
 
   return (
-    <section className="relative section-pad overflow-hidden bg-[#050810]">
+    <section className="relative section-pad overflow-hidden bg-surface">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -29,20 +29,20 @@ export function CtaSection() {
               <RevealText>
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-10 h-px bg-white/40" />
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-paper/78">
                     {t("ctaSection.getStarted")}
                   </span>
                 </div>
               </RevealText>
 
               <RevealText delay={0.1}>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-white mb-5">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-paper mb-5">
                   {t("ctaSection.title")}
                 </h2>
               </RevealText>
 
               <RevealText delay={0.2}>
-                <p className="text-base lg:text-lg text-white/80 mb-8 leading-relaxed max-w-xl">
+                <p className="text-base lg:text-lg text-paper/85 mb-8 leading-relaxed max-w-xl">
                   {t("ctaSection.subtitle")}
                 </p>
               </RevealText>
@@ -59,7 +59,7 @@ export function CtaSection() {
 
                   <a
                     href={`tel:+30${contactInfo.phone.replace(/\s/g, "")}`}
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full border border-white/30 text-white font-semibold text-sm hover:bg-white/10 transition-colors"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full border border-white/30 text-paper font-semibold text-sm hover:bg-white/10 transition-colors"
                   >
                     <Phone className="w-4 h-4" />
                     <span>{t("ctaSection.callNow")}</span>
@@ -67,7 +67,7 @@ export function CtaSection() {
 
                   <a
                     href={contactInfo.viberHref}
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full border border-white/30 text-white font-semibold text-sm hover:bg-white/10 transition-colors"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full border border-white/30 text-paper font-semibold text-sm hover:bg-white/10 transition-colors"
                   >
                     <MessageCircle className="w-4 h-4" />
                     <span>{t("ctaSection.viber")}</span>
@@ -104,13 +104,13 @@ export function CtaSection() {
                     className="flex items-center gap-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/15 p-4"
                   >
                     <div className="w-11 h-11 rounded-xl bg-white/15 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-5 h-5 text-white" />
+                      <item.icon className="w-5 h-5 text-paper" />
                     </div>
                     <div>
-                      <span className="block text-sm font-bold text-white">
+                      <span className="block text-sm font-bold text-paper">
                         {item.title}
                       </span>
-                      <span className="block text-xs text-white/70 mt-0.5">
+                      <span className="block text-xs text-paper/78 mt-0.5">
                         {item.value}
                       </span>
                     </div>

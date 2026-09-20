@@ -12,7 +12,7 @@ export function BrutalCard({
 }) {
     const variants = {
         default: {
-            bg: "bg-[#0c1222]",
+            bg: "bg-surface-3",
             border: "border-white/10",
             shadow: "shadow-[4px_4px_0px_0px_hsl(var(--primary))]",
             shadowHover: "hover:shadow-[8px_8px_0px_0px_hsl(var(--primary))]",
@@ -68,7 +68,7 @@ export function GlitchCard({ children, className }) {
             <div className="absolute inset-0 bg-cyan-500/20 -translate-x-1 -translate-y-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
 
             {/* Main card */}
-            <div className="relative bg-[#0c1222] border border-white/10">
+            <div className="relative bg-surface-3 border border-white/10">
                 {children}
             </div>
         </div>
@@ -79,7 +79,7 @@ export function ClipCard({ children, className, clipSize = 20 }) {
     return (
         <div
             className={cn(
-                "relative bg-[#0c1222] border border-white/10",
+                "relative bg-surface-3 border border-white/10",
                 className
             )}
             style={{
@@ -112,14 +112,14 @@ export function NumberedCard({ number, children, className }) {
     return (
         <div className={cn("relative", className)}>
             {/* Large background number */}
-            <span className="absolute -top-6 -left-2 text-[120px] font-bold text-white/[0.02] leading-none select-none pointer-events-none">
+            <span className="absolute -top-6 -left-2 text-[120px] font-bold text-paper/[0.02] leading-none select-none pointer-events-none">
                 {String(number).padStart(2, '0')}
             </span>
 
             {/* Card content */}
             <div className="relative bg-white/[0.02] border border-white/10 backdrop-blur-sm">
                 {/* Number indicator */}
-                <div className="absolute -top-3 left-6 px-3 py-1 bg-primary text-white text-xs font-bold">
+                <div className="absolute -top-3 left-6 px-3 py-1 bg-primary text-paper text-xs font-bold">
                     {String(number).padStart(2, '0')}
                 </div>
                 {children}
@@ -144,7 +144,7 @@ export function StackedCard({ children, className, layers = 2 }) {
             ))}
 
             {/* Main card */}
-            <div className="relative bg-[#0c1222] border border-white/10">
+            <div className="relative bg-surface-3 border border-white/10">
                 {children}
             </div>
         </div>

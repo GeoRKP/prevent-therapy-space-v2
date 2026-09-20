@@ -12,7 +12,7 @@ export function ConditionsSection() {
   if (!ready) return null;
 
   return (
-    <section className="relative section-pad overflow-hidden bg-[#070b14]">
+    <section className="relative section-pad overflow-hidden bg-surface-1">
       <div className="container relative z-10">
         <SectionHeading
           label={t("home:conditions.label")}
@@ -28,21 +28,21 @@ export function ConditionsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.05 + i * 0.04 }}
-              className="group bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 transition-all"
+              className="group bg-surface hover:bg-surface-2 border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 transition-all"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="w-11 h-11 rounded-xl bg-primary-soft/10 group-hover:bg-primary-soft/15 flex items-center justify-center transition-colors">
                   <Icon className="w-5 h-5 text-primary-soft" />
                 </div>
-                <span className="text-xs font-mono text-white/20 group-hover:text-primary-soft transition-colors">
+                <span className="text-xs font-mono text-paper/30 group-hover:text-primary-soft transition-colors">
                   {String(i + 1).padStart(2, "0")}
                 </span>
               </div>
 
-              <h3 className="text-base font-bold text-white mb-1.5 group-hover:text-primary-soft transition-colors">
+              <h3 className="text-base font-bold text-paper mb-1.5 group-hover:text-primary-soft transition-colors">
                 {t(`home:conditions.items.${key}.title`)}
               </h3>
-              <p className="text-sm text-white/50 leading-relaxed">
+              <p className="text-sm text-paper/64 leading-relaxed">
                 {t(`home:conditions.items.${key}.desc`)}
               </p>
             </motion.div>

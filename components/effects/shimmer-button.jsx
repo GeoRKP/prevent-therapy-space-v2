@@ -14,7 +14,7 @@ export function ShimmerButton({
   return (
     <button
       className={cn(
-        "group relative inline-flex h-12 items-center justify-center overflow-hidden px-8 font-bold uppercase tracking-wider text-sm text-white transition-all duration-300",
+        "group relative inline-flex h-12 items-center justify-center overflow-hidden px-8 font-bold uppercase tracking-wider text-sm text-paper transition-all duration-300",
         "hover:-translate-y-1",
         "active:translate-y-0",
         "disabled:opacity-50 disabled:hover:translate-y-0",
@@ -57,9 +57,9 @@ export function BrutalButton({
   ...props
 }) {
   const variants = {
-    primary: "bg-primary text-white hover:bg-primary/90",
-    outline: "bg-transparent border border-white/15 text-white hover:border-primary hover:text-primary",
-    ghost: "bg-transparent text-white/60 hover:text-white hover:bg-white/5",
+    primary: "bg-primary text-paper hover:bg-primary/90",
+    outline: "bg-transparent border border-white/15 text-paper hover:border-primary hover:text-primary",
+    ghost: "bg-transparent text-paper/72 hover:text-paper hover:bg-white/5",
   };
 
   const sizes = {

@@ -59,7 +59,7 @@ export function HexagonGrid({ className, size = 60, opacity = 0.04 }) {
                     <path d={hexPath} fill="none" stroke="currentColor" strokeWidth="1" transform={`translate(${size * 0.75},${size * Math.sqrt(3) / 2})`} />
                 </pattern>
             </defs>
-            <rect width="100%" height="100%" fill="url(#hexgrid)" className="text-white" />
+            <rect width="100%" height="100%" fill="url(#hexgrid)" className="text-paper" />
         </svg>
     );
 }

@@ -17,7 +17,7 @@ export function HowItWorks() {
   if (!ready) return null;
 
   return (
-    <section className="relative section-pad overflow-hidden bg-[#070b14]">
+    <section className="relative section-pad overflow-hidden bg-surface-1">
       <div className="container relative z-10">
         <SectionHeading
           label={t("howItWorks.label")}
@@ -35,21 +35,21 @@ export function HowItWorks() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="group relative bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-7 lg:p-8 transition-all"
+                className="group relative bg-surface hover:bg-surface-2 border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-7 lg:p-8 transition-all"
               >
                 <div className="flex items-start justify-between mb-6">
                   <div className="w-12 h-12 rounded-xl bg-primary-soft/10 group-hover:bg-primary-soft/15 flex items-center justify-center transition-colors">
                     <Icon className="w-5 h-5 text-primary-soft" />
                   </div>
-                  <span className="text-3xl font-bold text-white/[0.04] group-hover:text-primary-soft/15 transition-colors">
+                  <span className="text-3xl font-bold text-paper/[0.04] group-hover:text-primary-soft/15 transition-colors">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-white mb-2.5 group-hover:text-primary-soft transition-colors">
+                <h3 className="text-lg font-bold text-paper mb-2.5 group-hover:text-primary-soft transition-colors">
                   {t(`howItWorks.${step.key}Title`)}
                 </h3>
-                <p className="text-sm text-white/55 leading-relaxed">
+                <p className="text-sm text-paper/70 leading-relaxed">
                   {t(`howItWorks.${step.key}Desc`)}
                 </p>
               </motion.div>

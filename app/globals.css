@@ -15,6 +15,21 @@
   --color-white: #ffffff;
   --color-black: #000000;
 
+  /* Surfaces — βαθύ δασοπράσινο, ΟΧΙ μαύρο. Το παλιό #050810 (L≈3%) γινόταν
+     απόλυτο μαύρο σε OLED κινητά και το λευκό κείμενο «έλαμπε» (halation,
+     contrast ~20:1) — κούραζε. Κλίμακα ανύψωσης: surface (σελίδα) →
+     surface-1 (κάρτες) → surface-2 (hover/dropdown) → surface-3 (ανυψωμένο).
+     surface-deep μόνο για το footer. */
+  --color-surface: #162321;
+  --color-surface-1: #1c2b28;
+  --color-surface-2: #22342f;
+  --color-surface-3: #283d37;
+  --color-surface-deep: #101a18;
+
+  /* Κείμενο πάνω στα surfaces: ζεστό off-white αντί για καθαρό λευκό —
+     contrast ~14:1 αντί ~20:1, πολύ λιγότερο halation σε σκούρο φόντο. */
+  --color-paper: #f3f0e8;
+
   /* Responsive Breakpoints */
   --breakpoint-*: initial;
   --breakpoint-xxl: 1400px;
@@ -181,9 +196,11 @@
 /* Κάθετος ρυθμός sections — ΕΝΙΑΙΑ κλίμακα για όλο το site.
    Κάθε section χρησιμοποιεί .section-pad (όχι δικά του py-*), ώστε το κενό
    μεταξύ δύο διαδοχικών sections να είναι παντού σταθερό:
-   128px σε κινητό (2×64) και 192px σε desktop (2×96). */
+   96px σε κινητό (2×48) και 192px σε desktop (2×96). Στο κινητό κρατιέται
+   σφιχτό επίτηδες — το «άδειο σκούρο» ανάμεσα στα sections μετρούσε ως
+   επιπλέον σκοτάδι ανά scroll. */
 .section-pad {
-  padding-block: 4rem;
+  padding-block: 3rem;
 }
 @media (min-width: 1024px) {
   .section-pad {

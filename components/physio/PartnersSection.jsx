@@ -16,7 +16,7 @@ import {
 import { partners } from "@/data/partners";
 
 const cardBase =
-  "h-full bg-[#050810] border border-white/[0.06] rounded-2xl p-5";
+  "h-full bg-surface border border-white/[0.06] rounded-2xl p-5";
 
 function PartnerCardContent({ partner, name, role, note, t, interactive }) {
   return (
@@ -35,8 +35,8 @@ function PartnerCardContent({ partner, name, role, note, t, interactive }) {
         />
       </div>
 
-      <h3 className="text-lg font-bold text-white mb-1">{name}</h3>
-      <p className="text-sm text-white/55">{role}</p>
+      <h3 className="text-lg font-bold text-paper mb-1">{name}</h3>
+      <p className="text-sm text-paper/70">{role}</p>
 
       {note && (
         <span className="inline-block mt-3 text-xs font-semibold px-2.5 py-1 rounded-full bg-primary-soft/10 text-primary-soft whitespace-nowrap">
@@ -61,7 +61,7 @@ export function PartnersSection() {
   return (
     <section
       aria-labelledby="partners-heading"
-      className="relative section-pad overflow-hidden bg-[#070b14]"
+      className="relative section-pad overflow-hidden bg-surface-1"
     >
       <div className="container relative z-10">
         <SectionHeading
@@ -114,13 +114,13 @@ export function PartnersSection() {
                         aria-hidden="true"
                       />
                     </div>
-                    <h3 className="text-lg font-bold text-white">{role}</h3>
+                    <h3 className="text-lg font-bold text-paper">{role}</h3>
                     {roleDesc && (
-                      <p className="text-sm text-white/55 leading-relaxed">
+                      <p className="text-sm text-paper/70 leading-relaxed">
                         {roleDesc}
                       </p>
                     )}
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full border border-dashed border-white/20 text-white/60">
+                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full border border-dashed border-white/20 text-paper/72">
                       {t("partners.comingSoon")}
                     </span>
                   </div>
@@ -163,7 +163,7 @@ export function PartnersSection() {
                   <DialogTrigger asChild>
                     <button
                       type="button"
-                      className={`${cardBase} group block w-full text-left cursor-pointer transition-colors hover:bg-[#0a0f1a] hover:border-primary-soft/30`}
+                      className={`${cardBase} group block w-full text-left cursor-pointer transition-colors hover:bg-surface-2 hover:border-primary-soft/30`}
                     >
                       <PartnerCardContent
                         partner={partner}
@@ -178,7 +178,7 @@ export function PartnersSection() {
 
                   <DialogContent
                     closeLabel={t("partners.close")}
-                    className="w-[calc(100%-2rem)] max-w-xl max-h-[85vh] p-0 gap-0 flex flex-col bg-[#0a0f1a] border-white/10 rounded-2xl overflow-hidden"
+                    className="w-[calc(100%-2rem)] max-w-xl max-h-[85vh] p-0 gap-0 flex flex-col bg-surface-2 border-white/10 rounded-2xl overflow-hidden"
                   >
                     <DialogHeader className="flex-row items-center gap-4 space-y-0 p-6 pb-4 text-left">
                       <Image
@@ -189,10 +189,10 @@ export function PartnersSection() {
                         className="w-16 h-16 rounded-xl object-cover object-top shrink-0"
                       />
                       <div>
-                        <DialogTitle className="text-white leading-snug">
+                        <DialogTitle className="text-paper leading-snug">
                           {name}
                         </DialogTitle>
-                        <DialogDescription className="text-white/55 mt-1">
+                        <DialogDescription className="text-paper/70 mt-1">
                           {role}
                         </DialogDescription>
                       </div>
@@ -204,7 +204,7 @@ export function PartnersSection() {
                           {credentials.map((credential) => (
                             <li
                               key={credential}
-                              className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-full bg-white/[0.06] border border-white/10 text-white/75"
+                              className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-full bg-white/[0.06] border border-white/10 text-paper/82"
                             >
                               <GraduationCap
                                 className="w-3.5 h-3.5 text-primary-soft shrink-0"
@@ -219,7 +219,7 @@ export function PartnersSection() {
                       {bio.map((paragraph, j) => (
                         <p
                           key={j}
-                          className="text-sm text-white/70 leading-relaxed"
+                          className="text-sm text-paper/78 leading-relaxed"
                         >
                           {paragraph}
                         </p>

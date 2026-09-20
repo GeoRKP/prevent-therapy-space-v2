@@ -53,7 +53,7 @@ export default function RootLayout({ children }) {
         />
       </head>
 
-      <body className="min-h-screen flex flex-col bg-[#050810] text-white antialiased">
+      <body className="min-h-screen flex flex-col bg-surface text-paper antialiased">
         <AppShell>{children}</AppShell>
       </body>
     </html>
