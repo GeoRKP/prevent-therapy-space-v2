@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, MessageCircle, ArrowUpRight, X } from "lucide-react";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
-import { ThemeToggle } from "@/components/common/ThemeToggle";
 import { cn } from "@/lib/utils";
 
 export default function Header1() {
@@ -54,8 +53,8 @@ export default function Header1() {
           className={cn(
             "absolute inset-0 transition-all duration-500",
             isScrolled
-              ? "bg-canvas/95 backdrop-blur-xl border-b border-ink/[0.06]"
-              : "bg-gradient-to-b from-canvas/85 to-transparent"
+              ? "bg-[#050810]/95 backdrop-blur-xl border-b border-white/[0.06]"
+              : "bg-gradient-to-b from-[#050810]/85 to-transparent"
           )}
         />
 
@@ -82,8 +81,8 @@ export default function Header1() {
                     className={cn(
                       "relative px-4 py-2 rounded-full text-sm font-medium transition-colors duration-300",
                       isActive
-                        ? "text-brand bg-brand/10"
-                        : "text-ink-70 hover:text-ink hover:bg-ink/[0.04]"
+                        ? "text-primary-soft bg-primary-soft/10"
+                        : "text-white/70 hover:text-white hover:bg-white/[0.04]"
                     )}
                   >
                     {ready ? t(`common:navigation.${link.key}`) : link.key}
@@ -96,35 +95,33 @@ export default function Header1() {
               <div className="hidden lg:flex items-center gap-3">
                 <a
                   href="tel:+306972952263"
-                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-ink-70 hover:text-ink hover:bg-ink/[0.04] transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/[0.04] transition-colors"
                 >
-                  <Phone className="w-4 h-4 text-brand" />
+                  <Phone className="w-4 h-4 text-primary-soft" />
                   <span className="hidden xl:inline">
                     {ready ? t("header:contact.phone") : "697 295 2263"}
                   </span>
                 </a>
                 <a
                   href="viber://chat?number=%2B306972952263"
-                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-ink-70 hover:text-ink hover:bg-ink/[0.04] transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/[0.04] transition-colors"
                 >
-                  <MessageCircle className="w-4 h-4 text-brand" />
+                  <MessageCircle className="w-4 h-4 text-primary-soft" />
                   <span className="hidden xl:inline">Viber</span>
                 </a>
-                <ThemeToggle />
                 <LanguageSwitcher />
                 <Link
                   href="/booking"
-                  className="ml-1 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-brand text-brand-fg hover:bg-brand/90 transition-colors"
+                  className="ml-1 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-primary-soft text-primary-soft-foreground hover:bg-primary-soft/90 transition-colors"
                 >
                   {ready ? t("common:navigation.booking") : "Book"}
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
 
-              <ThemeToggle className="lg:hidden relative z-[1002]" />
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden relative z-[1002] w-10 h-10 flex items-center justify-center text-ink-80"
+                className="lg:hidden relative z-[1002] w-10 h-10 flex items-center justify-center text-white/80"
                 aria-label={
                   isMobileMenuOpen
                     ? t("header:aria.closeMenu")
@@ -133,18 +130,18 @@ export default function Header1() {
               >
                 <div className="relative w-5 h-3.5 flex flex-col justify-between">
                   <motion.span
-                    className="w-full h-0.5 bg-ink origin-left rounded-full"
+                    className="w-full h-0.5 bg-white origin-left rounded-full"
                     animate={{ rotate: isMobileMenuOpen ? 45 : 0 }}
                   />
                   <motion.span
-                    className="w-full h-0.5 bg-ink rounded-full"
+                    className="w-full h-0.5 bg-white rounded-full"
                     animate={{
                       opacity: isMobileMenuOpen ? 0 : 1,
                       scaleX: isMobileMenuOpen ? 0 : 1,
                     }}
                   />
                   <motion.span
-                    className="w-full h-0.5 bg-ink origin-left rounded-full"
+                    className="w-full h-0.5 bg-white origin-left rounded-full"
                     animate={{
                       rotate: isMobileMenuOpen ? -45 : 0,
                       y: isMobileMenuOpen ? -2 : 0,
@@ -164,11 +161,11 @@ export default function Header1() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[1001] bg-canvas"
+            className="fixed inset-0 z-[1001] bg-[#050810]"
           >
             <button
               onClick={() => setIsMobileMenuOpen(false)}
-              className="absolute top-5 right-5 z-[1002] w-12 h-12 flex items-center justify-center text-ink-80 hover:text-brand transition-colors bg-ink/5 hover:bg-ink/10 rounded-full"
+              className="absolute top-5 right-5 z-[1002] w-12 h-12 flex items-center justify-center text-white/80 hover:text-primary-soft transition-colors bg-white/5 hover:bg-white/10 rounded-full"
               aria-label={t("header:aria.closeMenu")}
             >
               <X className="w-5 h-5" />
@@ -192,8 +189,8 @@ export default function Header1() {
                           className={cn(
                             "group flex items-center justify-between py-4 px-5 rounded-2xl transition-colors",
                             isActive
-                              ? "bg-brand/10 text-brand"
-                              : "text-ink-85 hover:bg-ink/[0.04]"
+                              ? "bg-primary-soft/10 text-primary-soft"
+                              : "text-white/85 hover:bg-white/[0.04]"
                           )}
                         >
                           <span className="text-xl font-semibold tracking-tight">
@@ -203,8 +200,8 @@ export default function Header1() {
                             className={cn(
                               "w-5 h-5 transition-all",
                               isActive
-                                ? "text-brand"
-                                : "text-ink-30 group-hover:text-ink-60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                                ? "text-primary-soft"
+                                : "text-white/30 group-hover:text-white/60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                             )}
                           />
                         </Link>
@@ -218,12 +215,12 @@ export default function Header1() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.4 }}
-                className="pt-8 border-t border-ink/10 space-y-3"
+                className="pt-8 border-t border-white/10 space-y-3"
               >
                 <Link
                   href="/booking"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full font-semibold bg-brand text-brand-fg hover:bg-brand/90 transition-colors"
+                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full font-semibold bg-primary-soft text-primary-soft-foreground hover:bg-primary-soft/90 transition-colors"
                 >
                   {t("common:navigation.booking")}
                   <ArrowUpRight className="w-4 h-4" />
@@ -231,18 +228,18 @@ export default function Header1() {
                 <div className="flex gap-3">
                   <a
                     href="tel:+306972952263"
-                    className="flex items-center justify-center gap-3 flex-1 py-3.5 rounded-full text-ink-70 border border-ink/10 hover:border-primary/30 hover:text-ink transition-colors"
+                    className="flex items-center justify-center gap-3 flex-1 py-3.5 rounded-full text-white/70 border border-white/10 hover:border-primary/30 hover:text-white transition-colors"
                   >
-                    <Phone className="w-4 h-4 text-brand" />
+                    <Phone className="w-4 h-4 text-primary-soft" />
                     <span className="text-sm font-medium">
                       {t("header:contact.phone")}
                     </span>
                   </a>
                   <a
                     href="viber://chat?number=%2B306972952263"
-                    className="flex items-center justify-center gap-3 flex-1 py-3.5 rounded-full text-ink-70 border border-ink/10 hover:border-primary/30 hover:text-ink transition-colors"
+                    className="flex items-center justify-center gap-3 flex-1 py-3.5 rounded-full text-white/70 border border-white/10 hover:border-primary/30 hover:text-white transition-colors"
                   >
-                    <MessageCircle className="w-4 h-4 text-brand" />
+                    <MessageCircle className="w-4 h-4 text-primary-soft" />
                     <span className="text-sm font-medium">Viber</span>
                   </a>
                 </div>

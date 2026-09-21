@@ -12,7 +12,7 @@ export function TeamPreview() {
   const lang = i18n.language === "en" ? "en" : "el";
 
   return (
-    <section className="relative section-pad overflow-hidden bg-canvas">
+    <section className="relative section-pad overflow-hidden bg-[#050810]">
       <div className="container relative z-10">
         <SectionHeading
           label={t("home:team.label")}
@@ -34,7 +34,7 @@ export function TeamPreview() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.6 }}
-              className="group relative bg-canvas-1 hover:bg-canvas-2 border border-ink/[0.06] hover:border-brand/30 rounded-3xl p-6 lg:p-8 transition-all"
+              className="group relative bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-3xl p-6 lg:p-8 transition-all"
             >
               <div className="relative aspect-[4/5] overflow-hidden rounded-2xl mb-5">
                 <Image
@@ -44,19 +44,19 @@ export function TeamPreview() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-canvas-1/70 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#070b14]/70 via-transparent to-transparent" />
               </div>
 
               <div className="flex items-start justify-between mb-2.5 gap-3">
-                <h3 className="text-xl font-bold text-ink group-hover:text-brand transition-colors">
+                <h3 className="text-xl font-bold text-white group-hover:text-primary-soft transition-colors">
                   {t(`about:team.members.${member.id}.name`)}
                 </h3>
-                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand/10 text-brand uppercase tracking-wider">
+                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-primary-soft/10 text-primary-soft uppercase tracking-wider">
                   {t(`about:team.members.${member.id}.credentials`)}
                 </span>
               </div>
 
-              <p className="text-sm text-ink-55 mb-4">
+              <p className="text-sm text-white/55 mb-4">
                 {t(`about:team.members.${member.id}.role`)}
               </p>
 
@@ -64,7 +64,7 @@ export function TeamPreview() {
                 {member.specialties[lang].map((s) => (
                   <span
                     key={s}
-                    className="text-xs font-medium px-3 py-1 rounded-full border border-ink/[0.08] bg-ink/[0.02] text-ink-65"
+                    className="text-xs font-medium px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] text-white/65"
                   >
                     {s}
                   </span>

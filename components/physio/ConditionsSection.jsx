@@ -12,7 +12,7 @@ export function ConditionsSection() {
   if (!ready) return null;
 
   return (
-    <section className="relative section-pad overflow-hidden bg-canvas-1">
+    <section className="relative section-pad overflow-hidden bg-[#070b14]">
       <div className="container relative z-10">
         <SectionHeading
           label={t("home:conditions.label")}
@@ -28,21 +28,21 @@ export function ConditionsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.05 + i * 0.04 }}
-              className="group bg-canvas hover:bg-canvas-2 border border-ink/[0.06] hover:border-brand/30 rounded-2xl p-6 transition-all"
+              className="group bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 transition-all"
             >
               <div className="flex items-start justify-between mb-4">
-                <div className="w-11 h-11 rounded-xl bg-brand/10 group-hover:bg-brand/15 flex items-center justify-center transition-colors">
-                  <Icon className="w-5 h-5 text-brand" />
+                <div className="w-11 h-11 rounded-xl bg-primary-soft/10 group-hover:bg-primary-soft/15 flex items-center justify-center transition-colors">
+                  <Icon className="w-5 h-5 text-primary-soft" />
                 </div>
-                <span className="text-xs font-mono text-ink-20 group-hover:text-brand transition-colors">
+                <span className="text-xs font-mono text-white/20 group-hover:text-primary-soft transition-colors">
                   {String(i + 1).padStart(2, "0")}
                 </span>
               </div>
 
-              <h3 className="text-base font-bold text-ink mb-1.5 group-hover:text-brand transition-colors">
+              <h3 className="text-base font-bold text-white mb-1.5 group-hover:text-primary-soft transition-colors">
                 {t(`home:conditions.items.${key}.title`)}
               </h3>
-              <p className="text-sm text-ink-50 leading-relaxed">
+              <p className="text-sm text-white/50 leading-relaxed">
                 {t(`home:conditions.items.${key}.desc`)}
               </p>
             </motion.div>
@@ -52,7 +52,7 @@ export function ConditionsSection() {
         <div className="text-center mt-14">
           <Link
             href="/booking"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-brand text-brand-fg font-semibold text-sm hover:bg-brand/90 transition-colors"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary-soft text-primary-soft-foreground font-semibold text-sm hover:bg-primary-soft/90 transition-colors"
           >
             <span>{t("common:actions.bookAppointment")}</span>
             <ArrowUpRight className="w-4 h-4" />

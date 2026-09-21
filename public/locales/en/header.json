@@ -1,7 +1,5 @@
 {
-  "logo": {
-    "alt": "PREVENT Therapy Space"
-  },
+  "logo": { "alt": "PREVENT Therapy Space" },
   "contact": {
     "phone": "697 295 2263",
     "email": "info@preventtherapy.gr"
@@ -9,9 +7,5 @@
   "aria": {
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
-  },
-  "theme": {
-    "toLight": "Switch to light theme",
-    "toDark": "Switch to dark theme"
   }
 }

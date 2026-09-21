@@ -69,13 +69,13 @@ export function Hero() {
 
   if (!ready) {
     return (
-      <section className="relative min-h-[92svh] bg-canvas flex items-center">
+      <section className="relative min-h-[92svh] bg-[#050810] flex items-center">
         <div className="container">
           <div className="max-w-4xl">
-            <div className="w-32 h-6 bg-ink/5 rounded mb-8" />
+            <div className="w-32 h-6 bg-white/5 rounded mb-8" />
             <div className="space-y-4 mb-8">
-              <div className="w-full h-16 bg-ink/5 rounded" />
-              <div className="w-3/4 h-16 bg-ink/5 rounded" />
+              <div className="w-full h-16 bg-white/5 rounded" />
+              <div className="w-3/4 h-16 bg-white/5 rounded" />
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative min-h-[92svh] bg-canvas overflow-hidden"
+      className="relative min-h-[92svh] bg-[#050810] overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -116,9 +116,9 @@ export function Hero() {
       </AnimatePresence>
 
       {/* Scrim μόνο στο κινητό — κρατά το κείμενο αναγνώσιμο πάνω στη φωτογραφία */}
-      <div className="absolute inset-0 bg-canvas/45 lg:hidden" />
-      <div className="absolute inset-0 bg-gradient-to-r from-canvas/90 via-canvas/50 to-transparent lg:from-canvas lg:via-canvas/70 lg:to-canvas/30" />
-      <div className="absolute inset-0 bg-gradient-to-t from-canvas via-transparent to-canvas/60 lg:to-canvas/40" />
+      <div className="absolute inset-0 bg-[#050810]/45 lg:hidden" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#050810]/90 via-[#050810]/50 to-transparent lg:from-[#050810] lg:via-[#050810]/70 lg:to-[#050810]/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#050810] via-transparent to-[#050810]/60 lg:to-[#050810]/40" />
 
       <DiagonalLines className="opacity-[0.012]" spacing={100} />
 
@@ -135,8 +135,8 @@ export function Hero() {
               >
                 <RevealText delay={0.1}>
                   <div className="inline-flex items-center gap-3 mb-7">
-                    <div className="w-10 h-px bg-brand" />
-                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-60">
+                    <div className="w-10 h-px bg-primary-soft" />
+                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">
                       {t("home:hero.label")}
                     </span>
                   </div>
@@ -145,13 +145,13 @@ export function Hero() {
                 <div className="mb-6">
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1] tracking-tight">
                     <RevealText delay={0.2}>
-                      <span className="block text-ink">
+                      <span className="block text-white">
                         {heroSlides[currentSlide].title}
                       </span>
                     </RevealText>
                     <RevealText delay={0.3}>
                       <span className="block mt-2">
-                        <span className="relative inline-block text-brand">
+                        <span className="relative inline-block text-primary-soft">
                           {heroSlides[currentSlide].highlight}
                         </span>
                       </span>
@@ -160,7 +160,7 @@ export function Hero() {
                 </div>
 
                 <RevealText delay={0.4}>
-                  <p className="text-lg lg:text-xl text-ink-60 max-w-xl mb-10 leading-relaxed font-light">
+                  <p className="text-lg lg:text-xl text-white/60 max-w-xl mb-10 leading-relaxed font-light">
                     {heroSlides[currentSlide].subtitle}
                   </p>
                 </RevealText>
@@ -169,7 +169,7 @@ export function Hero() {
                   <div className="flex flex-wrap gap-3">
                     <Link
                       href="/booking"
-                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-brand text-brand-fg font-semibold text-sm rounded-full hover:bg-brand/90 transition-all hover:gap-3"
+                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-primary-soft text-primary-soft-foreground font-semibold text-sm rounded-full hover:bg-primary-soft/90 transition-all hover:gap-3"
                     >
                       {t("home:hero.ctaPrimary")}
                       <ArrowRight className="w-4 h-4 transition-transform" />
@@ -177,7 +177,7 @@ export function Hero() {
 
                     <Link
                       href="/contact"
-                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 border border-ink/20 text-ink-90 font-semibold text-sm rounded-full hover:border-brand/60 hover:text-brand hover:bg-ink/[0.02] transition-all"
+                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 border border-white/20 text-white/90 font-semibold text-sm rounded-full hover:border-primary-soft/60 hover:text-primary-soft hover:bg-white/[0.02] transition-all"
                     >
                       <Phone className="w-4 h-4" />
                       {t("common:actions.contactUs")}
@@ -191,15 +191,15 @@ export function Hero() {
           <div className="lg:col-span-5 hidden lg:block">
             <div className="relative w-full max-w-[360px] xl:max-w-[400px] ml-auto">
               {/* Διακοσμητικές γωνίες */}
-              <div className="absolute -top-4 -left-4 w-20 h-20 border-t-2 border-l-2 border-brand/30 rounded-tl-3xl" />
-              <div className="absolute -bottom-4 -right-4 w-20 h-20 border-b-2 border-r-2 border-brand/30 rounded-br-3xl" />
+              <div className="absolute -top-4 -left-4 w-20 h-20 border-t-2 border-l-2 border-primary-soft/30 rounded-tl-3xl" />
+              <div className="absolute -bottom-4 -right-4 w-20 h-20 border-b-2 border-r-2 border-primary-soft/30 rounded-br-3xl" />
 
               {/* Κάρτα 2:3 — ίδιο aspect με τις portrait φωτογραφίες */}
               <div className="relative aspect-[2/3]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
-                    className="absolute inset-0 rounded-2xl overflow-hidden ring-1 ring-ink/10 shadow-2xl shadow-black/40"
+                    className="absolute inset-0 rounded-2xl overflow-hidden ring-1 ring-white/10 shadow-2xl shadow-black/40"
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -16 }}
@@ -215,7 +215,7 @@ export function Hero() {
                       sizes="(min-width: 1280px) 440px, (min-width: 1024px) 400px, 0px"
                       quality={90}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-canvas/35 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#050810]/35 via-transparent to-transparent" />
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -236,15 +236,15 @@ export function Hero() {
                     <span
                       className={cn(
                         "text-xs font-mono transition-colors",
-                        index === currentSlide ? "text-brand" : "text-ink-50"
+                        index === currentSlide ? "text-primary-soft" : "text-white/50"
                       )}
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <div className="relative w-12 h-0.5 bg-ink/15 overflow-hidden rounded-full">
+                    <div className="relative w-12 h-0.5 bg-white/15 overflow-hidden rounded-full">
                       {index === currentSlide && (
                         <motion.div
-                          className="absolute inset-y-0 left-0 bg-brand rounded-full"
+                          className="absolute inset-y-0 left-0 bg-primary-soft rounded-full"
                           initial={{ width: "0%" }}
                           animate={{ width: "100%" }}
                           transition={{ duration: 7, ease: "linear" }}
@@ -261,15 +261,15 @@ export function Hero() {
 
       {/* Bottom marquee — softer */}
       <div className="absolute bottom-0 left-0 right-0 z-20">
-        <div className="border-t border-ink/[0.06] py-3 bg-canvas/85 backdrop-blur-sm overflow-hidden">
+        <div className="border-t border-white/[0.06] py-3 bg-[#050810]/85 backdrop-blur-sm overflow-hidden">
           <MarqueeText
             text={t("home:hero.marquee")}
-            className="text-[10px] font-semibold uppercase tracking-[0.25em] text-ink-25"
+            className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/25"
             speed={35}
           />
         </div>
 
-        <div className="lg:hidden border-t border-ink/[0.06] py-4 bg-canvas/90 backdrop-blur-sm">
+        <div className="lg:hidden border-t border-white/[0.06] py-4 bg-[#050810]/90 backdrop-blur-sm">
           <div className="container flex items-center justify-between">
             <div className="flex gap-2">
               {heroSlides.map((_, index) => (
@@ -279,13 +279,13 @@ export function Hero() {
                   className={cn(
                     "h-1 transition-all duration-300 rounded-full",
                     index === currentSlide
-                      ? "w-8 bg-brand"
-                      : "w-4 bg-ink/15"
+                      ? "w-8 bg-primary-soft"
+                      : "w-4 bg-white/15"
                   )}
                 />
               ))}
             </div>
-            <span className="text-xs font-mono text-ink-55">
+            <span className="text-xs font-mono text-white/55">
               {String(currentSlide + 1).padStart(2, "0")} /{" "}
               {String(heroSlides.length).padStart(2, "0")}
             </span>

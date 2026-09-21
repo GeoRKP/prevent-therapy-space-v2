@@ -21,32 +21,32 @@ export function AboutFrenaSection({ asPageIntro = false }) {
   const points = t("aboutSection.points", { returnObjects: true }) || [];
 
   return (
-    <section className="relative section-pad overflow-hidden bg-canvas">
+    <section className="relative section-pad overflow-hidden bg-[#050810]">
       <div className="container relative z-10">
         {!asPageIntro && (
         <div className="mb-16 lg:mb-20">
           <RevealText>
             <div className="flex items-center gap-3 mb-5">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-50">
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
                 {t("aboutSection.badge")}
               </span>
-              <div className="flex-1 h-px bg-gradient-to-r from-ink/10 to-transparent" />
+              <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent" />
             </div>
           </RevealText>
 
           <div className="grid lg:grid-cols-2 gap-10 items-end">
             <RevealText delay={0.1}>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
-                <span className="text-ink">{t("aboutSection.title")}</span>
+                <span className="text-white">{t("aboutSection.title")}</span>
                 <br />
-                <span className="text-brand">
+                <span className="text-primary-soft">
                   {t("aboutSection.subtitle")}
                 </span>
               </h2>
             </RevealText>
 
             <RevealText delay={0.2}>
-              <p className="text-base lg:text-lg text-ink-55 leading-relaxed lg:max-w-md">
+              <p className="text-base lg:text-lg text-white/55 leading-relaxed lg:max-w-md">
                 {t("aboutSection.description")}
               </p>
             </RevealText>
@@ -72,15 +72,15 @@ export function AboutFrenaSection({ asPageIntro = false }) {
                   style={{ objectPosition: "center 25%" }}
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-canvas via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050810] via-transparent to-transparent" />
               </div>
 
               <div className="absolute bottom-5 left-5 right-5">
-                <div className="bg-canvas/90 backdrop-blur-xl border border-ink/10 rounded-2xl p-5">
-                  <span className="text-3xl font-bold text-brand">
+                <div className="bg-[#050810]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-5">
+                  <span className="text-3xl font-bold text-primary-soft">
                     {t("aboutSection.experience.value")}
                   </span>
-                  <span className="block text-sm text-ink-65 mt-1">
+                  <span className="block text-sm text-white/65 mt-1">
                     {t("aboutSection.experience.label")}
                   </span>
                 </div>
@@ -93,7 +93,7 @@ export function AboutFrenaSection({ asPageIntro = false }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="relative aspect-square rounded-2xl overflow-hidden border border-ink/[0.06]"
+                className="relative aspect-square rounded-2xl overflow-hidden border border-white/[0.06]"
               >
                 <Image
                   src="/images/clinic/beautiful-chropractor-bed-photo.jpg"
@@ -102,7 +102,7 @@ export function AboutFrenaSection({ asPageIntro = false }) {
                   className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 20vw"
                 />
-                <div className="absolute inset-0 bg-dim/30" />
+                <div className="absolute inset-0 bg-[#050810]/30" />
               </motion.div>
 
               <motion.div
@@ -110,7 +110,7 @@ export function AboutFrenaSection({ asPageIntro = false }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="relative aspect-square rounded-2xl overflow-hidden border border-ink/[0.06]"
+                className="relative aspect-square rounded-2xl overflow-hidden border border-white/[0.06]"
               >
                 <Image
                   src="/images/clinic/inner-space-and-equipment.jpg"
@@ -119,7 +119,7 @@ export function AboutFrenaSection({ asPageIntro = false }) {
                   className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 20vw"
                 />
-                <div className="absolute inset-0 bg-dim/30" />
+                <div className="absolute inset-0 bg-[#050810]/30" />
               </motion.div>
             </div>
           </div>
@@ -133,20 +133,20 @@ export function AboutFrenaSection({ asPageIntro = false }) {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
               >
-                <div className="group relative bg-canvas-1 hover:bg-canvas-2 border border-ink/[0.06] hover:border-brand/30 rounded-2xl p-6 lg:p-8 transition-all">
+                <div className="group relative bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 lg:p-8 transition-all">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-brand/10 flex items-center justify-center flex-shrink-0 text-sm font-bold text-brand">
+                    <div className="w-10 h-10 rounded-lg bg-primary-soft/10 flex items-center justify-center flex-shrink-0 text-sm font-bold text-primary-soft">
                       {String(index + 1).padStart(2, "0")}
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-lg font-bold text-ink mb-2 group-hover:text-brand transition-colors">
+                      <h4 className="text-lg font-bold text-white mb-2 group-hover:text-primary-soft transition-colors">
                         {point.title}
                       </h4>
-                      <p className="text-ink-55 leading-relaxed text-sm">
+                      <p className="text-white/55 leading-relaxed text-sm">
                         {point.text}
                       </p>
                     </div>
-                    <ArrowUpRight className="w-5 h-5 text-ink-20 group-hover:text-brand group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all flex-shrink-0" />
+                    <ArrowUpRight className="w-5 h-5 text-white/20 group-hover:text-primary-soft group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all flex-shrink-0" />
                   </div>
                 </div>
               </motion.div>
@@ -164,12 +164,12 @@ export function AboutFrenaSection({ asPageIntro = false }) {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <div>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-px bg-brand/70" />
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-50">
+                <div className="w-8 h-px bg-primary-soft/70" />
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
                   Google
                 </span>
               </div>
-              <h3 className="text-2xl lg:text-3xl font-bold text-ink tracking-tight">
+              <h3 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
                 {t("aboutSection.reviews.title")}
               </h3>
             </div>
@@ -178,18 +178,18 @@ export function AboutFrenaSection({ asPageIntro = false }) {
               href={googleReviews.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-5 py-3 rounded-full border border-ink/10 bg-ink/[0.02] hover:border-brand/40 transition-colors"
+              className="group inline-flex items-center gap-3 px-5 py-3 rounded-full border border-white/10 bg-white/[0.02] hover:border-primary-soft/40 transition-colors"
             >
               <span className="flex items-center gap-0.5" aria-hidden="true">
                 {[1, 2, 3, 4, 5].map((j) => (
-                  <Star key={j} className="w-3.5 h-3.5 fill-brand text-brand" />
+                  <Star key={j} className="w-3.5 h-3.5 fill-primary-soft text-primary-soft" />
                 ))}
               </span>
-              <span className="text-sm text-ink-70 group-hover:text-ink transition-colors">
-                <span className="font-bold text-ink">{rating}</span> ·{" "}
+              <span className="text-sm text-white/70 group-hover:text-white transition-colors">
+                <span className="font-bold text-white">{rating}</span> ·{" "}
                 {googleReviews.reviewCount} {t("aboutSection.reviews.googleLabel")}
               </span>
-              <ArrowUpRight className="w-4 h-4 text-ink-30 group-hover:text-brand transition-colors" />
+              <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-primary-soft transition-colors" />
             </a>
           </div>
 
@@ -201,24 +201,24 @@ export function AboutFrenaSection({ asPageIntro = false }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="flex flex-col bg-canvas-1 hover:bg-canvas-2 border border-ink/[0.06] hover:border-brand/30 rounded-2xl p-6 lg:p-7 transition-all"
+                className="flex flex-col bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 lg:p-7 transition-all"
               >
                 <div
                   className="flex items-center gap-0.5 mb-4"
                   aria-label={`${review.rating} / 5`}
                 >
                   {Array.from({ length: review.rating }).map((_, j) => (
-                    <Star key={j} className="w-3.5 h-3.5 fill-brand text-brand" />
+                    <Star key={j} className="w-3.5 h-3.5 fill-primary-soft text-primary-soft" />
                   ))}
                 </div>
-                <blockquote className="flex-1 text-sm text-ink-65 leading-relaxed mb-5">
+                <blockquote className="flex-1 text-sm text-white/65 leading-relaxed mb-5">
                   “{review.quote[lang]}”
                 </blockquote>
-                <figcaption className="pt-4 border-t border-ink/[0.06]">
-                  <span className="block text-sm font-bold text-ink">
+                <figcaption className="pt-4 border-t border-white/[0.06]">
+                  <span className="block text-sm font-bold text-white">
                     {review.name}
                   </span>
-                  <span className="block text-xs text-ink-40 mt-0.5">
+                  <span className="block text-xs text-white/40 mt-0.5">
                     {t("aboutSection.reviews.reviewSource")}
                   </span>
                 </figcaption>
