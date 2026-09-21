@@ -9,6 +9,7 @@ Sitemap: https://www.preventtherapy.gr/sitemap.xml
 # Disallow admin or private areas
 Disallow: /api/
 Disallow: /admin/
+Disallow: /palette
 
 User-agent: Googlebot
 Allow: /

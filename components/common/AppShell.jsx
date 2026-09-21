@@ -10,12 +10,14 @@ import { PhysioFooter } from "@/components/physio/PhysioFooter";
 import { Toaster } from "@/components/ui/sonner";
 import LanguageDetector from "@/components/common/LanguageDetector";
 import StructuredData from "@/components/common/StructuredData";
+import PaletteParam from "@/components/common/PaletteParam";
 
 export default function AppShell({ children }) {
   return (
     <MotionConfig reducedMotion="user">
       <LanguageDetector />
       <StructuredData />
+      <PaletteParam />
       <Header1 />
       <main className="flex-1">{children}</main>
       <PhysioFooter />

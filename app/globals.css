@@ -211,6 +211,39 @@
   .text-white\/65 { color: rgb(255 255 255 / 0.78); }
 }
 
+/* ΔΟΚΙΜΗ ΠΑΛΕΤΑΣ ΚΙΝΗΤΟΥ (προσωρινό, μέχρι να αποφασίσει ο πελάτης) — τρία
+   στιλ φόντου/κάρτας, ενεργά μόνο με data-palette στον γονέα (η σελίδα
+   /palette το βάζει ανά μπλοκ, το ?palette=… το βάζει στο <html>). Το navy
+   #050810 «μπλεδίζει» μόλις ανασηκωθεί· εδώ αλλάζει η απόχρωση των
+   επιφανειών, όχι μόνο η ένταση. Σειρά: φόντο σελίδας / εναλλασσόμενο
+   section / κάρτα. Όταν επιλεγεί ένα, οι τιμές του γίνονται οι κανονικές
+   max-lg: κλάσεις και το μπλοκ αυτό φεύγει. */
+@media (max-width: 991.98px) {
+  /* Α · Πετρόλ — γέφυρα ανάμεσα στο navy και το mint */
+  [data-palette="teal"] .bg-\[\#050810\] { background-color: #070a0b; }
+  [data-palette="teal"] .bg-\[\#070b14\],
+  [data-palette="teal"] .max-lg\:bg-\[\#0a1019\] { background-color: #0d1315; }
+  [data-palette="teal"] .max-lg\:bg-\[\#0f1622\] { background-color: #141c1e; border-color: rgb(255 255 255 / 0.10); }
+  [data-palette="teal"] .bg-\[\#050810\]\/95, [data-palette="teal"] .bg-\[\#050810\]\/90,
+  [data-palette="teal"] .bg-\[\#050810\]\/85 { background-color: rgb(7 10 11 / 0.92); }
+
+  /* Β · Γραφίτης — ουδέτερο, επίπεδα «σωστού» dark mode */
+  [data-palette="graphite"] .bg-\[\#050810\] { background-color: #101214; }
+  [data-palette="graphite"] .bg-\[\#070b14\],
+  [data-palette="graphite"] .max-lg\:bg-\[\#0a1019\] { background-color: #171a1d; }
+  [data-palette="graphite"] .max-lg\:bg-\[\#0f1622\] { background-color: #1f2327; border-color: rgb(255 255 255 / 0.12); }
+  [data-palette="graphite"] .bg-\[\#050810\]\/95, [data-palette="graphite"] .bg-\[\#050810\]\/90,
+  [data-palette="graphite"] .bg-\[\#050810\]\/85 { background-color: rgb(16 18 20 / 0.92); }
+
+  /* Γ · Φασκόμηλο — ζεστό σκούρο πράσινο, δένει με το mint και το ξύλο */
+  [data-palette="sage"] .bg-\[\#050810\] { background-color: #0c100f; }
+  [data-palette="sage"] .bg-\[\#070b14\],
+  [data-palette="sage"] .max-lg\:bg-\[\#0a1019\] { background-color: #131917; }
+  [data-palette="sage"] .max-lg\:bg-\[\#0f1622\] { background-color: #1a2220; border-color: rgb(255 255 255 / 0.11); }
+  [data-palette="sage"] .bg-\[\#050810\]\/95, [data-palette="sage"] .bg-\[\#050810\]\/90,
+  [data-palette="sage"] .bg-\[\#050810\]\/85 { background-color: rgb(12 16 15 / 0.92); }
+}
+
 ::selection {
   background-color: hsl(var(--primary) / 0.25);
   color: hsl(var(--foreground));
