@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 // Τα τρία δοκιμαστικά στιλ για το κινητό (βλ. /palette και globals.css).
 export const PALETTES = [
@@ -13,7 +14,10 @@ export const PALETTES = [
 // site να φαίνεται με το στιλ αυτό· η επιλογή κρατιέται για τη συνεδρία
 // (sessionStorage), ?palette=off την καθαρίζει. Χωρίς παράμετρο και χωρίς
 // αποθηκευμένη επιλογή δεν κάνει τίποτα — το site είναι ως έχει.
+// Τρέχει ξανά σε κάθε αλλαγή διαδρομής (το AppShell δεν ξαναμοντάρεται σε
+// client-side navigation, οπότε το [] θα διάβαζε την παράμετρο μόνο μία φορά).
 export default function PaletteParam() {
+  const pathname = usePathname();
   useEffect(() => {
     const ids = PALETTES.map((p) => p.id);
     let wanted = null;
@@ -33,6 +37,6 @@ export default function PaletteParam() {
     }
     if (wanted) document.documentElement.setAttribute("data-palette", wanted);
     else document.documentElement.removeAttribute("data-palette");
-  }, []);
+  }, [pathname]);
   return null;
 }
