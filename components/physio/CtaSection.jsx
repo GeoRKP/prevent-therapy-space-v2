@@ -19,7 +19,7 @@ export function CtaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary to-secondary p-10 lg:p-16 max-w-6xl mx-auto"
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary to-secondary p-10 lg:p-16 max-lg:p-7 max-w-6xl mx-auto"
         >
           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/[0.06] rounded-full blur-[150px] -translate-y-1/3 translate-x-1/3 pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-white/[0.04] rounded-full blur-[120px] translate-y-1/3 -translate-x-1/3 pointer-events-none" />

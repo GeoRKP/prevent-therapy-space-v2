@@ -17,7 +17,7 @@ export function HowItWorks() {
   if (!ready) return null;
 
   return (
-    <section className="relative section-pad overflow-hidden bg-[#070b14]">
+    <section className="relative section-pad overflow-hidden bg-[#070b14] max-lg:bg-[#0a1019]">
       <div className="container relative z-10">
         <SectionHeading
           label={t("howItWorks.label")}
@@ -25,7 +25,7 @@ export function HowItWorks() {
           subtitle={t("howItWorks.subtitle")}
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-lg:gap-3 max-w-7xl mx-auto">
           {steps.map((step, i) => {
             const Icon = step.icon;
             return (
@@ -35,23 +35,25 @@ export function HowItWorks() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6 }}
-                className="group relative bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-7 lg:p-8 transition-all"
+                className="group relative bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-7 lg:p-8 transition-all max-lg:flex max-lg:items-start max-lg:gap-4 max-lg:p-5"
               >
-                <div className="flex items-start justify-between mb-6">
+                <div className="flex items-start justify-between mb-6 max-lg:mb-0 max-lg:shrink-0">
                   <div className="w-12 h-12 rounded-xl bg-primary-soft/10 group-hover:bg-primary-soft/15 flex items-center justify-center transition-colors">
                     <Icon className="w-5 h-5 text-primary-soft" />
                   </div>
-                  <span className="text-3xl font-bold text-white/[0.04] group-hover:text-primary-soft/15 transition-colors">
+                  <span className="text-3xl font-bold text-white/[0.04] group-hover:text-primary-soft/15 transition-colors max-lg:hidden">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-white mb-2.5 group-hover:text-primary-soft transition-colors">
-                  {t(`howItWorks.${step.key}Title`)}
-                </h3>
-                <p className="text-sm text-white/55 leading-relaxed">
-                  {t(`howItWorks.${step.key}Desc`)}
-                </p>
+                <div className="max-lg:min-w-0">
+                  <h3 className="text-lg font-bold text-white mb-2.5 group-hover:text-primary-soft transition-colors max-lg:mb-1.5">
+                    {t(`howItWorks.${step.key}Title`)}
+                  </h3>
+                  <p className="text-sm text-white/55 leading-relaxed">
+                    {t(`howItWorks.${step.key}Desc`)}
+                  </p>
+                </div>
               </motion.div>
             );
           })}

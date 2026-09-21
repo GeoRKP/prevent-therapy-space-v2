@@ -21,7 +21,7 @@ const cardBase =
 function PartnerCardContent({ partner, name, role, note, t, interactive }) {
   return (
     <>
-      <div className="relative aspect-[4/5] overflow-hidden rounded-xl mb-5">
+      <div className="relative aspect-[4/5] max-sm:aspect-[4/3] overflow-hidden rounded-xl mb-5">
         <Image
           src={partner.image}
           alt={name}
@@ -61,7 +61,7 @@ export function PartnersSection() {
   return (
     <section
       aria-labelledby="partners-heading"
-      className="relative section-pad overflow-hidden bg-[#070b14]"
+      className="relative section-pad overflow-hidden bg-[#070b14] max-lg:bg-[#0a1019]"
     >
       <div className="container relative z-10">
         <SectionHeading

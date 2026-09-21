@@ -27,6 +27,8 @@ const iconMap = {
 
 // asPageIntro: όταν η ενότητα μπαίνει αμέσως κάτω από PageHero, ο τίτλος της
 // σελίδας είναι ήδη ο τίτλος της ενότητας — δεν επαναλαμβάνεται.
+// Στην αρχική, στο κινητό, οι κάρτες είναι συμπαγείς (χωρίς τα bullets) —
+// η πλήρης λίστα ζει στη σελίδα /services (asPageIntro).
 export function ServicesGrid({ asPageIntro = false }) {
   const { t, ready } = useTranslation(["services", "contact"]);
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -62,7 +64,7 @@ export function ServicesGrid({ asPageIntro = false }) {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="group relative h-full bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-7 lg:p-8 transition-all duration-500">
+                <div className="group relative h-full bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-7 lg:p-8 transition-all duration-500 max-lg:bg-[#0f1622] max-lg:border-white/10 max-lg:p-6">
                   <div className="flex items-start justify-between mb-5">
                     <div className="w-12 h-12 rounded-xl bg-primary-soft/10 group-hover:bg-primary-soft/15 flex items-center justify-center transition-colors">
                       <Icon className="w-5 h-5 text-primary-soft" />
@@ -75,12 +77,12 @@ export function ServicesGrid({ asPageIntro = false }) {
                   <h3 className="text-lg lg:text-xl font-bold text-white mb-2.5 group-hover:text-primary-soft transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-white/55 mb-5 leading-relaxed text-sm">
+                  <p className={"text-white/55 mb-5 leading-relaxed text-sm" + (asPageIntro ? "" : " max-lg:mb-0")}>
                     {service.description}
                   </p>
 
                   {service.features && (
-                    <ul className="space-y-2">
+                    <ul className={"space-y-2" + (asPageIntro ? "" : " max-lg:hidden")}>
                       {service.features.map((feature, idx) => (
                         <li
                           key={idx}
@@ -103,7 +105,7 @@ export function ServicesGrid({ asPageIntro = false }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.5 }}
-          className="text-center mt-14"
+          className="text-center mt-14 max-lg:mt-8 max-lg:flex max-lg:flex-col max-lg:items-center max-lg:gap-3"
         >
           <Link
             href="/booking"
@@ -112,6 +114,15 @@ export function ServicesGrid({ asPageIntro = false }) {
             <span>{t("contact:requestQuote")}</span>
             <ArrowUpRight className="w-4 h-4" />
           </Link>
+          {!asPageIntro && (
+            <Link
+              href="/services"
+              className="hidden max-lg:inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/15 text-white/80 font-semibold text-sm hover:border-primary-soft/60 hover:text-primary-soft transition-colors"
+            >
+              <span>{t("services:viewAllServices")}</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          )}
         </motion.div>
       </div>
     </section>

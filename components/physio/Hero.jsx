@@ -18,10 +18,13 @@ export function Hero() {
 
   // Portrait φωτογραφίες σε κάρτα 2:3 — το position κρατά τα πρόσωπα στο κάδρο
   // όταν το aspect της φωτογραφίας (0.56) είναι στενότερο από την κάρτα (0.667).
+  // mobilePosition: στο κινητό η κάρτα είναι 4:3 (δείχνει το πάνω μισό της
+  // φωτογραφίας) — ξεχωριστό κάδρο ώστε τα πρόσωπα να μένουν μέσα.
   const heroSlides = [
     {
       image: "/images/team/konstantinos-patsakis-posing-photo.jpg",
       position: "center",
+      mobilePosition: "center 18%",
       title: t("home:hero.slides.0.title"),
       highlight: t("home:hero.slides.0.highlight"),
       subtitle: t("home:hero.slides.0.subtitle"),
@@ -29,6 +32,7 @@ export function Hero() {
     {
       image: "/images/treatments/physio-19-side-lying-shoulder.jpg",
       position: "center 30%",
+      mobilePosition: "center 35%",
       title: t("home:hero.slides.1.title"),
       highlight: t("home:hero.slides.1.highlight"),
       subtitle: t("home:hero.slides.1.subtitle"),
@@ -36,6 +40,7 @@ export function Hero() {
     {
       image: "/images/treatments/physio-10-leg-raise-ankle.jpg",
       position: "center 25%",
+      mobilePosition: "center 40%",
       title: t("home:hero.slides.2.title"),
       highlight: t("home:hero.slides.2.highlight"),
       subtitle: t("home:hero.slides.2.subtitle"),
@@ -89,13 +94,14 @@ export function Hero() {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Background — στο κινητό η φωτογραφία του slide γεμίζει την οθόνη
-          καθαρή (portrait σε portrait κάδρο)· σε desktop γίνεται έντονα
-          blurred ambient πίσω από την κάρτα, ώστε να μη φαίνεται διπλή */}
+      {/* Background — μόνο desktop: έντονα blurred ambient πίσω από την
+          κάρτα, ώστε να μη φαίνεται διπλή. Στο κινητό δεν υπάρχει καθόλου
+          φωτογραφία πίσω από το κείμενο (ούτε σκιάσεις)· η φωτογραφία ζει
+          καθαρή στην κάρτα πάνω από τον τίτλο. */}
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
-          className="absolute inset-0"
+          className="absolute inset-0 max-lg:hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -109,21 +115,20 @@ export function Hero() {
             priority
             className="object-cover lg:scale-110 lg:blur-2xl opacity-100 lg:opacity-35"
             style={{ objectPosition: heroSlides[currentSlide].position }}
-            sizes="100vw"
+            sizes="(max-width: 991px) 1px, 100vw"
             quality={40}
           />
         </motion.div>
       </AnimatePresence>
 
-      {/* Scrim μόνο στο κινητό — κρατά το κείμενο αναγνώσιμο πάνω στη φωτογραφία */}
-      <div className="absolute inset-0 bg-[#050810]/45 lg:hidden" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#050810]/90 via-[#050810]/50 to-transparent lg:from-[#050810] lg:via-[#050810]/70 lg:to-[#050810]/30" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#050810] via-transparent to-[#050810]/60 lg:to-[#050810]/40" />
+      {/* Σκιάσεις πάνω στο ambient — μόνο desktop */}
+      <div className="absolute inset-0 max-lg:hidden bg-gradient-to-r from-[#050810] via-[#050810]/70 to-[#050810]/30" />
+      <div className="absolute inset-0 max-lg:hidden bg-gradient-to-t from-[#050810] via-transparent to-[#050810]/40" />
 
       <DiagonalLines className="opacity-[0.012]" spacing={100} />
 
-      <div className="container relative z-20 min-h-[92svh] flex items-center pt-24 pb-32">
-        <div className="grid lg:grid-cols-12 gap-12 items-center w-full">
+      <div className="container relative z-20 min-h-[92svh] flex items-center pt-24 pb-32 max-lg:pt-28 max-lg:pb-36">
+        <div className="grid lg:grid-cols-12 gap-12 max-lg:gap-8 items-center w-full">
           <div className="lg:col-span-7">
             <AnimatePresence mode="wait">
               <motion.div
@@ -188,14 +193,16 @@ export function Hero() {
             </AnimatePresence>
           </div>
 
-          <div className="lg:col-span-5 hidden lg:block">
-            <div className="relative w-full max-w-[360px] xl:max-w-[400px] ml-auto">
-              {/* Διακοσμητικές γωνίες */}
-              <div className="absolute -top-4 -left-4 w-20 h-20 border-t-2 border-l-2 border-primary-soft/30 rounded-tl-3xl" />
-              <div className="absolute -bottom-4 -right-4 w-20 h-20 border-b-2 border-r-2 border-primary-soft/30 rounded-br-3xl" />
+          {/* Κάρτα φωτογραφίας — desktop δεξιά (2:3)· στο κινητό πρώτη,
+              πλάτος container, 4:3, χωρίς καμία σκίαση */}
+          <div className="lg:col-span-5 max-lg:order-first">
+            <div className="relative w-full max-w-[360px] xl:max-w-[400px] ml-auto max-lg:max-w-none">
+              {/* Διακοσμητικές γωνίες — μόνο desktop (στο κινητό κόβονται στην άκρη) */}
+              <div className="absolute -top-4 -left-4 w-20 h-20 border-t-2 border-l-2 border-primary-soft/30 rounded-tl-3xl max-lg:hidden" />
+              <div className="absolute -bottom-4 -right-4 w-20 h-20 border-b-2 border-r-2 border-primary-soft/30 rounded-br-3xl max-lg:hidden" />
 
               {/* Κάρτα 2:3 — ίδιο aspect με τις portrait φωτογραφίες */}
-              <div className="relative aspect-[2/3]">
+              <div className="relative aspect-[2/3] max-lg:aspect-[4/3]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -210,18 +217,21 @@ export function Hero() {
                       alt={heroSlides[currentSlide].title}
                       fill
                       priority
-                      className="object-cover"
-                      style={{ objectPosition: heroSlides[currentSlide].position }}
-                      sizes="(min-width: 1280px) 440px, (min-width: 1024px) 400px, 0px"
+                      className="object-cover [object-position:var(--pos-m)] lg:[object-position:var(--pos)]"
+                      style={{
+                        "--pos": heroSlides[currentSlide].position,
+                        "--pos-m": heroSlides[currentSlide].mobilePosition,
+                      }}
+                      sizes="(min-width: 1280px) 440px, (min-width: 992px) 400px, 100vw"
                       quality={90}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050810]/35 via-transparent to-transparent" />
+                    <div className="absolute inset-0 max-lg:hidden bg-gradient-to-t from-[#050810]/35 via-transparent to-transparent" />
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              {/* Progress indicators */}
-              <div className="mt-7 flex items-center justify-end gap-5">
+              {/* Progress indicators — στο κινητό υπάρχει η κάτω μπάρα */}
+              <div className="mt-7 flex max-lg:hidden items-center justify-end gap-5">
                 {heroSlides.map((_, index) => (
                   <button
                     key={index}

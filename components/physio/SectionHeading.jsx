@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 export function SectionHeading({ id, label, title, subtitle, centered = true }) {
   return (
-    <div className={cn("mb-16", centered ? "text-center" : "max-w-2xl")}>
+    <div className={cn("mb-16 max-lg:mb-10", centered ? "text-center" : "max-w-2xl")}>
       {label && (
         <RevealText>
           <div className="inline-flex items-center gap-3 mb-5">

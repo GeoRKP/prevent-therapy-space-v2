@@ -15,7 +15,7 @@ export function WhyChooseUs() {
   const features = t("whyChooseUs.features", { returnObjects: true }) || [];
 
   return (
-    <section className="relative section-pad overflow-hidden bg-[#070b14]">
+    <section className="relative section-pad overflow-hidden bg-[#070b14] max-lg:bg-[#0a1019]">
       <div className="container relative z-10">
         <div className="grid lg:grid-cols-12 gap-14 lg:gap-20 items-center">
           <div className="lg:col-span-6">
@@ -38,7 +38,7 @@ export function WhyChooseUs() {
             </RevealText>
 
             <RevealText delay={0.2}>
-              <p className="text-base lg:text-lg text-white/55 mb-10 leading-relaxed lg:max-w-md">
+              <p className="text-base lg:text-lg text-white/55 mb-10 max-lg:mb-7 leading-relaxed lg:max-w-md">
                 {t("whyChooseUs.description")}
               </p>
             </RevealText>
@@ -74,7 +74,9 @@ export function WhyChooseUs() {
             </div>
           </div>
 
-          <div className="lg:col-span-6">
+          {/* Φωτογραφία + badge «8+»: μόνο desktop — η προηγούμενη ενότητα
+              δείχνει ήδη φωτογραφία και το ίδιο badge, στο κινητό θα ήταν διπλά */}
+          <div className="lg:col-span-6 max-lg:hidden">
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}

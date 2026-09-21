@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { SectionHeading } from "./SectionHeading";
+import { cn } from "@/lib/utils";
 
 // Masonry με φυσικά aspect ratios — οι φωτογραφίες εμφανίζονται ολόκληρες, χωρίς κόψιμο.
 const galleryItems = [
@@ -38,7 +39,10 @@ export function GallerySection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ delay: (i % 3) * 0.1, duration: 0.6 }}
-              className="group relative mb-4 break-inside-avoid rounded-2xl overflow-hidden border border-white/[0.06]"
+              className={cn(
+                "group relative mb-4 break-inside-avoid rounded-2xl overflow-hidden border border-white/[0.06]",
+                i >= 6 && "max-lg:hidden" // στο κινητό 6 φωτογραφίες αρκούν
+              )}
             >
               <Image
                 src={item.src}
@@ -48,7 +52,7 @@ export function GallerySection() {
                 className="w-full h-auto transition-transform duration-700 group-hover:scale-[1.04]"
                 sizes="(max-width: 1024px) 50vw, 33vw"
               />
-              <div className="absolute inset-0 bg-[#050810]/25 group-hover:bg-transparent transition-colors duration-500" />
+              <div className="absolute inset-0 max-lg:hidden bg-[#050810]/25 group-hover:bg-transparent transition-colors duration-500" />
             </motion.div>
           ))}
         </div>

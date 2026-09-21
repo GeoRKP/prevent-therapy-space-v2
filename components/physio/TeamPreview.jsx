@@ -34,7 +34,7 @@ export function TeamPreview() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.6 }}
-              className="group relative bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-3xl p-6 lg:p-8 transition-all"
+              className="group relative bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-3xl p-6 lg:p-8 transition-all max-lg:bg-[#0f1622] max-lg:border-white/10"
             >
               <div className="relative aspect-[4/5] overflow-hidden rounded-2xl mb-5">
                 <Image
@@ -44,7 +44,7 @@ export function TeamPreview() {
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#070b14]/70 via-transparent to-transparent" />
+                <div className="absolute inset-0 max-lg:hidden bg-gradient-to-t from-[#070b14]/70 via-transparent to-transparent" />
               </div>
 
               <div className="flex items-start justify-between mb-2.5 gap-3">

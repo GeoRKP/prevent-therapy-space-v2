@@ -24,7 +24,7 @@ export function AboutFrenaSection({ asPageIntro = false }) {
     <section className="relative section-pad overflow-hidden bg-[#050810]">
       <div className="container relative z-10">
         {!asPageIntro && (
-        <div className="mb-16 lg:mb-20">
+        <div className="mb-16 lg:mb-20 max-lg:mb-10">
           <RevealText>
             <div className="flex items-center gap-3 mb-5">
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
@@ -72,7 +72,7 @@ export function AboutFrenaSection({ asPageIntro = false }) {
                   style={{ objectPosition: "center 25%" }}
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050810] via-transparent to-transparent" />
+                <div className="absolute inset-0 max-lg:hidden bg-gradient-to-t from-[#050810] via-transparent to-transparent" />
               </div>
 
               <div className="absolute bottom-5 left-5 right-5">
@@ -102,7 +102,7 @@ export function AboutFrenaSection({ asPageIntro = false }) {
                   className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 20vw"
                 />
-                <div className="absolute inset-0 bg-[#050810]/30" />
+                <div className="absolute inset-0 max-lg:hidden bg-[#050810]/30" />
               </motion.div>
 
               <motion.div
@@ -119,7 +119,7 @@ export function AboutFrenaSection({ asPageIntro = false }) {
                   className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 20vw"
                 />
-                <div className="absolute inset-0 bg-[#050810]/30" />
+                <div className="absolute inset-0 max-lg:hidden bg-[#050810]/30" />
               </motion.div>
             </div>
           </div>
@@ -133,7 +133,7 @@ export function AboutFrenaSection({ asPageIntro = false }) {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
               >
-                <div className="group relative bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 lg:p-8 transition-all">
+                <div className="group relative bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 lg:p-8 transition-all max-lg:bg-[#0f1622] max-lg:border-white/10 max-lg:p-5">
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg bg-primary-soft/10 flex items-center justify-center flex-shrink-0 text-sm font-bold text-primary-soft">
                       {String(index + 1).padStart(2, "0")}
@@ -159,9 +159,9 @@ export function AboutFrenaSection({ asPageIntro = false }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mt-20 lg:mt-28"
+          className="mt-20 lg:mt-28 max-lg:mt-14"
         >
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 max-lg:mb-6">
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 h-px bg-primary-soft/70" />
@@ -193,7 +193,8 @@ export function AboutFrenaSection({ asPageIntro = false }) {
             </a>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4">
+          {/* Στο κινητό οι κριτικές είναι οριζόντιο carousel (snap) αντί για στοίβα */}
+          <div className="grid md:grid-cols-3 gap-4 max-md:flex max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:-mx-4 max-md:px-4 max-md:pb-2 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden">
             {reviews.slice(0, 3).map((review, index) => (
               <motion.div
                 key={review.name}
@@ -201,7 +202,7 @@ export function AboutFrenaSection({ asPageIntro = false }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="flex flex-col bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 lg:p-7 transition-all"
+                className="flex flex-col bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 lg:p-7 transition-all max-lg:bg-[#0f1622] max-lg:border-white/10 max-md:w-[84%] max-md:shrink-0 max-md:snap-center"
               >
                 <div
                   className="flex items-center gap-0.5 mb-4"
