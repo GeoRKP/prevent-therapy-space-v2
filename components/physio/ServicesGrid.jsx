@@ -64,7 +64,7 @@ export function ServicesGrid({ asPageIntro = false }) {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="group relative h-full bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-7 lg:p-8 transition-all duration-500 max-lg:bg-[#0f1622] max-lg:border-white/10 max-lg:p-6">
+                <div className="group relative h-full bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-7 lg:p-8 transition-all duration-500 m-card max-lg:border-white/10 max-lg:p-6">
                   <div className="flex items-start justify-between mb-5">
                     <div className="w-12 h-12 rounded-xl bg-primary-soft/10 group-hover:bg-primary-soft/15 flex items-center justify-center transition-colors">
                       <Icon className="w-5 h-5 text-primary-soft" />

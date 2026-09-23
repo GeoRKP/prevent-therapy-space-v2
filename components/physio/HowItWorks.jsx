@@ -17,7 +17,7 @@ export function HowItWorks() {
   if (!ready) return null;
 
   return (
-    <section className="relative section-pad overflow-hidden bg-[#070b14] max-lg:bg-[#0a1019]">
+    <section className="relative section-pad overflow-hidden bg-[#070b14] m-section-alt">
       <div className="container relative z-10">
         <SectionHeading
           label={t("howItWorks.label")}

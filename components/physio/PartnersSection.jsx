@@ -61,7 +61,7 @@ export function PartnersSection() {
   return (
     <section
       aria-labelledby="partners-heading"
-      className="relative section-pad overflow-hidden bg-[#070b14] max-lg:bg-[#0a1019]"
+      className="relative section-pad overflow-hidden bg-[#070b14] m-section-alt"
     >
       <div className="container relative z-10">
         <SectionHeading

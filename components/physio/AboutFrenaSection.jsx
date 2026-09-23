@@ -133,7 +133,7 @@ export function AboutFrenaSection({ asPageIntro = false }) {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
               >
-                <div className="group relative bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 lg:p-8 transition-all max-lg:bg-[#0f1622] max-lg:border-white/10 max-lg:p-5">
+                <div className="group relative bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 lg:p-8 transition-all m-card max-lg:border-white/10 max-lg:p-5">
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg bg-primary-soft/10 flex items-center justify-center flex-shrink-0 text-sm font-bold text-primary-soft">
                       {String(index + 1).padStart(2, "0")}
@@ -202,7 +202,7 @@ export function AboutFrenaSection({ asPageIntro = false }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="flex flex-col bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 lg:p-7 transition-all max-lg:bg-[#0f1622] max-lg:border-white/10 max-md:w-[84%] max-md:shrink-0 max-md:snap-center"
+                className="flex flex-col bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 lg:p-7 transition-all m-card max-lg:border-white/10 max-md:w-[84%] max-md:shrink-0 max-md:snap-center"
               >
                 <div
                   className="flex items-center gap-0.5 mb-4"

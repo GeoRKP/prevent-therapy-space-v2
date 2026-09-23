@@ -18,6 +18,9 @@ import { toast } from "sonner";
 import HeadManager from "@/components/common/HeadManager";
 import { PageHero } from "@/components/physio/PageHero";
 import { cn } from "@/lib/utils";
+import { FormField, FieldError } from "@/components/common/FormField";
+import { validateBooking, BOOKING_FIELDS } from "@/lib/form-validation";
+import { useFormValidation, focusField } from "@/lib/use-form-validation";
 
 // Ώρες πριν τις 14:00 εμφανίζονται ως «Πρωί», οι υπόλοιπες ως «Απόγευμα»
 const AFTERNOON_FROM = 14 * 60;
@@ -111,8 +114,22 @@ export default function BookingPage() {
         })
       : "";
 
+  const values = {
+    name: selection.name,
+    email: selection.email,
+    phone: selection.phone,
+    notes: selection.notes,
+    consent,
+  };
+  const v = useFormValidation(validateBooking, values, BOOKING_FIELDS);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const firstInvalid = v.touchAll();
+    if (firstInvalid) {
+      focusField(`booking-${firstInvalid}`);
+      return;
+    }
     setSubmitting(true);
     try {
       const res = await fetch("/api/booking", {
@@ -135,7 +152,11 @@ export default function BookingPage() {
         setStep(1);
         loadAvailability();
       } else if (data.error === "validation") {
-        toast.error(t("booking:errors.invalid"));
+        const first = v.fromServer(data.fields);
+        if (first) focusField(`booking-${first}`);
+        toast.error(
+          first ? t("common:validation.fixFields") : t("booking:errors.invalid")
+        );
       } else {
         toast.error(t("booking:errors.generic"));
       }
@@ -365,65 +386,97 @@ export default function BookingPage() {
                 </p>
               </div>
 
+              {/* noValidate: τα γενικά μηνύματα του browser αντικαθίστανται από τα
+                  δικά μας (lib/form-validation.js), που λένε τι ακριβώς λείπει */}
               <form
                 onSubmit={handleSubmit}
+                noValidate
                 className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-7 space-y-5"
               >
                 <FormField
+                  id="booking-name"
                   label={ready ? t("booking:form.name") : ""}
+                  autoComplete="name"
                   required
                   value={selection.name}
                   onChange={(e) =>
                     setSelection((p) => ({ ...p, name: e.target.value }))
                   }
+                  onBlur={() => v.touch("name")}
+                  error={v.errors.name}
                 />
                 <FormField
+                  id="booking-email"
                   label={ready ? t("booking:form.email") : ""}
                   type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  placeholder={ready ? t("booking:form.emailPlaceholder") : ""}
                   required
                   value={selection.email}
                   onChange={(e) =>
                     setSelection((p) => ({ ...p, email: e.target.value }))
                   }
+                  onBlur={() => v.touch("email")}
+                  error={v.errors.email}
                 />
                 <FormField
+                  id="booking-phone"
                   label={ready ? t("booking:form.phone") : ""}
                   type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  placeholder={ready ? t("booking:form.phonePlaceholder") : ""}
                   required
                   value={selection.phone}
                   onChange={(e) =>
                     setSelection((p) => ({ ...p, phone: e.target.value }))
                   }
+                  onBlur={() => v.touch("phone")}
+                  error={v.errors.phone}
                 />
                 <FormField
+                  id="booking-notes"
                   label={ready ? t("booking:form.notes") : ""}
                   multiline
+                  rows={3}
                   value={selection.notes}
                   onChange={(e) =>
                     setSelection((p) => ({ ...p, notes: e.target.value }))
                   }
+                  onBlur={() => v.touch("notes")}
+                  error={v.errors.notes}
                 />
-                <label className="flex items-start gap-3 cursor-pointer pt-1">
-                  <input
-                    type="checkbox"
-                    required
-                    checked={consent}
-                    onChange={(e) => setConsent(e.target.checked)}
-                    className="mt-0.5 w-4 h-4 accent-[#82d9b9] flex-shrink-0"
-                  />
-                  <span className="text-xs text-white/55 leading-relaxed">
-                    {ready ? t("booking:form.consentPrefix") : ""}{" "}
-                    <a
-                      href="/privacy"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary-soft underline underline-offset-2 hover:text-primary-soft/80"
-                    >
-                      {ready ? t("booking:form.consentLink") : ""}
-                    </a>
-                    .
-                  </span>
-                </label>
+                <div>
+                  <label className="flex items-start gap-3 cursor-pointer pt-1">
+                    <input
+                      id="booking-consent"
+                      type="checkbox"
+                      required
+                      checked={consent}
+                      onChange={(e) => {
+                        setConsent(e.target.checked);
+                        v.touch("consent");
+                      }}
+                      aria-invalid={v.errors.consent ? true : undefined}
+                      aria-describedby="booking-consent-error"
+                      className="mt-0.5 w-4 h-4 accent-[#82d9b9] flex-shrink-0"
+                    />
+                    <span className="text-xs text-white/55 leading-relaxed">
+                      {ready ? t("booking:form.consentPrefix") : ""}{" "}
+                      <a
+                        href="/privacy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary-soft underline underline-offset-2 hover:text-primary-soft/80"
+                      >
+                        {ready ? t("booking:form.consentLink") : ""}
+                      </a>
+                      .
+                    </span>
+                  </label>
+                  <FieldError id="booking-consent-error" error={v.errors.consent} />
+                </div>
 
                 <div className="flex gap-3 pt-2">
                   <button
@@ -436,7 +489,7 @@ export default function BookingPage() {
                   </button>
                   <button
                     type="submit"
-                    disabled={submitting || !consent}
+                    disabled={submitting}
                     className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary-soft text-primary-soft-foreground font-semibold text-sm hover:bg-primary-soft/90 transition-colors disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-soft/60"
                   >
                     <CalendarCheck className="w-4 h-4" />
@@ -627,28 +680,6 @@ function CalendarPane({
           );
         })}
       </div>
-    </div>
-  );
-}
-
-function FormField({ label, multiline, ...props }) {
-  return (
-    <div>
-      <label className="block text-xs font-semibold uppercase tracking-wider text-white/55 mb-2">
-        {label}
-      </label>
-      {multiline ? (
-        <textarea
-          rows={3}
-          {...props}
-          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary-soft/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 resize-none"
-        />
-      ) : (
-        <input
-          {...props}
-          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary-soft/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 [color-scheme:dark]"
-        />
-      )}
     </div>
   );
 }

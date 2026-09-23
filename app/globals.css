@@ -211,37 +211,58 @@
   .text-white\/65 { color: rgb(255 255 255 / 0.78); }
 }
 
-/* ΔΟΚΙΜΗ ΠΑΛΕΤΑΣ ΚΙΝΗΤΟΥ (προσωρινό, μέχρι να αποφασίσει ο πελάτης) — τρία
-   στιλ φόντου/κάρτας, ενεργά μόνο με data-palette στον γονέα (η σελίδα
-   /palette το βάζει ανά μπλοκ, το ?palette=… το βάζει στο <html>). Το navy
-   #050810 «μπλεδίζει» μόλις ανασηκωθεί· εδώ αλλάζει η απόχρωση των
-   επιφανειών, όχι μόνο η ένταση. Σειρά: φόντο σελίδας / εναλλασσόμενο
-   section / κάρτα. Όταν επιλεγεί ένα, οι τιμές του γίνονται οι κανονικές
-   max-lg: κλάσεις και το μπλοκ αυτό φεύγει. */
+/* ═══════════════════════════════════════════════════════════════════════════
+   ΚΙΝΗΤΟ / TABLET (<992px) — ΠΑΛΕΤΑ «ΦΑΣΚΟΜΗΛΟ»
+   Επιλογή του πελάτη (Σεπτ. 2026) μετά από δοκιμή τριών στιλ. Στο κινητό το
+   navy #050810 «μπλεδίζει» μόλις ανασηκωθεί σε κάρτες, οπότε εδώ όλες οι
+   σκούρες επιφάνειες γίνονται ζεστό σκούρο πράσινο που δένει με το mint.
+   Στο desktop ΤΙΠΟΤΑ δεν αλλάζει — μένει το εγκεκριμένο navy.
+
+   Πώς δουλεύει: τα components κρατούν τα navy hex τους (αυτά ισχύουν στο
+   desktop) και εδώ ξαναχρωματίζονται μόνο κάτω από 992px. Οι κανόνες είναι
+   εκτός layer, άρα υπερισχύουν των utilities της Tailwind χωρίς !important.
+   Η σειρά μετράει: βάση → εναλλασσόμενο section → κάρτα.
+   Νέο navy hex σε component (π.χ. bg-[#050810]/80) ⇒ πρόσθεσέ το εδώ.
+
+     βάση σελίδας        #050810 → #0c100f
+     εναλλασσόμενο/κάρτα  #070b14 → #131917   (+ .m-section-alt)
+     ανασηκωμένη κάρτα             #1a2220   (.m-card)
+     hover/focus/dialog  #0a0f1a → #1a2220
+     footer              #040609 → #080b0a
+   ═══════════════════════════════════════════════════════════════════════════ */
 @media (max-width: 991.98px) {
-  /* Α · Πετρόλ — γέφυρα ανάμεσα στο navy και το mint */
-  [data-palette="teal"] .bg-\[\#050810\] { background-color: #070a0b; }
-  [data-palette="teal"] .bg-\[\#070b14\],
-  [data-palette="teal"] .max-lg\:bg-\[\#0a1019\] { background-color: #0d1315; }
-  [data-palette="teal"] .max-lg\:bg-\[\#0f1622\] { background-color: #141c1e; border-color: rgb(255 255 255 / 0.10); }
-  [data-palette="teal"] .bg-\[\#050810\]\/95, [data-palette="teal"] .bg-\[\#050810\]\/90,
-  [data-palette="teal"] .bg-\[\#050810\]\/85 { background-color: rgb(7 10 11 / 0.92); }
+  .bg-\[\#050810\] { background-color: #0c100f; }
+  .bg-\[\#050810\]\/95 { background-color: rgb(12 16 15 / 0.95); }
+  .bg-\[\#050810\]\/90 { background-color: rgb(12 16 15 / 0.90); }
+  .bg-\[\#050810\]\/85 { background-color: rgb(12 16 15 / 0.85); }
+  .bg-\[\#050810\]\/30 { background-color: rgb(12 16 15 / 0.30); }
+  .bg-\[\#050810\]\/25 { background-color: rgb(12 16 15 / 0.25); }
+  .bg-\[\#040609\] { background-color: #080b0a; }
 
-  /* Β · Γραφίτης — ουδέτερο, επίπεδα «σωστού» dark mode */
-  [data-palette="graphite"] .bg-\[\#050810\] { background-color: #101214; }
-  [data-palette="graphite"] .bg-\[\#070b14\],
-  [data-palette="graphite"] .max-lg\:bg-\[\#0a1019\] { background-color: #171a1d; }
-  [data-palette="graphite"] .max-lg\:bg-\[\#0f1622\] { background-color: #1f2327; border-color: rgb(255 255 255 / 0.12); }
-  [data-palette="graphite"] .bg-\[\#050810\]\/95, [data-palette="graphite"] .bg-\[\#050810\]\/90,
-  [data-palette="graphite"] .bg-\[\#050810\]\/85 { background-color: rgb(16 18 20 / 0.92); }
+  .bg-\[\#070b14\],
+  .m-section-alt { background-color: #131917; }
 
-  /* Γ · Φασκόμηλο — ζεστό σκούρο πράσινο, δένει με το mint και το ξύλο */
-  [data-palette="sage"] .bg-\[\#050810\] { background-color: #0c100f; }
-  [data-palette="sage"] .bg-\[\#070b14\],
-  [data-palette="sage"] .max-lg\:bg-\[\#0a1019\] { background-color: #131917; }
-  [data-palette="sage"] .max-lg\:bg-\[\#0f1622\] { background-color: #1a2220; border-color: rgb(255 255 255 / 0.11); }
-  [data-palette="sage"] .bg-\[\#050810\]\/95, [data-palette="sage"] .bg-\[\#050810\]\/90,
-  [data-palette="sage"] .bg-\[\#050810\]\/85 { background-color: rgb(12 16 15 / 0.92); }
+  .m-card,
+  .bg-\[\#0a0f1a\],
+  .bg-\[\#0c1222\] { background-color: #1a2220; }
+  .focus\:bg-\[\#0a0f1a\]:focus { background-color: #1a2220; }
+
+  /* Διαβαθμίσεις (PageHero, header) — ίδιο χρώμα, ίδια διαφάνεια */
+  .from-\[\#050810\] { --tw-gradient-from: #0c100f; }
+  .from-\[\#050810\]\/85 { --tw-gradient-from: rgb(12 16 15 / 0.85); }
+  .from-\[\#050810\]\/70 { --tw-gradient-from: rgb(12 16 15 / 0.70); }
+  .from-\[\#050810\]\/35 { --tw-gradient-from: rgb(12 16 15 / 0.35); }
+  .via-\[\#050810\]\/85 { --tw-gradient-via: rgb(12 16 15 / 0.85); }
+  .via-\[\#050810\]\/70 { --tw-gradient-via: rgb(12 16 15 / 0.70); }
+  .to-\[\#050810\] { --tw-gradient-to: #0c100f; }
+  .to-\[\#050810\]\/40 { --tw-gradient-to: rgb(12 16 15 / 0.40); }
+  .to-\[\#050810\]\/30 { --tw-gradient-to: rgb(12 16 15 / 0.30); }
+  .from-\[\#070b14\]\/90 { --tw-gradient-from: rgb(19 25 23 / 0.90); }
+  .from-\[\#070b14\]\/70 { --tw-gradient-from: rgb(19 25 23 / 0.70); }
+}
+/* Hover: η Tailwind το εφαρμόζει μόνο σε συσκευές με ποντίκι — το ίδιο εδώ */
+@media (max-width: 991.98px) and (hover: hover) {
+  .hover\:bg-\[\#0a0f1a\]:hover { background-color: #1a2220; }
 }
 
 ::selection {

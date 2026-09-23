@@ -9,6 +9,9 @@ import { contactInfo } from "@/data/conditions";
 import HeadManager from "@/components/common/HeadManager";
 import { PageHero } from "@/components/physio/PageHero";
 import { RevealText } from "@/components/effects/kinetic-text";
+import { FormField, FieldError } from "@/components/common/FormField";
+import { validateContact, CONTACT_FIELDS } from "@/lib/form-validation";
+import { useFormValidation, focusField } from "@/lib/use-form-validation";
 
 export default function ContactPage() {
   const { t, ready, i18n } = useTranslation(["contact", "common"]);
@@ -21,19 +24,37 @@ export default function ContactPage() {
     message: "",
   });
 
+  const values = { ...form, consent };
+  const v = useFormValidation(validateContact, values, CONTACT_FIELDS);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const firstInvalid = v.touchAll();
+    if (firstInvalid) {
+      focusField(`contact-${firstInvalid}`);
+      return;
+    }
     setSubmitting(true);
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, consent, locale: i18n.language || "el" }),
+        body: JSON.stringify({ ...values, locale: i18n.language === "en" ? "en" : "el" }),
       });
-      if (!res.ok) throw new Error("Failed");
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        if (data.error === "validation" && data.fields) {
+          const first = v.fromServer(data.fields);
+          if (first) focusField(`contact-${first}`);
+          toast.error(t("common:validation.fixFields"));
+          return;
+        }
+        throw new Error("Failed");
+      }
       toast.success(t("contact:form.success"));
       setForm({ name: "", email: "", phone: "", message: "" });
       setConsent(false);
+      v.reset();
     } catch (err) {
       toast.error(t("contact:form.error"));
     } finally {
@@ -119,57 +140,91 @@ export default function ContactPage() {
                 </h3>
               </RevealText>
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              {/* noValidate: τα γενικά μηνύματα του browser αντικαθίστανται από τα
+                  δικά μας (lib/form-validation.js), που λένε τι ακριβώς λείπει */}
+              <form onSubmit={handleSubmit} noValidate className="space-y-4">
                 <FormField
+                  id="contact-name"
                   label={ready ? t("contact:form.name") : ""}
+                  autoComplete="name"
                   value={form.name}
                   onChange={handleChange("name")}
+                  onBlur={() => v.touch("name")}
+                  error={v.errors.name}
+                  focusBorder="focus:border-primary/50"
                   required
                 />
                 <FormField
+                  id="contact-email"
                   label={ready ? t("contact:form.email") : ""}
                   type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  placeholder={ready ? t("contact:form.emailPlaceholder") : ""}
                   value={form.email}
                   onChange={handleChange("email")}
+                  onBlur={() => v.touch("email")}
+                  error={v.errors.email}
+                  focusBorder="focus:border-primary/50"
                   required
                 />
                 <FormField
+                  id="contact-phone"
                   label={ready ? t("contact:form.phone") : ""}
                   type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
+                  placeholder={ready ? t("contact:form.phonePlaceholder") : ""}
                   value={form.phone}
                   onChange={handleChange("phone")}
+                  onBlur={() => v.touch("phone")}
+                  error={v.errors.phone}
+                  focusBorder="focus:border-primary/50"
                 />
                 <FormField
+                  id="contact-message"
                   label={ready ? t("contact:form.message") : ""}
                   multiline
                   value={form.message}
                   onChange={handleChange("message")}
+                  onBlur={() => v.touch("message")}
+                  error={v.errors.message}
+                  focusBorder="focus:border-primary/50"
                   required
                 />
-                <label className="flex items-start gap-3 cursor-pointer pt-1">
-                  <input
-                    type="checkbox"
-                    required
-                    checked={consent}
-                    onChange={(e) => setConsent(e.target.checked)}
-                    className="mt-0.5 w-4 h-4 accent-[#82d9b9] flex-shrink-0"
-                  />
-                  <span className="text-xs text-white/55 leading-relaxed">
-                    {ready ? t("contact:form.consentPrefix") : ""}{" "}
-                    <a
-                      href="/privacy"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary-soft underline underline-offset-2 hover:text-primary-soft/80"
-                    >
-                      {ready ? t("contact:form.consentLink") : ""}
-                    </a>
-                    .
-                  </span>
-                </label>
+                <div>
+                  <label className="flex items-start gap-3 cursor-pointer pt-1">
+                    <input
+                      id="contact-consent"
+                      type="checkbox"
+                      required
+                      checked={consent}
+                      onChange={(e) => {
+                        setConsent(e.target.checked);
+                        v.touch("consent");
+                      }}
+                      aria-invalid={v.errors.consent ? true : undefined}
+                      aria-describedby="contact-consent-error"
+                      className="mt-0.5 w-4 h-4 accent-[#82d9b9] flex-shrink-0"
+                    />
+                    <span className="text-xs text-white/55 leading-relaxed">
+                      {ready ? t("contact:form.consentPrefix") : ""}{" "}
+                      <a
+                        href="/privacy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary-soft underline underline-offset-2 hover:text-primary-soft/80"
+                      >
+                        {ready ? t("contact:form.consentLink") : ""}
+                      </a>
+                      .
+                    </span>
+                  </label>
+                  <FieldError id="contact-consent-error" error={v.errors.consent} />
+                </div>
                 <button
                   type="submit"
-                  disabled={submitting || !consent}
+                  disabled={submitting}
                   className="inline-flex items-center justify-center gap-2 w-full px-7 py-3.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors disabled:opacity-50"
                 >
                   <Send className="w-4 h-4" />
@@ -216,27 +271,5 @@ function ContactCard({ icon: Icon, title, value, href }) {
     </a>
   ) : (
     Content
-  );
-}
-
-function FormField({ label, multiline, ...props }) {
-  return (
-    <div>
-      <label className="block text-xs font-semibold uppercase tracking-wider text-white/55 mb-2">
-        {label}
-      </label>
-      {multiline ? (
-        <textarea
-          rows={4}
-          {...props}
-          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 resize-none"
-        />
-      ) : (
-        <input
-          {...props}
-          className="w-full px-4 py-3 rounded-xl bg-[#050810] border border-white/[0.08] focus:border-primary/50 focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30 [color-scheme:dark]"
-        />
-      )}
-    </div>
   );
 }

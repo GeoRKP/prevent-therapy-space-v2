@@ -10,11 +10,15 @@
   "form": {
     "name": "Full Name",
     "email": "Email",
-    "phone": "Phone",
+    "phone": "Phone (optional)",
     "message": "Message",
+    "send": "Send message",
     "consentPrefix": "I consent to the processing of my details in order to respond to my message, in accordance with the",
     "success": "Your message has been sent successfully!",
-    "error": "Something went wrong. Please try again."
+    "error": "Something went wrong. Please try again.",
+    "consentLink": "Privacy Policy",
+    "phonePlaceholder": "e.g. 697 123 4567",
+    "emailPlaceholder": "e.g. name@gmail.com"
   },
   "info": {
     "address": { "title": "Address", "value": "Theotokopoulou 55, Patisia, Athens" },

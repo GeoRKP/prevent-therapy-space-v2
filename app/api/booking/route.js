@@ -3,25 +3,40 @@ import { assertSlotAvailable } from "@/lib/booking";
 import { createBookingEvent, patchBookingEventProps } from "@/lib/google-calendar";
 import { cancelUrl } from "@/lib/booking-token";
 import { sendBookingEmails, scheduleReminderEmails } from "@/lib/email";
+import { validateBooking } from "@/lib/form-validation";
 
 export const dynamic = "force-dynamic";
 
+// Το zod ελέγχει τύπους και το σχήμα ημερομηνίας/ώρας· οι κανόνες των πεδίων
+// του ασθενή (και τα μηνύματά τους) είναι οι ίδιοι με της φόρμας:
+// lib/form-validation.js — ένα λάθος επιστρέφεται ανά πεδίο στο `fields`.
 const schema = z.object({
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   time: z.string().regex(/^\d{2}:\d{2}$/),
-  name: z.string().min(2).max(120),
-  email: z.string().email(),
-  phone: z.string().min(5).max(30),
-  notes: z.string().max(1000).optional().default(""),
+  name: z.string().max(1000),
+  email: z.string().max(1000),
+  phone: z.string().max(200),
+  notes: z.string().max(20000).optional().default(""),
   locale: z.enum(["el", "en"]).optional().default("el"),
-  // Ρητή συναίνεση (GDPR) — υποχρεωτική για την καταχώρηση
-  consent: z.literal(true),
+  // Ρητή συναίνεση (GDPR) — υποχρεωτική για την καταχώρηση (validateBooking)
+  consent: z.boolean().optional().default(false),
 });
 
 export async function POST(request) {
   try {
     const body = await request.json();
-    const data = schema.parse(body);
+    const parsed = schema.parse(body);
+    const fields = validateBooking(parsed);
+    if (Object.keys(fields).length) {
+      return Response.json({ error: "validation", fields }, { status: 400 });
+    }
+    const data = {
+      ...parsed,
+      name: parsed.name.trim(),
+      email: parsed.email.trim(),
+      phone: parsed.phone.trim(),
+      notes: parsed.notes.trim(),
+    };
 
     // Επαλήθευση ότι το slot είναι έγκυρο και ακόμα ελεύθερο στο Google Calendar
     const { start, end, config } = await assertSlotAvailable(data.date, data.time);

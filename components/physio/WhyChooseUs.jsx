@@ -15,7 +15,7 @@ export function WhyChooseUs() {
   const features = t("whyChooseUs.features", { returnObjects: true }) || [];
 
   return (
-    <section className="relative section-pad overflow-hidden bg-[#070b14] max-lg:bg-[#0a1019]">
+    <section className="relative section-pad overflow-hidden bg-[#070b14] m-section-alt">
       <div className="container relative z-10">
         <div className="grid lg:grid-cols-12 gap-14 lg:gap-20 items-center">
           <div className="lg:col-span-6">

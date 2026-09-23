@@ -27,7 +27,9 @@
     "notes": "Notes (optional)",
     "consentPrefix": "I consent to the processing of my details for the purpose of this appointment, in accordance with the",
     "consentLink": "Privacy Policy",
-    "submit": "Confirm Appointment"
+    "submit": "Confirm Appointment",
+    "phonePlaceholder": "e.g. 697 123 4567",
+    "emailPlaceholder": "e.g. name@gmail.com"
   },
   "success": {
     "title": "Your appointment is confirmed!",
