@@ -107,8 +107,19 @@
         "note": "Supervising physician"
       },
       "trainer": {
-        "role": "Fitness Trainer",
-        "roleDesc": "Guided exercise as a continuation of rehabilitation, in collaboration with the physiotherapist."
+        "name": "Ioanna Demerouti",
+        "role": "Exercise Scientist – Physiotherapist",
+        "roleDesc": "Guided exercise as a continuation of rehabilitation, in collaboration with the physiotherapist.",
+        "note": "Sports Science & Physiotherapy",
+        "credentials": [
+          "BSc Physical Education & Sport Science (Adapted Physical Activity) — University of Thessaly",
+          "BSc Physiotherapy — University of Thessaly"
+        ],
+        "bio": [
+          "I am a graduate of the Department of Physical Education and Sport Science of the University of Thessaly, specialising in adapted physical activity and special physical education, as well as of the Department of Physiotherapy of the University of Thessaly.",
+          "My studies in sport science, working with movement, exercise and human function, made me want to go deeper into the prevention, rehabilitation and treatment of musculoskeletal and neurological conditions. That is why I chose to continue with Physiotherapy, gaining a more complete scientific approach to assessing and rehabilitating the human body.",
+          "My goal is to offer individualised care, combining my knowledge of exercise with modern physiotherapy and kinesiotherapy techniques, so that every patient returns safely and confidently to their everyday and sporting activities."
+        ]
       },
       "doctor": {
         "role": "General / Family Doctor",

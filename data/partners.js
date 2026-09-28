@@ -1,13 +1,18 @@
-import { Stethoscope, Apple } from "lucide-react";
+import { Stethoscope, Apple, Dumbbell } from "lucide-react";
 
 // Μόνο συνεργάτες με πραγματικό όνομα + φωτογραφία εμφανίζονται στο site.
-// Οι θέσεις που εκκρεμούν (γυμνάστρια, οικογενειακή ιατρός) είναι
-// καταγεγραμμένες στο ΕΚΚΡΕΜΟΤΗΤΕΣ.md — προστίθενται εδώ μόλις έρθουν στοιχεία.
+// Η θέση που εκκρεμεί (οικογενειακή ιατρός) είναι καταγεγραμμένη
+// στο ΕΚΚΡΕΜΟΤΗΤΕΣ.md — προστίθεται εδώ μόλις έρθουν στοιχεία.
 export const partners = [
   {
     id: "tsitouridis",
     image: "/images/team/alexandros-tsitouridis.jpg",
     icon: Stethoscope,
+  },
+  {
+    id: "trainer",
+    image: "/images/team/ioanna-demerouti.jpg",
+    icon: Dumbbell,
   },
   {
     id: "nutritionist",
