@@ -18,8 +18,8 @@ export default function HomePage() {
       <ServicesGrid />
       <HowItWorks />
       <AboutFrenaSection />
-      <WhyChooseUs />
       <PartnersSection />
+      <WhyChooseUs />
       <GallerySection />
       {/* AthletesSection: εκτός μέχρι να υπάρξουν πραγματικά ονόματα αθλητών — βλ. ΕΚΚΡΕΜΟΤΗΤΕΣ.md */}
       <CtaSection />
