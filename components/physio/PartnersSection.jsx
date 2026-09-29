@@ -21,12 +21,12 @@ const cardBase =
 function PartnerCardContent({ partner, name, role, note, t, interactive }) {
   return (
     <>
-      <div className="relative aspect-[4/5] max-sm:aspect-[4/3] overflow-hidden rounded-xl mb-5">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-xl mb-5">
         <Image
           src={partner.image}
           alt={name}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className={
             interactive
               ? "object-cover object-top group-hover:scale-[1.03] transition-transform duration-700"
@@ -72,7 +72,7 @@ export function PartnersSection() {
           subtitle={t("partners.subtitle")}
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl">
           {partners.map((partner, i) => {
             const Icon = partner.icon;
             const name = t(`partners.members.${partner.id}.name`, {
