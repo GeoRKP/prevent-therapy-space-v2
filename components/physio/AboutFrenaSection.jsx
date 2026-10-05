@@ -97,7 +97,7 @@ export function AboutFrenaSection({ asPageIntro = false }) {
               >
                 <Image
                   src="/images/clinic/beautiful-chropractor-bed-photo.jpg"
-                  alt="Treatment room"
+                  alt="Κρεβάτι θεραπείας στο PREVENT Therapy Space"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 20vw"
@@ -114,7 +114,7 @@ export function AboutFrenaSection({ asPageIntro = false }) {
               >
                 <Image
                   src="/images/clinic/inner-space-and-equipment.jpg"
-                  alt="Equipment"
+                  alt="Ο χώρος και ο εξοπλισμός του PREVENT Therapy Space"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 50vw, 20vw"

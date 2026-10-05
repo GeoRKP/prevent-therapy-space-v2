@@ -1,9 +1,10 @@
 // Πραγματικές κριτικές Google — μεταφέρθηκαν από το testimonials page του v1 project.
-// TODO(client): επιβεβαίωση rating/πλήθους και ακριβές link του Google Business προφίλ.
+// Link: η καταχώρηση Google Maps / Business Profile (μόνιμο λινκ μέσω CID, βρέθηκε 2026-10-05).
+// TODO(client): επιβεβαίωση πλήθους κριτικών (η βαθμολογία 5,0 επιβεβαιώθηκε στο Maps 2026-10-05).
 export const googleReviews = {
   ratingValue: "5.0",
   reviewCount: 76,
-  url: "https://www.google.com/maps/search/?api=1&query=PREVENT+Therapy+Space+Theotokopoulou+55+Patisia+Athens",
+  url: "https://maps.google.com/?cid=16305358983892498744",
 };
 
 // Οι 3 πρώτες εμφανίζονται στην αρχική· οι υπόλοιπες είναι διαθέσιμες για μελλοντική χρήση.
