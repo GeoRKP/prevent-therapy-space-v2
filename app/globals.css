@@ -6,13 +6,18 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @theme {
-  --font-Manrope: "Manrope", "sans-serif";
-  --font-NotoSerif: "Noto Serif", "serif";
-  --font-SansSerif: "sans-serif";
+  /* Τυπογραφία (redesign Οκτ. 2026): Literata για τίτλους — ζεστή, «βιβλιακή»
+     σερίφ με εξαιρετικά ελληνικά (TypeTogether) — και Commissioner για κείμενο
+     και UI (σχεδιασμένη από Έλληνα, καθαρή στα μικρά μεγέθη). */
+  --font-display: "Literata", Georgia, serif;
+  --font-sans: "Commissioner", system-ui, sans-serif;
 
-  /* Color System */
+  /* Color System
+     Το «white» της Tailwind είναι σκόπιμα ζεστό ιβουάρ (bone), όχι #fff:
+     κάθε text-white/NN, border-white/NN και bg-white σε όλο το site παίρνει
+     την ίδια ζεστή απόχρωση πάνω στο σκούρο navy / φασκόμηλο. */
   --color-*: initial;
-  --color-white: #ffffff;
+  --color-white: #f2ede4;
   --color-black: #000000;
 
   /* Responsive Breakpoints */
@@ -164,12 +169,20 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: var(--font-Manrope), system-ui, sans-serif;
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    font-feature-settings: "kern", "liga";
+    text-rendering: optimizeLegibility;
   }
   html { scroll-behavior: smooth; }
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-NotoSerif), Georgia, serif;
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 500;
+    text-wrap: balance;
   }
+  p { text-wrap: pretty; }
   /* Ορατή εστίαση για πλοήγηση με πληκτρολόγιο — ουδέτερο λευκό πάνω στο σκούρο UI */
   :focus-visible {
     outline: 2px solid rgba(255, 255, 255, 0.75);
@@ -182,17 +195,21 @@
    Κάθε section χρησιμοποιεί .section-pad (όχι δικά του py-*), ώστε το κενό
    μεταξύ δύο διαδοχικών sections να είναι παντού σταθερό:
    128px σε κινητό (2×64) και 192px σε desktop (2×96). */
-.section-pad {
-  padding-block: 3rem;
-}
-@media (min-width: 992px) {
+/* Μέσα σε @layer components ώστε ένα utility (π.χ. pt-0 κάτω από PageHero)
+   να μπορεί να το παρακάμψει. */
+@layer components {
   .section-pad {
-    padding-block: 4rem;
+    padding-block: 3rem;
   }
-}
-@media (min-width: 1024px) {
-  .section-pad {
-    padding-block: 6rem;
+  @media (min-width: 992px) {
+    .section-pad {
+      padding-block: 4rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .section-pad {
+      padding-block: 6rem;
+    }
   }
 }
 
@@ -205,10 +222,10 @@
    της Tailwind χωρίς !important. Στο desktop τίποτα δεν αλλάζει.
    ═══════════════════════════════════════════════════════════════════════════ */
 @media (max-width: 991.98px) {
-  .text-white\/50 { color: rgb(255 255 255 / 0.62); }
-  .text-white\/55 { color: rgb(255 255 255 / 0.70); }
-  .text-white\/60 { color: rgb(255 255 255 / 0.74); }
-  .text-white\/65 { color: rgb(255 255 255 / 0.78); }
+  .text-white\/50 { color: rgb(242 237 228 / 0.62); }
+  .text-white\/55 { color: rgb(242 237 228 / 0.70); }
+  .text-white\/60 { color: rgb(242 237 228 / 0.74); }
+  .text-white\/65 { color: rgb(242 237 228 / 0.78); }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -285,6 +302,57 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ΤΥΠΟΓΡΑΦΙΚΗ ΚΛΙΜΑΚΑ — μία για όλο το site
+   Τίτλοι σε Literata (βάρος 450–500, ποτέ bold), κείμενο σε Commissioner.
+   Κλίμακα: 13 · 15 · 17 · 20 · 24 · 32 · 48 · 72 px (desktop), με clamp()
+   ώστε στο κινητό να μικραίνουν ομαλά. Κανένα κεφαλαίο «eyebrow» label —
+   η ιεραρχία βγαίνει από το μέγεθος, όχι από διακοσμητικά.
+   ═══════════════════════════════════════════════════════════════════════════ */
+@layer components {
+  .t-display {
+    font-family: var(--font-display);
+    font-weight: 450;
+    font-size: clamp(2.5rem, 1.2rem + 3.4vw, 4.5rem);
+    line-height: 1.04;
+    letter-spacing: -0.018em;
+  }
+  .t-h1 {
+    font-family: var(--font-display);
+    font-weight: 450;
+    font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3.75rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+  }
+  .t-h2 {
+    font-family: var(--font-display);
+    font-weight: 450;
+    font-size: clamp(2rem, 1.5rem + 1.7vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.012em;
+  }
+  .t-h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.375rem, 1.2rem + 0.5vw, 1.625rem);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+  }
+  .t-h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.3;
+  }
+  .t-lead {
+    font-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem);
+    line-height: 1.55;
+  }
+  .t-body { font-size: 1.0625rem; line-height: 1.65; }
+  .t-small { font-size: 0.9375rem; line-height: 1.6; }
+  .t-caption { font-size: 0.8125rem; line-height: 1.45; letter-spacing: 0.01em; }
 }
 
 @layer utilities {

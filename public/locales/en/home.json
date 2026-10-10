@@ -9,18 +9,18 @@
     "subtitle": "Live pain-free. Move with confidence.",
     "slides": [
       {
-        "title": "Physiotherapy & Osteopathy",
-        "highlight": "PREVENT",
+        "title": "Physiotherapy &\u00a0Osteopathy",
+        "highlight": "",
         "subtitle": "Live pain-free. Move with confidence — in Patisia, Athens, since 2018."
       },
       {
         "title": "Personalized",
-        "highlight": "THERAPY",
+        "highlight": "therapy",
         "subtitle": "A physiotherapist and an orthopedic surgeon working together on a treatment plan built exclusively for you."
       },
       {
         "title": "Your path to",
-        "highlight": "RECOVERY",
+        "highlight": "recovery",
         "subtitle": "From your first assessment to full recovery — step by step, with clear progress at every session."
       }
     ],
@@ -30,7 +30,10 @@
     "experience": "SINCE 2018",
     "badgeLicensed": "Specialized Movement Care",
     "badgeExperience": "Evidence-Based Methods",
-    "badgePatients": "Holistic Recovery & Prevention"
+    "badgePatients": "Holistic Recovery & Prevention",
+    "since": "Since 2018",
+    "reviews": "Google reviews",
+    "slideLabel": "Photo"
   },
   "services": {
     "label": "Service",
@@ -200,6 +203,7 @@
       "treatment1": "Spinal mobilization by the physiotherapist",
       "treatment2": "Seated neck and shoulder treatment",
       "treatment4": "Limb mobilization technique",
+      "treatment5": "Treatment in the supine position",
       "waitingArea": "The PREVENT Therapy Space waiting area",
       "clinicInterior": "The therapeutic exercise space",
       "equipment": "Therapeutic exercise equipment",

@@ -35,8 +35,9 @@ export function FormField({
   const errorId = `${id}-error`;
   const border = error
     ? "border-[#f5a39a]/70 focus:border-[#f5a39a]"
-    : `border-white/[0.08] ${focusBorder}`;
-  const base = `w-full px-4 py-3 rounded-xl bg-[#050810] border ${border} focus:bg-[#0a0f1a] outline-none transition-all text-sm text-white placeholder:text-white/30`;
+    : `border-white/12 ${focusBorder}`;
+  // 16px κείμενο: κάτω από αυτό το iOS κάνει zoom στο πεδίο
+  const base = `w-full px-4 py-3.5 rounded-xl bg-[#050810] border ${border} outline-none transition-colors text-base text-white placeholder:text-white/40`;
   const a11y = {
     id,
     "aria-invalid": error ? true : undefined,
@@ -47,7 +48,7 @@ export function FormField({
     <div>
       <label
         htmlFor={id}
-        className="block text-xs font-semibold uppercase tracking-wider text-white/55 mb-2"
+        className="block t-small font-medium text-white/85 mb-2"
       >
         {label}
       </label>

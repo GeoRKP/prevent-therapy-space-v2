@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { Plus, GraduationCap } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { SectionHeading } from "./SectionHeading";
@@ -15,42 +14,30 @@ import {
 } from "@/components/ui/dialog";
 import { partners } from "@/data/partners";
 
-const cardBase =
-  "h-full bg-[#050810] border border-white/[0.06] rounded-2xl p-5";
-
-function PartnerCardContent({ partner, name, role, note, t, interactive }) {
+function Portrait({ partner, name, interactive }) {
   return (
-    <>
-      <div className="relative aspect-[4/5] overflow-hidden rounded-xl mb-5">
-        <Image
-          src={partner.image}
-          alt={name}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className={
-            interactive
-              ? "object-cover object-top group-hover:scale-[1.03] transition-transform duration-700"
-              : "object-cover object-top"
-          }
-        />
-      </div>
+    <div className="relative aspect-[4/5] overflow-hidden rounded-[18px] max-sm:aspect-[4/3]">
+      <Image
+        src={partner.image}
+        alt={name}
+        fill
+        sizes="(max-width: 575px) 100vw, (max-width: 1199px) 50vw, 22vw"
+        className={
+          "object-cover object-top" +
+          (interactive ? " transition-transform duration-700 group-hover:scale-[1.025]" : "")
+        }
+      />
+    </div>
+  );
+}
 
-      <h3 className="text-lg font-bold text-white mb-1">{name}</h3>
-      <p className="text-sm text-white/55">{role}</p>
-
-      {note && (
-        <span className="inline-block mt-3 text-xs font-semibold px-2.5 py-1 rounded-full bg-primary-soft/10 text-primary-soft whitespace-nowrap">
-          {note}
-        </span>
-      )}
-
-      {interactive && (
-        <span className="mt-4 inline-flex min-h-11 w-full items-center justify-between gap-2 rounded-xl border border-white/10 group-hover:border-primary-soft/40 px-4 py-2.5 text-sm font-semibold text-primary-soft transition-colors">
-          {t("partners.readMore")}
-          <Plus className="w-4 h-4" aria-hidden="true" />
-        </span>
-      )}
-    </>
+function Caption({ name, role, note }) {
+  return (
+    <div className="mt-5">
+      <h3 className="t-h3 text-white">{name}</h3>
+      <p className="t-small text-white/65 mt-1">{role}</p>
+      {note && <p className="t-small text-primary-soft mt-1">{note}</p>}
+    </div>
   );
 }
 
@@ -61,126 +48,63 @@ export function PartnersSection() {
   return (
     <section
       aria-labelledby="partners-heading"
-      className="relative section-pad overflow-hidden bg-[#070b14] m-section-alt"
+      className="relative section-pad bg-[#070b14] m-section-alt"
     >
-      <div className="container relative z-10">
+      <div className="container grid lg:grid-cols-12 gap-x-12">
         <SectionHeading
           id="partners-heading"
-          centered={false}
-          label={t("partners.label")}
+          layout="stack"
           title={t("partners.title")}
           subtitle={t("partners.subtitle")}
+          className="lg:col-span-4 lg:mb-0"
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-          {partners.map((partner, i) => {
-            const Icon = partner.icon;
-            const name = t(`partners.members.${partner.id}.name`, {
-              defaultValue: "",
-            });
+        <ul className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-12">
+          {partners.map((partner) => {
+            const name = t(`partners.members.${partner.id}.name`, { defaultValue: "" });
             const role = t(`partners.members.${partner.id}.role`);
-            const note = t(`partners.members.${partner.id}.note`, {
-              defaultValue: "",
+            const note = t(`partners.members.${partner.id}.note`, { defaultValue: "" });
+            const credentials = t(`partners.members.${partner.id}.credentials`, {
+              returnObjects: true,
+              defaultValue: null,
             });
-            const roleDesc = t(`partners.members.${partner.id}.roleDesc`, {
-              defaultValue: "",
-            });
-            const credentials = t(
-              `partners.members.${partner.id}.credentials`,
-              { returnObjects: true, defaultValue: null }
-            );
             const bio = t(`partners.members.${partner.id}.bio`, {
               returnObjects: true,
               defaultValue: null,
             });
             const hasBio = Array.isArray(bio) && bio.length > 0;
 
-            // Χωρίς όνομα δεν renderάρεται ποτέ «κάρτα προσώπου» — μόνο κάρτα ρόλου.
-            if (!name || !partner.image) {
-              return (
-                <motion.div
-                  key={partner.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.6 }}
-                >
-                  <div
-                    className={`${cardBase} flex flex-col items-start justify-center gap-3.5`}
-                  >
-                    <div className="w-11 h-11 rounded-xl bg-primary-soft/10 flex items-center justify-center">
-                      <Icon
-                        className="w-5 h-5 text-primary-soft"
-                        aria-hidden="true"
-                      />
-                    </div>
-                    <h3 className="text-lg font-bold text-white">{role}</h3>
-                    {roleDesc && (
-                      <p className="text-sm text-white/55 leading-relaxed">
-                        {roleDesc}
-                      </p>
-                    )}
-                    <span className="text-xs font-semibold px-2.5 py-1 rounded-full border border-dashed border-white/20 text-white/60">
-                      {t("partners.comingSoon")}
-                    </span>
-                  </div>
-                </motion.div>
-              );
-            }
+            // Χωρίς όνομα και φωτογραφία δεν εμφανίζεται «κάρτα προσώπου».
+            if (!name || !partner.image) return null;
 
             if (!hasBio) {
               return (
-                <motion.div
-                  key={partner.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.6 }}
-                >
-                  <div className={cardBase}>
-                    <PartnerCardContent
-                      partner={partner}
-                      name={name}
-                      role={role}
-                      note={note}
-                      t={t}
-                      interactive={false}
-                    />
-                  </div>
-                </motion.div>
+                <li key={partner.id}>
+                  <Portrait partner={partner} name={name} />
+                  <Caption name={name} role={role} note={note} />
+                </li>
               );
             }
 
             return (
-              <motion.div
-                key={partner.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-              >
+              <li key={partner.id}>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <button
-                      type="button"
-                      className={`${cardBase} group block w-full text-left cursor-pointer transition-colors hover:bg-[#0a0f1a] hover:border-primary-soft/30`}
-                    >
-                      <PartnerCardContent
-                        partner={partner}
-                        name={name}
-                        role={role}
-                        note={note}
-                        t={t}
-                        interactive
-                      />
+                    <button type="button" className="group block w-full text-left cursor-pointer">
+                      <Portrait partner={partner} name={name} interactive />
+                      <Caption name={name} role={role} note={note} />
+                      <span className="mt-4 inline-flex items-center gap-2 t-small font-semibold text-primary-soft group-hover:text-[#a3dec4] transition-colors">
+                        <Plus className="w-4 h-4" aria-hidden="true" />
+                        {t("partners.readMore")}
+                      </span>
                     </button>
                   </DialogTrigger>
 
                   <DialogContent
                     closeLabel={t("partners.close")}
-                    className="w-[calc(100%-2rem)] max-w-xl max-h-[85dvh] p-0 gap-0 flex flex-col bg-[#0a0f1a] border-white/10 rounded-2xl overflow-hidden"
+                    className="w-[calc(100%-2rem)] max-w-xl max-h-[85dvh] p-0 gap-0 flex flex-col bg-[#0a0f1a] border-white/10 rounded-[20px] overflow-hidden"
                   >
-                    <DialogHeader className="flex-row items-center gap-4 space-y-0 p-6 pb-4 text-left">
+                    <DialogHeader className="flex-row items-center gap-4 space-y-0 p-6 pb-5 pr-14 text-left border-b border-white/10">
                       <Image
                         src={partner.image}
                         alt=""
@@ -189,25 +113,23 @@ export function PartnersSection() {
                         className="w-16 h-16 rounded-xl object-cover object-top shrink-0"
                       />
                       <div>
-                        <DialogTitle className="text-white leading-snug">
-                          {name}
-                        </DialogTitle>
-                        <DialogDescription className="text-white/55 mt-1">
+                        <DialogTitle className="t-h3 text-white">{name}</DialogTitle>
+                        <DialogDescription className="t-small text-white/65 mt-1">
                           {role}
                         </DialogDescription>
                       </div>
                     </DialogHeader>
 
-                    <div className="overflow-y-auto px-6 pb-6 space-y-4">
+                    <div className="overflow-y-auto px-6 py-6 space-y-5">
                       {Array.isArray(credentials) && credentials.length > 0 && (
-                        <ul className="flex flex-wrap gap-2">
+                        <ul className="space-y-2.5">
                           {credentials.map((credential) => (
                             <li
                               key={credential}
-                              className="inline-flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-full bg-white/[0.06] border border-white/10 text-white/75"
+                              className="flex items-start gap-3 t-small text-white/80"
                             >
                               <GraduationCap
-                                className="w-3.5 h-3.5 text-primary-soft shrink-0"
+                                className="w-4 h-4 mt-1 text-primary-soft shrink-0"
                                 aria-hidden="true"
                               />
                               {credential}
@@ -217,21 +139,17 @@ export function PartnersSection() {
                       )}
 
                       {bio.map((paragraph, j) => (
-                        <p
-                          key={j}
-                          className="text-sm text-white/70 leading-relaxed"
-                        >
+                        <p key={j} className="t-body text-white/75">
                           {paragraph}
                         </p>
                       ))}
                     </div>
-
                   </DialogContent>
                 </Dialog>
-              </motion.div>
+              </li>
             );
           })}
-        </div>
+        </ul>
       </div>
     </section>
   );

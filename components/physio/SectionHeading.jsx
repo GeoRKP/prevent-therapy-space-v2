@@ -1,43 +1,48 @@
-"use client";
-
-import { RevealText } from "@/components/effects/kinetic-text";
 import { cn } from "@/lib/utils";
 
-export function SectionHeading({ id, label, title, subtitle, centered = true }) {
-  return (
-    <div className={cn("mb-16 max-lg:mb-10", centered ? "text-center" : "max-w-2xl")}>
-      {label && (
-        <RevealText>
-          <div className="inline-flex items-center gap-3 mb-5">
-            <div className="w-8 h-px bg-primary-soft/70" />
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-              {label}
-            </span>
-            {centered && <div className="w-8 h-px bg-primary-soft/70" />}
-          </div>
-        </RevealText>
-      )}
-
-      <RevealText delay={0.1}>
-        <h2
-          id={id}
-          className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-white mb-5"
-        >
+// Ένα μοτίβο για όλους τους τίτλους ενοτήτων: ο τίτλος αριστερά και η εισαγωγή
+// δεξιά στο desktop (split), ή στοιβαγμένα. Χωρίς κεφαλαίο «eyebrow» label —
+// η ιεραρχία βγαίνει από την τυπογραφία.
+export function SectionHeading({ id, title, subtitle, layout = "split", className, children }) {
+  if (layout === "center") {
+    return (
+      <div className={cn("mb-12 lg:mb-16 text-center max-w-2xl mx-auto", className)}>
+        <h2 id={id} className="t-h2 text-white">
           {title}
         </h2>
-      </RevealText>
+        {subtitle && <p className="t-lead text-white/65 mt-5">{subtitle}</p>}
+        {children}
+      </div>
+    );
+  }
 
-      {subtitle && (
-        <RevealText delay={0.2}>
-          <p
-            className={cn(
-              "text-base lg:text-lg text-white/55 max-w-2xl leading-relaxed",
-              centered ? "mx-auto" : ""
-            )}
-          >
-            {subtitle}
-          </p>
-        </RevealText>
+  if (layout === "stack") {
+    return (
+      <div className={cn("mb-12 lg:mb-16 max-w-2xl", className)}>
+        <h2 id={id} className="t-h2 text-white">
+          {title}
+        </h2>
+        {subtitle && <p className="t-lead text-white/65 mt-5">{subtitle}</p>}
+        {children}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={cn(
+        "mb-12 lg:mb-16 grid lg:grid-cols-12 gap-x-10 gap-y-5 lg:items-end",
+        className
+      )}
+    >
+      <h2 id={id} className="t-h2 text-white lg:col-span-6">
+        {title}
+      </h2>
+      {(subtitle || children) && (
+        <div className="lg:col-span-5 lg:col-start-8">
+          {subtitle && <p className="t-lead text-white/65">{subtitle}</p>}
+          {children}
+        </div>
       )}
     </div>
   );

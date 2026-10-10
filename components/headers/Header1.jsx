@@ -53,8 +53,8 @@ export default function Header1() {
           className={cn(
             "absolute inset-0 transition-all duration-500",
             isScrolled
-              ? "bg-[#050810]/95 backdrop-blur-xl border-b border-white/[0.06]"
-              : "bg-gradient-to-b from-[#050810]/85 to-transparent"
+              ? "bg-[#050810]/95 backdrop-blur-xl border-b border-white/[0.08]"
+              : "bg-transparent"
           )}
         />
 
@@ -69,6 +69,14 @@ export default function Header1() {
                 className="h-10 w-10"
                 priority
               />
+              <span className="leading-none max-xl:lg:hidden" aria-hidden="true">
+                <span className="block text-[0.9375rem] font-semibold tracking-[0.14em] text-white">
+                  PREVENT
+                </span>
+                <span className="block mt-1 text-[0.6875rem] tracking-[0.06em] text-white/60">
+                  Therapy Space
+                </span>
+              </span>
             </Link>
 
             <div className="hidden lg:flex items-center gap-1">
@@ -79,10 +87,11 @@ export default function Header1() {
                     key={link.href}
                     href={link.href}
                     className={cn(
-                      "relative px-4 py-2 rounded-full text-sm font-medium transition-colors duration-300",
+                      "relative px-2.5 xl:px-3.5 py-2 text-[0.9375rem] whitespace-nowrap transition-colors duration-300",
+                      "after:absolute after:left-2.5 after:right-2.5 xl:after:left-3.5 xl:after:right-3.5 after:-bottom-0.5 after:h-px after:bg-primary-soft after:origin-left after:transition-transform after:duration-300",
                       isActive
-                        ? "text-primary-soft bg-primary-soft/10"
-                        : "text-white/70 hover:text-white hover:bg-white/[0.04]"
+                        ? "text-white after:scale-x-100"
+                        : "text-white/72 hover:text-white after:scale-x-0 hover:after:scale-x-100"
                     )}
                   >
                     {ready ? t(`common:navigation.${link.key}`) : link.key}
@@ -95,7 +104,7 @@ export default function Header1() {
               <div className="hidden lg:flex items-center gap-3">
                 <a
                   href="tel:+306972952263"
-                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/[0.04] transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 text-[0.9375rem] text-white/80 hover:text-white transition-colors tabular-nums"
                 >
                   <Phone className="w-4 h-4 text-primary-soft" />
                   <span className="hidden xl:inline">
@@ -104,7 +113,7 @@ export default function Header1() {
                 </a>
                 <a
                   href="viber://chat?number=%2B306972952263"
-                  className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white/70 hover:text-white hover:bg-white/[0.04] transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 text-[0.9375rem] text-white/80 hover:text-white transition-colors"
                 >
                   <MessageCircle className="w-4 h-4 text-primary-soft" />
                   <span className="hidden xl:inline">Viber</span>
@@ -112,10 +121,9 @@ export default function Header1() {
                 <LanguageSwitcher />
                 <Link
                   href="/booking"
-                  className="ml-1 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-primary-soft text-primary-soft-foreground hover:bg-primary-soft/90 transition-colors"
+                  className="ml-1 inline-flex items-center h-11 px-5 whitespace-nowrap rounded-full text-[0.9375rem] font-semibold bg-primary-soft text-primary-soft-foreground hover:bg-[#a3dec4] transition-colors"
                 >
                   {ready ? t("common:navigation.booking") : "Book"}
-                  <ArrowUpRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
 
@@ -173,7 +181,7 @@ export default function Header1() {
 
             <div className="container relative z-10 h-full flex flex-col pt-24 pb-8 overflow-y-auto">
               <nav className="flex-1">
-                <div className="space-y-2">
+                <div className="border-t border-white/10">
                   {navLinks.map((link, index) => {
                     const isActive = pathname === link.href;
                     return (
@@ -187,13 +195,11 @@ export default function Header1() {
                           href={link.href}
                           onClick={() => setIsMobileMenuOpen(false)}
                           className={cn(
-                            "group flex items-center justify-between py-4 px-5 rounded-2xl transition-colors",
-                            isActive
-                              ? "bg-primary-soft/10 text-primary-soft"
-                              : "text-white/85 hover:bg-white/[0.04]"
+                            "group flex items-center justify-between py-4 border-b border-white/10 transition-colors",
+                            isActive ? "text-primary-soft" : "text-white"
                           )}
                         >
-                          <span className="text-xl font-semibold tracking-tight">
+                          <span className="font-display text-[1.75rem] leading-tight">
                             {t(`common:navigation.${link.key}`)}
                           </span>
                           <ArrowUpRight
@@ -215,12 +221,12 @@ export default function Header1() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.4 }}
-                className="pt-8 border-t border-white/10 space-y-3"
+                className="pt-8 space-y-3"
               >
                 <Link
                   href="/booking"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full font-semibold bg-primary-soft text-primary-soft-foreground hover:bg-primary-soft/90 transition-colors"
+                  className="flex items-center justify-center gap-2 w-full h-13 rounded-full font-semibold bg-primary-soft text-primary-soft-foreground hover:bg-[#a3dec4] transition-colors"
                 >
                   {t("common:navigation.booking")}
                   <ArrowUpRight className="w-4 h-4" />

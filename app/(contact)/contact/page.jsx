@@ -1,20 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { Mail, Phone, MessageCircle, MapPin, Send, ArrowRight } from "lucide-react";
+import { Mail, Phone, MessageCircle, MapPin, Clock, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { contactInfo } from "@/data/conditions";
 import HeadManager from "@/components/common/HeadManager";
 import { PageHero } from "@/components/physio/PageHero";
-import { RevealText } from "@/components/effects/kinetic-text";
 import { FormField, FieldError } from "@/components/common/FormField";
 import { validateContact, CONTACT_FIELDS } from "@/lib/form-validation";
 import { useFormValidation, focusField } from "@/lib/use-form-validation";
 
 export default function ContactPage() {
-  const { t, ready, i18n } = useTranslation(["contact", "common"]);
+  const { t, ready, i18n } = useTranslation(["contact", "common", "footer"]);
   const [submitting, setSubmitting] = useState(false);
   const [consent, setConsent] = useState(false);
   const [form, setForm] = useState({
@@ -70,76 +68,68 @@ export default function ContactPage() {
       <HeadManager namespace="contact" pageKey="meta" />
 
       <PageHero
-        label={ready ? "Επικοινωνία" : ""}
         title={ready ? t("contact:title") : ""}
         subtitle={ready ? t("contact:subtitle") : ""}
         backgroundImage="/images/clinic/office-photo.jpg"
       />
 
-      <section className="relative section-pad overflow-hidden bg-[#050810]">
-        <div className="container relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-6xl mx-auto">
-            {/* Left — info */}
-            <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-7 lg:p-10">
-              <RevealText>
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-px bg-primary/70" />
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-                    Info
-                  </span>
+      <section className="relative section-pad pt-0 lg:pt-0 bg-[#050810]">
+        <div className="container grid lg:grid-cols-12 gap-x-12 gap-y-12 items-start">
+          {/* Αριστερά — στοιχεία */}
+          <div className="lg:col-span-5">
+            <h2 className="t-h3 text-white mb-6">{ready ? t("contact:infoTitle") : ""}</h2>
+            <dl className="border-t border-white/12">
+              <ContactRow
+                icon={MapPin}
+                title={ready ? t("contact:info.address.title") : ""}
+                value={ready ? t("contact:info.address.value") : ""}
+                href={ready ? t("contact:location.googleMapsUrl") : undefined}
+                external
+              />
+              <ContactRow
+                icon={Phone}
+                title={ready ? t("contact:info.phone.title") : ""}
+                value={ready ? t("contact:info.phone.value") : ""}
+                href={`tel:+30${contactInfo.phone.replace(/\s/g, "")}`}
+              />
+              <ContactRow
+                icon={MessageCircle}
+                title={ready ? t("contact:info.viber.title") : ""}
+                value={ready ? t("contact:info.viber.value") : ""}
+                href={contactInfo.viberHref}
+              />
+              <ContactRow
+                icon={Mail}
+                title={ready ? t("contact:info.email.title") : ""}
+                value={contactInfo.email}
+                href={`mailto:${contactInfo.email}`}
+              />
+              <div className="grid grid-cols-[1.25rem_1fr] gap-x-4 py-5 border-b border-white/12">
+                <Clock className="w-5 h-5 mt-0.5 text-primary-soft" aria-hidden="true" />
+                <div>
+                  <dt className="t-small text-white/55">{ready ? t("footer:hours.title") : ""}</dt>
+                  <dd className="mt-1 t-small text-white space-y-1">
+                    <span className="flex justify-between gap-6 max-w-xs">
+                      <span className="text-white/75">{ready ? t("footer:hours.mondayFriday") : ""}</span>
+                      <span className="tabular-nums">{ready ? t("footer:hours.mondayFridayTime") : ""}</span>
+                    </span>
+                    <span className="flex justify-between gap-6 max-w-xs">
+                      <span className="text-white/75">{ready ? t("footer:hours.saturday") : ""}</span>
+                      <span className="tabular-nums">{ready ? t("footer:hours.saturdayTime") : ""}</span>
+                    </span>
+                    <span className="flex justify-between gap-6 max-w-xs">
+                      <span className="text-white/75">{ready ? t("footer:hours.sunday") : ""}</span>
+                      <span className="text-white/50">{ready ? t("footer:hours.closed") : ""}</span>
+                    </span>
+                  </dd>
                 </div>
-              </RevealText>
-
-              <RevealText delay={0.1}>
-                <h3 className="text-2xl lg:text-3xl font-bold text-white mb-7 tracking-tight">
-                  Επικοινωνήστε μαζί μας
-                </h3>
-              </RevealText>
-
-              <div className="space-y-3">
-                <ContactCard
-                  icon={MapPin}
-                  title={ready ? t("contact:info.address.title") : ""}
-                  value={ready ? t("contact:info.address.value") : ""}
-                />
-                <ContactCard
-                  icon={Phone}
-                  title={ready ? t("contact:info.phone.title") : ""}
-                  value={ready ? t("contact:info.phone.value") : ""}
-                  href={`tel:+30${(ready ? t("contact:info.phone.value") : "").replace(/\s/g, "")}`}
-                />
-                <ContactCard
-                  icon={MessageCircle}
-                  title={ready ? t("contact:info.viber.title") : ""}
-                  value={ready ? t("contact:info.viber.value") : ""}
-                  href={contactInfo.viberHref}
-                />
-                <ContactCard
-                  icon={Mail}
-                  title={ready ? t("contact:info.email.title") : ""}
-                  value={ready ? t("contact:info.email.value") : ""}
-                  href={`mailto:${ready ? t("contact:info.email.value") : ""}`}
-                />
               </div>
-            </div>
+            </dl>
+          </div>
 
-            {/* Right — form */}
-            <div className="bg-[#070b14] border border-white/[0.06] rounded-3xl p-7 lg:p-10">
-              <RevealText>
-                <div className="flex items-center gap-3 mb-5">
-                  <div className="w-10 h-px bg-primary/70" />
-                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-                    Form
-                  </span>
-                </div>
-              </RevealText>
-
-              <RevealText delay={0.1}>
-                <h3 className="text-2xl lg:text-3xl font-bold text-white mb-7 tracking-tight">
-                  Στείλτε μήνυμα
-                </h3>
-              </RevealText>
-
+          {/* Δεξιά — φόρμα */}
+          <div className="lg:col-span-7 rounded-[20px] bg-[#0a0f1a] p-7 sm:p-10 max-sm:-mx-1">
+            <h2 className="t-h3 text-white mb-7">{ready ? t("contact:formTitle") : ""}</h2>
               {/* noValidate: τα γενικά μηνύματα του browser αντικαθίστανται από τα
                   δικά μας (lib/form-validation.js), που λένε τι ακριβώς λείπει */}
               <form onSubmit={handleSubmit} noValidate className="space-y-4">
@@ -151,7 +141,7 @@ export default function ContactPage() {
                   onChange={handleChange("name")}
                   onBlur={() => v.touch("name")}
                   error={v.errors.name}
-                  focusBorder="focus:border-primary/50"
+                  focusBorder="focus:border-primary-soft/60"
                   required
                 />
                 <FormField
@@ -165,7 +155,7 @@ export default function ContactPage() {
                   onChange={handleChange("email")}
                   onBlur={() => v.touch("email")}
                   error={v.errors.email}
-                  focusBorder="focus:border-primary/50"
+                  focusBorder="focus:border-primary-soft/60"
                   required
                 />
                 <FormField
@@ -179,7 +169,7 @@ export default function ContactPage() {
                   onChange={handleChange("phone")}
                   onBlur={() => v.touch("phone")}
                   error={v.errors.phone}
-                  focusBorder="focus:border-primary/50"
+                  focusBorder="focus:border-primary-soft/60"
                 />
                 <FormField
                   id="contact-message"
@@ -189,7 +179,7 @@ export default function ContactPage() {
                   onChange={handleChange("message")}
                   onBlur={() => v.touch("message")}
                   error={v.errors.message}
-                  focusBorder="focus:border-primary/50"
+                  focusBorder="focus:border-primary-soft/60"
                   required
                 />
                 <div>
@@ -207,7 +197,7 @@ export default function ContactPage() {
                       aria-describedby="contact-consent-error"
                       className="mt-0.5 w-4 h-4 accent-[#82d9b9] flex-shrink-0"
                     />
-                    <span className="text-xs text-white/55 leading-relaxed">
+                    <span className="t-small text-white/65">
                       {ready ? t("contact:form.consentPrefix") : ""}{" "}
                       <a
                         href="/privacy"
@@ -225,9 +215,8 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center justify-center gap-2 w-full px-7 py-3.5 rounded-full bg-primary text-white font-semibold text-sm hover:bg-primary/90 transition-colors disabled:opacity-50"
+                  className="inline-flex items-center justify-center gap-2 w-full h-13 rounded-full bg-primary-soft text-primary-soft-foreground font-semibold hover:bg-[#a3dec4] transition-colors disabled:opacity-50"
                 >
-                  <Send className="w-4 h-4" />
                   {submitting
                     ? ready
                       ? t("common:actions.loading")
@@ -238,7 +227,6 @@ export default function ContactPage() {
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </form>
-            </div>
           </div>
         </div>
       </section>
@@ -246,30 +234,26 @@ export default function ContactPage() {
   );
 }
 
-function ContactCard({ icon: Icon, title, value, href }) {
-  const Content = (
-    <motion.div
-      whileHover={{ x: 3 }}
-      className="group flex items-center gap-4 p-5 rounded-2xl bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary/30 transition-all"
-    >
-      <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/15 transition-colors">
-        <Icon className="w-5 h-5 text-primary" />
-      </div>
+function ContactRow({ icon: Icon, title, value, href, external }) {
+  const body = (
+    <>
+      <Icon className="w-5 h-5 mt-0.5 text-primary-soft" aria-hidden="true" />
       <div>
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-white/55 mb-0.5">
-          {title}
-        </h4>
-        <p className="text-white font-medium group-hover:text-primary transition-colors">
-          {value}
-        </p>
+        <dt className="t-small text-white/55">{title}</dt>
+        <dd className="mt-0.5 text-white group-hover:text-primary-soft transition-colors">{value}</dd>
       </div>
-    </motion.div>
+    </>
   );
+  const cls = "group grid grid-cols-[1.25rem_1fr] gap-x-4 py-5 border-b border-white/12";
   return href ? (
-    <a href={href} className="block">
-      {Content}
+    <a
+      href={href}
+      className={cls}
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+    >
+      {body}
     </a>
   ) : (
-    Content
+    <div className={cls}>{body}</div>
   );
 }

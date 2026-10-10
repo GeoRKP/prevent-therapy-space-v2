@@ -18,25 +18,23 @@ export function LegalPage({ docKey }) {
       <HeadManager namespace="legal" pageKey={`${docKey}.meta`} />
 
       <PageHero
-        label="PREVENT"
         title={t(`${docKey}.title`)}
         subtitle=""
-        backgroundImage="/images/clinic/office-photo.jpg"
       />
 
-      <section className="relative section-pad bg-[#050810]">
+      <section className="relative section-pad pt-0 lg:pt-0 bg-[#050810]">
         <div className="container relative z-10 max-w-3xl">
-          <p className="text-xs text-white/40 mb-10">{t(`${docKey}.updated`)}</p>
+          <p className="t-small text-white/55 mb-10">{t(`${docKey}.updated`)}</p>
 
           <div className="space-y-10">
             {sections.map((section, i) => (
               <div key={i}>
-                <h2 className="text-lg font-bold text-white mb-3 tracking-tight">
+                <h2 className="t-h4 text-white mb-3">
                   {section.h}
                 </h2>
                 <div className="space-y-3">
                   {section.p.map((paragraph, j) => (
-                    <p key={j} className="text-sm text-white/60 leading-relaxed">
+                    <p key={j} className="t-body text-white/72">
                       {paragraph}
                     </p>
                   ))}

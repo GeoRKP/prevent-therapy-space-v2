@@ -18,7 +18,7 @@ export default function ServicesPage() {
         label={ready ? t("hero.label") : "Services"}
         title={ready ? t("hero.title") : ""}
         subtitle={ready ? t("hero.subtitle") : ""}
-        backgroundImage="/images/clinic/inner-space-and-equipment.jpg"
+        backgroundImage="/images/clinic/equipment-photo.jpg"
       />
 
       <ServicesGrid asPageIntro />

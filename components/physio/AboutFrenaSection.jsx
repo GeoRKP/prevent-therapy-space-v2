@@ -1,229 +1,98 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Star, ArrowUpRight } from "lucide-react";
-import { RevealText } from "@/components/effects/kinetic-text";
 import { reviews, googleReviews } from "@/data/reviews";
+import { SectionHeading } from "./SectionHeading";
 
 // asPageIntro: στη σελίδα «Σχετικά» ο PageHero λέει ήδη «Στόχος μας…» —
-// η ενότητα ξεκινά κατευθείαν από το περιεχόμενο, χωρίς δικό της heading.
+// η ενότητα ξεκινά κατευθείαν από το περιεχόμενο, χωρίς δικό της τίτλο.
 export function AboutFrenaSection({ asPageIntro = false }) {
   const { t, ready, i18n } = useTranslation("home");
   if (!ready) return null;
 
   const lang = i18n.language === "en" ? "en" : "el";
   const rating =
-    lang === "el"
-      ? googleReviews.ratingValue.replace(".", ",")
-      : googleReviews.ratingValue;
+    lang === "el" ? googleReviews.ratingValue.replace(".", ",") : googleReviews.ratingValue;
   const points = t("aboutSection.points", { returnObjects: true }) || [];
 
   return (
-    <section className="relative section-pad overflow-hidden bg-[#050810]">
-      <div className="container relative z-10">
+    <section className="relative section-pad bg-[#050810]">
+      <div className="container">
         {!asPageIntro && (
-        <div className="mb-16 lg:mb-20 max-lg:mb-10">
-          <RevealText>
-            <div className="flex items-center gap-3 mb-5">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-                {t("aboutSection.badge")}
-              </span>
-              <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent" />
-            </div>
-          </RevealText>
-
-          <div className="grid lg:grid-cols-2 gap-10 items-end">
-            <RevealText delay={0.1}>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
-                <span className="text-white">{t("aboutSection.title")}</span>
-                <br />
-                <span className="text-primary-soft">
-                  {t("aboutSection.subtitle")}
-                </span>
-              </h2>
-            </RevealText>
-
-            <RevealText delay={0.2}>
-              <p className="text-base lg:text-lg text-white/55 leading-relaxed lg:max-w-md">
-                {t("aboutSection.description")}
-              </p>
-            </RevealText>
-          </div>
-        </div>
+          <SectionHeading
+            title={`${t("aboutSection.title")} ${t("aboutSection.subtitle")}`}
+            subtitle={t("aboutSection.description")}
+          />
         )}
 
-        <div className="grid lg:grid-cols-12 gap-6 lg:gap-10">
-          <div className="lg:col-span-5 space-y-4">
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative rounded-3xl overflow-hidden"
-            >
-              <div className="relative aspect-[4/5]">
-                <Image
-                  src="/images/treatments/physio-18-side-lying-shoulder.jpg"
-                  alt="Συνεδρία φυσικοθεραπείας στο PREVENT Therapy Space"
-                  fill
-                  className="object-cover"
-                  style={{ objectPosition: "center 25%" }}
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                />
-                <div className="absolute inset-0 max-lg:hidden bg-gradient-to-t from-[#050810] via-transparent to-transparent" />
-              </div>
-
-              <div className="absolute bottom-5 left-5 right-5">
-                <div className="bg-[#050810]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-5">
-                  <span className="text-3xl font-bold text-primary-soft">
-                    {t("aboutSection.experience.value")}
-                  </span>
-                  <span className="block text-sm text-white/65 mt-1">
-                    {t("aboutSection.experience.label")}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="relative aspect-square rounded-2xl overflow-hidden border border-white/[0.06]"
-              >
-                <Image
-                  src="/images/clinic/beautiful-chropractor-bed-photo.jpg"
-                  alt="Κρεβάτι θεραπείας στο PREVENT Therapy Space"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 50vw, 20vw"
-                />
-                <div className="absolute inset-0 max-lg:hidden bg-[#050810]/30" />
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="relative aspect-square rounded-2xl overflow-hidden border border-white/[0.06]"
-              >
-                <Image
-                  src="/images/clinic/inner-space-and-equipment.jpg"
-                  alt="Ο χώρος και ο εξοπλισμός του PREVENT Therapy Space"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 50vw, 20vw"
-                />
-                <div className="absolute inset-0 max-lg:hidden bg-[#050810]/30" />
-              </motion.div>
+        <div className="grid lg:grid-cols-12 gap-x-12 gap-y-10 items-start">
+          <figure className="lg:col-span-5">
+            <div className="relative aspect-[4/5] rounded-[20px] overflow-hidden">
+              <Image
+                src="/images/treatments/physio-18-side-lying-shoulder.jpg"
+                alt="Συνεδρία φυσικοθεραπείας στο PREVENT Therapy Space"
+                fill
+                className="object-cover"
+                style={{ objectPosition: "center 25%" }}
+                sizes="(max-width: 991px) 100vw, 40vw"
+              />
             </div>
-          </div>
+          </figure>
 
-          <div className="lg:col-span-7 lg:pl-6 space-y-4">
-            {points.map((point, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-              >
-                <div className="group relative bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 lg:p-8 transition-all m-card max-lg:border-white/10 max-lg:p-5">
-                  <div className="flex items-start gap-4">
-                    <div className="flex-1">
-                      <h4 className="text-lg font-bold text-white mb-2 group-hover:text-primary-soft transition-colors">
-                        {point.title}
-                      </h4>
-                      <p className="text-white/55 leading-relaxed text-sm">
-                        {point.text}
-                      </p>
-                    </div>
-                    <ArrowUpRight className="w-5 h-5 text-white/20 group-hover:text-primary-soft group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all flex-shrink-0" />
-                  </div>
-                </div>
-              </motion.div>
+          <ul className="lg:col-span-6 lg:col-start-7 lg:pt-2">
+            {points.map((point) => (
+              <li key={point.title} className="py-7 first:pt-0 border-b border-white/12 last:border-b-0">
+                <h3 className="t-h3 text-white">{point.title}</h3>
+                <p className="t-body text-white/68 mt-2.5 max-w-[46ch]">{point.text}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mt-20 lg:mt-28 max-lg:mt-14"
-        >
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 max-lg:mb-6">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-px bg-primary-soft/70" />
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-                  Google
-                </span>
-              </div>
-              <h3 className="text-2xl lg:text-3xl font-bold text-white tracking-tight">
-                {t("aboutSection.reviews.title")}
-              </h3>
-            </div>
-
+        {/* Κριτικές Google — πραγματικές, με παραπομπή στην καταχώρηση */}
+        <div className="mt-24 lg:mt-32">
+          <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-5 mb-10 lg:mb-12">
+            <h2 className="t-h2 text-white">{t("aboutSection.reviews.title")}</h2>
             <a
               href={googleReviews.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-5 py-3 rounded-full border border-white/10 bg-white/[0.02] hover:border-primary-soft/40 transition-colors"
+              className="group inline-flex items-center gap-3 text-white/75 hover:text-white transition-colors"
             >
               <span className="flex items-center gap-0.5" aria-hidden="true">
                 {[1, 2, 3, 4, 5].map((j) => (
-                  <Star key={j} className="w-3.5 h-3.5 fill-primary-soft text-primary-soft" />
+                  <Star key={j} className="w-4 h-4 fill-primary-soft text-primary-soft" />
                 ))}
               </span>
-              <span className="text-sm text-white/70 group-hover:text-white transition-colors">
-                <span className="font-bold text-white">{rating}</span> ·{" "}
+              <span>
+                <span className="font-semibold text-white tabular-nums">{rating}</span>
+                {" · "}
                 {googleReviews.reviewCount} {t("aboutSection.reviews.googleLabel")}
               </span>
-              <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-primary-soft transition-colors" />
+              <ArrowUpRight className="w-4 h-4 text-white/45 group-hover:text-primary-soft transition-colors" />
             </a>
           </div>
 
           {/* Στο κινητό οι κριτικές είναι οριζόντιο carousel (snap) αντί για στοίβα */}
-          <div className="grid md:grid-cols-3 gap-4 max-md:flex max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:-mx-4 max-md:px-4 max-md:pb-2 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden">
-            {reviews.slice(0, 3).map((review, index) => (
-              <motion.div
+          <div className="grid md:grid-cols-3 gap-x-10 max-md:flex max-md:gap-6 max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:-mx-4 max-md:px-4 max-md:scroll-px-4 max-md:pb-2 max-md:[scrollbar-width:none] max-md:[&::-webkit-scrollbar]:hidden">
+            {reviews.slice(0, 3).map((review) => (
+              <figure
                 key={review.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="flex flex-col bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 lg:p-7 transition-all m-card max-lg:border-white/10 max-md:w-[84%] max-md:shrink-0 max-md:snap-center"
+                className="flex flex-col pt-7 border-t border-primary-soft/40 max-md:w-[84%] max-md:shrink-0 max-md:snap-start"
               >
-                <div
-                  className="flex items-center gap-0.5 mb-4"
-                  aria-label={`${review.rating} / 5`}
-                >
-                  {Array.from({ length: review.rating }).map((_, j) => (
-                    <Star key={j} className="w-3.5 h-3.5 fill-primary-soft text-primary-soft" />
-                  ))}
-                </div>
-                <blockquote className="flex-1 text-sm text-white/65 leading-relaxed mb-5">
-                  “{review.quote[lang]}”
+                <blockquote className="flex-1 font-display italic text-[1.1875rem] leading-[1.55] text-white/88">
+                  {lang === "el" ? `«${review.quote.el}»` : `“${review.quote.en}”`}
                 </blockquote>
-                <figcaption className="pt-4 border-t border-white/[0.06]">
-                  <span className="block text-sm font-bold text-white">
-                    {review.name}
-                  </span>
-                  <span className="block text-xs text-white/40 mt-0.5">
-                    {t("aboutSection.reviews.reviewSource")}
-                  </span>
+                <figcaption className="mt-6 t-small">
+                  <span className="block font-semibold text-white">{review.name}</span>
+                  <span className="block text-white/50">{t("aboutSection.reviews.reviewSource")}</span>
                 </figcaption>
-              </motion.div>
+              </figure>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

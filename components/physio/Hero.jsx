@@ -5,301 +5,259 @@ import Link from "next/link";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight, Phone, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { DiagonalLines } from "@/components/effects/geometric-patterns";
-import { RevealText, MarqueeText } from "@/components/effects/kinetic-text";
+import { googleReviews } from "@/data/reviews";
+import { contactInfo } from "@/data/conditions";
+
+const EASE = [0.22, 1, 0.36, 1];
+
+// Desktop: η φωτογραφία πιάνει όλο το δεξί μισό του hero, από άκρη σε άκρη,
+// καθαρή (χωρίς blur/σκίαση) — τα πραγματικά πρόσωπα είναι το πιο δυνατό υλικό.
+// Κινητό: καθαρή κάρτα 4:3 πάνω από τον τίτλο (εγκεκριμένο από τον πελάτη).
+const SLIDES = [
+  {
+    image: "/images/team/konstantinos-patsakis-posing-photo.jpg",
+    position: "center 20%",
+    mobilePosition: "center 18%",
+  },
+  {
+    image: "/images/treatments/physio-19-side-lying-shoulder.jpg",
+    position: "center 35%",
+    mobilePosition: "center 35%",
+  },
+  {
+    image: "/images/treatments/physio-10-leg-raise-ankle.jpg",
+    position: "center 30%",
+    mobilePosition: "center 40%",
+  },
+];
 
 export function Hero() {
-  const { t, ready } = useTranslation(["home", "common"]);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const { t, ready, i18n } = useTranslation(["home", "common"]);
+  const [current, setCurrent] = useState(0);
+  const [autoPlay, setAutoPlay] = useState(true);
   const [touchStart, setTouchStart] = useState(null);
 
-  // Portrait φωτογραφίες σε κάρτα 2:3 — το position κρατά τα πρόσωπα στο κάδρο
-  // όταν το aspect της φωτογραφίας (0.56) είναι στενότερο από την κάρτα (0.667).
-  // mobilePosition: στο κινητό η κάρτα είναι 4:3 (δείχνει το πάνω μισό της
-  // φωτογραφίας) — ξεχωριστό κάδρο ώστε τα πρόσωπα να μένουν μέσα.
-  const heroSlides = [
-    {
-      image: "/images/team/konstantinos-patsakis-posing-photo.jpg",
-      position: "center",
-      mobilePosition: "center 18%",
-      title: t("home:hero.slides.0.title"),
-      highlight: t("home:hero.slides.0.highlight"),
-      subtitle: t("home:hero.slides.0.subtitle"),
-    },
-    {
-      image: "/images/treatments/physio-19-side-lying-shoulder.jpg",
-      position: "center 30%",
-      mobilePosition: "center 35%",
-      title: t("home:hero.slides.1.title"),
-      highlight: t("home:hero.slides.1.highlight"),
-      subtitle: t("home:hero.slides.1.subtitle"),
-    },
-    {
-      image: "/images/treatments/physio-10-leg-raise-ankle.jpg",
-      position: "center 25%",
-      mobilePosition: "center 40%",
-      title: t("home:hero.slides.2.title"),
-      highlight: t("home:hero.slides.2.highlight"),
-      subtitle: t("home:hero.slides.2.subtitle"),
-    },
-  ];
-
   useEffect(() => {
-    if (!isAutoPlaying) return;
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 7000);
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, heroSlides.length]);
+    if (!autoPlay) return;
+    const id = setInterval(() => setCurrent((p) => (p + 1) % SLIDES.length), 7000);
+    return () => clearInterval(id);
+  }, [autoPlay]);
 
-  const goToSlide = useCallback((index) => {
-    setCurrentSlide(index);
-    setIsAutoPlaying(false);
+  const goTo = useCallback((i) => {
+    setCurrent(i);
+    setAutoPlay(false);
   }, []);
 
-  const nextSlide = () => goToSlide((currentSlide + 1) % heroSlides.length);
-  const prevSlide = () =>
-    goToSlide((currentSlide - 1 + heroSlides.length) % heroSlides.length);
-
-  const handleTouchStart = (e) => setTouchStart(e.touches[0].clientX);
   const handleTouchEnd = (e) => {
-    if (!touchStart) return;
+    if (touchStart === null) return;
     const diff = touchStart - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) (diff > 0 ? nextSlide : prevSlide)();
+    if (Math.abs(diff) > 50) {
+      goTo((current + (diff > 0 ? 1 : SLIDES.length - 1)) % SLIDES.length);
+    }
     setTouchStart(null);
   };
 
   if (!ready) {
-    return (
-      <section className="relative min-h-[92svh] bg-[#050810] flex items-center">
-        <div className="container">
-          <div className="max-w-4xl">
-            <div className="w-32 h-6 bg-white/5 rounded mb-8" />
-            <div className="space-y-4 mb-8">
-              <div className="w-full h-16 bg-white/5 rounded" />
-              <div className="w-3/4 h-16 bg-white/5 rounded" />
-            </div>
-          </div>
-        </div>
-      </section>
-    );
+    return <section className="min-h-[92svh] bg-[#050810]" aria-hidden="true" />;
   }
+
+  const lang = i18n.language === "en" ? "en" : "el";
+  const rating =
+    lang === "el" ? googleReviews.ratingValue.replace(".", ",") : googleReviews.ratingValue;
+  const slide = {
+    ...SLIDES[current],
+    title: t(`home:hero.slides.${current}.title`),
+    highlight: t(`home:hero.slides.${current}.highlight`, { defaultValue: "" }),
+    subtitle: t(`home:hero.slides.${current}.subtitle`),
+  };
+  const headline = [slide.title, slide.highlight].filter(Boolean).join(" ");
+
+  const indicators = (
+    <div className="flex items-center gap-4">
+      {SLIDES.map((_, i) => (
+        <button
+          key={i}
+          type="button"
+          onClick={() => goTo(i)}
+          aria-label={`${t("home:hero.slideLabel")} ${i + 1} / ${SLIDES.length}`}
+          aria-current={i === current}
+          className="group flex items-center gap-2.5 py-2"
+        >
+          <span
+            className={cn(
+              "t-caption tabular-nums transition-colors",
+              i === current ? "text-white" : "text-white/45 group-hover:text-white/75"
+            )}
+          >
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <span className="relative h-px w-10 overflow-hidden bg-white/25">
+            {i === current && (
+              <motion.span
+                key={`${current}-${autoPlay}`}
+                className="absolute inset-y-0 left-0 bg-primary-soft"
+                initial={{ width: autoPlay ? "0%" : "100%" }}
+                animate={{ width: "100%" }}
+                transition={{ duration: autoPlay ? 7 : 0, ease: "linear" }}
+              />
+            )}
+          </span>
+        </button>
+      ))}
+    </div>
+  );
 
   return (
     <section
-      className="relative min-h-[92svh] bg-[#050810] overflow-hidden"
-      onTouchStart={handleTouchStart}
+      className="relative bg-[#050810] overflow-hidden"
+      onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Background — μόνο desktop: έντονα blurred ambient πίσω από την
-          κάρτα, ώστε να μη φαίνεται διπλή. Στο κινητό δεν υπάρχει καθόλου
-          φωτογραφία πίσω από το κείμενο (ούτε σκιάσεις)· η φωτογραφία ζει
-          καθαρή στην κάρτα πάνω από τον τίτλο. */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentSlide}
-          className="absolute inset-0 max-lg:hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          aria-hidden="true"
-        >
-          <Image
-            src={heroSlides[currentSlide].image}
-            alt=""
-            fill
-            priority
-            className="object-cover lg:scale-110 lg:blur-2xl opacity-100 lg:opacity-35"
-            style={{ objectPosition: heroSlides[currentSlide].position }}
-            sizes="(max-width: 991px) 1px, 100vw"
-            quality={40}
-          />
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Σκιάσεις πάνω στο ambient — μόνο desktop */}
-      <div className="absolute inset-0 max-lg:hidden bg-gradient-to-r from-[#050810] via-[#050810]/70 to-[#050810]/30" />
-      <div className="absolute inset-0 max-lg:hidden bg-gradient-to-t from-[#050810] via-transparent to-[#050810]/40" />
-
-      <DiagonalLines className="opacity-[0.012]" spacing={100} />
-
-      <div className="container relative z-20 min-h-[92svh] flex items-center pt-24 pb-32 max-lg:pt-28 max-lg:pb-36">
-        <div className="grid lg:grid-cols-12 gap-12 max-lg:gap-8 items-center w-full">
-          <div className="lg:col-span-7">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentSlide}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <RevealText delay={0.1}>
-                  <div className="inline-flex items-center gap-3 mb-7">
-                    <div className="w-10 h-px bg-primary-soft" />
-                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">
-                      {t("home:hero.label")}
-                    </span>
-                  </div>
-                </RevealText>
-
-                <div className="mb-6">
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1] tracking-tight">
-                    <RevealText delay={0.2}>
-                      <span className="block text-white">
-                        {heroSlides[currentSlide].title}
-                      </span>
-                    </RevealText>
-                    <RevealText delay={0.3}>
-                      <span className="block mt-2">
-                        <span className="relative inline-block text-primary-soft">
-                          {heroSlides[currentSlide].highlight}
-                        </span>
-                      </span>
-                    </RevealText>
-                  </h1>
-                </div>
-
-                <RevealText delay={0.4}>
-                  <p className="text-lg lg:text-xl text-white/60 max-w-xl mb-10 leading-relaxed font-light">
-                    {heroSlides[currentSlide].subtitle}
-                  </p>
-                </RevealText>
-
-                <RevealText delay={0.5}>
-                  <div className="flex flex-wrap gap-3">
-                    <Link
-                      href="/booking"
-                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-primary-soft text-primary-soft-foreground font-semibold text-sm rounded-full hover:bg-primary-soft/90 transition-all hover:gap-3"
-                    >
-                      {t("home:hero.ctaPrimary")}
-                      <ArrowRight className="w-4 h-4 transition-transform" />
-                    </Link>
-
-                    <Link
-                      href="/contact"
-                      className="group inline-flex items-center gap-2.5 px-7 py-3.5 border border-white/20 text-white/90 font-semibold text-sm rounded-full hover:border-primary-soft/60 hover:text-primary-soft hover:bg-white/[0.02] transition-all"
-                    >
-                      <Phone className="w-4 h-4" />
-                      {t("common:actions.contactUs")}
-                    </Link>
-                  </div>
-                </RevealText>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Κάρτα φωτογραφίας — desktop δεξιά (2:3)· στο κινητό πρώτη,
-              πλάτος container, 4:3, χωρίς καμία σκίαση */}
-          <div className="lg:col-span-5 max-lg:order-first">
-            <div className="relative w-full max-w-[360px] xl:max-w-[400px] ml-auto max-lg:max-w-none">
-              {/* Διακοσμητικές γωνίες — μόνο desktop (στο κινητό κόβονται στην άκρη) */}
-              <div className="absolute -top-4 -left-4 w-20 h-20 border-t-2 border-l-2 border-primary-soft/30 rounded-tl-3xl max-lg:hidden" />
-              <div className="absolute -bottom-4 -right-4 w-20 h-20 border-b-2 border-r-2 border-primary-soft/30 rounded-br-3xl max-lg:hidden" />
-
-              {/* Κάρτα 2:3 — ίδιο aspect με τις portrait φωτογραφίες */}
-              <div className="relative aspect-[2/3] max-lg:aspect-[4/3]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentSlide}
-                    className="absolute inset-0 rounded-2xl overflow-hidden ring-1 ring-white/10 shadow-2xl shadow-black/40"
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -16 }}
-                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    <Image
-                      src={heroSlides[currentSlide].image}
-                      alt={heroSlides[currentSlide].title}
-                      fill
-                      priority
-                      className="object-cover [object-position:var(--pos-m)] lg:[object-position:var(--pos)]"
-                      style={{
-                        "--pos": heroSlides[currentSlide].position,
-                        "--pos-m": heroSlides[currentSlide].mobilePosition,
-                      }}
-                      sizes="(min-width: 1280px) 440px, (min-width: 992px) 400px, 100vw"
-                      quality={90}
-                    />
-                    <div className="absolute inset-0 max-lg:hidden bg-gradient-to-t from-[#050810]/35 via-transparent to-transparent" />
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-
-              {/* Progress indicators — στο κινητό υπάρχει η κάτω μπάρα */}
-              <div className="mt-7 flex max-lg:hidden items-center justify-end gap-5">
-                {heroSlides.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goToSlide(index)}
-                    className={cn(
-                      "group flex items-center gap-3 transition-all duration-300",
-                      index === currentSlide
-                        ? "opacity-100"
-                        : "opacity-40 hover:opacity-70"
-                    )}
-                  >
-                    <span
-                      className={cn(
-                        "text-xs font-mono transition-colors",
-                        index === currentSlide ? "text-primary-soft" : "text-white/50"
-                      )}
-                    >
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <div className="relative w-12 h-0.5 bg-white/15 overflow-hidden rounded-full">
-                      {index === currentSlide && (
-                        <motion.div
-                          className="absolute inset-y-0 left-0 bg-primary-soft rounded-full"
-                          initial={{ width: "0%" }}
-                          animate={{ width: "100%" }}
-                          transition={{ duration: 7, ease: "linear" }}
-                        />
-                      )}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
+      {/* Desktop: φωτογραφία στο δεξί μισό, από το πάνω μέχρι το κάτω άκρο
+          (992–1279px: ξεκινά κάτω από το header, όπου το μενού δεν χωράει δίπλα της) */}
+      <div className="absolute bottom-0 right-0 top-20 xl:top-0 w-[42%] max-lg:hidden">
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={current}
+            className="absolute inset-0"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.1, ease: EASE }}
+          >
+            <Image
+              src={slide.image}
+              alt={headline}
+              fill
+              priority
+              className="object-cover"
+              style={{ objectPosition: slide.position }}
+              sizes="42vw"
+              quality={85}
+            />
+          </motion.div>
+        </AnimatePresence>
+        {/* Μόνο για να διαβάζονται το header (πάνω) και οι δείκτες (κάτω) */}
+        <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-black/55 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/55 to-transparent" />
+        <div className="absolute bottom-6 left-8 right-8 flex items-center justify-between">
+          {indicators}
         </div>
       </div>
 
-      {/* Bottom marquee — softer */}
-      <div className="absolute bottom-0 left-0 right-0 z-20">
-        <div className="border-t border-white/[0.06] py-3 bg-[#050810]/85 backdrop-blur-sm overflow-hidden">
-          <MarqueeText
-            text={t("home:hero.marquee")}
-            className="text-[10px] font-semibold uppercase tracking-[0.25em] text-white/25"
-            speed={35}
-          />
-        </div>
-
-        <div className="lg:hidden border-t border-white/[0.06] py-4 bg-[#050810]/90 backdrop-blur-sm">
-          <div className="container flex items-center justify-between">
-            <div className="flex gap-2">
-              {heroSlides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className={cn(
-                    "h-1 transition-all duration-300 rounded-full",
-                    index === currentSlide
-                      ? "w-8 bg-primary-soft"
-                      : "w-4 bg-white/15"
-                  )}
-                />
-              ))}
+      <div className="container relative">
+        <div className="grid lg:grid-cols-12 lg:min-h-[max(640px,100svh)] lg:items-center pt-24 pb-12 lg:pt-32 lg:pb-24">
+          <motion.div
+            className="lg:col-span-6 lg:pr-6"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: EASE, delay: 0.05 }}
+          >
+            {/* Κινητό: καθαρή κάρτα 4:3 πάνω από τον τίτλο */}
+            <div className="lg:hidden relative aspect-[4/3] mb-8 rounded-[20px] overflow-hidden">
+              <AnimatePresence initial={false}>
+                <motion.div
+                  key={current}
+                  className="absolute inset-0"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.6, ease: EASE }}
+                >
+                  <Image
+                    src={slide.image}
+                    alt={headline}
+                    fill
+                    priority
+                    className="object-cover"
+                    style={{ objectPosition: slide.mobilePosition }}
+                    sizes="100vw"
+                    quality={85}
+                  />
+                </motion.div>
+              </AnimatePresence>
             </div>
-            <span className="text-xs font-mono text-white/55">
-              {String(currentSlide + 1).padStart(2, "0")} /{" "}
-              {String(heroSlides.length).padStart(2, "0")}
-            </span>
-          </div>
+
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={current}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.45, ease: EASE }}
+              >
+                <h1 className="t-display text-white max-w-[16ch]">{headline}</h1>
+                <p className="t-lead text-white/72 max-w-[34rem] mt-6">{slide.subtitle}</p>
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="flex flex-wrap gap-3 mt-10 max-lg:mt-8">
+              <Link
+                href="/booking"
+                className="group inline-flex items-center gap-2.5 h-13 px-7 rounded-full bg-primary-soft text-primary-soft-foreground font-semibold hover:bg-[#a3dec4] transition-colors"
+              >
+                {t("home:hero.ctaPrimary")}
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+              <a
+                href={`tel:+30${contactInfo.phone.replace(/\s/g, "")}`}
+                className="inline-flex items-center gap-2.5 h-13 px-6 rounded-full border border-white/20 text-white font-medium hover:border-white/45 transition-colors"
+              >
+                <Phone className="w-4 h-4 text-primary-soft" />
+                {contactInfo.phone}
+              </a>
+            </div>
+
+            {/* Στοιχεία εμπιστοσύνης — πραγματικά δεδομένα, όχι διακοσμητικά badges */}
+            <dl
+              className="mt-14 max-lg:mt-10 pt-6 border-t border-white/12 grid grid-cols-3 gap-6 max-sm:gap-4 max-sm:text-[0.9375rem] max-w-[34rem]"
+            >
+              <div>
+                <dt className="sr-only">Google</dt>
+                <dd>
+                  <a
+                    href={googleReviews.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group block"
+                  >
+                    <span className="flex items-center gap-1.5 text-white">
+                      <Star className="w-4 h-4 fill-primary-soft text-primary-soft" aria-hidden="true" />
+                      <span className="font-semibold tabular-nums">{rating}</span>
+                    </span>
+                    <span className="t-small text-white/60 group-hover:text-white/85 transition-colors">
+                      {googleReviews.reviewCount} {t("home:hero.reviews")}
+                    </span>
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="sr-only">{t("common:navigation.contact")}</dt>
+                <dd>
+                  <span className="block text-white font-semibold">
+                    {lang === "el" ? "Πατήσια" : "Patisia"}
+                  </span>
+                  <span className="t-small text-white/60">
+                    {contactInfo.address[lang].split(",")[0]}
+                  </span>
+                </dd>
+              </div>
+              <div>
+                <dt className="sr-only">PREVENT</dt>
+                <dd>
+                  <span className="block text-white font-semibold">{t("home:hero.since")}</span>
+                  <span className="t-small text-white/60">
+                    {t("home:aboutSection.experience.value")}{" "}
+                    {t("home:aboutSection.experience.label").toLocaleLowerCase(lang)}
+                  </span>
+                </dd>
+              </div>
+            </dl>
+
+            <div className="lg:hidden mt-10 flex justify-start">{indicators}</div>
+          </motion.div>
         </div>
       </div>
     </section>
