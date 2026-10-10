@@ -12,7 +12,6 @@ const galleryItems = [
   { src: "/images/clinic/beautifull-waiting-area-photo.jpg", altKey: "waitingArea", width: 800, height: 533 },
   { src: "/images/treatments/physio-20-seated-neck-shoulder.jpg", altKey: "treatment2", width: 607, height: 1080 },
   { src: "/images/clinic/equipment-photo.jpg", altKey: "equipment", width: 533, height: 800 },
-  { src: "/images/treatments/physio-01-lumbar-massage.jpg", altKey: "treatment3", width: 499, height: 1080 },
   { src: "/images/team/konstantinos-patsakis-on-his-office-photo.jpg", altKey: "office", width: 800, height: 574 },
   { src: "/images/treatments/physio-13-wrist-hand-treatment.jpg", altKey: "treatment4", width: 607, height: 1080 },
   { src: "/images/clinic/beautifull-inner-photo-of-clinic.jpg", altKey: "clinicInterior", width: 800, height: 533 },
