@@ -178,7 +178,7 @@ export function PartnersSection() {
 
                   <DialogContent
                     closeLabel={t("partners.close")}
-                    className="w-[calc(100%-2rem)] max-w-xl max-h-[85vh] p-0 gap-0 flex flex-col bg-[#0a0f1a] border-white/10 rounded-2xl overflow-hidden"
+                    className="w-[calc(100%-2rem)] max-w-xl max-h-[85dvh] p-0 gap-0 flex flex-col bg-[#0a0f1a] border-white/10 rounded-2xl overflow-hidden"
                   >
                     <DialogHeader className="flex-row items-center gap-4 space-y-0 p-6 pb-4 text-left">
                       <Image
