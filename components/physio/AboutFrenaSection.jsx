@@ -135,9 +135,6 @@ export function AboutFrenaSection({ asPageIntro = false }) {
               >
                 <div className="group relative bg-[#070b14] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-6 lg:p-8 transition-all m-card max-lg:border-white/10 max-lg:p-5">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary-soft/10 flex items-center justify-center flex-shrink-0 text-sm font-bold text-primary-soft">
-                      {String(index + 1).padStart(2, "0")}
-                    </div>
                     <div className="flex-1">
                       <h4 className="text-lg font-bold text-white mb-2 group-hover:text-primary-soft transition-colors">
                         {point.title}

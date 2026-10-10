@@ -37,13 +37,8 @@ export function HowItWorks() {
                 transition={{ delay: i * 0.1, duration: 0.6 }}
                 className="group relative bg-[#050810] hover:bg-[#0a0f1a] border border-white/[0.06] hover:border-primary-soft/30 rounded-2xl p-7 lg:p-8 transition-all max-lg:flex max-lg:items-start max-lg:gap-4 max-lg:p-5"
               >
-                <div className="flex items-start justify-between mb-6 max-lg:mb-0 max-lg:shrink-0">
-                  <div className="w-12 h-12 rounded-xl bg-primary-soft/10 group-hover:bg-primary-soft/15 flex items-center justify-center transition-colors">
-                    <Icon className="w-5 h-5 text-primary-soft" />
-                  </div>
-                  <span className="text-3xl font-bold text-white/[0.04] group-hover:text-primary-soft/15 transition-colors max-lg:hidden">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                <div className="w-12 h-12 mb-6 rounded-xl bg-primary-soft/10 group-hover:bg-primary-soft/15 flex items-center justify-center transition-colors max-lg:mb-0 max-lg:shrink-0">
+                  <Icon className="w-5 h-5 text-primary-soft" />
                 </div>
 
                 <div className="max-lg:min-w-0">
